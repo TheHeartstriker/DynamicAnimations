@@ -2,9 +2,10 @@ import React, { useRef, useEffect, useState } from 'react';
 
 function App() {
     const canvasRef = useRef(null);
+    const ctx = useRef(null);
     const [circlearray, setCirclearray] = useState([]);
 //Draw circles with predefined properties
-  const drawCircle = (x, y, glow, size) => {
+  const drawCircle = (x, y) => {
     ctx.fillStyle = "white";
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
@@ -47,16 +48,17 @@ setCirclearray(Array(40)
 //End of useEffect
 
 useEffect(() => {
+    const ctx = ctxRef.current;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    circlearray.forEach(circlearray => {
-      const dx = circlearray.target.x - circlearray.current.x;
-      const dy = circlearray.target.y - circlearray.current.y;
+    setCirclearray.forEach(circlearray => {
+      const dx = setCirclearray.target.x - setCirclearray.current.x;
+      const dy = setCirclearray.target.y - setCirclearray.current.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      drawCircle(circlearray.current.x, circlearray.current.y);
+      drawCircle(setCirclearray.current.x, setCirclearray.current.y);
       if (distance < 1) {
-        circlearray.target.x = Math.floor(Math.random() * canvas.width);
-        circlearray.target.y = Math.floor(Math.random() * canvas.height);
+        setCirclearray.target.x = Math.floor(Math.random() * canvas.width);
+        setCirclearray.target.y = Math.floor(Math.random() * canvas.height);
       }
       else {
         let lerp = 0.02;
@@ -64,7 +66,7 @@ useEffect(() => {
         setCirclearraycirclearray.current.y += dy * lerp;
       }
     });
-  }, [circlearray, setCirclearray, drawCircle], ctx);
+  }, [circlearray], ctx);
   return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
 
