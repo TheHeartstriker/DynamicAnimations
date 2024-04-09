@@ -1,72 +1,68 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 function App() {
-    const canvasRef = useRef(null);
-    const ctx = useRef(null);
-    const [circlearray, setCirclearray] = useState([]);
-//Draw circles with predefined properties
-  const drawCircle = (x, y) => {
-    ctx.fillStyle = "white";
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.fill();
-    ctx.shadowColor = "white";
-    ctx.shadowBlur = glow;
-  }
-
+  const canvasRef = useRef(null);
+  const [ctx, setCtx] = useState(null);
+  const [circlearray, setCirclearray] = useState(new Array(40)
+  .fill()
+  .map(() => ({
+    current: {
+      x: Math.floor(Math.random() * window.innerWidth),
+      y: Math.floor(Math.random() * window.innerHeight),
+    },
+    target: {
+      x: Math.floor(Math.random() * window.innerWidth),
+      y: Math.floor(Math.random() * window.innerHeight),
+    },
+  })));
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-//Create array of circles with manipulatable properties
-setCirclearray(Array(40)
-.fill()
-.map(() => ({
-  current: {
-    x: Math.floor(Math.random() * canvas.width),
-    y: Math.floor(Math.random() * canvas.height),
-  },
-  target: {
-    x: Math.floor(Math.random() * canvas.width),
-    y: Math.floor(Math.random() * canvas.height),
-  },
-  glow: {
-    g: 0,
-  },
-  size: {
-    s: Math.random() * 10,
-  },
-})));
+    const context = canvas.getContext('2d');
+    setCtx(context);
 
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+    };
   }, []);
 
-//End of useEffect
+  function drawCircle(x, y) {
+    if (!ctx) return;
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.fill();
+    ctx.shadowColor = "white";
+    ctx.shadowBlur = 5;
+  }
 
-useEffect(() => {
-    const ctx = ctxRef.current;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    setCirclearray.forEach(circlearray => {
-      const dx = setCirclearray.target.x - setCirclearray.current.x;
-      const dy = setCirclearray.target.y - setCirclearray.current.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      drawCircle(setCirclearray.current.x, setCirclearray.current.y);
+  useEffect(() => {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    setCirclearray((prevCircles) => prevCircles.map((circle) => {
+      let dx = circle.target.x - circle.current.x;
+      let dy = circle.target.y - circle.current.y;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+      drawCircle(circle.current.x, circle.current.y);
       if (distance < 1) {
-        setCirclearray.target.x = Math.floor(Math.random() * canvas.width);
-        setCirclearray.target.y = Math.floor(Math.random() * canvas.height);
+        circle.target.x = Math.floor(Math.random() * window.innerWidth);
+        circle.target.y = Math.floor(Math.random() * window.innerHeight);
+      } else {
+        let lerpFactor = 0.02;
+        circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
+        circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
       }
-      else {
-        let lerp = 0.02;
-        setCirclearraycirclearray.current.x += dx * lerp;
-        setCirclearraycirclearray.current.y += dy * lerp;
-      }
-    });
-  }, [circlearray], ctx);
+      return circle;
+    }));
+  }, [ctx, circlearray]);
+
   return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
 
