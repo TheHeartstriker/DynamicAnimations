@@ -43,10 +43,15 @@ function App() {
     ctx.shadowBlur = 5;
   }
 
-  useEffect(() => {
-    if (!ctx) return;
+useEffect(() => {
+  if (!ctx) return;
+  let animationFrameId;
+
+  // Create the update function
+  const update = () => {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    setCirclearray((prevCircles) => prevCircles.map((circle) => {
+    let newCircleArray = [...circlearray]; // Create a copy of circlearray
+    newCircleArray.forEach((circle) => {
       let dx = circle.target.x - circle.current.x;
       let dy = circle.target.y - circle.current.y;
       let distance = Math.sqrt(dx * dx + dy * dy);
@@ -59,9 +64,22 @@ function App() {
         circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
         circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
       }
-      return circle;
-    }));
-  }, [ctx, circlearray]);
+    });
+
+    setCirclearray(newCircleArray); // Update the state with the modified copy
+
+    // Request the next frame
+    animationFrameId = requestAnimationFrame(update);
+  };
+
+  // Start the loop
+  update();
+
+  // Clean up function
+  return () => {
+    cancelAnimationFrame(animationFrameId);
+  };
+}, []);
 
   return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
