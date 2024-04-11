@@ -79,7 +79,7 @@ useEffect(() => {
   return () => {
     cancelAnimationFrame(animationFrameId);
   };
-}, []);
+}, [ctx]);
 
   return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
