@@ -49,7 +49,7 @@ useEffect(() => {
 
   // Create the update function
   const update = () => {
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight); 
     let newCircleArray = [...circlearray]; // Create a copy of circlearray
     newCircleArray.forEach((circle) => {
       let dx = circle.target.x - circle.current.x;

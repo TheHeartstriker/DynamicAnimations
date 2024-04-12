@@ -6,3 +6,29 @@
   top: 0;
   left: 0;
 }
+
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.PageContainer {
+  position: relative;
+  display: flex;
+  width: 50vw;
+  height: 99vh;
+  border: 5px solid hsl(145, 75%, 43%);
+  background-color: hsl(180, 4%, 5%);
+  border-radius: 1%;
+  left: 50%;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+.Buttons {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
