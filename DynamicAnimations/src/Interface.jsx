@@ -1,5 +1,9 @@
 function Buttons() {
   return (
+    <>
+    <div id = "Settings">
+        <button>+</button>
+    </div>
     <div className="PageContainer">
     <div className="Buttons">
         <button>1</button>
@@ -8,6 +12,7 @@ function Buttons() {
         <button>4</button>
     </div>
     </div>
+    </>
   );
 }
 

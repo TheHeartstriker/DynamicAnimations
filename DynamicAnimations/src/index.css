@@ -13,17 +13,33 @@ body {
   padding: 0;
 }
 
+#Settings {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+}
+
+#Settings button {
+  height: 10vh;
+  width: 10vh;
+  background-color: hsl(180, 4%, 5%);
+  color: white;
+  border: none;
+  font-size: 20px;
+}
+
 .PageContainer {
   position: relative;
   display: flex;
-  width: 50vw;
+  width: 25vw;
   height: 99vh;
   border: 5px solid hsl(145, 75%, 43%);
   background-color: hsl(180, 4%, 5%);
   border-radius: 1%;
-  left: 50%;
-  opacity: 0;
-  animation: fadeIn 2s forwards;
+  left: 75vw;
+  opacity: 0.9;
+  animation: Slide 10s linear forwards;
 }
 
 .Buttons {
@@ -31,4 +47,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+@keyframes Slide {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
