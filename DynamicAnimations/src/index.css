@@ -21,8 +21,8 @@ body {
 }
 
 #Settings button {
-  height: 10vh;
-  width: 10vh;
+  height: 6vh;
+  width: 6vh;
   background-color: hsl(180, 4%, 5%);
   color: white;
   border: none;
@@ -39,7 +39,7 @@ body {
   border-radius: 1%;
   left: 75vw;
   opacity: 0.9;
-  animation: Slide 10s linear forwards;
+  animation: Slide 1s linear forwards;
 }
 
 .Buttons {
@@ -51,9 +51,9 @@ body {
 
 @keyframes Slide {
   from {
-    transform: translateX(0%);
+    transform: translateX(var(--start));
   }
   to {
-    transform: translateX(100%);
+    transform: translateX(var(--end));
   }
 }
