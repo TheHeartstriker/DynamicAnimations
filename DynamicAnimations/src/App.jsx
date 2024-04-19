@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 function App() {
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
+  // Create an array of circles with data related to them
   const [circlearray, setCirclearray] = useState(new Array(40)
   .fill()
   .map(() => ({
@@ -14,8 +15,12 @@ function App() {
       x: Math.floor(Math.random() * window.innerWidth),
       y: Math.floor(Math.random() * window.innerHeight),
     },
+    size: {
+      s: Math.random() * 10,
+    },
+    IncreaseTo: Math.random() * 10,
   })));
-
+  // Resize the canvas to fit the window
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -31,12 +36,12 @@ function App() {
       window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
-
-  function drawCircle(x, y) {
+  // Function to draw a circle and related inputs
+  function drawCircle(x, y, size) {
     if (!ctx) return;
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "";
     ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.stroke();
     ctx.fill();
     ctx.shadowColor = "white";
@@ -49,13 +54,25 @@ useEffect(() => {
 
   // Create the update function
   const update = () => {
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    let newCircleArray = [...circlearray]; // Create a copy of circlearray
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight); 
+    let newCircleArray = [...circlearray]; // Create a copy of circlearray to use setState
     newCircleArray.forEach((circle) => {
       let dx = circle.target.x - circle.current.x;
       let dy = circle.target.y - circle.current.y;
       let distance = Math.sqrt(dx * dx + dy * dy);
-      drawCircle(circle.current.x, circle.current.y);
+
+      if (circle.size.s < circle.IncreaseTo) {
+        circle.size.s += 0.02;
+      } else if (circle.size.s > 1) {
+        circle.size.s -= 0.02;
+      }
+
+      if (Math.abs(circle.size.s - circle.IncreaseTo) < 1) {
+        circle.IncreaseTo = Math.random() * 10;
+      }
+
+
+      drawCircle(circle.current.x, circle.current.y, circle.size.s);
       if (distance < 1) {
         circle.target.x = Math.floor(Math.random() * window.innerWidth);
         circle.target.y = Math.floor(Math.random() * window.innerHeight);
