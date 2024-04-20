@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import ParentComponent from './OnOffAni.jsx'
 import Button from './Interface.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <div>
-    <App />
+    <ParentComponent />
     <Button />
     </div>
   </React.StrictMode>,

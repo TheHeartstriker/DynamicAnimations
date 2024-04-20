@@ -1,6 +1,8 @@
+// Messy react but its my first time using react I will clean it up later
+
 import { useEffect, useRef, useState } from "react";
 
-function App() {
+function Stars() {
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Create an array of circles with data related to them
@@ -101,4 +103,4 @@ useEffect(() => {
   return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
 
-export default App;
+export default Stars;
