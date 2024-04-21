@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Stars from './Stars.jsx';
+import Stars from './AnimationLogic/Stars.jsx';
 
 function ParentComponent() {
-  const [isAppVisible, setIsAppVisible] = useState(true);
+  const [isAppVisible, setIsAppVisible] = useState(false);
 
   return (
     <div>

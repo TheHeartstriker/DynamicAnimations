@@ -100,7 +100,7 @@ useEffect(() => {
   };
 }, [ctx]);
 
-  return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
+  return <canvas ref={canvasRef} id="StarCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
 
 export default Stars;

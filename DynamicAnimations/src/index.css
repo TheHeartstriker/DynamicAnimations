@@ -1,6 +1,6 @@
 #myCanvas {
   position: absolute;
-  background: black;
+  background: rgb(255, 255, 255);
   width: 100%;
   height: 100%;
   top: 0;
