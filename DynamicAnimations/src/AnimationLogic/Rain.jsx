@@ -5,7 +5,12 @@ function Rain(){
     const canvasRef = useRef(null);
     // Create a state for the context
     const [ctx, setCtx] = useState(null);
-    const [rainArray, setRainArray] = useState(new Array(40).fill().map(() => ({})));
+    const [rainArray, setRainArray] = useState(new Array(40).fill().map(() => ({
+        Start: {
+            x: Math.floor(Math.random() * window.innerWidth),
+            y: 0,
+        }
+    })));
 
     useEffect(() => {
         // Creates a refrence to current canvas
@@ -13,36 +18,53 @@ function Rain(){
         // Sets the default canvas size to the window size
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
+        // Gets the context of the canvas
         const context = canvas.getContext('2d');
+        // Sets the context to the state
         setCtx(context);
-
+        // Function to resize the canvas
         const resizeCanvas = () => {
+            // The resize
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             // After resizing the canvas, we need to get the context again
             setCtx(canvas.getContext('2d'));
-            Droplet();
+            // Where the redrawing of the canvas happens
+    
         }
+        // Event listener where the resizeCanvas function is called
         window.addEventListener('resize', resizeCanvas);
         return () => {
             window.removeEventListener('resize', resizeCanvas);
         }
     }, []);
 
-    function Droplet(){
+    function Droplet(x1, y1, x2, y2){
         ctx.beginPath();
-        ctx.moveTo(20,20)
-        ctx.lineTo(50, 50)
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x2,y2);
         ctx.strokeStyle = "blue";
-        ctx.lineWidth = 10;
+        ctx.lineWidth = 2.5;
         ctx.stroke();
     }
 
-    if(ctx){
-        Droplet();
+    function DrawAnimation(){
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        let newRainArray = [...rainArray];
+        newRainArray.forEach((drop) => {
+            drop.Start.y += 5;
+            Droplet(drop.Start.x, drop.Start.y, drop.Start.x, drop.Start.y + 10);
+        });
+        setRainArray(newRainArray);
+
+        requestAnimationFrame(DrawAnimation);
     }
 
+    useEffect(() => {
+        if (ctx){
+            DrawAnimation();
+        }
+    }, [ctx]);
 
 
 
