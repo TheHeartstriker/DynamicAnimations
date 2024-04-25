@@ -1,15 +1,22 @@
 import {useState, useEffect, useRef} from 'react';
 
+
 function Rain(){
+    const SIZE = 20;
+    const SHEET = 3;
+    const DROPWIDTH = 2;
+    const DROPS = 100;
     // Create a reference to the canvas
     const canvasRef = useRef(null);
     // Create a state for the context
     const [ctx, setCtx] = useState(null);
-    const [rainArray, setRainArray] = useState(new Array(40).fill().map(() => ({
+    const [rainArray, setRainArray] = useState(new Array(DROPS).fill().map(() => ({
         Start: {
             x: Math.floor(Math.random() * window.innerWidth),
             y: 0,
-        }
+        },
+        speed: Math.random() * 5 + 5,
+        size: SIZE / (Math.floor(Math.random() * SHEET) + 1),
     })));
 
     useEffect(() => {
@@ -38,22 +45,26 @@ function Rain(){
             window.removeEventListener('resize', resizeCanvas);
         }
     }, []);
-
+    // Drop constructor
     function Droplet(x1, y1, x2, y2){
         ctx.beginPath();
         ctx.moveTo(x1,y1);
         ctx.lineTo(x2,y2);
         ctx.strokeStyle = "blue";
-        ctx.lineWidth = 2.5;
+        ctx.lineWidth = DROPWIDTH;
         ctx.stroke();
     }
-
+    // Animation function so rules etc can be applied
     function DrawAnimation(){
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        let newRainArray = [...rainArray];
+        const newRainArray = [...rainArray];
         newRainArray.forEach((drop) => {
-            drop.Start.y += 5;
-            Droplet(drop.Start.x, drop.Start.y, drop.Start.x, drop.Start.y + 10);
+            drop.Start.y += drop.speed;
+            Droplet(drop.Start.x, drop.Start.y, drop.Start.x, drop.Start.y + drop.size);
+            if (drop.Start.y > window.innerHeight){
+                drop.Start.x = Math.floor(Math.random() * window.innerWidth);
+                drop.Start.y = 0;
+            }
         });
         setRainArray(newRainArray);
 
