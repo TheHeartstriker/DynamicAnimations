@@ -5,13 +5,14 @@ import Sand from './AnimationLogic/Sand.jsx';
 
 function ParentComponent() {
   const BoolStar = false;
-  const BoolRain = true;
-  const BoolSand = false;
+  const BoolRain = false;
+  const BoolSand = true;
 
   return (
     <div>
       {BoolStar && <Stars />}
       {BoolRain && <Rain />}
+      {BoolSand && <Sand />}
     </div>
   );
 }
