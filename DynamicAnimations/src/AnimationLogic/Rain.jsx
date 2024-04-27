@@ -45,6 +45,23 @@ function Rain(){
             window.removeEventListener('resize', resizeCanvas);
         }
     }, []);
+
+    function Zeus(){
+        StartEnd = [];
+        ctx.beginPath();
+        StartEnd.push(ctx.moveTo(Math.random() * window.innerWidth, 0));
+        StartEnd.push(ctx.lineTo(Math.random() * window.innerWidth, Math.random() * window.innerHeight));
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    function Bolt(){
+        const lightning = [];
+            
+
+
+    }
     // Drop constructor
     function Droplet(x1, y1, x2, y2){
         ctx.beginPath();
@@ -54,32 +71,31 @@ function Rain(){
         ctx.lineWidth = DROPWIDTH;
         ctx.stroke();
     }
+
     // Animation function so rules etc can be applied
-    function DrawAnimation(){
+    function DrawDroplets(){
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        const newRainArray = [...rainArray];
-        newRainArray.forEach((drop) => {
-            drop.Start.y += drop.speed;
-            Droplet(drop.Start.x, drop.Start.y, drop.Start.x, drop.Start.y + drop.size);
-            if (drop.Start.y > window.innerHeight){
-                drop.Start.x = Math.floor(Math.random() * window.innerWidth);
-                drop.Start.y = 0;
+        const newRainArray = rainArray.map((drop) => {
+            const newDrop = {...drop};
+            newDrop.Start.y += newDrop.speed;
+            Droplet(newDrop.Start.x, newDrop.Start.y, newDrop.Start.x, newDrop.Start.y + newDrop.size);
+            if (newDrop.Start.y > window.innerHeight){
+                newDrop.Start.x = Math.floor(Math.random() * window.innerWidth);
+                newDrop.Start.y = 0;
             }
+            return newDrop;
         });
         setRainArray(newRainArray);
-
-        requestAnimationFrame(DrawAnimation);
+    
+        requestAnimationFrame(DrawDroplets);
     }
+
 
     useEffect(() => {
         if (ctx){
-            DrawAnimation();
+            DrawDroplets();
         }
     }, [ctx]);
-
-
-
-
 
 
     return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;

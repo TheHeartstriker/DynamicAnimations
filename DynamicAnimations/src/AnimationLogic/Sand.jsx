@@ -7,7 +7,7 @@ function Sand(){
     const [Cols, setCols] = useState(0);
     const [ctx, setCtx] = useState(null);
     const canvasRef = useRef(null);
-    const w = 10;
+    const Pix_size = 10;
     useEffect(() => {
         // Creates a refrence to current canvas
         const canvas = canvasRef.current;
@@ -36,13 +36,17 @@ function Sand(){
     }, []);
 
     useEffect(() => {
-        const rows = Math.floor(window.innerWidth / w);
-        const cols = Math.floor(window.innerHeight / w);
+        // Sets the number of rows and columns that are need based on res
+        const rows = Math.floor(window.innerWidth / Pix_size);
+        const cols = Math.floor(window.innerHeight / Pix_size);
+        // Sets
         setRows(rows);
         setCols(cols);
+        // Creates the grid based on the number of rows and columns
         setGrid(create2DArray(rows, cols));
     }, []);
 
+    // Function to create a 2D array
     function create2DArray(Rows, Cols){
         let arr = new Array(Rows);
         for(let i = 0; i < arr.length; i++){
@@ -51,6 +55,7 @@ function Sand(){
         return arr;
     }
 
+    //Sets the values of the grid to 0
     function Impose(){
         for(let i = 0; i < Rows; i++){
             for(let j = 0; j < Cols; j++){
@@ -65,7 +70,7 @@ function Sand(){
             for(let j = 0; j < Cols; j++){
                 if(Grid[i][j] === 1){
                     ctx.fillStyle = "blue";
-                    ctx.fillRect(i * w, j * w, w, w);
+                    ctx.fillRect(i * Pix_size, j * Pix_size, Pix_size, Pix_size);
                 }
             }
         }

@@ -5,8 +5,8 @@ import Sand from './AnimationLogic/Sand.jsx';
 
 function ParentComponent() {
   const BoolStar = false;
-  const BoolRain = false;
-  const BoolSand = true;
+  const BoolRain = true;
+  const BoolSand = false;
 
   return (
     <div>
