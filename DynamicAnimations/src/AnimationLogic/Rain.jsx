@@ -2,10 +2,14 @@ import {useState, useEffect, useRef} from 'react';
 
 
 function Rain(){
+    // Magic numbers
     const SIZE = 20;
     const SHEET = 3;
     const DROPWIDTH = 2;
     const DROPS = 100;
+
+    const [StartEnd, setStartEnd] = useState([]);
+    const [lightning, setLightning] = useState([]);
     // Create a reference to the canvas
     const canvasRef = useRef(null);
     // Create a state for the context
@@ -46,21 +50,56 @@ function Rain(){
         }
     }, []);
 
+    useEffect(() => {
+        if (StartEnd.length === 2) {
+
+            Bolt();
+            ctx.beginPath();
+            ctx.moveTo(StartEnd[0].x, StartEnd[0].y);
+            for(let i = 0; i < lightning.length; i++){
+                ctx.lineTo(lightning[i].x, lightning[i].y);
+            }
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+    }, [StartEnd]);
+
     function Zeus(){
-        StartEnd = [];
-        ctx.beginPath();
-        StartEnd.push(ctx.moveTo(Math.random() * window.innerWidth, 0));
-        StartEnd.push(ctx.lineTo(Math.random() * window.innerWidth, Math.random() * window.innerHeight));
-        ctx.strokeStyle = "white";
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        //First point of the bolt
+        let x = Math.random() * window.innerWidth;
+        let y = 0;
+        //Second point of the bolt
+        let x2 = Math.random() * window.innerWidth;
+        let y2 = Math.random() * window.innerHeight;
+        setStartEnd([{x: x, y: y}, {x: x2, y: y2}]);
     }
 
     function Bolt(){
-        const lightning = [];
-            
+        let newLightning = [];
+        let Ranx = Math.random() * window.innerWidth;
+        let start = StartEnd[0];
+        let end = StartEnd[1];
+        let midPointx = (start.x + end.x) / 2;
+        let midPointy = (start.y + end.y) / 2;
 
-
+    
+        // Add the start point to the newLightning array
+        newLightning.push(start);
+    
+        for(let i = 0; i < 100; i++){
+            let NewMidPoint = {x: midPointx + Ranx, y: midPointy};
+            Ranx -= 3;
+            newLightning.push(NewMidPoint);
+            midPointx = (midPointx + NewMidPoint.x) / 2;
+            midPointy = (midPointy + NewMidPoint.y) / 2;
+        }
+    
+        // Add the end point to the newLightning array
+        newLightning.push(end);
+    
+        // Update the state
+        setLightning(newLightning);
     }
     // Drop constructor
     function Droplet(x1, y1, x2, y2){
@@ -94,6 +133,8 @@ function Rain(){
     useEffect(() => {
         if (ctx){
             DrawDroplets();
+            Zeus();
+
         }
     }, [ctx]);
 
