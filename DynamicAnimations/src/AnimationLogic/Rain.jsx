@@ -50,36 +50,37 @@ function Rain(){
         }
     }, []);
 
-    useEffect(() => {
-        if (StartEnd.length === 2) {
-
-            Bolt();
-            ctx.beginPath();
-            ctx.moveTo(StartEnd[0].x, StartEnd[0].y);
-            for(let i = 0; i < lightning.length; i++){
+    function CreateLightning(Points){
+        ctx.beginPath();
+        ctx.moveTo(Points[0].x, Points[0].y);
+        for(let i = 0; i < lightning.length; i++){
+            if (lightning[i]) { // Check if the current element is defined
                 ctx.lineTo(lightning[i].x, lightning[i].y);
             }
-            ctx.strokeStyle = "white";
-            ctx.lineWidth = 2;
-            ctx.stroke();
         }
-    }, [StartEnd]);
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        requestAnimationFrame(() => CreateLightning(Points)); // Pass Points to CreateLightning
+    }
 
-    function Zeus(){
+    function SetPoints(){
         //First point of the bolt
         let x = Math.random() * window.innerWidth;
         let y = 0;
         //Second point of the bolt
         let x2 = Math.random() * window.innerWidth;
         let y2 = Math.random() * window.innerHeight;
-        setStartEnd([{x: x, y: y}, {x: x2, y: y2}]);
+        let newPoints = [{x: x, y: y}, {x: x2, y: y2}];
+        setStartEnd(newPoints);
+        return newPoints;
     }
 
-    function Bolt(){
+    function Bolt(Points){
         let newLightning = [];
         let Ranx = Math.random() * window.innerWidth;
-        let start = StartEnd[0];
-        let end = StartEnd[1];
+        let start = Points[0];
+        let end = Points[1];
         let midPointx = (start.x + end.x) / 2;
         let midPointy = (start.y + end.y) / 2;
 
@@ -87,9 +88,9 @@ function Rain(){
         // Add the start point to the newLightning array
         newLightning.push(start);
     
-        for(let i = 0; i < 100; i++){
+        for(let i = 0; i < 1000; i++){
             let NewMidPoint = {x: midPointx + Ranx, y: midPointy};
-            Ranx -= 3;
+            Ranx -= 100;
             newLightning.push(NewMidPoint);
             midPointx = (midPointx + NewMidPoint.x) / 2;
             midPointy = (midPointy + NewMidPoint.y) / 2;
@@ -132,9 +133,9 @@ function Rain(){
 
     useEffect(() => {
         if (ctx){
-            DrawDroplets();
-            Zeus();
-
+            let Points = SetPoints();
+            Bolt(Points);
+            CreateLightning(Points);
         }
     }, [ctx]);
 
