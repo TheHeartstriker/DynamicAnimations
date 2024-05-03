@@ -50,9 +50,13 @@ function Rain(){
         }
     }, []);
 
-    function CreateLightning(Points){
+    function CreateLightning(){
+        if (lightning.length === 0) { 
+            return;
+        }
+    
         ctx.beginPath();
-        ctx.moveTo(Points[0].x, Points[0].y);
+        ctx.moveTo(StartEnd[0].x, StartEnd[0].y);
         for(let i = 0; i < lightning.length; i++){
             if (lightning[i]) { // Check if the current element is defined
                 ctx.lineTo(lightning[i].x, lightning[i].y);
@@ -61,7 +65,6 @@ function Rain(){
         ctx.strokeStyle = "white";
         ctx.lineWidth = 2;
         ctx.stroke();
-        requestAnimationFrame(() => CreateLightning(Points)); // Pass Points to CreateLightning
     }
 
     function SetPoints(){
@@ -71,37 +74,35 @@ function Rain(){
         //Second point of the bolt
         let x2 = Math.random() * window.innerWidth;
         let y2 = Math.random() * window.innerHeight;
-        let newPoints = [{x: x, y: y}, {x: x2, y: y2}];
-        setStartEnd(newPoints);
-        return newPoints;
+        setStartEnd([{x: x, y: y}, {x: x2, y: y2}]);
     }
 
-    function Bolt(Points){
-        let newLightning = [];
-        let Ranx = Math.random() * window.innerWidth;
-        let start = Points[0];
-        let end = Points[1];
-        let midPointx = (start.x + end.x) / 2;
-        let midPointy = (start.y + end.y) / 2;
-
-    
-        // Add the start point to the newLightning array
-        newLightning.push(start);
-    
-        for(let i = 0; i < 1000; i++){
-            let NewMidPoint = {x: midPointx + Ranx, y: midPointy};
-            Ranx -= 100;
-            newLightning.push(NewMidPoint);
-            midPointx = (midPointx + NewMidPoint.x) / 2;
-            midPointy = (midPointy + NewMidPoint.y) / 2;
+    function Bolt(){
+        if (!StartEnd[0] || !StartEnd[1]) {
+            return;
         }
-    
+      
+        let newLightning = [];
+        
+        // Add the start point to the newLightning array
+        newLightning.push(StartEnd[0]);
+      
+        for(let i = 0; i < 100; i++){
+            let Start = newLightning[i];
+            let End = StartEnd[1];
+            let Midx = (Start.x + End.x) / 2;
+            let Diff = (Math.random() - 0.5) * window.innerWidth; // Calculate a new random offset for each point
+            let NewX = Midx + Diff;
+            newLightning.push({x: NewX, y: (Start.y + End.y) / 2});
+        }
+      
         // Add the end point to the newLightning array
-        newLightning.push(end);
-    
+        newLightning.push(StartEnd[1]);
+      
         // Update the state
         setLightning(newLightning);
-    }
+        console.log(newLightning);
+      }
     // Drop constructor
     function Droplet(x1, y1, x2, y2){
         ctx.beginPath();
@@ -133,9 +134,9 @@ function Rain(){
 
     useEffect(() => {
         if (ctx){
-            let Points = SetPoints();
-            Bolt(Points);
-            CreateLightning(Points);
+            SetPoints();
+            Bolt();
+            CreateLightning();
         }
     }, [ctx]);
 
