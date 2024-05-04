@@ -35,7 +35,7 @@ function Sand(){
         }
     }, []);
 
-    useEffect(() => {
+    function Impose() {
         // Sets the number of rows and columns that are need based on res
         const rows = Math.floor(window.innerWidth / Pix_size);
         const cols = Math.floor(window.innerHeight / Pix_size);
@@ -44,43 +44,66 @@ function Sand(){
         setCols(cols);
         // Creates the grid based on the number of rows and columns
         setGrid(create2DArray(rows, cols));
-    }, []);
+    }
 
     // Function to create a 2D array
     function create2DArray(Rows, Cols){
         let arr = new Array(Rows);
         for(let i = 0; i < arr.length; i++){
             arr[i] = new Array(Cols);
+            for(let j = 0; j < arr[i].length; j++){
+                arr[i][j] = 0;
+            }
+
+
         }
         return arr;
     }
 
-    //Sets the values of the grid to 0
-    function Impose(){
-        for(let i = 0; i < Rows; i++){
-            for(let j = 0; j < Cols; j++){
-                Grid[i][j] = 0;
+    function NextGrid(){
+
+        let CopyGrid = [...Grid];
+        for (let i = 0; i < Rows; i++){
+            for (let j = 0; j < Cols; j++){
+                if (CopyGrid[i][j] === 1){
+                    if (CopyGrid[i][j + 1] === 0){
+                        CopyGrid[i][j] = 0;
+                        CopyGrid[i][j + 1] = 1;
+                    }
+                }
             }
         }
+        setGrid(CopyGrid);
     }
 
+
     function Draw(){
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        if (!ctx) return;
+        Grid[5][5] = 1;
         for(let i = 0; i < Rows; i++){
             for(let j = 0; j < Cols; j++){
                 if(Grid[i][j] === 1){
                     ctx.fillStyle = "blue";
                     ctx.fillRect(i * Pix_size, j * Pix_size, Pix_size, Pix_size);
                 }
+
             }
         }
+        requestAnimationFrame(Draw);
     }
+
     useEffect(() => {
         if (ctx){
             Impose();
-            Draw();
         }
     }, [ctx]);
+    
+    useEffect(() => {
+        if (Grid.length > 0){
+            NextGrid();
+            requestAnimationFrame(Draw);
+        }
+    }, [Grid]);
 
     return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
