@@ -77,23 +77,42 @@ function Rain(){
         setStartEnd([{x: x, y: y}, {x: x2, y: y2}]);
     }
 
-    function Bolt(){
+    function Bolt() {
         if (!StartEnd[0] || !StartEnd[1]) {
-            return;
+          return;
         }
       
         let newLightning = [];
-        
+        let MinSegment = 1;
+        let Diff = Math.random() * window.innerWidth * 2; // Increase initial displacement
+      
         // Add the start point to the newLightning array
         newLightning.push(StartEnd[0]);
       
-        for(let i = 0; i < 100; i++){
-            let Start = newLightning[i];
-            let End = StartEnd[1];
-            let Midx = (Start.x + End.x) / 2;
-            let Diff = (Math.random() - 0.5) * window.innerWidth; // Calculate a new random offset for each point
-            let NewX = Midx + Diff;
-            newLightning.push({x: NewX, y: (Start.y + End.y) / 2});
+        let Start = StartEnd[0];
+        let End = StartEnd[1];
+      
+        // Calculate the distance between the start and end points
+        let CurrentSegment = Math.sqrt(
+          Math.pow(End.x - Start.x, 2) + Math.pow(End.y - Start.y, 2)
+        );
+      
+        while (MinSegment < CurrentSegment) {
+          // Calculate the midpoint and add randomness
+          let Midx = (Start.x + End.x) / 2;
+          let NewX = Midx + Diff;
+          let NewY = (Start.y + End.y) / 2 + (Math.random() - 0.5) * Diff; // Add randomness to y-coordinate
+          newLightning.push({ x: NewX, y: NewY });
+          Diff = Math.max(0, Diff - 50); // Decrease displacement by a smaller amount
+      
+          // Update Start and End for the next iteration
+          Start = newLightning[newLightning.length - 1];
+          End = StartEnd[1];
+      
+          // Recalculate CurrentSegment for the next iteration
+          CurrentSegment = Math.sqrt(
+            Math.pow(End.x - Start.x, 2) + Math.pow(End.y - Start.y, 2)
+          );
         }
       
         // Add the end point to the newLightning array
