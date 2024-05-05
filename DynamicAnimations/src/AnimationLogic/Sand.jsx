@@ -35,18 +35,7 @@ function Sand(){
         }
     }, []);
 
-    function Impose() {
-        // Sets the number of rows and columns that are need based on res
-        const rows = Math.floor(window.innerWidth / Pix_size);
-        const cols = Math.floor(window.innerHeight / Pix_size);
-        // Sets
-        setRows(rows);
-        setCols(cols);
-        // Creates the grid based on the number of rows and columns
-        setGrid(create2DArray(rows, cols));
-    }
-
-    // Function to create a 2D array
+    // Function to create a 2D array and set all values to 0
     function create2DArray(Rows, Cols){
         let arr = new Array(Rows);
         for(let i = 0; i < arr.length; i++){
@@ -54,38 +43,58 @@ function Sand(){
             for(let j = 0; j < arr[i].length; j++){
                 arr[i][j] = 0;
             }
-
-
         }
         return arr;
     }
 
+    //Defines the number of rows and columns based on the window size
+    function Impose() {
+        // Sets the number of rows and columns that are need based on res
+        const rows = Math.floor(window.innerWidth / Pix_size);
+        const cols = Math.floor(window.innerHeight / Pix_size);
+        // Sets
+        setRows(rows);
+        setCols(cols);
+    
+        // Creates the grid based on the number of rows and columns
+        let initialGrid = create2DArray(rows, cols);
+        initialGrid[5][5] = 1; // Set the initial cell to 1
+        setGrid(initialGrid);
+    }
+
+    // Creates the next generation of the grid
     function NextGrid(){
 
-        let CopyGrid = [...Grid];
-        for (let i = 0; i < Rows; i++){
-            for (let j = 0; j < Cols; j++){
-                if (CopyGrid[i][j] === 1){
-                    if (CopyGrid[i][j + 1] === 0){
-                        CopyGrid[i][j] = 0;
-                        CopyGrid[i][j + 1] = 1;
+        let NextGrid = create2DArray(Rows, Cols); //Creates a empty grid
+        for(let i = 0; i < Rows; i++){
+            for(let j = 0; j < Cols; j++){
+                let State = Grid[i][j]; //Gets the state of the current cell or previous generation
+                if(State === 1){
+                    let Bellow = Grid[i][j + 1];
+                    if(Bellow === 0){
+                        NextGrid[i][j] = 0;
+                        NextGrid[i][j + 1] = 1;
                     }
                 }
             }
         }
-        setGrid(CopyGrid);
+        setGrid(NextGrid);
     }
 
-
+    // Function to draw based on the values in the grid
     function Draw(){
         if (!ctx) return;
-        Grid[5][5] = 1;
         for(let i = 0; i < Rows; i++){
             for(let j = 0; j < Cols; j++){
                 if(Grid[i][j] === 1){
                     ctx.fillStyle = "blue";
                     ctx.fillRect(i * Pix_size, j * Pix_size, Pix_size, Pix_size);
                 }
+                if(Grid[i][j] === 0){
+                    ctx.fillStyle = "white";
+                    ctx.fillRect(i * Pix_size, j * Pix_size, Pix_size, Pix_size);
+                }
+                
 
             }
         }
@@ -100,10 +109,10 @@ function Sand(){
     
     useEffect(() => {
         if (Grid.length > 0){
+            Draw();
             NextGrid();
-            requestAnimationFrame(Draw);
         }
-    }, [Grid]);
+    }, []);
 
     return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
