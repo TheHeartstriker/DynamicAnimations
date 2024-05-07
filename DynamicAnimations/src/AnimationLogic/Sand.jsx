@@ -1,13 +1,16 @@
 import {useState, useEffect, useRef} from 'react';
 
 function Sand(){
-    const SIZE = 20;
+    //Grid generation
     const [Grid, setGrid] = useState([]);
     const [Rows, setRows] = useState(0);
     const [Cols, setCols] = useState(0);
+    //Boilerplate code for canvas
     const [ctx, setCtx] = useState(null);
     const canvasRef = useRef(null);
+
     const Pix_size = 10;
+    const [Update, setUpdate] = useState(true);
     useEffect(() => {
         // Creates a refrence to current canvas
         const canvas = canvasRef.current;
@@ -58,23 +61,32 @@ function Sand(){
     
         // Creates the grid based on the number of rows and columns
         let initialGrid = create2DArray(rows, cols);
-        initialGrid[5][5] = 1; // Set the initial cell to 1
+        initialGrid[50][50] = 1; // Set the initial cell to 1
         setGrid(initialGrid);
     }
 
+
     // Creates the next generation of the grid
     function NextGrid(){
-
+        if (!ctx || !Grid || Grid.length !== Rows || Grid[0].length !== Cols) {
+            return;
+        }
         let NextGrid = create2DArray(Rows, Cols); //Creates a empty grid
         for(let i = 0; i < Rows; i++){
             for(let j = 0; j < Cols; j++){
                 let State = Grid[i][j]; //Gets the state of the current cell or previous generation
                 if(State === 1){
                     let Bellow = Grid[i][j + 1];
-                    if(Bellow === 0){
+                    if(Bellow === 0 && j < Rows - 1){
+                        setUpdate(true);
                         NextGrid[i][j] = 0;
                         NextGrid[i][j + 1] = 1;
                     }
+                    else{
+                        NextGrid[i][j] = 1;
+                        setUpdate(false);
+                    }
+
                 }
             }
         }
@@ -83,7 +95,9 @@ function Sand(){
 
     // Function to draw based on the values in the grid
     function Draw(){
-        if (!ctx) return;
+        if (!ctx || !Grid || Grid.length !== Rows || Grid[0].length !== Cols) {
+            return;
+        }
         for(let i = 0; i < Rows; i++){
             for(let j = 0; j < Cols; j++){
                 if(Grid[i][j] === 1){
@@ -98,21 +112,22 @@ function Sand(){
 
             }
         }
-        requestAnimationFrame(Draw);
     }
 
+
+    // Function to impose the grid
     useEffect(() => {
-        if (ctx){
-            Impose();
-        }
+        Impose();
     }, [ctx]);
-    
+
     useEffect(() => {
-        if (Grid.length > 0){
-            Draw();
+        Draw();
+        requestAnimationFrame(Draw);
+        if(Update){
             NextGrid();
         }
-    }, []);
+    }, [Grid]); 
+
 
     return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
