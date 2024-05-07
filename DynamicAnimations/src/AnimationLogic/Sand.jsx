@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef,} from 'react';
 
 function Sand(){
     //Grid generation
@@ -10,7 +10,26 @@ function Sand(){
     const canvasRef = useRef(null);
 
     const Pix_size = 10;
+    //Update to prevent depth errors
     const [Update, setUpdate] = useState(true);
+    //Mouse
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+    function MouseTracker(event){
+        if(!ctx){
+            return;
+        }
+        let x = Math.floor(event.clientX / Pix_size);
+        let y = Math.floor(event.clientY / Pix_size);
+        setMousePosition({x: x, y: y}); // update mousePosition with x and y
+        if (x < Grid.length && y < Grid[0].length) { // check if x and y are within the grid
+            let newGrid = [...Grid]; // create a deep copy of Grid
+            newGrid[x][y] = 1;
+            setGrid(newGrid);
+        }
+    }
+
+
     useEffect(() => {
         // Creates a refrence to current canvas
         const canvas = canvasRef.current;
@@ -61,57 +80,46 @@ function Sand(){
     
         // Creates the grid based on the number of rows and columns
         let initialGrid = create2DArray(rows, cols);
+        initialGrid[50][51] = 1;
         initialGrid[50][50] = 1; // Set the initial cell to 1
         setGrid(initialGrid);
     }
 
 
-    // Creates the next generation of the grid
-    function NextGrid(){
+    function Draw(){
         if (!ctx || !Grid || Grid.length !== Rows || Grid[0].length !== Cols) {
             return;
         }
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    
         let NextGrid = create2DArray(Rows, Cols); //Creates a empty grid
+        let updateNeeded = false;
+    
         for(let i = 0; i < Rows; i++){
+            let x = i * Pix_size;
             for(let j = 0; j < Cols; j++){
+                let y = j * Pix_size;
                 let State = Grid[i][j]; //Gets the state of the current cell or previous generation
                 if(State === 1){
+                    ctx.fillStyle = "blue";
+                    ctx.fillRect(x, y, Pix_size, Pix_size);
+    
                     let Bellow = Grid[i][j + 1];
                     if(Bellow === 0 && j < Rows - 1){
-                        setUpdate(true);
+                        updateNeeded = true;
                         NextGrid[i][j] = 0;
                         NextGrid[i][j + 1] = 1;
                     }
                     else{
                         NextGrid[i][j] = 1;
-                        setUpdate(false);
                     }
-
                 }
             }
         }
+    
         setGrid(NextGrid);
-    }
-
-    // Function to draw based on the values in the grid
-    function Draw(){
-        if (!ctx || !Grid || Grid.length !== Rows || Grid[0].length !== Cols) {
-            return;
-        }
-        for(let i = 0; i < Rows; i++){
-            for(let j = 0; j < Cols; j++){
-                if(Grid[i][j] === 1){
-                    ctx.fillStyle = "blue";
-                    ctx.fillRect(i * Pix_size, j * Pix_size, Pix_size, Pix_size);
-                }
-                if(Grid[i][j] === 0){
-                    ctx.fillStyle = "white";
-                    ctx.fillRect(i * Pix_size, j * Pix_size, Pix_size, Pix_size);
-                }
-                
-
-            }
-        }
+        setUpdate(updateNeeded);
     }
 
 
@@ -121,15 +129,13 @@ function Sand(){
     }, [ctx]);
 
     useEffect(() => {
-        Draw();
-        requestAnimationFrame(Draw);
         if(Update){
-            NextGrid();
+            requestAnimationFrame(Draw);
         }
     }, [Grid]); 
 
 
-    return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
+    return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} onMouseMove={MouseTracker}/>;
 }
 
 export default Sand;
