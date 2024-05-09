@@ -8,27 +8,13 @@ function Sand(){
     //Boilerplate code for canvas
     const [ctx, setCtx] = useState(null);
     const canvasRef = useRef(null);
-
-    const Pix_size = 10;
+    //On state which purpose is mainly to check if a pixel is on screen
+    const [On, setOn] = useState(false);
+    //
+    const Pix_size = 3;
+    const [Color, setColor] = useState();
     //Update to prevent depth errors
     const [Update, setUpdate] = useState(true);
-    //Mouse
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    function MouseTracker(event){
-        if(!ctx){
-            return;
-        }
-        let x = Math.floor(event.clientX / Pix_size);
-        let y = Math.floor(event.clientY / Pix_size);
-        setMousePosition({x: x, y: y}); // update mousePosition with x and y
-        if (x < Grid.length && y < Grid[0].length) { // check if x and y are within the grid
-            let newGrid = [...Grid]; // create a deep copy of Grid
-            newGrid[x][y] = 1;
-            setGrid(newGrid);
-        }
-    }
-
 
     useEffect(() => {
         // Creates a refrence to current canvas
@@ -57,6 +43,44 @@ function Sand(){
         }
     }, []);
 
+
+
+    //Mouse down event
+    const [MouseDown, setMouseDown] = useState(false); 
+    const handleMouseDown = () => {
+        setOn(true);
+        setMouseDown(true);
+        window.addEventListener('mouseup', handleMouseUp);
+    }
+    
+    const handleMouseUp = () => {
+        setMouseDown(false);
+        window.removeEventListener('mouseup', handleMouseUp);
+    }
+    //Tracks the mouse position converts it to grid position and sets the grid to 1
+    function MouseTracker(event){
+        if(!ctx || MouseDown === false){
+            return;
+        }
+        let x = Math.floor(event.clientX / Pix_size);
+        let y = Math.floor(event.clientY / Pix_size);
+        let AmountAround = 5;
+        let Extent = Math.floor(AmountAround / 2);
+        let newGrid = [...Grid]; // create a copy of Grid
+        for(let i = -Extent; i <= Extent; i++){
+            for(let j = -Extent; j <= Extent; j++){
+                if(Math.random() < 0.5){
+                let X = x + i;
+                let Y = y + j;
+                if(X >= 0 && X < Rows && Y >= 0 && Y < Cols){
+                    newGrid[X][Y] = 1; // modify the copy, not the original state
+                }
+            }}
+        }
+        setGrid(newGrid); // update the state with the modified copy
+    }
+    
+
     // Function to create a 2D array and set all values to 0
     function create2DArray(Rows, Cols){
         let arr = new Array(Rows);
@@ -74,14 +98,16 @@ function Sand(){
         // Sets the number of rows and columns that are need based on res
         const rows = Math.floor(window.innerWidth / Pix_size);
         const cols = Math.floor(window.innerHeight / Pix_size);
+
+        window.innerWidth = rows * Pix_size;
+        window.innerHeight = cols * Pix_size;
         // Sets
         setRows(rows);
         setCols(cols);
     
         // Creates the grid based on the number of rows and columns
         let initialGrid = create2DArray(rows, cols);
-        initialGrid[50][51] = 1;
-        initialGrid[50][50] = 1; // Set the initial cell to 1
+
         setGrid(initialGrid);
     }
 
@@ -106,11 +132,21 @@ function Sand(){
                     ctx.fillRect(x, y, Pix_size, Pix_size);
     
                     let Bellow = Grid[i][j + 1];
-                    if(Bellow === 0 && j < Rows - 1){
+                    let BellowRight = (i + 1 < Rows) ? Grid[i + 1][j + 1] : 1;
+                    let BellowLeft = (i - 1 >= 0) ? Grid[i - 1][j + 1] : 1;
+                    if(Bellow === 0){
                         updateNeeded = true;
                         NextGrid[i][j] = 0;
                         NextGrid[i][j + 1] = 1;
-                    }
+                    }else if(BellowRight === 0){
+                        updateNeeded = true;
+                        NextGrid[i][j] = 0;
+                        NextGrid[i + 1][j + 1] = 1;}
+                        else if(BellowLeft === 0){
+                        updateNeeded = true;
+                        NextGrid[i][j] = 0;
+                        NextGrid[i - 1][j + 1] = 1;
+                        }
                     else{
                         NextGrid[i][j] = 1;
                     }
@@ -129,13 +165,20 @@ function Sand(){
     }, [ctx]);
 
     useEffect(() => {
-        if(Update){
+        if(Update || On){
             requestAnimationFrame(Draw);
+
         }
     }, [Grid]); 
 
 
-    return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} onMouseMove={MouseTracker}/>;
+    return <canvas
+        ref={canvasRef} id="myCanvas" 
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onMouseDown={handleMouseDown}
+        onMouseMove={MouseTracker}>
+    </canvas>;
 }
 
 export default Sand;
