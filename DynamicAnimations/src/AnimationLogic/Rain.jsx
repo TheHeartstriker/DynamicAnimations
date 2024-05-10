@@ -2,18 +2,19 @@ import {useState, useEffect, useRef} from 'react';
 
 
 function Rain(){
-    // Magic numbers
+    // Magic numbers for the rain
     const SIZE = 20;
     const SHEET = 3;
     const DROPWIDTH = 2;
     const DROPS = 100;
+    // Magic numbers for the lightning and its randomness
 
-    const [StartEnd, setStartEnd] = useState([]);
-    const [lightning, setLightning] = useState([]);
+
     // Create a reference to the canvas
     const canvasRef = useRef(null);
     // Create a state for the context
     const [ctx, setCtx] = useState(null);
+    // The rain array
     const [rainArray, setRainArray] = useState(new Array(DROPS).fill().map(() => ({
         Start: {
             x: Math.floor(Math.random() * window.innerWidth),
@@ -50,78 +51,6 @@ function Rain(){
         }
     }, []);
 
-    function CreateLightning(){
-        if (lightning.length === 0) { 
-            return;
-        }
-    
-        ctx.beginPath();
-        ctx.moveTo(StartEnd[0].x, StartEnd[0].y);
-        for(let i = 0; i < lightning.length; i++){
-            if (lightning[i]) { // Check if the current element is defined
-                ctx.lineTo(lightning[i].x, lightning[i].y);
-            }
-        }
-        ctx.strokeStyle = "white";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-    }
-
-    function SetPoints(){
-        //First point of the bolt
-        let x = Math.random() * window.innerWidth;
-        let y = 0;
-        //Second point of the bolt
-        let x2 = Math.random() * window.innerWidth;
-        let y2 = Math.random() * window.innerHeight;
-        setStartEnd([{x: x, y: y}, {x: x2, y: y2}]);
-    }
-
-    function Bolt() {
-        if (!StartEnd[0] || !StartEnd[1]) {
-          return;
-        }
-      
-        let newLightning = [];
-        let MinSegment = 1;
-        let Diff = Math.random() * window.innerWidth * 2; // Increase initial displacement
-      
-        // Add the start point to the newLightning array
-        newLightning.push(StartEnd[0]);
-      
-        let Start = StartEnd[0];
-        let End = StartEnd[1];
-      
-        // Calculate the distance between the start and end points
-        let CurrentSegment = Math.sqrt(
-          Math.pow(End.x - Start.x, 2) + Math.pow(End.y - Start.y, 2)
-        );
-      
-        while (MinSegment < CurrentSegment) {
-          // Calculate the midpoint and add randomness
-          let Midx = (Start.x + End.x) / 2;
-          let NewX = Midx + Diff;
-          let NewY = (Start.y + End.y) / 2 + (Math.random() - 0.5) * Diff; // Add randomness to y-coordinate
-          newLightning.push({ x: NewX, y: NewY });
-          Diff = Math.max(0, Diff - 50); // Decrease displacement by a smaller amount
-      
-          // Update Start and End for the next iteration
-          Start = newLightning[newLightning.length - 1];
-          End = StartEnd[1];
-      
-          // Recalculate CurrentSegment for the next iteration
-          CurrentSegment = Math.sqrt(
-            Math.pow(End.x - Start.x, 2) + Math.pow(End.y - Start.y, 2)
-          );
-        }
-      
-        // Add the end point to the newLightning array
-        newLightning.push(StartEnd[1]);
-      
-        // Update the state
-        setLightning(newLightning);
-        console.log(newLightning);
-      }
     // Drop constructor
     function Droplet(x1, y1, x2, y2){
         ctx.beginPath();
@@ -150,12 +79,36 @@ function Rain(){
         requestAnimationFrame(DrawDroplets);
     }
 
+    const [Distance, setDistance] = useState(40);
+
+    function Zeus(startX, startY){
+        for(let i = 0; i < 1000; i++){
+            ctx.beginPath();
+            ctx.strokeStyle = "yellow";
+            ctx.moveTo(startX,startY)
+
+            setDistance(Distance / 1.1)
+            let endX = startX + PosNegConverter(Distance);
+            let endY = startY + Math.random() * Distance * 2;
+            ctx.lineTo(endX, endY);
+            startX = endX;
+            startY = endY;
+            ctx.stroke();
+        }
+    }
+
+    function PosNegConverter(A){
+        if(Math.random() < 0.5){
+            return A * -1;
+        }
+        return A;
+    
+    }
 
     useEffect(() => {
         if (ctx){
-            SetPoints();
-            Bolt();
-            CreateLightning();
+            Zeus(Math.random() * window.innerWidth, 0);
+
         }
     }, [ctx]);
 

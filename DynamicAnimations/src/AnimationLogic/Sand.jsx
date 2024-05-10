@@ -1,5 +1,7 @@
 import {useState, useEffect, useRef,} from 'react';
-
+//Need to optimize code
+//Need to fix the color change
+//Orginize and understand the code aka comments
 function Sand(){
     //Grid generation
     const [Grid, setGrid] = useState([]);
@@ -10,9 +12,10 @@ function Sand(){
     const canvasRef = useRef(null);
     //On state which purpose is mainly to check if a pixel is on screen
     const [On, setOn] = useState(false);
-    //
-    const Pix_size = 3;
-    const [Color, setColor] = useState();
+    //Color state
+    const [Color, setColor] = useState(100);
+    //Pixel size
+    const Pix_size = 10;
     //Update to prevent depth errors
     const [Update, setUpdate] = useState(true);
 
@@ -43,7 +46,13 @@ function Sand(){
         }
     }, []);
 
-
+    function ChangeColor(){
+        let newColorH = Color + 1;
+        if(newColorH > 260 || newColorH === 0){
+            newColorH = 190;
+        }
+        setColor(newColorH);
+    }
 
     //Mouse down event
     const [MouseDown, setMouseDown] = useState(false); 
@@ -73,7 +82,7 @@ function Sand(){
                 let X = x + i;
                 let Y = y + j;
                 if(X >= 0 && X < Rows && Y >= 0 && Y < Cols){
-                    newGrid[X][Y] = 1; // modify the copy, not the original state
+                    newGrid[X][Y] = Color; // modify the copy, not the original state
                 }
             }}
         }
@@ -127,8 +136,8 @@ function Sand(){
             for(let j = 0; j < Cols; j++){
                 let y = j * Pix_size;
                 let State = Grid[i][j]; //Gets the state of the current cell or previous generation
-                if(State === 1){
-                    ctx.fillStyle = "blue";
+                if(State > 0){
+                    ctx.fillStyle = ctx.fillStyle = `hsl(${Grid[i][j]}, 100%, 50%)`;
                     ctx.fillRect(x, y, Pix_size, Pix_size);
     
                     let Bellow = Grid[i][j + 1];
@@ -137,18 +146,18 @@ function Sand(){
                     if(Bellow === 0){
                         updateNeeded = true;
                         NextGrid[i][j] = 0;
-                        NextGrid[i][j + 1] = 1;
+                        NextGrid[i][j + 1] = State;
                     }else if(BellowRight === 0){
                         updateNeeded = true;
                         NextGrid[i][j] = 0;
-                        NextGrid[i + 1][j + 1] = 1;}
+                        NextGrid[i + 1][j + 1] = State;}
                         else if(BellowLeft === 0){
                         updateNeeded = true;
                         NextGrid[i][j] = 0;
-                        NextGrid[i - 1][j + 1] = 1;
+                        NextGrid[i - 1][j + 1] = State;
                         }
                     else{
-                        NextGrid[i][j] = 1;
+                        NextGrid[i][j] = State;
                     }
                 }
             }
@@ -166,6 +175,7 @@ function Sand(){
 
     useEffect(() => {
         if(Update || On){
+            ChangeColor();
             requestAnimationFrame(Draw);
 
         }
