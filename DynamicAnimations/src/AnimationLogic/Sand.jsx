@@ -13,9 +13,9 @@ function Sand(){
     //On state which purpose is mainly to check if a pixel is on screen
     const [On, setOn] = useState(false);
     //Color state
-    const [Color, setColor] = useState(100);
+    const [Color, setColor] = useState(190);
     //Pixel size
-    const Pix_size = 10;
+    const Pix_size = 5;
     //Update to prevent depth errors
     const [Update, setUpdate] = useState(true);
 
@@ -47,7 +47,7 @@ function Sand(){
     }, []);
 
     function ChangeColor(){
-        let newColorH = Color + 1;
+        let newColorH = Color + 0.5;
         if(newColorH > 260 || newColorH === 0){
             newColorH = 190;
         }

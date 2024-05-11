@@ -79,22 +79,42 @@ function Rain(){
         requestAnimationFrame(DrawDroplets);
     }
 
-    const [Distance, setDistance] = useState(40);
+    const [Distance, setDistance] = useState(50);
+    const [Thickness, setThickness] = useState(2);
+    const [Time, setTime] = useState(200);
+    const [Reset, setReset] = useState(false);
 
     function Zeus(startX, startY){
-        for(let i = 0; i < 1000; i++){
-            ctx.beginPath();
-            ctx.strokeStyle = "yellow";
-            ctx.moveTo(startX,startY)
-
-            setDistance(Distance / 1.1)
-            let endX = startX + PosNegConverter(Distance);
-            let endY = startY + Math.random() * Distance * 2;
-            ctx.lineTo(endX, endY);
-            startX = endX;
-            startY = endY;
-            ctx.stroke();
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        let currentThickness = Thickness;
+        let currentDistance = Distance;
+        let currentTime = Time;
+        let totalDelay = 0;
+    
+        for(let i = 0; i < 100; i++){
+            totalDelay += currentTime;
+            setTimeout(() => {
+                setReset(false);
+                ctx.beginPath();
+                ctx.strokeStyle = "blue";
+                ctx.lineWidth = currentThickness;
+                ctx.moveTo(startX,startY);
+                let endX = startX + PosNegConverter(currentDistance);
+                let endY = startY + Math.random() * currentDistance * 2;
+                ctx.lineTo(endX, endY);
+                startX = endX;
+                startY = endY;
+                ctx.stroke();
+    
+                currentThickness /= 1.1;
+                currentDistance /= 1.1;
+                currentTime *= 1.5;
+            }, totalDelay);
         }
+        setReset(true);
+        setThickness(currentThickness);
+        setDistance(currentDistance);
+        setTime(currentTime);
     }
 
     function PosNegConverter(A){
@@ -110,7 +130,7 @@ function Rain(){
             Zeus(Math.random() * window.innerWidth, 0);
 
         }
-    }, [ctx]);
+    }, [ctx, ]);
 
 
     return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
