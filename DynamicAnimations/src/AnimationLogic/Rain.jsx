@@ -10,10 +10,12 @@ function Rain(){
     // Magic numbers for the lightning and its randomness
 
 
-    // Create a reference to the canvas
-    const canvasRef = useRef(null);
-    // Create a state for the context
-    const [ctx, setCtx] = useState(null);
+    // Create references to the canvases
+    const rainCanvasRef = useRef(null);
+    const lightningCanvasRef = useRef(null);
+    // Create states for the contexts
+    const [rainCtx, setRainCtx] = useState(null);
+    const [lightningCtx, setLightningCtx] = useState(null);
     // The rain array
     const [rainArray, setRainArray] = useState(new Array(DROPS).fill().map(() => ({
         Start: {
@@ -25,22 +27,30 @@ function Rain(){
     })));
 
     useEffect(() => {
-        // Creates a refrence to current canvas
-        const canvas = canvasRef.current;
-        // Sets the default canvas size to the window size
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        // Gets the context of the canvas
-        const context = canvas.getContext('2d');
-        // Sets the context to the state
-        setCtx(context);
+        // Creates references to current canvases
+        const rainCanvas = rainCanvasRef.current;
+        const lightningCanvas = lightningCanvasRef.current;
+        // Sets the default canvas sizes to the window size
+        rainCanvas.width = window.innerWidth;
+        rainCanvas.height = window.innerHeight;
+        lightningCanvas.width = window.innerWidth;
+        lightningCanvas.height = window.innerHeight;
+        // Gets the contexts of the canvases
+        const rainContext = rainCanvas.getContext('2d');
+        const lightningContext = lightningCanvas.getContext('2d');
+        // Sets the contexts to the states
+        setRainCtx(rainContext);
+        setLightningCtx(lightningContext);
         // Function to resize the canvas
         const resizeCanvas = () => {
             // The resize
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            rainCanvas.width = window.innerWidth;
+            rainCanvas.height = window.innerHeight;
+            lightningCanvas.width = window.innerWidth;
+            lightningCanvas.height = window.innerHeight;
             // After resizing the canvas, we need to get the context again
-            setCtx(canvas.getContext('2d'));
+            setRainCtx(rainCanvas.getContext('2d'));
+            setLightningCtx(lightningCanvas.getContext('2d'));
             // Where the redrawing of the canvas happens
     
         }
@@ -53,17 +63,17 @@ function Rain(){
 
     // Drop constructor
     function Droplet(x1, y1, x2, y2){
-        ctx.beginPath();
-        ctx.moveTo(x1,y1);
-        ctx.lineTo(x2,y2);
-        ctx.strokeStyle = "blue";
-        ctx.lineWidth = DROPWIDTH;
-        ctx.stroke();
+        rainCtx.beginPath();
+        rainCtx.moveTo(x1,y1);
+        rainCtx.lineTo(x2,y2);
+        rainCtx.strokeStyle = "blue";
+        rainCtx.lineWidth = DROPWIDTH;
+        rainCtx.stroke();
     }
 
     // Animation function so rules etc can be applied
     function DrawDroplets(){
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        rainCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         const newRainArray = rainArray.map((drop) => {
             const newDrop = {...drop};
             newDrop.Start.y += newDrop.speed;
@@ -86,10 +96,10 @@ function Rain(){
     const [Reset, setReset] = useState(true); // Used to reset the lightning bolt
     
     function Zeus(startX, startY){
-        if(!ctx){
+        if(!lightningCtx){
             return;
         }
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+        lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight)
         //Refrences
         let currentThickness = Thickness;
         let currentDistance = Distance;
@@ -100,16 +110,16 @@ function Rain(){
         for(let i = 0; i < 100; i++){
             totalDelay += currentTime; // Creates a steadily increasing delay
             setTimeout(() => {
-                ctx.beginPath();
-                ctx.strokeStyle = "purple";
-                ctx.lineWidth = currentThickness;
-                ctx.moveTo(startX,startY);
+                lightningCtx.beginPath();
+                lightningCtx.strokeStyle = "purple";
+                lightningCtx.lineWidth = currentThickness;
+                lightningCtx.moveTo(startX,startY);
                 let endX = startX + PosNegConverter(currentDistance);
                 let endY = startY + Math.random() * currentDistance * 2;
-                ctx.lineTo(endX, endY);
+                lightningCtx.lineTo(endX, endY);
                 startX = endX;
                 startY = endY;
-                ctx.stroke();
+                lightningCtx.stroke();
     
                 currentThickness /= 1.1;
                 currentDistance /= 1.1;
@@ -140,14 +150,14 @@ function Rain(){
     }
 
     useEffect(() => {
-        if(!ctx){
+        if(!rainCtx){
             return
         }
         DrawDroplets();
-    }, [ctx]);
+    }, [rainCtx]);
 
     useEffect(() => {
-        if(!ctx){
+        if(!lightningCtx){
             return
         }
         if (Reset){
@@ -155,9 +165,13 @@ function Rain(){
             setReset(false);
             Zeus(Math.random() * window.innerWidth, 0);
         }
-    }, [ctx, Reset]);
+    }, [lightningCtx, Reset]);
 
-    return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
+    return <div>
+    <canvas ref={rainCanvasRef} style={{position: 'absolute'}} id="rainCanvas" width={window.innerWidth} height={window.innerHeight} />
+    <canvas ref={lightningCanvasRef} style={{position: 'absolute'}} id="lightningCanvas" width={window.innerWidth} height={window.innerHeight} />
+    </div>
+    ;
 }
 
 export default Rain;
