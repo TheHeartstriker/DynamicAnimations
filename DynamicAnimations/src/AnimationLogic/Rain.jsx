@@ -80,23 +80,28 @@ function Rain(){
     }
 
     const [Distance, setDistance] = useState(50);
-    const [Thickness, setThickness] = useState(2);
-    const [Time, setTime] = useState(200);
-    const [Reset, setReset] = useState(false);
-
+    const [Thickness, setThickness] = useState(3.5);
+    const [Time, setTime] = useState(200); // Used to create a delay between each lightning bolt in tandem with totalDelay
+    const [Branches, setBranches] = useState(0); 
+    const [Reset, setReset] = useState(true); // Used to reset the lightning bolt
+    
     function Zeus(startX, startY){
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        if(!ctx){
+            return;
+        }
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+        //Refrences
         let currentThickness = Thickness;
         let currentDistance = Distance;
         let currentTime = Time;
+        //Stores the total delay as it increases
         let totalDelay = 0;
     
         for(let i = 0; i < 100; i++){
-            totalDelay += currentTime;
+            totalDelay += currentTime; // Creates a steadily increasing delay
             setTimeout(() => {
-                setReset(false);
                 ctx.beginPath();
-                ctx.strokeStyle = "blue";
+                ctx.strokeStyle = "purple";
                 ctx.lineWidth = currentThickness;
                 ctx.moveTo(startX,startY);
                 let endX = startX + PosNegConverter(currentDistance);
@@ -108,15 +113,24 @@ function Rain(){
     
                 currentThickness /= 1.1;
                 currentDistance /= 1.1;
-                currentTime *= 1.5;
+                currentTime *= 1.5; // Suport steadly increasing delay
+
             }, totalDelay);
         }
-        setReset(true);
+    
+        let totalDelay2 = totalDelay + currentTime * 10; //Magic number
+    
+        setTimeout(() => {
+            setReset(true);
+            console.log("True");
+        }, totalDelay2); // Set Reset to true after total delay
+    
         setThickness(currentThickness);
         setDistance(currentDistance);
         setTime(currentTime);
     }
-
+    
+    // This is a helper function it helps with randomizing the lightning
     function PosNegConverter(A){
         if(Math.random() < 0.5){
             return A * -1;
@@ -126,12 +140,22 @@ function Rain(){
     }
 
     useEffect(() => {
-        if (ctx){
-            Zeus(Math.random() * window.innerWidth, 0);
-
+        if(!ctx){
+            return
         }
-    }, [ctx, ]);
+        DrawDroplets();
+    }, [ctx]);
 
+    useEffect(() => {
+        if(!ctx){
+            return
+        }
+        if (Reset){
+            console.log("Calling zeus")
+            setReset(false);
+            Zeus(Math.random() * window.innerWidth, 0);
+        }
+    }, [ctx, Reset]);
 
     return <canvas ref={canvasRef} id="myCanvas" width={window.innerWidth} height={window.innerHeight} />;
 }
