@@ -3,9 +3,10 @@ import {useState, useEffect, useRef} from 'react';
 
 function Rain(){
     // Magic numbers for the rain
-    const SIZE = 20;
+    const WIDTH = 2.5;
+    const HEIGHT = 20;
     const SHEET = 3;
-    const DROPWIDTH = 2;
+    const DROPWIDTH = 0.5;
     const DROPS = 100;
     // Magic numbers for the lightning and its randomness
 
@@ -23,7 +24,8 @@ function Rain(){
             y: 0,
         },
         speed: Math.random() * 5 + 5,
-        size: SIZE / (Math.floor(Math.random() * SHEET) + 1),
+        width: WIDTH,
+        height: HEIGHT / Math.floor(Math.random() * SHEET),
     })));
 
     useEffect(() => {
@@ -62,12 +64,13 @@ function Rain(){
     }, []);
 
     // Drop constructor
-    function Droplet(x1, y1, x2, y2){
+    function Droplet(x1, y1, width, height){
         rainCtx.beginPath();
-        rainCtx.moveTo(x1,y1);
-        rainCtx.lineTo(x2,y2);
-        rainCtx.strokeStyle = "blue";
+        rainCtx.rect(x1, y1, width, height);
         rainCtx.lineWidth = DROPWIDTH;
+        rainCtx.strokeStyle = "gray";
+        rainCtx.fillStyle = "blue";
+        rainCtx.fill();
         rainCtx.stroke();
     }
 
@@ -77,7 +80,8 @@ function Rain(){
         const newRainArray = rainArray.map((drop) => {
             const newDrop = {...drop};
             newDrop.Start.y += newDrop.speed;
-            Droplet(newDrop.Start.x, newDrop.Start.y, newDrop.Start.x, newDrop.Start.y + newDrop.size);
+
+            Droplet(newDrop.Start.x, newDrop.Start.y, newDrop.width, newDrop.height);
             if (newDrop.Start.y > window.innerHeight){
                 newDrop.Start.x = Math.floor(Math.random() * window.innerWidth);
                 newDrop.Start.y = 0;
@@ -86,32 +90,32 @@ function Rain(){
         });
         setRainArray(newRainArray);
     
-        requestAnimationFrame(DrawDroplets);
+        //requestAnimationFrame(DrawDroplets);
     }
 
     const [Distance, setDistance] = useState(50);
     const [Thickness, setThickness] = useState(3.5);
+    const [Depth, setDepth] = useState(5);
     const [Time, setTime] = useState(200); // Used to create a delay between each lightning bolt in tandem with totalDelay
-    const [Branches, setBranches] = useState(0); 
     const [Reset, setReset] = useState(true); // Used to reset the lightning bolt
     
-    function Zeus(startX, startY){
+    function Zeus(startX, startY, Depth){
         if(!lightningCtx){
             return;
         }
-        lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight)
         //Refrences
+        let currentDepth = Depth;
         let currentThickness = Thickness;
         let currentDistance = Distance;
         let currentTime = Time;
         //Stores the total delay as it increases
         let totalDelay = 0;
     
-        for(let i = 0; i < 100; i++){
+        for(let i = 0; i < 150; i++){
             totalDelay += currentTime; // Creates a steadily increasing delay
             setTimeout(() => {
                 lightningCtx.beginPath();
-                lightningCtx.strokeStyle = "purple";
+                lightningCtx.strokeStyle = "blue";
                 lightningCtx.lineWidth = currentThickness;
                 lightningCtx.moveTo(startX,startY);
                 let endX = startX + PosNegConverter(currentDistance);
@@ -120,15 +124,22 @@ function Rain(){
                 startX = endX;
                 startY = endY;
                 lightningCtx.stroke();
-    
+
+                if (i % 10 === 0 && currentDepth > 0){
+                    let branchX = endX;
+                    let branchY = endY;
+                    //Zeus(branchX, branchY, currentDepth - 1);
+                }
+
                 currentThickness /= 1.1;
                 currentDistance /= 1.1;
-                currentTime *= 1.5; // Suport steadly increasing delay
+                currentTime *= 1.5; //Increases time 
 
             }, totalDelay);
+
         }
     
-        let totalDelay2 = totalDelay + currentTime * 10; //Magic number
+        let totalDelay2 = totalDelay + currentTime * 2; //Magic number
     
         setTimeout(() => {
             setReset(true);
@@ -149,6 +160,7 @@ function Rain(){
     
     }
 
+
     useEffect(() => {
         if(!rainCtx){
             return
@@ -162,8 +174,9 @@ function Rain(){
         }
         if (Reset){
             console.log("Calling zeus")
+            lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
             setReset(false);
-            Zeus(Math.random() * window.innerWidth, 0);
+            Zeus(Math.random() * window.innerWidth, 0, Depth);
         }
     }, [lightningCtx, Reset]);
 
