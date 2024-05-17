@@ -73,7 +73,7 @@ function Sand(){
         }
         let x = Math.floor(event.clientX / Pix_size);
         let y = Math.floor(event.clientY / Pix_size);
-        let AmountAround = 5;
+        let AmountAround = 10;
         let Extent = Math.floor(AmountAround / 2);
         let newGrid = [...Grid]; // create a copy of Grid
         for(let i = -Extent; i <= Extent; i++){
