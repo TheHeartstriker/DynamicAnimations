@@ -90,75 +90,60 @@ function Rain(){
         });
         setRainArray(newRainArray);
     
-        requestAnimationFrame(DrawDroplets);
+        //requestAnimationFrame(DrawDroplets);
     }
 
-    const [Distance, setDistance] = useState(50);
-    const [Thickness, setThickness] = useState(3.5);
-    const [Depth, setDepth] = useState(3);
-    const [Time, setTime] = useState(200); // Used to create a delay between each lightning bolt in tandem with totalDelay
-    const [Reset, setReset] = useState(true); // Used to reset the lightning bolt
-    
-    function Zeus(startX, startY, Depth, Thickness, Distance){
-        if(!lightningCtx ||  Depth <= 0){
-            return;
-        }
-        //Refrences
-        let currentDepth = Depth;
-        let currentThickness = Thickness;
+    const [Distance, setDistance] = useState(100);
+    const [Thickness, setThickness] = useState(3);
+    const [Time, setTime] = useState(200);
+    const [Branches, setBranches] = useState(3);
+    const [Reset, setReset] = useState(false);
+
+    function createLightning(startX, startY, Distance, Thickness, Time, Branches){
         let currentDistance = Distance;
+        let currentThickness = Thickness;
         let currentTime = Time;
-        //Stores the total delay as it increases
-        let totalDelay = 0;
+        let accumulate = 0;
+        let currentBranches = Branches;
     
-        for(let i = 0; i < 100; i++){
-            totalDelay += currentTime; // Creates a steadily increasing delay
-            setTimeout(() => {
-                lightningCtx.beginPath();
-                lightningCtx.strokeStyle = "blue";
-                lightningCtx.lineWidth = currentThickness;
-                lightningCtx.moveTo(startX,startY);
-                let endX = startX + PosNegConverter(currentDistance);
-                let endY = startY + Math.random() * currentDistance * 2;
-                lightningCtx.lineTo(endX, endY);
-                startX = endX;
-                startY = endY;
-                lightningCtx.stroke();
+        return new Promise(resolve => {
+            for (let i = 0; i < 100; i++){
+                accumulate += currentTime;
+                setTimeout(() => {
+                    lightningCtx.beginPath();
+                    lightningCtx.strokeStyle = "blue";
+                    lightningCtx.lineWidth = currentThickness;
+                    lightningCtx.moveTo(startX,startY);
+                    let endX = startX + PosNegConverter(currentDistance);
+                    let endY = startY + Math.random() * currentDistance * 2;
+                    lightningCtx.lineTo(endX, endY);
+                    startX = endX;
+                    startY = endY;
+                    lightningCtx.stroke();
 
-                if (i % 10 === 0 && currentDepth > 0){
-                    let branchX = endX;
-                    let branchY = endY;
-                    currentDepth -= 1;
-                    Zeus(branchX, branchY, currentDepth, currentThickness, currentDistance);
-                }
-
-                currentThickness /= 1.1;
-                currentDistance /= 1.1;
-                currentTime *= 1.3; //Increases time 
-
-                
-
-            }, totalDelay);
-
-        }
-        let totalDelay2 = totalDelay + currentTime * 2; //Magic number
-        setTimeout(() => {
-            resetValues();
-            if (Reset === false){
-                setReset(true);
-            }
-            else{
-                setReset(false);
-            }
-        }, totalDelay2); // Set Reset to true after total delay
+                    if (currentBranches > 0 && i % 10 === 0){
+                        currentBranches -= 1;
+                        Branch(startX, startY, currentDistance, currentThickness, currentTime);
+                    }
     
-        setThickness(currentThickness);
-        setDistance(currentDistance);
-        setTime(currentTime);
-        setDepth(currentDepth);
+                    currentThickness /= 1.1;
+                    currentDistance /= 1.1;
+                    currentTime *= 1.1;
+    
+                    if (i === 99) {
+                        ReDraw();
+                        resolve(console.log("Lightning has struck"));
+                    }
+                }, accumulate);
+            }
+        });
+    }
+
+    function Branch(End1, End2, Dis, Thick, Time){
+        createLightning(End1, End2, Dis, Thick, Time);
     }
     
-    // This is a helper function it helps with randomizing the lightning
+
     function PosNegConverter(A){
         if(Math.random() < 0.5){
             return A * -1;
@@ -167,14 +152,22 @@ function Rain(){
     
     }
 
-    function resetValues() {
-        setDistance(50);
-        setThickness(3.5);
-        setDepth(3);
-        setTime(200);
+    function ReDraw(){
+        if (Reset === true){
+            setReset(false);
+        } else {
+            setReset(true);
+        }
     }
 
+    function Resetval(){
+        setDistance(100);
+        setThickness(3);
+        setTime(200);
+        setBranches(3);
+    }
 
+    
     useEffect(() => {
         if(!rainCtx){
             return
@@ -186,9 +179,9 @@ function Rain(){
         if(!lightningCtx){
             return
         }
+        Resetval();
         lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        console.log(Thickness);
-        Zeus(Math.random() * window.innerWidth, 0, Depth, Thickness, Distance);
+        createLightning(window.innerWidth / 2, 0, Distance, Thickness, Time, Branches);
 
     }, [lightningCtx, Reset]);
 
