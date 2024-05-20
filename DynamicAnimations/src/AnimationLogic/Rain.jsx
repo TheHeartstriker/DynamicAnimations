@@ -93,23 +93,25 @@ function Rain(){
         //requestAnimationFrame(DrawDroplets);
     }
 
-    const [Distance, setDistance] = useState(100);
+    const [Distance, setDistance] = useState(75);
     const [Thickness, setThickness] = useState(3);
-    const [Time, setTime] = useState(200);
+    const [Time, setTime] = useState(300);
     const [Branches, setBranches] = useState(3);
     const [Reset, setReset] = useState(false);
+    let timeoutId = 0;
+    let timeoutIds = [];
 
-    function createLightning(startX, startY, Distance, Thickness, Time, Branches){
+
+    function createLightning(startX, startY, Distance, Thickness, Time, Branches, Iterator = 0){
         let currentDistance = Distance;
         let currentThickness = Thickness;
-        let currentTime = Time;
+        let currentTime = Math.floor(Math.random() * Time) + 100;
         let accumulate = 0;
         let currentBranches = Branches;
     
-        return new Promise(resolve => {
-            for (let i = 0; i < 100; i++){
+            for (let i = Iterator; i < 100; i++){
                 accumulate += currentTime;
-                setTimeout(() => {
+                let timeoutId = setTimeout(() => {
                     lightningCtx.beginPath();
                     lightningCtx.strokeStyle = "blue";
                     lightningCtx.lineWidth = currentThickness;
@@ -121,9 +123,9 @@ function Rain(){
                     startY = endY;
                     lightningCtx.stroke();
 
-                    if (currentBranches > 0 && i % 10 === 0){
+                    if (currentBranches > 0 && i > 20 && i < 99){
                         currentBranches -= 1;
-                        Branch(startX, startY, currentDistance, currentThickness, currentTime);
+                        Branch(startX, startY, currentDistance, currentThickness, i);
                     }
     
                     currentThickness /= 1.1;
@@ -131,16 +133,21 @@ function Rain(){
                     currentTime *= 1.1;
     
                     if (i === 99) {
+                        console.log("Redraw");
                         ReDraw();
-                        resolve(console.log("Lightning has struck"));
+
+                        for (let id of timeoutIds){
+                            clearTimeout(id);
+                        }
+                        timeoutIds = [];
                     }
                 }, accumulate);
+                timeoutIds.push(timeoutId);
             }
-        });
     }
 
-    function Branch(End1, End2, Dis, Thick, Time){
-        createLightning(End1, End2, Dis, Thick, Time);
+    function Branch(End1, End2, Dis, Thick, Iterator){
+        createLightning(End1, End2, Dis, Thick, Iterator);
     }
     
 
@@ -160,14 +167,6 @@ function Rain(){
         }
     }
 
-    function Resetval(){
-        setDistance(100);
-        setThickness(3);
-        setTime(200);
-        setBranches(3);
-    }
-
-    
     useEffect(() => {
         if(!rainCtx){
             return
@@ -179,9 +178,10 @@ function Rain(){
         if(!lightningCtx){
             return
         }
-        Resetval();
+        setTimeout(() => {
         lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         createLightning(window.innerWidth / 2, 0, Distance, Thickness, Time, Branches);
+        }, Time * 2);
 
     }, [lightningCtx, Reset]);
 
