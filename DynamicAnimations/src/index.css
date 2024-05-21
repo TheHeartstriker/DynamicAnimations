@@ -1,3 +1,4 @@
+/*For animations that need only a single canvas*/
 #myCanvas {
   position: absolute;
   background: rgb(0, 0, 0);
@@ -6,7 +7,7 @@
   top: 0;
   left: 0;
 }
-
+/*Canvas for rain animation*/
 #rainCanvas {
   position: absolute;
   background: rgb(0, 0, 0);
@@ -23,13 +24,13 @@
   top: 0;
   left: 0;
 }
-
+/* Removal of default margin and padding */
 body {
   overflow: hidden;
   margin: 0;
   padding: 0;
 }
-
+/*Settings button*/
 #Settings {
   position: absolute;
   display: flex;
@@ -41,21 +42,19 @@ body {
   height: 6vh;
   width: 6vh;
   background-color: hsl(180, 4%, 5%);
-  color: white;
+  color: rgb(255, 255, 255);
   border: none;
   font-size: 20px;
 }
-
+/*Settings panel*/
 .PageContainer {
   position: relative;
   display: flex;
   width: 25vw;
   height: 99vh;
-  border: 5px solid hsl(145, 75%, 43%);
-  background-color: hsl(180, 4%, 5%);
-  border-radius: 1%;
-  left: 75vw;
-  opacity: 0.9;
+  border: 5px solid hsl(0, 0%, 100%);
+  background-color: hsl(0, 0%, 0%);
+  left: 75vw; /*75*/
   animation: Slide 1s linear forwards;
 }
 

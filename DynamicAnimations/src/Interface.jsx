@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 function Buttons() {
   const pageContainerRef = useRef(null);
-  const [Buttoncount, setButtoncount] = useState(0);
+  const [Buttoncount, setButtoncount] = useState(0); //Helps switch between animation states aka left and right not a direct counter
   const [Timer, setTimer] = useState(0);
   useEffect(() => {
   const interval = setInterval(() => {
@@ -15,7 +15,8 @@ function Buttons() {
   }, []);
 
   const handleButtonClick = () => {
-    if (pageContainerRef.current && Buttoncount === 0 && Timer > 2.5) {
+    //Slide left
+    if (pageContainerRef.current && Buttoncount === 0 && Timer > 2) {
       // Remove the animation
       pageContainerRef.current.style.animation = 'none';
       // Force a reflow
@@ -26,9 +27,10 @@ function Buttons() {
       pageContainerRef.current.style.animation = 'Slide 1s linear forwards';
       setButtoncount(1);
       setTimer(0)
-      console.log(Buttoncount);
+
     }
-    if (pageContainerRef.current && Buttoncount === 1 && Timer > 2.5) {
+    //Slide back aka right
+    if (pageContainerRef.current && Buttoncount === 1 && Timer > 2) {
       // Remove the animation
       pageContainerRef.current.style.animation = 'none';
       // Force a reflow
@@ -39,7 +41,7 @@ function Buttons() {
       pageContainerRef.current.style.animation = 'Slide 1s linear forwards';
       setButtoncount(0);
       setTimer(0)
-      console.log(Buttoncount);
+
 
     }
   };
@@ -50,7 +52,7 @@ function Buttons() {
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
       </div>
-      <div className="PageContainer" ref={pageContainerRef} style={{ '--start': '100%', '--end': '0%' }}>
+      <div className="PageContainer" ref={pageContainerRef}>
         <div className="Buttons">
           <button>1</button>
           <button>2</button>

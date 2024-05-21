@@ -90,42 +90,52 @@ function Rain(){
         });
         setRainArray(newRainArray);
     
-        //requestAnimationFrame(DrawDroplets);
+        requestAnimationFrame(DrawDroplets);
     }
 
-    const [Distance, setDistance] = useState(75);
-    const [Thickness, setThickness] = useState(3);
-    const [Time, setTime] = useState(300);
-    const [Branches, setBranches] = useState(3);
+    const Distance = 75;
+    const Thickness = 3;
+    const Time = 25;
+    const Branches = 3;
+    const Roughness = 100;
+    const Chance = 5;
+
+
     const [Reset, setReset] = useState(false);
-    let timeoutId = 0;
+
     let timeoutIds = [];
 
 
     function createLightning(startX, startY, Distance, Thickness, Time, Branches, Iterator = 0){
+        // Creates local references to the variables
+        let Check = Roughness;
         let currentDistance = Distance;
         let currentThickness = Thickness;
-        let currentTime = Math.floor(Math.random() * Time) + 100;
+        let currentTime = Math.floor(Math.random() * Time) + 50;
         let accumulate = 0;
         let currentBranches = Branches;
     
-            for (let i = Iterator; i < 100; i++){
-                accumulate += currentTime;
+            for (let i = Iterator; i < Roughness; i++){
+                accumulate += currentTime / 2;
                 let timeoutId = setTimeout(() => {
+                    //Drawing values
                     lightningCtx.beginPath();
+                    lightningCtx.shadowBlur = 10;
+                    lightningCtx.shadowColor = "purple";
                     lightningCtx.strokeStyle = "blue";
                     lightningCtx.lineWidth = currentThickness;
+                    //Drawing logic
                     lightningCtx.moveTo(startX,startY);
                     let endX = startX + PosNegConverter(currentDistance);
-                    let endY = startY + Math.random() * currentDistance * 2;
+                    let endY = startY + Math.random() * currentDistance * 1.5;
                     lightningCtx.lineTo(endX, endY);
                     startX = endX;
                     startY = endY;
                     lightningCtx.stroke();
-
-                    if (currentBranches > 0 && i > 20 && i < 99){
+                    //Branching logic
+                    if (currentBranches > 0 && BranchChance(Check) === true && i < 99){
                         currentBranches -= 1;
-                        Branch(startX, startY, currentDistance, currentThickness, i);
+                        Branch(startX, startY, currentDistance, currentThickness, currentTime, 0, i);
                     }
     
                     currentThickness /= 1.1;
@@ -142,14 +152,21 @@ function Rain(){
                         timeoutIds = [];
                     }
                 }, accumulate);
+                //Saves the id each iteration
                 timeoutIds.push(timeoutId);
             }
     }
 
-    function Branch(End1, End2, Dis, Thick, Iterator){
-        createLightning(End1, End2, Dis, Thick, Iterator);
+    function Branch(End1, End2, Dis, Thick, Ti, Bran, Iterator){
+        createLightning(End1, End2, Dis, Thick, Ti, Bran, Iterator);
     }
     
+    function BranchChance(Check){
+        Check -= 1;
+        if(Math.random() * Check < Chance){
+            return true;
+        }
+    }
 
     function PosNegConverter(A){
         if(Math.random() < 0.5){
@@ -181,7 +198,7 @@ function Rain(){
         setTimeout(() => {
         lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         createLightning(window.innerWidth / 2, 0, Distance, Thickness, Time, Branches);
-        }, Time * 2);
+        }, Time * 10);
 
     }, [lightningCtx, Reset]);
 

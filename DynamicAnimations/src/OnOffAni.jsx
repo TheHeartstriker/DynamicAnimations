@@ -3,10 +3,11 @@ import Stars from './AnimationLogic/Stars.jsx';
 import Rain from './AnimationLogic/Rain.jsx';
 import Sand from './AnimationLogic/Sand.jsx';
 
+
 function ParentComponent() {
   const BoolStar = false;
-  const BoolRain = true;
-  const BoolSand = false;
+  const BoolRain = false;
+  const BoolSand = true;
 
   return (
     <div>
