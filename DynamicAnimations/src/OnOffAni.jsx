@@ -5,10 +5,9 @@ import Sand from './AnimationLogic/Sand.jsx';
 
 
 function ParentComponent() {
-  const BoolStar = false;
-  const BoolRain = false;
-  const BoolSand = true;
-
+  const [BoolStar, setBoolStar] = useState(false);
+  const [BoolRain, setBoolRain] = useState(true);
+  const [BoolSand, setBoolSand] = useState(false);
   return (
     <div>
       {BoolStar && <Stars />}

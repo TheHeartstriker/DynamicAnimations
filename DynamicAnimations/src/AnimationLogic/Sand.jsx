@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef,} from 'react';
+import {useState, useEffect, useRef} from 'react';
 //Need to optimize code
 //Need to fix the color change
 //Orginize and understand the code aka comments
@@ -17,7 +17,7 @@ function Sand(){
     //Pixel size
     const Pix_size = 5;
     //Update to prevent depth errors
-    const [Update, setUpdate] = useState(true);
+
 
     useEffect(() => {
         // Creates a refrence to current canvas
@@ -61,7 +61,7 @@ function Sand(){
         setMouseDown(true);
         window.addEventListener('mouseup', handleMouseUp);
     }
-    
+
     const handleMouseUp = () => {
         setMouseDown(false);
         window.removeEventListener('mouseup', handleMouseUp);
@@ -107,9 +107,6 @@ function Sand(){
         // Sets the number of rows and columns that are need based on res
         const rows = Math.floor(window.innerWidth / Pix_size);
         const cols = Math.floor(window.innerHeight / Pix_size);
-
-        window.innerWidth = rows * Pix_size;
-        window.innerHeight = cols * Pix_size;
         // Sets
         setRows(rows);
         setCols(cols);
@@ -125,11 +122,11 @@ function Sand(){
         if (!ctx || !Grid || Grid.length !== Rows || Grid[0].length !== Cols) {
             return;
         }
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
     
         let NextGrid = create2DArray(Rows, Cols); //Creates a empty grid
-        let updateNeeded = false;
+
     
         for(let i = 0; i < Rows; i++){
             let x = i * Pix_size;
@@ -140,22 +137,18 @@ function Sand(){
                     ctx.fillStyle = ctx.fillStyle = `hsl(${Grid[i][j]}, 100%, 50%)`;
                     ctx.fillRect(x, y, Pix_size, Pix_size);
     
-                    let Bellow = Grid[i][j + 1];
-                    let BellowRight = (i + 1 < Rows) ? Grid[i + 1][j + 1] : 1;
-                    let BellowLeft = (i - 1 >= 0) ? Grid[i - 1][j + 1] : 1;
-                    if(Bellow === 0){
-                        updateNeeded = true;
-                        NextGrid[i][j] = 0;
-                        NextGrid[i][j + 1] = State;
-                    }else if(BellowRight === 0){
-                        updateNeeded = true;
-                        NextGrid[i][j] = 0;
-                        NextGrid[i + 1][j + 1] = State;}
-                        else if(BellowLeft === 0){
-                        updateNeeded = true;
-                        NextGrid[i][j] = 0;
-                        NextGrid[i - 1][j + 1] = State;
-                        }
+                    let cellBellow = Grid[i][j + 1]; // renamed variable
+                    let cellRight = (i + 1 < Rows) ? Grid[i + 1][j + 1] : 1;
+                    let cellLeft = (i - 1 >= 0) ? Grid[i - 1][j + 1] : 1;
+                    if (cellBellow === 0){
+                    Bellow(NextGrid, i, j, State, );
+                    }
+                    else if(cellRight === 0){
+                        BellowRight(NextGrid, i, j, State, );
+                    }
+                    else if(cellLeft === 0){
+                        BellowLeft(NextGrid, i, j, State, );
+                    }
                     else{
                         NextGrid[i][j] = State;
                     }
@@ -164,7 +157,25 @@ function Sand(){
         }
     
         setGrid(NextGrid);
-        setUpdate(updateNeeded);
+
+    }
+
+    function Bellow(NextGrid, i, j, State, ){
+
+            NextGrid[i][j] = 0;
+            NextGrid[i][j + 1] = State;
+
+}
+    function BellowRight(NextGrid, i, j, State, ){
+
+        NextGrid[i][j] = 0;
+        NextGrid[i + 1][j + 1] = State;
+
+    }
+    function BellowLeft(NextGrid, i, j, State, ){
+        NextGrid[i][j] = 0;
+        NextGrid[i - 1][j + 1] = State;
+
     }
 
 
@@ -174,7 +185,7 @@ function Sand(){
     }, [ctx]);
 
     useEffect(() => {
-        if(Update || On){
+        if(On){
             ChangeColor();
             requestAnimationFrame(Draw);
 

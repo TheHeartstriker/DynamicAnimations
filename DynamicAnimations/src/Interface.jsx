@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 
+
 function Buttons() {
   const pageContainerRef = useRef(null);
   const [Buttoncount, setButtoncount] = useState(0); //Helps switch between animation states aka left and right not a direct counter
@@ -16,7 +17,7 @@ function Buttons() {
 
   const handleButtonClick = () => {
     //Slide left
-    if (pageContainerRef.current && Buttoncount === 0 && Timer > 2) {
+    if (pageContainerRef.current && Buttoncount === 0 && Timer > 1.5) {
       // Remove the animation
       pageContainerRef.current.style.animation = 'none';
       // Force a reflow
@@ -30,7 +31,7 @@ function Buttons() {
 
     }
     //Slide back aka right
-    if (pageContainerRef.current && Buttoncount === 1 && Timer > 2) {
+    if (pageContainerRef.current && Buttoncount === 1 && Timer > 1.5) {
       // Remove the animation
       pageContainerRef.current.style.animation = 'none';
       // Force a reflow
@@ -45,6 +46,8 @@ function Buttons() {
 
     }
   };
+
+  //Related code for the buttons
 
   //Html code
   return (
@@ -63,5 +66,6 @@ function Buttons() {
     </>
   );
 }
+
 
 export default Buttons;
