@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-
+import Stars from './AnimationLogic/Stars.jsx';
+import Rain from './AnimationLogic/Rain.jsx';
+import Sand from './AnimationLogic/Sand.jsx';
 
 function Buttons() {
   const pageContainerRef = useRef(null);
@@ -48,18 +50,35 @@ function Buttons() {
   };
 
   //Related code for the buttons
+const [BoolStar, setBoolStar] = useState(false);
+const [BoolRain, setBoolRain] = useState(false);
+const [BoolSand, setBoolSand] = useState(false);
 
+function Test(setterFunctions) {
+  for (let i = 0; i < setterFunctions.length; i++) {
+    if (i === 0) {
+      setterFunctions[i](true);
+    } else {
+      setterFunctions[i](false);
+    }
+  }
+}
   //Html code
   return (
     <>
+      <div>
+        {BoolStar && <Stars />}
+        {BoolRain && <Rain />}
+        {BoolSand && <Sand />}
+      </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
       </div>
       <div className="PageContainer" ref={pageContainerRef}>
         <div className="Buttons">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
+          <button onClick={() => Test([setBoolRain, setBoolSand, setBoolStar])}>1</button>
+          <button onClick={() => Test([setBoolSand, setBoolRain, setBoolStar])}>2</button>
+          <button onClick={() => Test([setBoolStar, setBoolSand, setBoolRain])}>3</button>
           <button>4</button>
         </div>
       </div>
