@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Button from './Interface.jsx'
+import Button from './Interface/SlidePage.jsx'
 
 import './index.css'
 
