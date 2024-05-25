@@ -66,12 +66,14 @@ function Buttons() {
       }
     }
   }
+
+  const DROPS = 400;
   //Html code
   return (
     <>
       <div>
         {BoolStar && <Stars />}
-        {BoolRain && <Rain />}
+        {BoolRain && <Rain DROPS={DROPS} />}
         {BoolSand && <Sand />}
       </div>
       <div id="Settings">
@@ -80,6 +82,7 @@ function Buttons() {
       <div className="PageContainer" ref={pageContainerRef}>
         <div className="Buttons">
           {Check()}
+          {BoolSand && <button>Your Button</button>}
           <button
             onClick={() => FirstTrue([setBoolStar, setBoolRain, setBoolSand])}
           >

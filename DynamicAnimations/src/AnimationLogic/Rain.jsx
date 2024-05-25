@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 
-function Rain() {
+function Rain({ DROPS }) {
   // Magic numbers for the rain
   const WIDTH = 2.5;
   const HEIGHT = 20;
   const SHEET = 3;
   const DROPWIDTH = 0.5;
-  const DROPS = 100;
   // Magic numbers for the lightning and its randomness
 
   // Create references to the canvases
