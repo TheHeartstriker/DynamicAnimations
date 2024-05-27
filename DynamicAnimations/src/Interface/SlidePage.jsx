@@ -46,11 +46,6 @@ function Buttons() {
     }
   };
   // Just a test need to add configurations/presets for buttons in
-  function Check() {
-    if (BoolSand === true) {
-      return <button>Test</button>;
-    }
-  }
 
   //Related code for the buttons
   const [BoolStar, setBoolStar] = useState(false);
@@ -66,6 +61,12 @@ function Buttons() {
       }
     }
   }
+  const [showRain, setShowRain] = useState(false);
+
+  const handle = () => {
+    setShowRain(true);
+    console.log(showRain);
+  };
 
   const DROPS = 400;
   //Html code
@@ -73,16 +74,18 @@ function Buttons() {
     <>
       <div>
         {BoolStar && <Stars />}
-        {BoolRain && <Rain DROPS={DROPS} />}
+        {BoolRain && <Rain />}
         {BoolSand && <Sand />}
+        {showRain && <Rain DROPS={DROPS} />}
       </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
       </div>
       <div className="PageContainer" ref={pageContainerRef}>
+        <div className="OptionsButtons">
+          {BoolRain ? <button onClick={handle}>Your Button</button> : null}
+        </div>
         <div className="Buttons">
-          {Check()}
-          {BoolSand && <button>Your Button</button>}
           <button
             onClick={() => FirstTrue([setBoolStar, setBoolRain, setBoolSand])}
           >

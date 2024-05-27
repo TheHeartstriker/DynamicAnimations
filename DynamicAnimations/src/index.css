@@ -65,6 +65,13 @@ body {
   justify-content: space-evenly;
 }
 
+.OptionsButtons {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
 @keyframes Slide {
   from {
     transform: translateX(var(--start));
