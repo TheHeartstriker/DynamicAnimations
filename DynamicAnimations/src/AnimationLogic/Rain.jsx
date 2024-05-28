@@ -97,6 +97,9 @@ function Rain({ DROPS }) {
   const [Branches, setBranches] = useState(3);
   const [Roughness, setRoughness] = useState(100);
   const [Chance, setChance] = useState(5);
+  const Hue = 123;
+  const Sat = 100;
+  const Light = 50;
 
   const [Reset, setReset] = useState(false);
 
@@ -118,9 +121,6 @@ function Rain({ DROPS }) {
     let currentTime = Math.floor(Math.random() * Time) + 50;
     let accumulate = 0;
     let currentBranches = Branches;
-    let hue = Math.floor(Math.random() * 360);
-    let saturation = 200;
-    let lightness = 50;
     let Glow = 20;
 
     for (let i = Iterator; i < Roughness; i++) {
@@ -130,7 +130,7 @@ function Rain({ DROPS }) {
         lightningCtx.beginPath();
         lightningCtx.shadowBlur = Glow;
         lightningCtx.shadowColor = "red";
-        lightningCtx.strokeStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        lightningCtx.strokeStyle = `hsl(${Hue}, ${Sat}%, ${Light}%)`;
         lightningCtx.lineWidth = currentThickness;
         //Drawing logic
         lightningCtx.moveTo(startX, startY);

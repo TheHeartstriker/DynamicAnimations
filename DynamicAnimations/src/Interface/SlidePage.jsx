@@ -82,9 +82,6 @@ function Buttons() {
         <button onClick={handleButtonClick}>+</button>
       </div>
       <div className="PageContainer" ref={pageContainerRef}>
-        <div className="OptionsButtons">
-          {BoolRain ? <button onClick={handle}>Your Button</button> : null}
-        </div>
         <div className="Buttons">
           <button
             onClick={() => FirstTrue([setBoolStar, setBoolRain, setBoolSand])}
@@ -101,6 +98,9 @@ function Buttons() {
           >
             Sand
           </button>
+        </div>
+        <div className="OptionsButtons">
+          {BoolRain ? <button onClick={handle}>Your Button</button> : null}
         </div>
       </div>
     </>
