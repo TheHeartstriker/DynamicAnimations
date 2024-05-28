@@ -68,15 +68,35 @@ function Buttons() {
     console.log(showRain);
   };
 
+  const RainData = { WIDTH: 5, HEIGHT: 20, SHEET: 3, DROPWIDTH: 0.5 };
+  const LightningData = {
+    startX: 0,
+    startY: 0,
+    Distance: 25,
+    Thickness: 3,
+    Time: 50,
+    Branches: 3,
+    Iterator: 0,
+    Roughness: 100,
+    Hue: 123,
+    Sat: 100,
+    Light: 50,
+  };
   const DROPS = 400;
   //Html code
   return (
     <>
       <div>
         {BoolStar && <Stars />}
-        {BoolRain && <Rain />}
+        {BoolRain && <Rain DROPS={DROPS} RainProps={RainData} />}
         {BoolSand && <Sand />}
-        {showRain && <Rain DROPS={DROPS} />}
+        {showRain && (
+          <Rain
+            DROPS={DROPS}
+            RainProps={RainData}
+            LightningProps={LightningData}
+          />
+        )}
       </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
@@ -89,12 +109,16 @@ function Buttons() {
             Stars
           </button>
           <button
-            onClick={() => FirstTrue([setBoolRain, setBoolStar, setBoolSand])}
+            onClick={() =>
+              FirstTrue([setBoolRain, setBoolStar, setBoolSand, setShowRain])
+            }
           >
             Rain
           </button>
           <button
-            onClick={() => FirstTrue([setBoolSand, setBoolRain, setBoolStar])}
+            onClick={() =>
+              FirstTrue([setBoolSand, setBoolRain, setBoolStar, setShowRain])
+            }
           >
             Sand
           </button>

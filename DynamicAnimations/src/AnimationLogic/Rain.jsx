@@ -1,12 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 
-function Rain({ DROPS }) {
-  // Magic numbers for the rain
-  const WIDTH = 2.5;
-  const HEIGHT = 20;
-  const SHEET = 3;
-  const DROPWIDTH = 0.5;
-  // Magic numbers for the lightning and its randomness
+function Rain({ DROPS, RainProps, LightningProps }) {
+  //Rain props include WIDTH, HEIGHT, SHEET, DROPWIDTH
+  //Lightning props include Distance, Thickness, Time, Branches, Roughness, Chance, Hue, Sat, Light
+  LightningProps = LightningProps || {
+    startX: 0,
+    startY: 0,
+    Distance: 100,
+    Thickness: 2,
+    Time: 500,
+    Branches: 3,
+    Iterator: 0,
+    Roughness: 10,
+    Hue: 50,
+    Sat: 100,
+    Light: 50,
+  };
 
   // Create references to the canvases
   const rainCanvasRef = useRef(null);
@@ -22,8 +31,8 @@ function Rain({ DROPS }) {
         y: 0,
       },
       speed: Math.random() * 5 + 5,
-      width: WIDTH,
-      height: HEIGHT / Math.floor(Math.random() * SHEET),
+      width: RainProps.WIDTH,
+      height: RainProps.HEIGHT / Math.floor(Math.random() * RainProps.SHEET),
     }))
   );
 
@@ -65,7 +74,7 @@ function Rain({ DROPS }) {
   function Droplet(x1, y1, width, height) {
     rainCtx.beginPath();
     rainCtx.rect(x1, y1, width, height);
-    rainCtx.lineWidth = DROPWIDTH;
+    rainCtx.lineWidth = RainProps.DROPWIDTH;
     rainCtx.strokeStyle = "gray";
     rainCtx.fillStyle = "blue";
     rainCtx.fill();
@@ -91,29 +100,23 @@ function Rain({ DROPS }) {
     requestAnimationFrame(DrawDroplets);
   }
 
-  const [Distance, setDistance] = useState(75);
-  const [Thickness, setThickness] = useState(3);
-  const [Time, setTime] = useState(25);
-  const [Branches, setBranches] = useState(3);
-  const [Roughness, setRoughness] = useState(100);
-  const [Chance, setChance] = useState(5);
-  const Hue = 123;
-  const Sat = 100;
-  const Light = 50;
-
   const [Reset, setReset] = useState(false);
 
   let timeoutIds = [];
 
-  function createLightning(
-    startX,
-    startY,
-    Distance,
-    Thickness,
-    Time,
-    Branches,
-    Iterator = 0
-  ) {
+  function Zeus({
+    startX = 0,
+    startY = 0,
+    Distance = 100,
+    Thickness = 2,
+    Time = 500,
+    Branches = 3,
+    Iterator = 0,
+    Roughness,
+    Hue = 0,
+    Sat = 100,
+    Light = 50,
+  } = {}) {
     // Creates local references to the variables
     let Check = Roughness;
     let currentDistance = Distance;
@@ -153,7 +156,7 @@ function Rain({ DROPS }) {
             i
           );
         }
-        Glow - 0.1;
+        Glow - 0.5;
         currentThickness /= 1.1;
         currentDistance /= 1.1;
         currentTime *= 1.1;
@@ -174,7 +177,7 @@ function Rain({ DROPS }) {
   }
 
   function Branch(End1, End2, Dis, Thick, Ti, Bran, Iterator) {
-    createLightning(End1, End2, Dis, Thick, Ti, Bran, Iterator);
+    Zeus(End1, End2, Dis, Thick, Ti, Bran, Iterator);
   }
 
   function BranchChance(Check) {
@@ -211,16 +214,12 @@ function Rain({ DROPS }) {
       return;
     }
     setTimeout(() => {
+      if (LightningProps.Time === undefined) {
+        return;
+      }
       lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      createLightning(
-        window.innerWidth / 2,
-        0,
-        Distance,
-        Thickness,
-        Time,
-        Branches
-      );
-    }, Time * 10);
+      Zeus(LightningProps);
+    }, LightningProps.Time * 10);
   }, [lightningCtx, Reset]);
 
   return (
