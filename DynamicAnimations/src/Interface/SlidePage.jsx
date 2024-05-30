@@ -70,7 +70,7 @@ function Buttons() {
 
   const RainData = { WIDTH: 5, HEIGHT: 20, SHEET: 3, DROPWIDTH: 0.5 };
   const LightningData = {
-    startX: 0,
+    startX: window.innerWidth / 2,
     startY: 0,
     Distance: 25,
     Thickness: 3,
@@ -124,7 +124,9 @@ function Buttons() {
           </button>
         </div>
         <div className="OptionsButtons">
-          {BoolRain ? <button onClick={handle}>Your Button</button> : null}
+          {BoolRain ? <button onClick={handle}>Test</button> : null}
+          <button>Test</button>
+          <button>Test</button>
         </div>
       </div>
     </>
