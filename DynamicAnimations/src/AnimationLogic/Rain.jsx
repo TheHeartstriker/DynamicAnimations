@@ -1,22 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 
 function Rain({ DROPS, RainProps, LightningProps }) {
-  //Rain props include WIDTH, HEIGHT, SHEET, DROPWIDTH
-  //Lightning props include Distance, Thickness, Time, Branches, Roughness, Chance, Hue, Sat, Light
-  LightningProps = LightningProps || {
-    startX: 0,
-    startY: 0,
-    Distance: 100,
-    Thickness: 2,
-    Time: 500,
-    Branches: 3,
-    Iterator: 0,
-    Roughness: 10,
-    Hue: 50,
-    Sat: 100,
-    Light: 50,
-  };
-
+  let {
+    Distance,
+    Thickness,
+    Time,
+    Branches,
+    Roughness,
+    Chance,
+    Hue,
+    Sat,
+    Light,
+  } = LightningProps;
   // Create references to the canvases
   const rainCanvasRef = useRef(null);
   const lightningCanvasRef = useRef(null);
@@ -85,7 +80,7 @@ function Rain({ DROPS, RainProps, LightningProps }) {
   function DrawDroplets() {
     rainCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     const newRainArray = rainArray.map((drop) => {
-      const newDrop = { ...drop };
+      const newDrop = drop;
       newDrop.Start.y += newDrop.speed;
 
       Droplet(newDrop.Start.x, newDrop.Start.y, newDrop.width, newDrop.height);
@@ -104,19 +99,7 @@ function Rain({ DROPS, RainProps, LightningProps }) {
 
   let timeoutIds = [];
 
-  function Zeus({
-    startX = 0,
-    startY = 0,
-    Distance = 100,
-    Thickness = 2,
-    Time = 500,
-    Branches = 3,
-    Iterator = 0,
-    Roughness,
-    Hue = 0,
-    Sat = 100,
-    Light = 50,
-  } = {}) {
+  function Zeus(startX, startY, Thickness, Branches, Distance, Iterator) {
     // Creates local references to the variables
     let Check = Roughness;
     let currentDistance = Distance;
@@ -140,6 +123,7 @@ function Rain({ DROPS, RainProps, LightningProps }) {
         let endX = startX + PosNegConverter(currentDistance);
         let endY = startY + Math.random() * currentDistance * 1.5;
         lightningCtx.lineTo(endX, endY);
+        // Update startX and startY here
         startX = endX;
         startY = endY;
         lightningCtx.stroke();
@@ -149,11 +133,10 @@ function Rain({ DROPS, RainProps, LightningProps }) {
           Branch(
             startX,
             startY,
-            currentDistance,
             currentThickness,
-            currentTime,
-            0,
-            i
+            currentBranches,
+            currentDistance,
+            Iterator
           );
         }
         Glow - 0.5;
@@ -162,13 +145,9 @@ function Rain({ DROPS, RainProps, LightningProps }) {
         currentTime *= 1.1;
 
         if (i === 99) {
+          console.log(timeoutIds);
           console.log("Redraw");
           ReDraw();
-
-          for (let id of timeoutIds) {
-            clearTimeout(id);
-          }
-          timeoutIds = [];
         }
       }, accumulate);
       //Saves the id each iteration
@@ -176,8 +155,8 @@ function Rain({ DROPS, RainProps, LightningProps }) {
     }
   }
 
-  function Branch(End1, End2, Dis, Thick, Ti, Bran, Iterator) {
-    Zeus(End1, End2, Dis, Thick, Ti, Bran, Iterator);
+  function Branch(End1, End2, Thick, Branches, Distance, iteration) {
+    Zeus(End1, End2, Thick, Branches, Distance, iteration);
   }
 
   function BranchChance(Check) {
@@ -214,12 +193,17 @@ function Rain({ DROPS, RainProps, LightningProps }) {
       return;
     }
     setTimeout(() => {
-      if (LightningProps.Time === undefined) {
-        return;
-      }
+      timeoutIds = [];
       lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      Zeus(LightningProps);
-    }, LightningProps.Time * 10);
+      Zeus(
+        Math.random() * window.innerWidth,
+        0,
+        Thickness,
+        Branches,
+        Distance,
+        0
+      );
+    }, 5000);
   }, [lightningCtx, Reset]);
 
   return (

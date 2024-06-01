@@ -67,7 +67,9 @@ body {
 }
 
 .Buttons button {
-  color: rgb(167, 0, 0);
+  border: 5px solid hsl(0, 5%, 25%);
+  border-radius: 5%;
+  background-color: hsl(0, 5%, 10%);
 }
 
 .OptionsButtons {
@@ -78,9 +80,8 @@ body {
 }
 
 .OptionsButtons button:hover {
-  background-color: indigo;
+  background-color: rgb(130, 0, 0);
   transform: scale(1.5);
-  padding: 10px;
 }
 
 .OptionsButtons button {
@@ -88,9 +89,8 @@ body {
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: hsl(100, 4%, 16%);
+  background-color: hsl(100, 5%, 25%);
   transition: background-color 5s ease-in-out, transform 5s ease-in-out;
-  padding: 10px;
   border: 3px solid hsl(91, 100%, 50%);
 }
 

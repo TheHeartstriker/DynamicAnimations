@@ -51,20 +51,19 @@ function Stars() {
   // Function to draw a circle and related inputs
   function drawCircle(x, y, size) {
     if (!ctx) return;
-    ctx.fillStyle = "";
+    ctx.fillStyle = "orange";
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.stroke();
     ctx.fill();
-    ctx.shadowColor = "white";
-    ctx.shadowBlur = 5;
+    ctx.shadowColor = "red";
+    ctx.shadowBlur = 20;
   }
   // Create the update function
   function update() {
     if (!ctx) return;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    let newCircleArray = [...circlearray]; // Create a copy of circlearray to use setState
-    newCircleArray.forEach((circle) => {
+    const newCircleArray = circlearray.map((circle) => {
       let dx = circle.target.x - circle.current.x;
       let dy = circle.target.y - circle.current.y;
       let distance = Math.sqrt(dx * dx + dy * dy);
