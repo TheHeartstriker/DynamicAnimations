@@ -91,7 +91,6 @@ function Rain({ DROPS, RainProps, LightningProps }) {
       return newDrop;
     });
     setRainArray(newRainArray);
-
     requestAnimationFrame(DrawDroplets);
   }
 
@@ -145,7 +144,6 @@ function Rain({ DROPS, RainProps, LightningProps }) {
         currentTime *= 1.1;
 
         if (i === 99) {
-          console.log(timeoutIds);
           console.log("Redraw");
           ReDraw();
         }

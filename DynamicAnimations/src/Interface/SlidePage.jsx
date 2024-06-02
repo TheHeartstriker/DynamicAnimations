@@ -51,12 +51,13 @@ function Buttons() {
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolRain, setBoolRain] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
+  const [RainIsON, setRainIsON] = useState(false);
 
   const [Config1, setConfig1] = useState(false);
   const [Config2, setConfig2] = useState(false);
 
-  const RainData = { WIDTH: 2, HEIGHT: 20, SHEET: 3, DROPWIDTH: 0.1 };
-  const LightningData = {
+  const Config1DataRain = { WIDTH: 2, HEIGHT: 20, SHEET: 3, DROPWIDTH: 0.1 };
+  const Config1DataLight = {
     startX: window.innerWidth / 2,
     startY: 0,
     Distance: 75,
@@ -87,7 +88,8 @@ function Buttons() {
   };
 
   const Config2Check = () => {
-    setConfig2(false);
+    setBoolRain(false);
+    setConfig2(true);
   };
   const DROPS = 400;
   //Html code
@@ -95,16 +97,29 @@ function Buttons() {
     <>
       <div>
         {BoolStar && <Stars />}
-        {BoolRain && <Rain DROPS={DROPS} RainProps={RainData} />}
+        {BoolRain && (
+          <Rain
+            DROPS={DROPS}
+            RainProps={Config1DataRain}
+            LightningProps={Config1DataLight}
+          />
+        )}
         {BoolSand && <Sand />}
+
         {Config1 && (
           <Rain
             DROPS={DROPS}
-            RainProps={RainData}
-            LightningProps={LightningData}
+            RainProps={Config1DataRain}
+            LightningProps={Config1DataLight}
           />
         )}
-        {Config2 && <Rain DROPS={DROPS} RainProps={RainData} />}
+        {Config2 && (
+          <Rain
+            DROPS={DROPS}
+            RainProps={Config2DataRain}
+            LightningProps={LightningDa}
+          />
+        )}
       </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
@@ -117,9 +132,10 @@ function Buttons() {
             Stars
           </button>
           <button
-            onClick={() =>
-              FirstTrue([setBoolRain, setBoolStar, setBoolSand, setConfig1])
-            }
+            onClick={() => {
+              FirstTrue([setBoolRain, setBoolStar, setBoolSand, setConfig1]),
+                setRainIsON(true);
+            }}
           >
             Rain
           </button>
@@ -131,11 +147,13 @@ function Buttons() {
             Sand
           </button>
         </div>
-        <div className="OptionsButtons">
-          <button onClick={Config1Check}>Vibro</button>
-          <button onClick={Config2Check}>Sun</button>
-          <button>Test</button>
-        </div>
+        {RainIsON && (
+          <div className="OptionsButtons">
+            <button onClick={Config1Check}>Vibro</button>
+            <button onClick={Config2Check}>Sun</button>
+            <button>Test</button>
+          </div>
+        )}
       </div>
     </>
   );
