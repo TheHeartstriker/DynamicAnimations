@@ -48,16 +48,47 @@ function Buttons() {
   // Just a test need to add configurations/presets for buttons in
 
   //Related code for the buttons
-  const [BoolStar, setBoolStar] = useState(false);
-  const [BoolRain, setBoolRain] = useState(false);
-  const [BoolSand, setBoolSand] = useState(false);
   const [RainIsON, setRainIsON] = useState(false);
+  //Activate animation/preset
+  const [BoolStar, setBoolStar] = useState(false);
+  const [BoolSand, setBoolSand] = useState(false);
+  const [BoolRain, setBoolRain] = useState(false);
 
   const [Config1, setConfig1] = useState(false);
   const [Config2, setConfig2] = useState(false);
 
-  const Config1DataRain = { WIDTH: 2, HEIGHT: 20, SHEET: 3, DROPWIDTH: 0.1 };
+  const Configsetarr = [setConfig1, setConfig2];
+
+  const Config1DataRain = {
+    WIDTH: 2,
+    HEIGHT: 20,
+    SHEET: 3,
+    DROPWIDTH: 0.1,
+    DROPS: 100,
+  };
   const Config1DataLight = {
+    startX: window.innerWidth / 2,
+    startY: 0,
+    Distance: 75,
+    Thickness: 3,
+    Time: 200,
+    Branches: 1,
+    Iterator: 0,
+    Roughness: 100,
+    Chance: 5,
+    Hue: 20,
+    Sat: 100,
+    Light: 50,
+  };
+  const Config2DataRain = {
+    WIDTH: 3,
+    HEIGHT: 30,
+    SHEET: 4,
+    DROPWIDTH: 0.3,
+    DROPS: 300,
+  };
+
+  const Config2DataLight = {
     startX: window.innerWidth / 2,
     startY: 0,
     Distance: 75,
@@ -83,42 +114,28 @@ function Buttons() {
   }
 
   const Config1Check = () => {
-    setBoolRain(false);
-    setConfig1(true);
+    FirstTrue([setConfig1, setBoolRain, setConfig2]);
   };
 
   const Config2Check = () => {
-    setBoolRain(false);
-    setConfig2(true);
+    FirstTrue([setConfig2, setBoolRain, setConfig1]);
   };
-  const DROPS = 400;
   //Html code
   return (
     <>
+      {/* When true arguments */}
       <div>
         {BoolStar && <Stars />}
         {BoolRain && (
-          <Rain
-            DROPS={DROPS}
-            RainProps={Config1DataRain}
-            LightningProps={Config1DataLight}
-          />
+          <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
 
         {Config1 && (
-          <Rain
-            DROPS={DROPS}
-            RainProps={Config1DataRain}
-            LightningProps={Config1DataLight}
-          />
+          <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {Config2 && (
-          <Rain
-            DROPS={DROPS}
-            RainProps={Config2DataRain}
-            LightningProps={LightningDa}
-          />
+          <Rain RainProps={Config2DataRain} LightningProps={Config2DataLight} />
         )}
       </div>
       <div id="Settings">
@@ -133,8 +150,13 @@ function Buttons() {
           </button>
           <button
             onClick={() => {
-              FirstTrue([setBoolRain, setBoolStar, setBoolSand, setConfig1]),
-                setRainIsON(true);
+              FirstTrue([
+                setBoolRain,
+                setBoolStar,
+                setBoolSand,
+                ...Configsetarr,
+              ]);
+              setRainIsON(true);
             }}
           >
             Rain

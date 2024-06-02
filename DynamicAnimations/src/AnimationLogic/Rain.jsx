@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-function Rain({ DROPS, RainProps, LightningProps }) {
+function Rain({ RainProps, LightningProps }) {
   let {
     Distance,
     Thickness,
@@ -20,7 +20,7 @@ function Rain({ DROPS, RainProps, LightningProps }) {
   const [lightningCtx, setLightningCtx] = useState(null);
   // The rain array
   const [rainArray, setRainArray] = useState(
-    new Array(DROPS).fill().map(() => ({
+    new Array(RainProps.DROPS).fill().map(() => ({
       Start: {
         x: Math.floor(Math.random() * window.innerWidth),
         y: 0,
@@ -76,11 +76,12 @@ function Rain({ DROPS, RainProps, LightningProps }) {
     rainCtx.stroke();
   }
 
+  let id;
   // Animation function so rules etc can be applied
   function DrawDroplets() {
     rainCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     const newRainArray = rainArray.map((drop) => {
-      const newDrop = drop;
+      const newDrop = { ...drop };
       newDrop.Start.y += newDrop.speed;
 
       Droplet(newDrop.Start.x, newDrop.Start.y, newDrop.width, newDrop.height);
@@ -91,7 +92,7 @@ function Rain({ DROPS, RainProps, LightningProps }) {
       return newDrop;
     });
     setRainArray(newRainArray);
-    requestAnimationFrame(DrawDroplets);
+    id = requestAnimationFrame(DrawDroplets);
   }
 
   const [Reset, setReset] = useState(false);
@@ -184,6 +185,9 @@ function Rain({ DROPS, RainProps, LightningProps }) {
       return;
     }
     DrawDroplets();
+    return () => {
+      cancelAnimationFrame(id);
+    };
   }, [rainCtx]);
 
   useEffect(() => {
