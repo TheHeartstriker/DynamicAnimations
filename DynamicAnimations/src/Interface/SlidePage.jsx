@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
+import WaveFunction from "../AnimationLogic/WaveFunction.jsx";
 
 function Buttons() {
   const pageContainerRef = useRef(null);
@@ -53,6 +54,7 @@ function Buttons() {
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
   const [BoolRain, setBoolRain] = useState(false);
+  const [BoolWave, setBoolWave] = useState(false);
 
   const [Config1, setConfig1] = useState(false);
   const [Config2, setConfig2] = useState(false);
@@ -103,6 +105,8 @@ function Buttons() {
     Light: 50,
   };
 
+  //Add conditional statment to check if the button is true and set the rest to false instead of doing it manually
+  //So set all false and then set the one that is true to true
   function FirstTrue(setterFunctions) {
     for (let i = 0; i < setterFunctions.length; i++) {
       if (i === 0) {
@@ -130,6 +134,7 @@ function Buttons() {
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
+        {BoolWave && <WaveFunction />}
 
         {Config1 && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
@@ -167,6 +172,13 @@ function Buttons() {
             }
           >
             Sand
+          </button>
+          <button
+            onClick={() =>
+              FirstTrue([setBoolWave, setBoolRain, setBoolStar, setBoolSand])
+            }
+          >
+            Wave
           </button>
         </div>
         {RainIsON && (
