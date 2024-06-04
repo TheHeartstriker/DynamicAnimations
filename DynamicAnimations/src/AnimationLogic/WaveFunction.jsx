@@ -37,6 +37,25 @@ function WaveFunction() {
 
   const Tile = [];
 
+  const Grid = [];
+
+  const BLANK = 0;
+  const UP = 1;
+  const RIGHT = 2;
+  const DOWN = 3;
+  const LEFT = 4;
+
+  const Dimension = 2;
+
+  function CreateGrid() {
+    for (let i = 0; i < Dimension * Dimension; i++) {
+      Grid[i] = {
+        Collapsed: false,
+        Options: [BLANK, UP, RIGHT, DOWN, LEFT],
+      };
+    }
+  }
+
   function Load() {
     for (let i = 0; i < Sources.length; i++) {
       Tile[i] = new Image();
@@ -44,21 +63,30 @@ function WaveFunction() {
     }
   }
 
-  function Draw(x, y) {
-    for (let i = 0; i < Tile.length; i++) {
-      Tile[i].onload = () => {
-        ctx.drawImage(Tile[i], x, y); // adjust position as needed
-        console.log("Image Loaded");
-        x += 100;
-        y += 100;
-      };
+  function Draw() {
+    const Width = window.innerWidth / Dimension;
+    const Height = window.innerHeight / Dimension;
+
+    for (let i = 0; i < Dimension; i++) {
+      for (let j = 0; j < Dimension; j++) {
+        let Cell = Grid[i * Dimension + j];
+        if (Cell.Collapsed) {
+          let Index = Cell.Options[0];
+          ctx.drawImage(Tile[Index], i * Width, j * Height, Width, Height);
+        } else {
+          ctx.rect(i * Width, j * Height, Width, Height);
+          ctx.strokeStyle = "blue";
+          ctx.stroke();
+        }
+      }
     }
   }
 
   useEffect(() => {
     if (ctx) {
+      CreateGrid();
       Load();
-      Draw(50, 50);
+      Draw();
     }
   }, [ctx]);
 
