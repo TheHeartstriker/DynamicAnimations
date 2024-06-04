@@ -73,7 +73,7 @@ function Buttons() {
     startY: 0,
     Distance: 75,
     Thickness: 3,
-    Time: 200,
+    Time: 100,
     Branches: 1,
     Iterator: 0,
     Roughness: 100,
