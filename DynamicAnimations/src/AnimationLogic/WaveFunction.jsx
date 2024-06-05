@@ -47,6 +47,7 @@ function WaveFunction() {
 
   const Dimension = 2;
 
+  //Creates the grid and gives them data
   function CreateGrid() {
     for (let i = 0; i < Dimension * Dimension; i++) {
       Grid[i] = {
@@ -54,8 +55,12 @@ function WaveFunction() {
         Options: [BLANK, UP, RIGHT, DOWN, LEFT],
       };
     }
+
+    Grid[2].Options = [UP, BLANK];
+    Grid[0].Options = [UP, BLANK];
   }
 
+  //Loads the images into and array
   function Load() {
     for (let i = 0; i < Sources.length; i++) {
       Tile[i] = new Image();
@@ -64,12 +69,34 @@ function WaveFunction() {
   }
 
   function Draw() {
-    const Width = window.innerWidth / Dimension;
-    const Height = window.innerHeight / Dimension;
+    const Shallow = [...Grid];
+    Shallow.sort((a, b) => {
+      return a.Options.length - b.Options.length;
+    });
 
+    let Len = Shallow[0].Options.Length;
+    let StopIndex = 0;
+    for (let i = 1; i < Shallow.length; i++) {
+      if (Shallow[i].Options.Length > Len) {
+        StopIndex = i;
+        break;
+      }
+    }
+    if (StopIndex > 0) Shallow.splice(StopIndex);
+
+    const CellIndex = Math.floor(Math.random() * Shallow.length);
+    Shallow[CellIndex].Collapsed = true;
+    const Pick = Math.floor(Math.random() * Shallow[CellIndex].Options.length);
+    Shallow[CellIndex].Options = [Pick];
+
+    const Width = window.innerWidth / Dimension; //Cell width
+    const Height = window.innerHeight / Dimension; //Cell height
+
+    //Row
     for (let i = 0; i < Dimension; i++) {
+      //Column
       for (let j = 0; j < Dimension; j++) {
-        let Cell = Grid[i * Dimension + j];
+        let Cell = Grid[i * Dimension + j]; //Find index
         if (Cell.Collapsed) {
           let Index = Cell.Options[0];
           ctx.drawImage(Tile[Index], i * Width, j * Height, Width, Height);
