@@ -27,7 +27,7 @@ function Rain({ RainProps, LightningProps }) {
       },
       speed: Math.random() * 5 + 5,
       width: RainProps.WIDTH,
-      height: RainProps.HEIGHT / Math.floor(Math.random() * RainProps.SHEET),
+      height: RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1),
     }))
   );
 

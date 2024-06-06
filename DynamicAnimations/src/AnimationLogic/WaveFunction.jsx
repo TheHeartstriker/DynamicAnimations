@@ -35,32 +35,8 @@ function WaveFunction() {
     };
   }, []);
 
+  //Loads the images into the Tile array
   const Tile = [];
-
-  const Grid = [];
-
-  const BLANK = 0;
-  const UP = 1;
-  const RIGHT = 2;
-  const DOWN = 3;
-  const LEFT = 4;
-
-  const Dimension = 2;
-
-  //Creates the grid and gives them data
-  function CreateGrid() {
-    for (let i = 0; i < Dimension * Dimension; i++) {
-      Grid[i] = {
-        Collapsed: false,
-        Options: [BLANK, UP, RIGHT, DOWN, LEFT],
-      };
-    }
-
-    Grid[2].Options = [UP, BLANK];
-    Grid[0].Options = [UP, BLANK];
-  }
-
-  //Loads the images into and array
   function Load() {
     for (let i = 0; i < Sources.length; i++) {
       Tile[i] = new Image();
@@ -68,26 +44,85 @@ function WaveFunction() {
     }
   }
 
-  function Draw() {
+  //Creates the grid and gives them states
+  const Grid = [];
+
+  const Dimension = 2;
+  const BLANK = 0;
+  const UP = 1;
+  const RIGHT = 2;
+  const DOWN = 3;
+  const LEFT = 4;
+  function CreateGrid() {
+    for (let i = 0; i < Dimension * Dimension; i++) {
+      Grid[i] = {
+        Collapsed: false,
+        Options: [BLANK, UP, RIGHT, DOWN, LEFT],
+      };
+    }
+  }
+
+  const Rules = {
+    BLANK: [
+      [BLANK, UP],
+      [BLANK, RIGHT],
+      [BLANK, DOWN],
+      [BLANK, LEFT],
+    ], //Above //Right //Below //Left
+    UP: [
+      [RIGHT, LEFT, DOWN], //Above
+      [LEFT, UP, DOWN], //Right
+      [BLANK, DOWN], //Below
+      [RIGHT, UP, DOWN], //Left
+    ],
+    RIGHT: [
+      [RIGHT, LEFT, DOWN], //Above
+      [LEFT, UP, DOWN], //Right
+      [RIGHT, LEFT, UP], //Below
+      [BLANK, LEFT], //Left
+    ],
+    DOWN: [
+      [BLANK, UP], //Above
+      [LEFT, UP, DOWN], //Right
+      [RIGHT, LEFT, UP], //Below
+      [RIGHT, UP, DOWN], //Left
+    ],
+    LEFT: [
+      [RIGHT, LEFT, DOWN], //Above
+      [BLANK, RIGHT], //Right
+      [RIGHT, LEFT, UP], //Below
+      [UP, DOWN, RIGHT],
+    ],
+  };
+
+  function Collapser(Grid) {
+    //Creates a shallow copy of the grid
     const Shallow = [...Grid];
+    //Sorts the grid by the length of the options
     Shallow.sort((a, b) => {
       return a.Options.length - b.Options.length;
     });
-
+    //Store possible options of the first cell
     let Len = Shallow[0].Options.Length;
+    //Find the index of the first cell with more options than the first cell
     let StopIndex = 0;
     for (let i = 1; i < Shallow.length; i++) {
-      if (Shallow[i].Options.Length > Len) {
+      if (Shallow[i].Options.length > Len) {
         StopIndex = i;
         break;
       }
     }
+    //Remove all cells with less options than the first cell
     if (StopIndex > 0) Shallow.splice(StopIndex);
 
     const CellIndex = Math.floor(Math.random() * Shallow.length);
     Shallow[CellIndex].Collapsed = true;
     const Pick = Math.floor(Math.random() * Shallow[CellIndex].Options.length);
     Shallow[CellIndex].Options = [Pick];
+  }
+
+  function Draw() {
+    Collapser(Grid);
 
     const Width = window.innerWidth / Dimension; //Cell width
     const Height = window.innerHeight / Dimension; //Cell height
@@ -104,6 +139,16 @@ function WaveFunction() {
           ctx.rect(i * Width, j * Height, Width, Height);
           ctx.strokeStyle = "blue";
           ctx.stroke();
+        }
+      }
+    }
+    const NextGenTile = [];
+    for (let j = 0; j < Dimension; j++) {
+      for (let i = 0; i < Dimension; i++) {
+        let Index = i + j * Dimension;
+        if (Grid[Index].Collapsed) {
+          NextGenTile[Index] = Grid[Index];
+        } else {
         }
       }
     }
