@@ -67,11 +67,22 @@ function Rain({ RainProps, LightningProps }) {
 
   // Drop constructor
   function Droplet(x1, y1, width, height) {
+    let gradient = rainCtx.createLinearGradient(
+      x1,
+      y1,
+      x1 + width,
+      y1 + height
+    );
+    if (!gradient) {
+      return;
+    }
+    gradient.addColorStop(0, "black");
+    gradient.addColorStop(1, "blue");
     rainCtx.beginPath();
     rainCtx.rect(x1, y1, width, height);
     rainCtx.lineWidth = RainProps.DROPWIDTH;
-    rainCtx.strokeStyle = "gray";
-    rainCtx.fillStyle = "blue";
+    rainCtx.strokeStyle = "";
+    rainCtx.fillStyle = gradient;
     rainCtx.fill();
     rainCtx.stroke();
   }

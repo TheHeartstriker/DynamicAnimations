@@ -45,7 +45,7 @@ function WaveFunction() {
   }
 
   //Creates the grid and gives them states
-  const Grid = [];
+  let Grid = [];
 
   const Dimension = 2;
   const BLANK = 0;
@@ -62,42 +62,43 @@ function WaveFunction() {
     }
   }
 
-  const Rules = {
-    BLANK: [
+  const Rules = [
+    [
       [BLANK, UP],
       [BLANK, RIGHT],
       [BLANK, DOWN],
       [BLANK, LEFT],
     ], //Above //Right //Below //Left
-    UP: [
+    [
       [RIGHT, LEFT, DOWN], //Above
       [LEFT, UP, DOWN], //Right
       [BLANK, DOWN], //Below
       [RIGHT, UP, DOWN], //Left
     ],
-    RIGHT: [
+    [
       [RIGHT, LEFT, DOWN], //Above
       [LEFT, UP, DOWN], //Right
       [RIGHT, LEFT, UP], //Below
       [BLANK, LEFT], //Left
     ],
-    DOWN: [
+    [
       [BLANK, UP], //Above
       [LEFT, UP, DOWN], //Right
       [RIGHT, LEFT, UP], //Below
       [RIGHT, UP, DOWN], //Left
     ],
-    LEFT: [
+    [
       [RIGHT, LEFT, DOWN], //Above
       [BLANK, RIGHT], //Right
       [RIGHT, LEFT, UP], //Below
       [UP, DOWN, RIGHT],
     ],
-  };
+  ];
 
   function Collapser(Grid) {
     //Creates a shallow copy of the grid
-    const Shallow = [...Grid];
+    let Shallow = [...Grid];
+    Shallow = Shallow.filter((cell) => !cell.Collapsed);
     //Sorts the grid by the length of the options
     Shallow.sort((a, b) => {
       return a.Options.length - b.Options.length;
@@ -114,11 +115,21 @@ function WaveFunction() {
     }
     //Remove all cells with less options than the first cell
     if (StopIndex > 0) Shallow.splice(StopIndex);
-
+    //Randomly select a cell from the remaining cells
     const CellIndex = Math.floor(Math.random() * Shallow.length);
     Shallow[CellIndex].Collapsed = true;
+    //Randomly select an option from the cell
     const Pick = Math.floor(Math.random() * Shallow[CellIndex].Options.length);
+    //Sets the random option
     Shallow[CellIndex].Options = [Pick];
+  }
+
+  function CheckValid(array, valid) {
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (!valid.includes(array[i])) {
+        array.splice(i, 1);
+      }
+    }
   }
 
   function Draw() {
@@ -142,16 +153,66 @@ function WaveFunction() {
         }
       }
     }
-    const NextGenTile = [];
+
+    const NextGenGrid = [];
     for (let j = 0; j < Dimension; j++) {
       for (let i = 0; i < Dimension; i++) {
         let Index = i + j * Dimension;
         if (Grid[Index].Collapsed) {
-          NextGenTile[Index] = Grid[Index];
+          NextGenGrid[Index] = Grid[Index];
         } else {
+          //All possible options
+          let options = [BLANK, UP, RIGHT, DOWN, LEFT];
+          //Check options of the cell
+          //Look up
+          if (j > 0) {
+            let up = Grid[i + (j - 1) * Dimension];
+            let validOptions = [];
+            for (let options of up.Options) {
+              let Valid = Rules[options][2];
+              validOptions = validOptions.concat(Valid);
+            }
+            CheckValid(options, validOptions);
+          }
+          //Look right
+          if (i < Dimension - 1) {
+            let right = Grid[i + 1 + j * Dimension];
+            let validOptions = [];
+            for (let options of right.Options) {
+              let Valid = Rules[options][3];
+              validOptions = validOptions.concat(Valid);
+            }
+            CheckValid(options, validOptions);
+          }
+          //Look down
+          if (j < Dimension - 1) {
+            let down = Grid[i + (j + 1) * Dimension];
+            let validOptions = [];
+            for (let options of down.Options) {
+              let Valid = Rules[options][0];
+              validOptions = validOptions.concat(Valid);
+            }
+            CheckValid(options, validOptions);
+          }
+          //Look left
+          if (i > 0) {
+            let left = Grid[i - 1 + j * Dimension];
+            let validOptions = [];
+            for (let options of left.Options) {
+              let Valid = Rules[options][1];
+              validOptions = validOptions.concat(Valid);
+            }
+            CheckValid(options, validOptions);
+          }
+          NextGenGrid[Index] = {
+            Options: options,
+            Collapsed: false,
+          };
         }
       }
     }
+    Grid = NextGenGrid;
+    console.table(Grid);
   }
 
   useEffect(() => {

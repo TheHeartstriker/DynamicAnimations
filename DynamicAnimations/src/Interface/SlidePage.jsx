@@ -63,7 +63,7 @@ function Buttons() {
 
   const Config1DataRain = {
     WIDTH: 2,
-    HEIGHT: 20,
+    HEIGHT: 40,
     SHEET: 3,
     DROPWIDTH: 0.1,
     DROPS: 100,
@@ -78,7 +78,7 @@ function Buttons() {
     Iterator: 0,
     Roughness: 100,
     Chance: 5,
-    Hue: 20,
+    Hue: 190,
     Sat: 100,
     Light: 50,
   };
