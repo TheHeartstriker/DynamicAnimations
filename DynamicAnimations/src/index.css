@@ -1,29 +1,3 @@
-/*For animations that need only a single canvas*/
-#myCanvas {
-  position: absolute;
-  background: rgb(0, 0, 0);
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-/*Canvas for rain animation*/
-#rainCanvas {
-  position: absolute;
-  background: rgb(0, 0, 0);
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
-#lightningCanvas {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
 /* Removal of default margin and padding */
 body {
   overflow: hidden;
