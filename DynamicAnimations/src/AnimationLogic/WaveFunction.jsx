@@ -44,15 +44,15 @@ function WaveFunction() {
     }
   }
 
-  //Creates the grid and gives them states
-  let Grid = [];
-
-  const Dimension = 2;
+  const Dimension = 4;
   const BLANK = 0;
   const UP = 1;
   const RIGHT = 2;
   const DOWN = 3;
   const LEFT = 4;
+  //Holds grid states
+  let Grid = [];
+  //Creates the grid and gives them states
   function CreateGrid() {
     for (let i = 0; i < Dimension * Dimension; i++) {
       Grid[i] = {
@@ -64,11 +64,11 @@ function WaveFunction() {
 
   const Rules = [
     [
-      [BLANK, UP],
-      [BLANK, RIGHT],
-      [BLANK, DOWN],
-      [BLANK, LEFT],
-    ], //Above //Right //Below //Left
+      [BLANK, UP], //Above
+      [BLANK, RIGHT], //Right
+      [BLANK, DOWN], //Below
+      [BLANK, LEFT], //Left
+    ],
     [
       [RIGHT, LEFT, DOWN], //Above
       [LEFT, UP, DOWN], //Right
@@ -98,6 +98,7 @@ function WaveFunction() {
   function Collapser(Grid) {
     //Creates a shallow copy of the grid
     let Shallow = [...Grid];
+    //Filters out all the cells that are collapsed
     Shallow = Shallow.filter((cell) => !cell.Collapsed);
     //Sorts the grid by the length of the options
     Shallow.sort((a, b) => {
@@ -123,7 +124,7 @@ function WaveFunction() {
     //Sets the random option
     Shallow[CellIndex].Options = [Pick];
   }
-
+  //Gets an array and removes all elements that are not in the valid array
   function CheckValid(array, valid) {
     for (let i = array.length - 1; i >= 0; i--) {
       if (!valid.includes(array[i])) {
@@ -142,7 +143,7 @@ function WaveFunction() {
     for (let i = 0; i < Dimension; i++) {
       //Column
       for (let j = 0; j < Dimension; j++) {
-        let Cell = Grid[i * Dimension + j]; //Find index
+        let Cell = Grid[i * Dimension + j]; //Find index of
         if (Cell.Collapsed) {
           let Index = Cell.Options[0];
           ctx.drawImage(Tile[Index], i * Width, j * Height, Width, Height);
@@ -212,16 +213,15 @@ function WaveFunction() {
       }
     }
     Grid = NextGenGrid;
-    console.table(Grid);
   }
 
+  CreateGrid();
+  Load();
   useEffect(() => {
     if (ctx) {
-      CreateGrid();
-      Load();
       Draw();
     }
-  }, [ctx]);
+  }, [ctx, Grid]);
 
   return (
     <canvas

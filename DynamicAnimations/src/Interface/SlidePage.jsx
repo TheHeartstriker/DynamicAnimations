@@ -81,7 +81,7 @@ function Buttons() {
     startY: 0,
     Distance: 75,
     Thickness: 3,
-    Time: 100,
+    Time: 50,
     Branches: 1,
     Iterator: 0,
     Roughness: 100,
@@ -184,7 +184,13 @@ function Buttons() {
           >
             Sand
           </button>
-          <button onClick={() => FirstTrue([])}>Wave</button>
+          <button
+            onClick={() =>
+              FirstTrue([setBoolWave], [], [...AniStates, ...Configsetarr])
+            }
+          >
+            Wave
+          </button>
         </div>
         {RainIsON && (
           <div className="OptionsButtons">

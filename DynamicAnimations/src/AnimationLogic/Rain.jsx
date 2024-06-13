@@ -164,25 +164,25 @@ function Rain({ RainProps, LightningProps }) {
       timeoutIds.push(timeoutId);
     }
   }
-
+  //Fucntion to draw the branches
   function Branch(End1, End2, Thick, Branches, Distance, iteration) {
     Zeus(End1, End2, Thick, Branches, Distance, iteration);
   }
-
+  //Controls the branching chance as the iteration increases
   function BranchChance(Check) {
     Check -= 1;
     if (Math.random() * Check < Chance) {
       return true;
     }
   }
-
+  //Function to convert a positive or negative value
   function PosNegConverter(A) {
     if (Math.random() < 0.5) {
       return A * -1;
     }
     return A;
   }
-
+  //Function to redraw the canvas
   function ReDraw() {
     if (Reset === true) {
       setReset(false);
@@ -206,6 +206,11 @@ function Rain({ RainProps, LightningProps }) {
       return;
     }
     setTimeout(() => {
+      // let test = document.getElementById("rainCanvas");
+      // if (test) {
+      //  test.classList.add("flash");
+      // }
+      //Calls lightning and the length time wise of the lightning
       timeoutIds = [];
       lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       Zeus(
