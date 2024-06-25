@@ -112,6 +112,7 @@ function Buttons() {
     Sat: 100,
     Light: 50,
   };
+  document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
 
   //Function used to control button and cofig states
   function FirstTrue(Trueset, Exclude, Falseset) {

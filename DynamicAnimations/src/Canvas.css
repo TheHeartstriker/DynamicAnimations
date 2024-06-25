@@ -1,3 +1,7 @@
+:root {
+  --HUE: 0;
+}
+
 /*For animations that need only a single canvas*/
 #myCanvas {
   position: absolute;
@@ -20,25 +24,23 @@
   left: 0;
 }
 
-/* .flash {
-  animation-name: Flash;
-  animation-duration: 5s;
-} */
-
 @keyframes Flash {
   0% {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
   }
-  30% {
-    background-color: rgba(255, 255, 255, 0.505);
+  20% {
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
   }
-  60% {
-    background-color: rgba(255, 255, 255, 0.505);
+  50% {
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+  }
+  70% {
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
   }
   90% {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
   }
   100% {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: hsla(var(--HUE), 0%, 0%, 0);
   }
 }

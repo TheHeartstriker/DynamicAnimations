@@ -201,15 +201,16 @@ function Rain({ RainProps, LightningProps }) {
     };
   }, [rainCtx]);
 
+  let test = document.getElementById("lightningCanvas");
   useEffect(() => {
     if (!lightningCtx) {
       return;
     }
     setTimeout(() => {
-      // let test = document.getElementById("rainCanvas");
-      // if (test) {
-      //  test.classList.add("flash");
-      // }
+      if (test) {
+        test.style.animation = "Flash";
+        test.style.animationDuration = "2s";
+      }
       //Calls lightning and the length time wise of the lightning
       timeoutIds = [];
       lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
@@ -221,7 +222,8 @@ function Rain({ RainProps, LightningProps }) {
         Distance,
         0
       );
-    }, 5000);
+    }, 9000);
+    test.style.animation = "none";
   }, [lightningCtx, Reset]);
 
   return (
