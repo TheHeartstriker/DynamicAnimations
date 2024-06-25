@@ -27,7 +27,7 @@ function Rain({ RainProps, LightningProps }) {
       },
       speed: Math.random() * 5 + 5,
       width: RainProps.WIDTH,
-      height: RainProps.HEIGHT / Math.floor(Math.random() * RainProps.SHEET),
+      height: RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1),
     }))
   );
 
@@ -67,11 +67,22 @@ function Rain({ RainProps, LightningProps }) {
 
   // Drop constructor
   function Droplet(x1, y1, width, height) {
+    let gradient = rainCtx.createLinearGradient(
+      x1,
+      y1,
+      x1 + width,
+      y1 + height
+    );
+    if (!gradient) {
+      return;
+    }
+    gradient.addColorStop(0, "black");
+    gradient.addColorStop(1, "blue");
     rainCtx.beginPath();
     rainCtx.rect(x1, y1, width, height);
     rainCtx.lineWidth = RainProps.DROPWIDTH;
-    rainCtx.strokeStyle = "gray";
-    rainCtx.fillStyle = "blue";
+    rainCtx.strokeStyle = "";
+    rainCtx.fillStyle = gradient;
     rainCtx.fill();
     rainCtx.stroke();
   }
@@ -153,25 +164,25 @@ function Rain({ RainProps, LightningProps }) {
       timeoutIds.push(timeoutId);
     }
   }
-
+  //Fucntion to draw the branches
   function Branch(End1, End2, Thick, Branches, Distance, iteration) {
     Zeus(End1, End2, Thick, Branches, Distance, iteration);
   }
-
+  //Controls the branching chance as the iteration increases
   function BranchChance(Check) {
     Check -= 1;
     if (Math.random() * Check < Chance) {
       return true;
     }
   }
-
+  //Function to convert a positive or negative value
   function PosNegConverter(A) {
     if (Math.random() < 0.5) {
       return A * -1;
     }
     return A;
   }
-
+  //Function to redraw the canvas
   function ReDraw() {
     if (Reset === true) {
       setReset(false);
@@ -190,11 +201,17 @@ function Rain({ RainProps, LightningProps }) {
     };
   }, [rainCtx]);
 
+  let test = document.getElementById("lightningCanvas");
   useEffect(() => {
     if (!lightningCtx) {
       return;
     }
     setTimeout(() => {
+      if (test) {
+        test.style.animation = "Flash";
+        test.style.animationDuration = "2s";
+      }
+      //Calls lightning and the length time wise of the lightning
       timeoutIds = [];
       lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       Zeus(
@@ -205,7 +222,8 @@ function Rain({ RainProps, LightningProps }) {
         Distance,
         0
       );
-    }, 5000);
+    }, 9000);
+    test.style.animation = "none";
   }, [lightningCtx, Reset]);
 
   return (

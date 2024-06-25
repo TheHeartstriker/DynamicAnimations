@@ -1,0 +1,46 @@
+:root {
+  --HUE: 0;
+}
+
+/*For animations that need only a single canvas*/
+#myCanvas {
+  position: absolute;
+  background: rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+/*Canvas for rain animation*/
+#rainCanvas {
+  background: rgb(0, 0, 0);
+}
+
+#lightningCanvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+@keyframes Flash {
+  0% {
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+  }
+  20% {
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+  }
+  50% {
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+  }
+  70% {
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+  }
+  90% {
+    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+  }
+  100% {
+    background-color: hsla(var(--HUE), 0%, 0%, 0);
+  }
+}

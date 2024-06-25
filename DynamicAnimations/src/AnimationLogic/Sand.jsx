@@ -123,7 +123,6 @@ function Sand() {
     ctx.fillStyle = "black";
 
     let NextGrid = create2DArray(Rows, Cols); //Creates a empty grid
-    let Frame = 0;
     for (let i = 0; i < Rows; i++) {
       for (let j = 0; j < Cols; j++) {
         let State = Grid[i][j]; //Gets the state of the current cell or previous generation

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
+import WaveFunction from "../AnimationLogic/WaveFunction.jsx";
 
 function Buttons() {
   const pageContainerRef = useRef(null);
@@ -19,7 +20,7 @@ function Buttons() {
 
   const handleButtonClick = () => {
     //Slide left
-    if (pageContainerRef.current && Buttoncount === 0 && Timer > 1.5) {
+    if (pageContainerRef.current && Buttoncount === 0 && Timer > 1.2) {
       // Remove the animation
       pageContainerRef.current.style.animation = "none";
       // Force a reflow
@@ -53,15 +54,24 @@ function Buttons() {
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
   const [BoolRain, setBoolRain] = useState(false);
+  const [BoolWave, setBoolWave] = useState(false);
 
   const [Config1, setConfig1] = useState(false);
   const [Config2, setConfig2] = useState(false);
+
+  const AniStates = [
+    setBoolStar,
+    setBoolSand,
+    setBoolRain,
+    setBoolWave,
+    setRainIsON,
+  ];
 
   const Configsetarr = [setConfig1, setConfig2];
 
   const Config1DataRain = {
     WIDTH: 2,
-    HEIGHT: 20,
+    HEIGHT: 40,
     SHEET: 3,
     DROPWIDTH: 0.1,
     DROPS: 100,
@@ -71,12 +81,12 @@ function Buttons() {
     startY: 0,
     Distance: 75,
     Thickness: 3,
-    Time: 200,
+    Time: 50,
     Branches: 1,
     Iterator: 0,
     Roughness: 100,
     Chance: 5,
-    Hue: 20,
+    Hue: 300,
     Sat: 100,
     Light: 50,
   };
@@ -102,23 +112,29 @@ function Buttons() {
     Sat: 100,
     Light: 50,
   };
+  document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
 
-  function FirstTrue(setterFunctions) {
-    for (let i = 0; i < setterFunctions.length; i++) {
-      if (i === 0) {
-        setterFunctions[i](true);
-      } else {
-        setterFunctions[i](false);
+  //Function used to control button and cofig states
+  function FirstTrue(Trueset, Exclude, Falseset) {
+    for (let i = 0; i < Falseset.length; i++) {
+      if (Falseset[i] !== Exclude) {
+        Falseset[i](false);
+      }
+    }
+    for (let i = 0; i < Trueset.length; i++) {
+      if (Trueset[i] !== Exclude) {
+        Trueset[i](true);
       }
     }
   }
+  //used to set configurations to on
 
   const Config1Check = () => {
-    FirstTrue([setConfig1, setBoolRain, setConfig2]);
+    FirstTrue([setConfig1, setRainIsON], [], [...AniStates, ...Configsetarr]);
   };
 
   const Config2Check = () => {
-    FirstTrue([setConfig2, setBoolRain, setConfig1]);
+    FirstTrue([setConfig2, setConfig2], [], [...AniStates, ...Configsetarr]);
   };
   //Html code
   return (
@@ -130,6 +146,7 @@ function Buttons() {
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
+        {BoolWave && <WaveFunction />}
 
         {Config1 && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
@@ -144,29 +161,36 @@ function Buttons() {
       <div className="PageContainer" ref={pageContainerRef}>
         <div className="Buttons">
           <button
-            onClick={() => FirstTrue([setBoolStar, setBoolRain, setBoolSand])}
+            onClick={() =>
+              FirstTrue([setBoolStar], [], [...AniStates, ...Configsetarr])
+            }
           >
             Stars
           </button>
           <button
             onClick={() => {
-              FirstTrue([
-                setBoolRain,
-                setBoolStar,
-                setBoolSand,
-                ...Configsetarr,
-              ]);
-              setRainIsON(true);
+              FirstTrue(
+                [setBoolRain, setRainIsON],
+                [],
+                [...AniStates, ...Configsetarr]
+              );
             }}
           >
             Rain
           </button>
           <button
             onClick={() =>
-              FirstTrue([setBoolSand, setBoolRain, setBoolStar, setConfig1])
+              FirstTrue([setBoolSand], [], [...AniStates, ...Configsetarr])
             }
           >
             Sand
+          </button>
+          <button
+            onClick={() =>
+              FirstTrue([setBoolWave], [], [...AniStates, ...Configsetarr])
+            }
+          >
+            Wave
           </button>
         </div>
         {RainIsON && (
