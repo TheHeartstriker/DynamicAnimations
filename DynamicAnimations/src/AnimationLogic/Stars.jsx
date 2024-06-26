@@ -22,7 +22,7 @@ function Stars() {
       IncreaseTo: Math.random() * 10,
     }))
   );
-  // Resize the canvas to fit the window
+
   useEffect(() => {
     // Creates a refrence to current canvas
     const canvas = canvasRef.current;

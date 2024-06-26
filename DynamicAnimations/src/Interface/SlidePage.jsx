@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect } from "react";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
-import WaveFunction from "../AnimationLogic/WaveFunction.jsx";
+import Marble from "../AnimationLogic/Marbling.jsx";
 
-function Buttons() {
+function Interface() {
   const pageContainerRef = useRef(null);
   const [Buttoncount, setButtoncount] = useState(0); //Helps switch between animation states aka left and right not a direct counter
   const [Timer, setTimer] = useState(0);
@@ -46,16 +46,15 @@ function Buttons() {
       setTimer(0);
     }
   };
-  // Just a test need to add configurations/presets for buttons in
 
-  //Related code for the buttons
+  //RainIsON is used to check if rain is on or off
   const [RainIsON, setRainIsON] = useState(false);
-  //Activate animation/preset
+  //Activate animation/preset these are the first animation presets that are activated
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
   const [BoolRain, setBoolRain] = useState(false);
-  const [BoolWave, setBoolWave] = useState(false);
-
+  const [BoolMarble, setBoolMarble] = useState(false);
+  //Configuration presets
   const [Config1, setConfig1] = useState(false);
   const [Config2, setConfig2] = useState(false);
 
@@ -63,11 +62,13 @@ function Buttons() {
     setBoolStar,
     setBoolSand,
     setBoolRain,
-    setBoolWave,
+    setBoolMarble,
     setRainIsON,
   ];
 
   const Configsetarr = [setConfig1, setConfig2];
+
+  //Rain data for configurations
 
   const Config1DataRain = {
     WIDTH: 2,
@@ -112,30 +113,34 @@ function Buttons() {
     Sat: 100,
     Light: 50,
   };
-  document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
+
+  if (Config1) {
+    document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
+  }
 
   //Function used to control button and cofig states
-  function FirstTrue(Trueset, Exclude, Falseset) {
+  function FirstTrue(Trueset, Falseset) {
     for (let i = 0; i < Falseset.length; i++) {
-      if (Falseset[i] !== Exclude) {
+      if (Falseset[i]) {
         Falseset[i](false);
       }
     }
     for (let i = 0; i < Trueset.length; i++) {
-      if (Trueset[i] !== Exclude) {
+      if (Trueset[i]) {
         Trueset[i](true);
       }
     }
   }
-  //used to set configurations to on
 
+  //On click functions for the buttons
   const Config1Check = () => {
-    FirstTrue([setConfig1, setRainIsON], [], [...AniStates, ...Configsetarr]);
+    FirstTrue([setConfig1, setRainIsON], [...AniStates, ...Configsetarr]);
   };
 
   const Config2Check = () => {
-    FirstTrue([setConfig2, setConfig2], [], [...AniStates, ...Configsetarr]);
+    FirstTrue([setConfig2, setRainIsON], [...AniStates, ...Configsetarr]);
   };
+
   //Html code
   return (
     <>
@@ -146,7 +151,7 @@ function Buttons() {
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
-        {BoolWave && <WaveFunction />}
+        {BoolMarble && <Marble />}
 
         {Config1 && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
@@ -187,10 +192,10 @@ function Buttons() {
           </button>
           <button
             onClick={() =>
-              FirstTrue([setBoolWave], [], [...AniStates, ...Configsetarr])
+              FirstTrue([setBoolMarble], [], [...AniStates, ...Configsetarr])
             }
           >
-            Wave
+            Marble
           </button>
         </div>
         {RainIsON && (
@@ -205,4 +210,4 @@ function Buttons() {
   );
 }
 
-export default Buttons;
+export default Interface;
