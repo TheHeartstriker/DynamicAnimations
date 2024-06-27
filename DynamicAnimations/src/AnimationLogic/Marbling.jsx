@@ -4,7 +4,7 @@ function Marble() {
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   //The array containing the ink blobs
-  const [Globs, setGlobs] = useState([]);
+  const [Blobs, setBlobs] = useState([]);
   useEffect(() => {
     // Creates a refrence to current canvas
     const canvas = canvasRef.current;
@@ -31,36 +31,81 @@ function Marble() {
     };
   }, []);
 
-  class GlobCreater {
+  function map(value, start1, stop1, start2, stop2) {
+    return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+  }
+
+  class BlobCreater {
     constructor(x, y, radius) {
       this.x = x;
       this.y = y;
       this.radius = radius;
+
+      this.vertices = [];
+
+      for (let i = 0; i < 10; i++) {
+        let angle = map(i, 0, 10, 0, Math.PI * 2);
+        // Directly calculate the x and y components of the vector
+        let vx = this.radius * Math.cos(angle);
+        let vy = this.radius * Math.sin(angle);
+
+        // Multiply the components by radius (though it seems redundant here, adjust as needed)
+        vx *= this.radius;
+        vy *= this.radius;
+
+        // Add this.x and this.y to the components
+        vx += this.x;
+        vy += this.y;
+
+        // Store the vector as an object with x and y properties
+        this.vertices[i] = { x: vx, y: vy };
+      }
     }
 
     imprint() {
-      if (!ctx) return;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      ctx.fillStyle = "blue";
-      ctx.fill();
+      if (this.vertices.length > 0) {
+        ctx.beginPath();
+        ctx.moveTo(this.vertices[0].x, this.vertices[0].y); // Move to the first vertex
+
+        // Loop through the vertices and draw lines
+        for (let i = 1; i < this.vertices.length; i++) {
+          ctx.lineTo(this.vertices[i].x, this.vertices[i].y);
+        }
+
+        ctx.closePath(); // Close the path
+        ctx.fillStyle = "blue"; // Set the fill color
+        ctx.fill(); // Fill the shape
+        // ctx.stroke(); // Optionally, outline the shape
+      }
     }
   }
 
-  function MousePress() {
+  function drawBlobs() {
     if (!ctx) return;
-    canvas.addEventListener("click", function (event) {
-      let newGlob = new GlobCreater(event.clientX, event.clientY, 30);
-      setGlobs([...Globs, newGlob]);
+    Blobs.forEach((Blob) => {
+      Blob.imprint();
     });
   }
 
-  function drawGlobs() {
+  useEffect(() => {
     if (!ctx) return;
-    Globs.forEach((Glob) => {
-      Glob.imprint();
-    });
-  }
+    drawBlobs();
+  }, [ctx, Blobs]);
+
+  useEffect(() => {
+    if (!ctx) return;
+
+    const handleClick = (event) => {
+      const newBlob = new BlobCreater(event.clientX, event.clientY, 10);
+      setBlobs((prevBlobs) => [...prevBlobs, newBlob]);
+    };
+
+    canvasRef.current.addEventListener("click", handleClick);
+
+    return () => {
+      canvasRef.current.removeEventListener("click", handleClick);
+    };
+  }, [ctx]);
 
   return (
     <canvas
