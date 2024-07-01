@@ -33,11 +33,14 @@ function Marble() {
 
   class Particle {
     constructor() {
-      this.x = 300;
-      this.y = 300;
-      this.vx = Math.random(-1, 1);
-      this.vy = Math.random(-5, -1);
+      this.x = Math.random() * window.innerWidth;
+      this.y = Math.random() * window.innerHeight;
+      this.vx = Math.random() * 6 - 3;
+      this.vy = Math.random() * 6 - 3;
       this.alpha = 255;
+      this.hue = Math.random() * 360;
+      this.saturation = Math.random() * 100;
+      this.lightness = Math.random() * 100;
     }
     completed() {
       return this.alpha <= 0;
@@ -48,7 +51,9 @@ function Marble() {
       this.alpha -= 0.5;
     }
     appear() {
-      ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha / 255})`;
+      ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${
+        this.lightness
+      }%, ${this.alpha / 255})`;
       ctx.beginPath();
       ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
       ctx.fill();
@@ -57,7 +62,7 @@ function Marble() {
 
   function draw() {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 1; i++) {
       let p = new Particle();
       Particles.push(p);
     }
