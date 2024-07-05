@@ -49,6 +49,7 @@ function Interface() {
 
   //RainIsON is used to check if rain is on or off
   const [RainIsON, setRainIsON] = useState(false);
+  const [StarsIsON, setStarsIsON] = useState(false);
   //Activate animation/preset these are the first animation presets that are activated
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
@@ -57,6 +58,7 @@ function Interface() {
   //Configuration presets
   const [Config1, setConfig1] = useState(false);
   const [Config2, setConfig2] = useState(false);
+  const [Config3, setConfig3] = useState(false);
 
   const AniStates = [
     setBoolStar,
@@ -66,7 +68,7 @@ function Interface() {
     setRainIsON,
   ];
 
-  const Configsetarr = [setConfig1, setConfig2];
+  const Configsetarr = [setConfig1, setConfig2, setConfig3];
 
   //Rain data for configurations
 
@@ -118,6 +120,10 @@ function Interface() {
     document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
   }
 
+  const StarConfig1 = {
+    Color: "red",
+  };
+
   //Function used to control button and cofig states
   function FirstTrue(Trueset, Falseset) {
     for (let i = 0; i < Falseset.length; i++) {
@@ -141,6 +147,10 @@ function Interface() {
     FirstTrue([setConfig2, setRainIsON], [...AniStates, ...Configsetarr]);
   };
 
+  const Config3Check = () => {
+    FirstTrue([setConfig3, setRainIsON], [...AniStates, ...Configsetarr]);
+  };
+
   //Html code
   return (
     <>
@@ -159,6 +169,7 @@ function Interface() {
         {Config2 && (
           <Rain RainProps={Config2DataRain} LightningProps={Config2DataLight} />
         )}
+        {Config3 && <Stars></Stars>}
       </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
@@ -167,7 +178,10 @@ function Interface() {
         <div className="Buttons">
           <button
             onClick={() =>
-              FirstTrue([setBoolStar], [], [...AniStates, ...Configsetarr])
+              FirstTrue(
+                [setBoolStar, setStarsIsON],
+                [...AniStates, ...Configsetarr]
+              )
             }
           >
             Stars
@@ -176,7 +190,6 @@ function Interface() {
             onClick={() => {
               FirstTrue(
                 [setBoolRain, setRainIsON],
-                [],
                 [...AniStates, ...Configsetarr]
               );
             }}
@@ -185,14 +198,14 @@ function Interface() {
           </button>
           <button
             onClick={() =>
-              FirstTrue([setBoolSand], [], [...AniStates, ...Configsetarr])
+              FirstTrue([setBoolSand], [...AniStates, ...Configsetarr])
             }
           >
             Sand
           </button>
           <button
             onClick={() =>
-              FirstTrue([setBoolMarble], [], [...AniStates, ...Configsetarr])
+              FirstTrue([setBoolMarble], [...AniStates, ...Configsetarr])
             }
           >
             Marble
@@ -202,6 +215,13 @@ function Interface() {
           <div className="OptionsButtons">
             <button onClick={Config1Check}>Vibro</button>
             <button onClick={Config2Check}>Sun</button>
+            <button>Test</button>
+          </div>
+        )}
+        {StarsIsON && (
+          <div className="OptionsButtons">
+            <button onClick={Config3Check}>Test</button>
+            <button>Test</button>
             <button>Test</button>
           </div>
         )}

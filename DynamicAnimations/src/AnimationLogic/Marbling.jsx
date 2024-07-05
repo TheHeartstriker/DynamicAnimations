@@ -39,8 +39,8 @@ function Marble() {
       this.vy = Math.random() * 6 - 3;
       this.alpha = 255;
       this.hue = Math.random() * 360;
-      this.saturation = Math.random() * 100;
-      this.lightness = Math.random() * 100;
+      this.saturation = 50;
+      this.lightness = 50;
     }
     completed() {
       return this.alpha <= 0;
@@ -48,7 +48,7 @@ function Marble() {
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      this.alpha -= 0.5;
+      this.alpha -= 2;
     }
     appear() {
       ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${
