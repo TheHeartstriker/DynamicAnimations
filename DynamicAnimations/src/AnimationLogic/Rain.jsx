@@ -209,7 +209,7 @@ function Rain({ RainProps, LightningProps }) {
     setTimeout(() => {
       if (test) {
         test.style.animation = "Flash";
-        test.style.animationDuration = "2s";
+        test.style.animationDuration = "1.5s";
       }
       //Calls lightning and the length time wise of the lightning
       timeoutIds = [];

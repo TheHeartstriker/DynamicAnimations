@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
-function Stars() {
+function Stars({ StarsProps }) {
+  let { Color } = StarsProps;
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Create an array of circles with data related to them
@@ -22,7 +23,7 @@ function Stars() {
       IncreaseTo: Math.random() * 10,
     }))
   );
-  // Resize the canvas to fit the window
+
   useEffect(() => {
     // Creates a refrence to current canvas
     const canvas = canvasRef.current;
@@ -51,7 +52,7 @@ function Stars() {
   // Function to draw a circle and related inputs
   function drawCircle(x, y, size) {
     if (!ctx) return;
-    ctx.fillStyle = "orange";
+    ctx.fillStyle = Color;
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.stroke();

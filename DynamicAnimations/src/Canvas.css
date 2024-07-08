@@ -26,21 +26,24 @@
 
 @keyframes Flash {
   0% {
-    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 25%, 0.5);
   }
   20% {
+    background-color: hsla(var(--HUE), 50%, 25%, 0.5);
+  }
+  40% {
     background-color: hsla(var(--HUE), 50%, 50%, 0.5);
   }
   50% {
-    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 75%, 0.5);
   }
   70% {
     background-color: hsla(var(--HUE), 50%, 50%, 0.5);
   }
   90% {
-    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 25%, 0.5);
   }
   100% {
-    background-color: hsla(var(--HUE), 0%, 0%, 0);
+    background-color: hsla(var(--HUE), 0%, 25%, 0);
   }
 }
