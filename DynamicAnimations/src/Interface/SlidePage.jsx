@@ -56,9 +56,10 @@ function Interface() {
   const [BoolRain, setBoolRain] = useState(false);
   const [BoolMarble, setBoolMarble] = useState(false);
   //Configuration presets
-  const [Config1, setConfig1] = useState(false);
-  const [Config2, setConfig2] = useState(false);
-  const [Config3, setConfig3] = useState(false);
+  const [Config1Rain, setConfig1Rain] = useState(false);
+  const [Config2Rain, setConfig2Rain] = useState(false);
+  const [Config1Star, setConfig1Star] = useState(false);
+  const [Config2Star, setConfig2Star] = useState(false);
 
   const AniStates = [
     setBoolStar,
@@ -68,7 +69,12 @@ function Interface() {
     setRainIsON,
   ];
 
-  const Configsetarr = [setConfig1, setConfig2, setConfig3];
+  const Configsetarr = [
+    setConfig1Rain,
+    setConfig2Rain,
+    setConfig1Star,
+    setConfig2Star,
+  ];
 
   //Rain data for configurations
 
@@ -116,12 +122,16 @@ function Interface() {
     Light: 50,
   };
 
-  if (Config1) {
+  if (Config1Rain) {
     document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
   }
 
   const StarConfig1 = {
     Color: "red",
+  };
+
+  const StarConfig2 = {
+    Color: "blue",
   };
 
   //Function used to control button and cofig states
@@ -140,15 +150,15 @@ function Interface() {
 
   //On click functions for the buttons
   const Config1Check = () => {
-    FirstTrue([setConfig1, setRainIsON], [...AniStates, ...Configsetarr]);
+    FirstTrue([setConfig1Rain, setRainIsON], [...AniStates, ...Configsetarr]);
   };
 
   const Config2Check = () => {
-    FirstTrue([setConfig2, setRainIsON], [...AniStates, ...Configsetarr]);
+    FirstTrue([setConfig2Rain, setRainIsON], [...AniStates, ...Configsetarr]);
   };
 
-  const Config3Check = () => {
-    FirstTrue([setConfig3, setRainIsON], [...AniStates, ...Configsetarr]);
+  const Config1StarCheck = () => {
+    FirstTrue([setConfig1Star], [...AniStates, ...Configsetarr]);
   };
 
   //Html code
@@ -156,20 +166,20 @@ function Interface() {
     <>
       {/* When true arguments */}
       <div>
-        {BoolStar && <Stars />}
+        {BoolStar && <Stars StarsProps={StarConfig1} />}
         {BoolRain && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
         {BoolMarble && <Marble />}
 
-        {Config1 && (
+        {Config1Rain && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
-        {Config2 && (
+        {Config2Rain && (
           <Rain RainProps={Config2DataRain} LightningProps={Config2DataLight} />
         )}
-        {Config3 && <Stars></Stars>}
+        {Config1Star && <Stars StarsProps={StarConfig2} />}
       </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
@@ -220,7 +230,7 @@ function Interface() {
         )}
         {StarsIsON && (
           <div className="OptionsButtons">
-            <button onClick={Config3Check}>Test</button>
+            <button onClick={Config1StarCheck}>Blue</button>
             <button>Test</button>
             <button>Test</button>
           </div>
