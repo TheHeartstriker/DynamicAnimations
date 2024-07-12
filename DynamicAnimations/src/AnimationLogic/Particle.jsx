@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-function Marble() {
+function Particle() {
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Particles array
@@ -93,4 +93,4 @@ function Marble() {
   );
 }
 
-export default Marble;
+export default Particle;

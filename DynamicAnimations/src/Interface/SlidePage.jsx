@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
-import Marble from "../AnimationLogic/Marbling.jsx";
+import Particle from "../AnimationLogic/Particle.jsx";
 
 function Interface() {
   const pageContainerRef = useRef(null);
@@ -54,7 +54,7 @@ function Interface() {
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
   const [BoolRain, setBoolRain] = useState(false);
-  const [BoolMarble, setBoolMarble] = useState(false);
+  const [BoolParticle, setBoolParticle] = useState(false);
   //Configuration presets
   const [Config1Rain, setConfig1Rain] = useState(false);
   const [Config2Rain, setConfig2Rain] = useState(false);
@@ -65,7 +65,7 @@ function Interface() {
     setBoolStar,
     setBoolSand,
     setBoolRain,
-    setBoolMarble,
+    setBoolParticle,
     setRainIsON,
   ];
 
@@ -171,7 +171,7 @@ function Interface() {
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
-        {BoolMarble && <Marble />}
+        {BoolParticle && <Particle />}
 
         {Config1Rain && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
@@ -215,10 +215,10 @@ function Interface() {
           </button>
           <button
             onClick={() =>
-              FirstTrue([setBoolMarble], [...AniStates, ...Configsetarr])
+              FirstTrue([setBoolParticle], [...AniStates, ...Configsetarr])
             }
           >
-            Marble
+            Particle
           </button>
         </div>
         {RainIsON && (

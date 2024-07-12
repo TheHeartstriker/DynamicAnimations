@@ -65,10 +65,11 @@ function Stars({ StarsProps }) {
     if (!ctx) return;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     const newCircleArray = circlearray.map((circle) => {
+      // Calculate the distance between the current and target position
       let dx = circle.target.x - circle.current.x;
       let dy = circle.target.y - circle.current.y;
       let distance = Math.sqrt(dx * dx + dy * dy);
-
+      // Increase the size of the circle
       if (circle.size.s < circle.IncreaseTo) {
         circle.size.s += 0.02;
       } else if (circle.size.s > 1) {
@@ -78,9 +79,8 @@ function Stars({ StarsProps }) {
       if (Math.abs(circle.size.s - circle.IncreaseTo) < 1) {
         circle.IncreaseTo = Math.random() * 10;
       }
-
-      drawCircle(circle.current.x, circle.current.y, circle.size.s);
-      if (distance < 1) {
+      //Reset the target position if the circle is close enough to the target
+      if (distance < 1 || hasDuplicateCoordinates(circlearray) === true) {
         circle.target.x = Math.floor(Math.random() * window.innerWidth);
         circle.target.y = Math.floor(Math.random() * window.innerHeight);
       } else {
@@ -88,10 +88,29 @@ function Stars({ StarsProps }) {
         circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
         circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
       }
+
+      drawCircle(circle.current.x, circle.current.y, circle.size.s);
     });
 
     setCirclearray(newCircleArray); // Update the state with the modified copy
     requestAnimationFrame(update);
+  }
+
+  function hasDuplicateCoordinates(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        // Check if it's not the same element
+        if (i !== j) {
+          const xDiff = Math.abs(arr[i].current.x - arr[j].current.x);
+          const yDiff = Math.abs(arr[i].current.y - arr[j].current.y);
+          // Check if the x and y values are within a range of 5
+          if (xDiff <= 5 && yDiff <= 5) {
+            return true; // Found another element within the range
+          }
+        }
+      }
+    }
+    return false; // No duplicates within the range found
   }
 
   useEffect(() => {
