@@ -8,7 +8,7 @@ function Stars({ StarsProps }) {
   const [ctx, setCtx] = useState(null);
   // Create an array of circles with data related to them
   const [circlearray, setCirclearray] = useState(
-    new Array(40).fill().map(() => ({
+    new Array(20).fill().map(() => ({
       current: {
         x: Math.floor(Math.random() * window.innerWidth),
         y: Math.floor(Math.random() * window.innerHeight),
@@ -52,8 +52,13 @@ function Stars({ StarsProps }) {
   // Function to draw a circle and related inputs
   function drawCircle(x, y, size) {
     if (!ctx) return;
-    ctx.fillStyle = Color;
+    var gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+    gradient.addColorStop(0, "red");
+    gradient.addColorStop(1, "black");
+
+    ctx.fillStyle = gradient;
     ctx.beginPath();
+
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.stroke();
     ctx.fill();
@@ -80,14 +85,17 @@ function Stars({ StarsProps }) {
         circle.IncreaseTo = Math.random() * 10;
       }
       //Reset the target position if the circle is close enough to the target
-      if (distance < 1 || hasDuplicateCoordinates(circlearray) === true) {
+      if (distance < 1) {
         circle.target.x = Math.floor(Math.random() * window.innerWidth);
         circle.target.y = Math.floor(Math.random() * window.innerHeight);
-      } else {
-        let lerpFactor = 0.02;
-        circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
-        circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
       }
+      if (Has(circlearray, circle.target.x, circle.target.y)) {
+        circle.target.x = Math.floor(Math.random() * window.innerWidth);
+        circle.target.y = Math.floor(Math.random() * window.innerHeight);
+      }
+      let lerpFactor = 0.02;
+      circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
+      circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
 
       drawCircle(circle.current.x, circle.current.y, circle.size.s);
     });
@@ -96,21 +104,17 @@ function Stars({ StarsProps }) {
     requestAnimationFrame(update);
   }
 
-  function hasDuplicateCoordinates(arr) {
+  function Has(arr, x, y) {
     for (let i = 0; i < arr.length; i++) {
-      for (let j = 0; j < arr.length; j++) {
-        // Check if it's not the same element
-        if (i !== j) {
-          const xDiff = Math.abs(arr[i].current.x - arr[j].current.x);
-          const yDiff = Math.abs(arr[i].current.y - arr[j].current.y);
-          // Check if the x and y values are within a range of 5
-          if (xDiff <= 5 && yDiff <= 5) {
-            return true; // Found another element within the range
-          }
-        }
+      let DiffX = Math.abs(arr[i].current.x - x);
+      let DiffY = Math.abs(arr[i].current.y - y);
+      let distance = Math.sqrt(DiffX * DiffX + DiffY * DiffY);
+      if (distance < 10) {
+        // Adjusted threshold to be more precise
+        return true;
       }
     }
-    return false; // No duplicates within the range found
+    return false;
   }
 
   useEffect(() => {
