@@ -32,9 +32,31 @@ function Particle({ ParticleProps }) {
     };
   }, []);
 
+  function generateBiasedRandom(min, max) {
+    const mean = (max + min) / 2;
+    const standardDeviation = (max - min) / 6; // Assuming 99.7% values within [min, max]
+
+    let rand;
+    do {
+      rand = generateGaussianRandom(mean, standardDeviation);
+    } while (rand < min || rand > max); // Ensure the value is within [min, max]
+
+    return rand;
+  }
+
+  function generateGaussianRandom(mean = 0, standardDeviation = 1) {
+    let u = 0,
+      v = 0;
+    while (u === 0) u = Math.random(); // Converting [0,1) to (0,1)
+    while (v === 0) v = Math.random();
+    let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    // Convert to the desired mean and standard deviation
+    return num * standardDeviation + mean;
+  }
+
   function LocationX() {
     if (Fire) {
-      return Math.random() * window.innerWidth;
+      return generateBiasedRandom(0, window.innerWidth);
     }
   }
   function LocationY() {
@@ -63,6 +85,8 @@ function Particle({ ParticleProps }) {
       this.alpha -= 1;
     }
     appear() {
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, 1)`;
       ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${
         this.lightness
       }%, ${this.alpha / 255})`;
