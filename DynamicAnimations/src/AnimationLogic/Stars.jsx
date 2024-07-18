@@ -54,7 +54,7 @@ function Stars({ StarsProps }) {
     if (!ctx) return;
     var gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
     gradient.addColorStop(0, "red");
-    gradient.addColorStop(1, "black");
+    gradient.addColorStop(1, "orange");
 
     ctx.fillStyle = gradient;
     ctx.beginPath();
@@ -82,14 +82,15 @@ function Stars({ StarsProps }) {
       }
 
       if (Math.abs(circle.size.s - circle.IncreaseTo) < 1) {
-        circle.IncreaseTo = Math.random() * 10;
+        circle.IncreaseTo = Math.random() * 20;
       }
       //Reset the target position if the circle is close enough to the target
       if (distance < 1) {
         circle.target.x = Math.floor(Math.random() * window.innerWidth);
         circle.target.y = Math.floor(Math.random() * window.innerHeight);
       }
-      if (Has(circlearray, circle.target.x, circle.target.y)) {
+      // Check if the circle is close to another circle
+      if (Has(circlearray, circle.target.x, circle.target.y, circle)) {
         circle.target.x = Math.floor(Math.random() * window.innerWidth);
         circle.target.y = Math.floor(Math.random() * window.innerHeight);
       }
@@ -104,13 +105,21 @@ function Stars({ StarsProps }) {
     requestAnimationFrame(update);
   }
 
-  function Has(arr, x, y) {
+  function Has(arr, x, y, currentCircle) {
     for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === currentCircle) continue; // Skip if it's the same circle
+
       let DiffX = Math.abs(arr[i].current.x - x);
       let DiffY = Math.abs(arr[i].current.y - y);
-      let distance = Math.sqrt(DiffX * DiffX + DiffY * DiffY);
-      if (distance < 10) {
-        // Adjusted threshold to be more precise
+      let distanceBetweenCenters = Math.sqrt(DiffX * DiffX + DiffY * DiffY);
+
+      // Calculate the distance between the edges of the circles
+      let combinedRadius = arr[i].size.s / 2 + currentCircle.size.s / 2;
+      let distanceBetweenEdges = distanceBetweenCenters - combinedRadius;
+
+      // Check if the distance between edges is less than a threshold
+      if (distanceBetweenEdges < 1) {
+        // You can adjust this threshold as needed
         return true;
       }
     }

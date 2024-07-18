@@ -122,7 +122,7 @@ function Interface() {
     Light: 50,
   };
 
-  if (Config1Rain) {
+  if (BoolRain) {
     document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
   }
 
@@ -132,6 +132,10 @@ function Interface() {
 
   const StarConfig2 = {
     Color: "blue",
+  };
+
+  const ParticleConfig1 = {
+    Fire: true,
   };
 
   //Function used to control button and cofig states
@@ -171,7 +175,7 @@ function Interface() {
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
-        {BoolParticle && <Particle />}
+        {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
 
         {Config1Rain && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />

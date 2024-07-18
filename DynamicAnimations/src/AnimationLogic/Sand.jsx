@@ -15,7 +15,7 @@ function Sand() {
   //Color state
   const [Color, setColor] = useState(190);
   //Pixel size
-  const Pix_size = 5;
+  const Pix_size = 7;
   //Update to prevent depth errors
 
   useEffect(() => {

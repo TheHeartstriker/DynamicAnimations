@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 
-function Particle() {
+function Particle({ ParticleProps }) {
+  let { Fire } = ParticleProps;
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Particles array
@@ -31,14 +32,25 @@ function Particle() {
     };
   }, []);
 
+  function LocationX() {
+    if (Fire) {
+      return Math.random() * window.innerWidth;
+    }
+  }
+  function LocationY() {
+    if (Fire) {
+      return window.innerHeight;
+    }
+  }
+
   class Particle {
     constructor() {
-      this.x = Math.random() * window.innerWidth;
-      this.y = Math.random() * window.innerHeight;
+      this.x = LocationX();
+      this.y = LocationY();
       this.vx = Math.random() * 6 - 3;
       this.vy = Math.random() * 6 - 3;
       this.alpha = 255;
-      this.hue = Math.random() * 360;
+      this.hue = Math.random() * 45;
       this.saturation = 50;
       this.lightness = 50;
     }
@@ -48,7 +60,7 @@ function Particle() {
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      this.alpha -= 2;
+      this.alpha -= 1;
     }
     appear() {
       ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${
@@ -62,7 +74,7 @@ function Particle() {
 
   function draw() {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
       let p = new Particle();
       Particles.push(p);
     }
@@ -76,6 +88,8 @@ function Particle() {
     }
     requestAnimationFrame(draw);
   }
+
+  //Imporve the speed by reseting instead removing
 
   useEffect(() => {
     if (ctx) {
