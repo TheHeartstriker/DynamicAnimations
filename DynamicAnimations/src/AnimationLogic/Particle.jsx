@@ -6,6 +6,8 @@ function Particle({ ParticleProps }) {
   const [ctx, setCtx] = useState(null);
   // Particles array
   const [Particles, setParticles] = useState([]);
+  //Sun points
+  const [Sun, setSun] = useState(false);
   useEffect(() => {
     // Creates a refrence to current canvas
     const canvas = canvasRef.current;
@@ -54,39 +56,68 @@ function Particle({ ParticleProps }) {
     return num * standardDeviation + mean;
   }
 
+  function SunArea() {
+    const CenterX = window.innerWidth / 2;
+    const CenterY = window.innerHeight / 2;
+    const Radius = 250;
+    const step = 1;
+    let newSun = []; // Temporary array to hold new sun points
+    for (let x = CenterX - Radius; x <= CenterX + Radius; x += step) {
+      for (let y = CenterY - Radius; y <= CenterY + Radius; y += step) {
+        const distanceFromCenter = Math.sqrt(
+          (x - CenterX) ** 2 + (y - CenterY) ** 2
+        );
+        if (distanceFromCenter <= Radius) {
+          newSun.push({ x, y });
+        }
+      }
+    }
+    setSun(newSun); // Update the state with the new sun points
+  }
+
   function LocationX() {
     if (Fire) {
       return generateBiasedRandom(0, window.innerWidth);
+    }
+    if (Sun) {
     }
   }
   function LocationY() {
     if (Fire) {
       return window.innerHeight;
     }
+    if (Sun) {
+    }
   }
+
+  //webworkers somewhere
 
   class Particle {
     constructor() {
+      this.reset();
+    }
+    reset() {
       this.x = LocationX();
       this.y = LocationY();
-      this.vx = Math.random() * 6 - 3;
-      this.vy = Math.random() * 6 - 3;
+      this.vx = Math.random() * 8 - 4;
+      this.vy = Math.random() * 8 - 4;
       this.alpha = 255;
-      this.hue = Math.random() * 45;
+      this.hue = Math.random() * (260 - 190) + 190;
       this.saturation = 50;
       this.lightness = 50;
+      this.Subtract = Math.random() * 5 + 1;
     }
     completed() {
-      return this.alpha <= 0;
+      if (this.alpha <= 0) {
+        this.reset();
+      }
     }
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      this.alpha -= 1;
+      this.alpha -= this.Subtract;
     }
     appear() {
-      ctx.shadowBlur = 20;
-      ctx.shadowColor = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, 1)`;
       ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${
         this.lightness
       }%, ${this.alpha / 255})`;
@@ -96,19 +127,21 @@ function Particle({ ParticleProps }) {
     }
   }
 
+  //Consider calling with delay
+  function createParticles() {
+    console.log("called");
+    for (let i = 0; i < 12000; i++) {
+      Particles.push(new Particle());
+    }
+  }
+
   function draw() {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    for (let i = 0; i < 10; i++) {
-      let p = new Particle();
-      Particles.push(p);
-    }
 
-    for (let i = Particles.length - 1; i >= 0; i--) {
+    for (let i = 0; i < Particles.length; i++) {
       Particles[i].update();
+      Particles[i].completed();
       Particles[i].appear();
-      if (Particles[i].completed()) {
-        Particles.splice(i, 1);
-      }
     }
     requestAnimationFrame(draw);
   }
@@ -117,6 +150,7 @@ function Particle({ ParticleProps }) {
 
   useEffect(() => {
     if (ctx) {
+      createParticles();
       draw();
     }
   }, [ctx]);
