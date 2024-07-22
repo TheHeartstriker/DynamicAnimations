@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 
 function Particle({ ParticleProps }) {
-  let { Fire } = ParticleProps;
+  let { Fire, SunOn } = ParticleProps;
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Particles array
@@ -75,18 +75,35 @@ function Particle({ ParticleProps }) {
     setSun(newSun); // Update the state with the new sun points
   }
 
+  function SunPoint() {
+    if (Sun && Sun.length > 0) {
+      const Index = Math.floor(Math.random() * Sun.length);
+      return Sun[Index];
+    }
+    return null;
+  }
+
   function LocationX() {
     if (Fire) {
       return generateBiasedRandom(0, window.innerWidth);
     }
-    if (Sun) {
+    if (SunOn) {
+      console.log("SunOn");
+      const point = SunPoint();
+      if (Sun) {
+        return point ? point.x : null;
+      }
     }
   }
   function LocationY() {
     if (Fire) {
       return window.innerHeight;
     }
-    if (Sun) {
+    if (SunOn) {
+      const point = SunPoint();
+      if (Sun) {
+        return point ? point.y : null;
+      }
     }
   }
 
@@ -130,7 +147,7 @@ function Particle({ ParticleProps }) {
   //Consider calling with delay
   function createParticles() {
     console.log("called");
-    for (let i = 0; i < 12000; i++) {
+    for (let i = 0; i < 5000; i++) {
       Particles.push(new Particle());
     }
   }
@@ -150,6 +167,7 @@ function Particle({ ParticleProps }) {
 
   useEffect(() => {
     if (ctx) {
+      SunArea();
       createParticles();
       draw();
     }

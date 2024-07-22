@@ -138,6 +138,10 @@ function Interface() {
     Fire: true,
   };
 
+  const ParticleConfig2 = {
+    SunOn: true,
+  };
+
   //Function used to control button and cofig states
   function FirstTrue(Trueset, Falseset) {
     for (let i = 0; i < Falseset.length; i++) {
@@ -175,7 +179,7 @@ function Interface() {
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
-        {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
+        {BoolParticle && <Particle ParticleProps={ParticleConfig2} />}
 
         {Config1Rain && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
