@@ -67,6 +67,7 @@ function Interface() {
     setBoolRain,
     setBoolParticle,
     setRainIsON,
+    setStarsIsON,
   ];
 
   const Configsetarr = [
@@ -128,10 +129,12 @@ function Interface() {
 
   const StarConfig1 = {
     Color: "red",
+    Color2: "orange",
   };
 
   const StarConfig2 = {
     Color: "blue",
+    Color2: "white",
   };
 
   const ParticleConfig1 = {
@@ -165,8 +168,8 @@ function Interface() {
     FirstTrue([setConfig2Rain, setRainIsON], [...AniStates, ...Configsetarr]);
   };
 
-  const Config1StarCheck = () => {
-    FirstTrue([setConfig1Star], [...AniStates, ...Configsetarr]);
+  const Config2StarCheck = () => {
+    FirstTrue([setConfig2Star, setStarsIsON], [...AniStates, ...Configsetarr]);
   };
 
   //Html code
@@ -179,7 +182,7 @@ function Interface() {
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
         {BoolSand && <Sand />}
-        {BoolParticle && <Particle ParticleProps={ParticleConfig2} />}
+        {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
 
         {Config1Rain && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
@@ -187,7 +190,7 @@ function Interface() {
         {Config2Rain && (
           <Rain RainProps={Config2DataRain} LightningProps={Config2DataLight} />
         )}
-        {Config1Star && <Stars StarsProps={StarConfig2} />}
+        {Config2Star && <Stars StarsProps={StarConfig2} />}
       </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
@@ -238,7 +241,7 @@ function Interface() {
         )}
         {StarsIsON && (
           <div className="OptionsButtons">
-            <button onClick={Config1StarCheck}>Blue</button>
+            <button onClick={Config2StarCheck}>Blue</button>
             <button>Test</button>
             <button>Test</button>
           </div>

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 function Stars({ StarsProps }) {
-  let { Color } = StarsProps;
+  let { Color, Color2 } = StarsProps;
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Create an array of circles with data related to them
@@ -53,8 +53,8 @@ function Stars({ StarsProps }) {
   function drawCircle(x, y, size) {
     if (!ctx) return;
     var gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-    gradient.addColorStop(0, "red");
-    gradient.addColorStop(1, "orange");
+    gradient.addColorStop(0, Color);
+    gradient.addColorStop(1, Color2);
 
     ctx.fillStyle = gradient;
     ctx.beginPath();
@@ -86,11 +86,6 @@ function Stars({ StarsProps }) {
       }
       //Reset the target position if the circle is close enough to the target
       if (distance < 1) {
-        circle.target.x = Math.floor(Math.random() * window.innerWidth);
-        circle.target.y = Math.floor(Math.random() * window.innerHeight);
-      }
-      // Check if the circle is close to another circle
-      if (Has(circlearray, circle.target.x, circle.target.y, circle)) {
         circle.target.x = Math.floor(Math.random() * window.innerWidth);
         circle.target.y = Math.floor(Math.random() * window.innerHeight);
       }
