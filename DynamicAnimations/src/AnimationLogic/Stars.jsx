@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 function Stars({ StarsProps }) {
-  let { Color, Color2 } = StarsProps;
+  let { Color, Color2, Glow } = StarsProps;
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Create an array of circles with data related to them
@@ -62,7 +62,7 @@ function Stars({ StarsProps }) {
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.stroke();
     ctx.fill();
-    ctx.shadowColor = "red";
+    ctx.shadowColor = Glow;
     ctx.shadowBlur = 20;
   }
   // Create the update function
@@ -82,7 +82,7 @@ function Stars({ StarsProps }) {
       }
 
       if (Math.abs(circle.size.s - circle.IncreaseTo) < 1) {
-        circle.IncreaseTo = Math.random() * 20;
+        circle.IncreaseTo = Math.random() * 10;
       }
       //Reset the target position if the circle is close enough to the target
       if (distance < 1) {

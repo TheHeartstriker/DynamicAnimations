@@ -136,9 +136,9 @@ function Sand() {
           let cellLeft = i - 1 >= 0 ? Grid[i - 1][j + 1] : 1;
           if (cellBellow === 0) {
             Bellow(NextGrid, i, j, State);
-          } else if (cellRight === 0) {
+          } else if (cellRight === 0 && Math.random() < 0.5) {
             BellowRight(NextGrid, i, j, State);
-          } else if (cellLeft === 0) {
+          } else if (cellLeft === 0 && Math.random() < 0.5) {
             BellowLeft(NextGrid, i, j, State);
           } else {
             NextGrid[i][j] = State;

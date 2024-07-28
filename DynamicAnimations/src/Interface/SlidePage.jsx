@@ -50,6 +50,7 @@ function Interface() {
   //RainIsON is used to check if rain is on or off
   const [RainIsON, setRainIsON] = useState(false);
   const [StarsIsON, setStarsIsON] = useState(false);
+  const [ParticleIsON, setParticleIsON] = useState(false);
   //Activate animation/preset these are the first animation presets that are activated
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
@@ -60,6 +61,7 @@ function Interface() {
   const [Config2Rain, setConfig2Rain] = useState(false);
   const [Config1Star, setConfig1Star] = useState(false);
   const [Config2Star, setConfig2Star] = useState(false);
+  const [Config2Particle, setConfig2Particle] = useState(false);
 
   const AniStates = [
     setBoolStar,
@@ -68,6 +70,7 @@ function Interface() {
     setBoolParticle,
     setRainIsON,
     setStarsIsON,
+    setParticleIsON,
   ];
 
   const Configsetarr = [
@@ -75,6 +78,7 @@ function Interface() {
     setConfig2Rain,
     setConfig1Star,
     setConfig2Star,
+    setConfig2Particle,
   ];
 
   //Rain data for configurations
@@ -127,14 +131,20 @@ function Interface() {
     document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
   }
 
+  if (Config2Rain) {
+    document.documentElement.style.setProperty("--HUE", Config2DataLight.Hue);
+  }
+
   const StarConfig1 = {
     Color: "red",
     Color2: "orange",
+    Glow: "yellow",
   };
 
   const StarConfig2 = {
     Color: "blue",
     Color2: "white",
+    Glow: "blue",
   };
 
   const ParticleConfig1 = {
@@ -172,25 +182,35 @@ function Interface() {
     FirstTrue([setConfig2Star, setStarsIsON], [...AniStates, ...Configsetarr]);
   };
 
+  const Config2ParticleCheck = () => {
+    FirstTrue(
+      [setConfig2Particle, setParticleIsON],
+      [...AniStates, ...Configsetarr]
+    );
+  };
+
   //Html code
   return (
     <>
       {/* When true arguments */}
       <div>
         {BoolStar && <Stars StarsProps={StarConfig1} />}
+
         {BoolRain && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
-        {BoolSand && <Sand />}
-        {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
 
-        {Config1Rain && (
-          <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
-        )}
+        {BoolSand && <Sand />}
+
+        {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
+        {/* Configuration */}
         {Config2Rain && (
           <Rain RainProps={Config2DataRain} LightningProps={Config2DataLight} />
         )}
+
         {Config2Star && <Stars StarsProps={StarConfig2} />}
+
+        {Config2Particle && <Particle ParticleProps={ParticleConfig2} />}
       </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
@@ -226,7 +246,10 @@ function Interface() {
           </button>
           <button
             onClick={() =>
-              FirstTrue([setBoolParticle], [...AniStates, ...Configsetarr])
+              FirstTrue(
+                [setBoolParticle, setParticleIsON],
+                [...AniStates, ...Configsetarr]
+              )
             }
           >
             Particle
@@ -234,14 +257,21 @@ function Interface() {
         </div>
         {RainIsON && (
           <div className="OptionsButtons">
-            <button onClick={Config1Check}>Vibro</button>
-            <button onClick={Config2Check}>Sun</button>
+            <button onClick={Config2Check}>Vibro</button>
+            {/* <button onClick={Config2Check}>Sun</button> */}
             <button>Test</button>
           </div>
         )}
         {StarsIsON && (
           <div className="OptionsButtons">
             <button onClick={Config2StarCheck}>Blue</button>
+            <button>Test</button>
+            <button>Test</button>
+          </div>
+        )}
+        {ParticleIsON && (
+          <div className="OptionsButtons">
+            <button onClick={Config2ParticleCheck}>Sun</button>
             <button>Test</button>
             <button>Test</button>
           </div>

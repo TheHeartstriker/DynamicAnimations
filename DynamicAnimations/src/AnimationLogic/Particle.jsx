@@ -108,6 +108,7 @@ function Particle({ ParticleProps }) {
   }
 
   //webworkers somewhere
+  //If slow make larger
 
   class Particle {
     constructor() {
@@ -162,8 +163,6 @@ function Particle({ ParticleProps }) {
     }
     requestAnimationFrame(draw);
   }
-
-  //Imporve the speed by reseting instead removing
 
   useEffect(() => {
     if (ctx) {
