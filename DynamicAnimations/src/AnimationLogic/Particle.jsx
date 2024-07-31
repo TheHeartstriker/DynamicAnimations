@@ -88,7 +88,6 @@ function Particle({ ParticleProps }) {
       return generateBiasedRandom(0, window.innerWidth);
     }
     if (SunOn) {
-      console.log("SunOn");
       const point = SunPoint();
       if (Sun) {
         return point ? point.x : null;
@@ -147,7 +146,6 @@ function Particle({ ParticleProps }) {
 
   //Consider calling with delay
   function createParticles() {
-    console.log("called");
     for (let i = 0; i < 5000; i++) {
       Particles.push(new Particle());
     }
@@ -165,8 +163,13 @@ function Particle({ ParticleProps }) {
   }
 
   useEffect(() => {
-    if (ctx) {
+    if (SunOn) {
       SunArea();
+    }
+  }, [ctx]);
+
+  useEffect(() => {
+    if (ctx) {
       createParticles();
       draw();
     }

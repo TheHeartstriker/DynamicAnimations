@@ -100,27 +100,6 @@ function Stars({ StarsProps }) {
     requestAnimationFrame(update);
   }
 
-  function Has(arr, x, y, currentCircle) {
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] === currentCircle) continue; // Skip if it's the same circle
-
-      let DiffX = Math.abs(arr[i].current.x - x);
-      let DiffY = Math.abs(arr[i].current.y - y);
-      let distanceBetweenCenters = Math.sqrt(DiffX * DiffX + DiffY * DiffY);
-
-      // Calculate the distance between the edges of the circles
-      let combinedRadius = arr[i].size.s / 2 + currentCircle.size.s / 2;
-      let distanceBetweenEdges = distanceBetweenCenters - combinedRadius;
-
-      // Check if the distance between edges is less than a threshold
-      if (distanceBetweenEdges < 1) {
-        // You can adjust this threshold as needed
-        return true;
-      }
-    }
-    return false;
-  }
-
   useEffect(() => {
     if (!ctx) return;
     update();
