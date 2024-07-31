@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 
 function Stars({ StarsProps }) {
-  let { Color } = StarsProps;
+  let { Color, Color2, Glow } = StarsProps;
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Create an array of circles with data related to them
   const [circlearray, setCirclearray] = useState(
-    new Array(40).fill().map(() => ({
+    new Array(20).fill().map(() => ({
       current: {
         x: Math.floor(Math.random() * window.innerWidth),
         y: Math.floor(Math.random() * window.innerHeight),
@@ -52,12 +52,17 @@ function Stars({ StarsProps }) {
   // Function to draw a circle and related inputs
   function drawCircle(x, y, size) {
     if (!ctx) return;
-    ctx.fillStyle = Color;
+    var gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+    gradient.addColorStop(0, Color);
+    gradient.addColorStop(1, Color2);
+
+    ctx.fillStyle = gradient;
     ctx.beginPath();
+
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.stroke();
     ctx.fill();
-    ctx.shadowColor = "red";
+    ctx.shadowColor = Glow;
     ctx.shadowBlur = 20;
   }
   // Create the update function
@@ -65,10 +70,11 @@ function Stars({ StarsProps }) {
     if (!ctx) return;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     const newCircleArray = circlearray.map((circle) => {
+      // Calculate the distance between the current and target position
       let dx = circle.target.x - circle.current.x;
       let dy = circle.target.y - circle.current.y;
       let distance = Math.sqrt(dx * dx + dy * dy);
-
+      // Increase the size of the circle
       if (circle.size.s < circle.IncreaseTo) {
         circle.size.s += 0.02;
       } else if (circle.size.s > 1) {
@@ -78,16 +84,16 @@ function Stars({ StarsProps }) {
       if (Math.abs(circle.size.s - circle.IncreaseTo) < 1) {
         circle.IncreaseTo = Math.random() * 10;
       }
-
-      drawCircle(circle.current.x, circle.current.y, circle.size.s);
+      //Reset the target position if the circle is close enough to the target
       if (distance < 1) {
         circle.target.x = Math.floor(Math.random() * window.innerWidth);
         circle.target.y = Math.floor(Math.random() * window.innerHeight);
-      } else {
-        let lerpFactor = 0.02;
-        circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
-        circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
       }
+      let lerpFactor = 0.02;
+      circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
+      circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
+
+      drawCircle(circle.current.x, circle.current.y, circle.size.s);
     });
 
     setCirclearray(newCircleArray); // Update the state with the modified copy

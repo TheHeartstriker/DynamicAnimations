@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
-import Marble from "../AnimationLogic/Marbling.jsx";
+import Particle from "../AnimationLogic/Particle.jsx";
 
 function Interface() {
   const pageContainerRef = useRef(null);
@@ -50,23 +50,27 @@ function Interface() {
   //RainIsON is used to check if rain is on or off
   const [RainIsON, setRainIsON] = useState(false);
   const [StarsIsON, setStarsIsON] = useState(false);
+  const [ParticleIsON, setParticleIsON] = useState(false);
   //Activate animation/preset these are the first animation presets that are activated
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
   const [BoolRain, setBoolRain] = useState(false);
-  const [BoolMarble, setBoolMarble] = useState(false);
+  const [BoolParticle, setBoolParticle] = useState(false);
   //Configuration presets
   const [Config1Rain, setConfig1Rain] = useState(false);
   const [Config2Rain, setConfig2Rain] = useState(false);
   const [Config1Star, setConfig1Star] = useState(false);
   const [Config2Star, setConfig2Star] = useState(false);
+  const [Config2Particle, setConfig2Particle] = useState(false);
 
   const AniStates = [
     setBoolStar,
     setBoolSand,
     setBoolRain,
-    setBoolMarble,
+    setBoolParticle,
     setRainIsON,
+    setStarsIsON,
+    setParticleIsON,
   ];
 
   const Configsetarr = [
@@ -74,6 +78,7 @@ function Interface() {
     setConfig2Rain,
     setConfig1Star,
     setConfig2Star,
+    setConfig2Particle,
   ];
 
   //Rain data for configurations
@@ -122,16 +127,32 @@ function Interface() {
     Light: 50,
   };
 
-  if (Config1Rain) {
+  if (BoolRain) {
     document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
+  }
+
+  if (Config2Rain) {
+    document.documentElement.style.setProperty("--HUE", Config2DataLight.Hue);
   }
 
   const StarConfig1 = {
     Color: "red",
+    Color2: "orange",
+    Glow: "yellow",
   };
 
   const StarConfig2 = {
     Color: "blue",
+    Color2: "white",
+    Glow: "blue",
+  };
+
+  const ParticleConfig1 = {
+    Fire: true,
+  };
+
+  const ParticleConfig2 = {
+    SunOn: true,
   };
 
   //Function used to control button and cofig states
@@ -157,8 +178,15 @@ function Interface() {
     FirstTrue([setConfig2Rain, setRainIsON], [...AniStates, ...Configsetarr]);
   };
 
-  const Config1StarCheck = () => {
-    FirstTrue([setConfig1Star], [...AniStates, ...Configsetarr]);
+  const Config2StarCheck = () => {
+    FirstTrue([setConfig2Star, setStarsIsON], [...AniStates, ...Configsetarr]);
+  };
+
+  const Config2ParticleCheck = () => {
+    FirstTrue(
+      [setConfig2Particle, setParticleIsON],
+      [...AniStates, ...Configsetarr]
+    );
   };
 
   //Html code
@@ -167,19 +195,22 @@ function Interface() {
       {/* When true arguments */}
       <div>
         {BoolStar && <Stars StarsProps={StarConfig1} />}
+
         {BoolRain && (
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
-        {BoolSand && <Sand />}
-        {BoolMarble && <Marble />}
 
-        {Config1Rain && (
-          <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
-        )}
+        {BoolSand && <Sand />}
+
+        {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
+        {/* Configuration */}
         {Config2Rain && (
           <Rain RainProps={Config2DataRain} LightningProps={Config2DataLight} />
         )}
-        {Config1Star && <Stars StarsProps={StarConfig2} />}
+
+        {Config2Star && <Stars StarsProps={StarConfig2} />}
+
+        {Config2Particle && <Particle ParticleProps={ParticleConfig2} />}
       </div>
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
@@ -215,22 +246,32 @@ function Interface() {
           </button>
           <button
             onClick={() =>
-              FirstTrue([setBoolMarble], [...AniStates, ...Configsetarr])
+              FirstTrue(
+                [setBoolParticle, setParticleIsON],
+                [...AniStates, ...Configsetarr]
+              )
             }
           >
-            Marble
+            Particle
           </button>
         </div>
         {RainIsON && (
           <div className="OptionsButtons">
-            <button onClick={Config1Check}>Vibro</button>
-            <button onClick={Config2Check}>Sun</button>
+            <button onClick={Config2Check}>Vibro</button>
+            {/* <button onClick={Config2Check}>Sun</button> */}
             <button>Test</button>
           </div>
         )}
         {StarsIsON && (
           <div className="OptionsButtons">
-            <button onClick={Config1StarCheck}>Blue</button>
+            <button onClick={Config2StarCheck}>Blue</button>
+            <button>Test</button>
+            <button>Test</button>
+          </div>
+        )}
+        {ParticleIsON && (
+          <div className="OptionsButtons">
+            <button onClick={Config2ParticleCheck}>Sun</button>
             <button>Test</button>
             <button>Test</button>
           </div>
