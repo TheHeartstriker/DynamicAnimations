@@ -8,6 +8,8 @@ function Particle({ ParticleProps }) {
   const [Particles, setParticles] = useState([]);
   //Sun points
   const [Sun, setSun] = useState(false);
+  const [Test, setTest] = useState(false);
+
   useEffect(() => {
     // Creates a refrence to current canvas
     const canvas = canvasRef.current;
@@ -37,7 +39,6 @@ function Particle({ ParticleProps }) {
   function generateBiasedRandom(min, max) {
     const mean = (max + min) / 2;
     const standardDeviation = (max - min) / 6; // Assuming 99.7% values within [min, max]
-
     let rand;
     do {
       rand = generateGaussianRandom(mean, standardDeviation);
@@ -49,7 +50,7 @@ function Particle({ ParticleProps }) {
   function generateGaussianRandom(mean = 0, standardDeviation = 1) {
     let u = 0,
       v = 0;
-    while (u === 0) u = Math.random(); // Converting [0,1) to (0,1)
+    while (u === 0) u = Math.random();
     while (v === 0) v = Math.random();
     let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
     // Convert to the desired mean and standard deviation
@@ -57,6 +58,7 @@ function Particle({ ParticleProps }) {
   }
 
   function SunArea() {
+    if (ctx) return;
     const CenterX = window.innerWidth / 2;
     const CenterY = window.innerHeight / 2;
     const Radius = 250;
@@ -106,7 +108,6 @@ function Particle({ ParticleProps }) {
     }
   }
 
-  //webworkers somewhere
   //If slow make larger
 
   class Particle {
@@ -139,19 +140,24 @@ function Particle({ ParticleProps }) {
         this.lightness
       }%, ${this.alpha / 255})`;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+      ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
       ctx.fill();
     }
   }
 
   //Consider calling with delay
   function createParticles() {
+    const newParticles = [];
     for (let i = 0; i < 5000; i++) {
-      Particles.push(new Particle());
+      newParticles.push(new Particle());
     }
+    setParticles(newParticles);
+    setTest(true);
   }
 
   function draw() {
+    if (!ctx) return;
+
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     for (let i = 0; i < Particles.length; i++) {
@@ -171,9 +177,11 @@ function Particle({ ParticleProps }) {
   useEffect(() => {
     if (ctx) {
       createParticles();
-      draw();
+      if (Test) {
+        draw();
+      }
     }
-  }, [ctx]);
+  }, [ctx, Test]);
 
   return (
     <canvas

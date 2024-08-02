@@ -30,6 +30,10 @@ function Rain({ RainProps, LightningProps }) {
       height: RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1),
     }))
   );
+  //Call a reset on lightning
+  const [Reset, setReset] = useState(false);
+  // Create a reference to the animation frame for the rain
+  const animationFrameId = useRef(null);
 
   useEffect(() => {
     // Creates references to current canvases
@@ -87,26 +91,28 @@ function Rain({ RainProps, LightningProps }) {
     rainCtx.stroke();
   }
 
-  let id;
-  // Animation function so rules etc can be applied
   function DrawDroplets() {
-    rainCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    rainCtx.clearRect(0, 0, width, height);
+
     const newRainArray = rainArray.map((drop) => {
-      const newDrop = { ...drop };
-      newDrop.Start.y += newDrop.speed;
+      drop.Start.y += drop.speed;
 
-      Droplet(newDrop.Start.x, newDrop.Start.y, newDrop.width, newDrop.height);
-      if (newDrop.Start.y > window.innerHeight) {
-        newDrop.Start.x = Math.floor(Math.random() * window.innerWidth);
-        newDrop.Start.y = 0;
+      Droplet(drop.Start.x, drop.Start.y, drop.width, drop.height);
+
+      if (drop.Start.y > height) {
+        drop.Start.x = Math.floor(Math.random() * width);
+        drop.Start.y = 0;
       }
-      return newDrop;
-    });
-    setRainArray(newRainArray);
-    id = requestAnimationFrame(DrawDroplets);
-  }
 
-  const [Reset, setReset] = useState(false);
+      return drop;
+    });
+
+    setRainArray(newRainArray);
+    animationFrameId.current = requestAnimationFrame(DrawDroplets);
+  }
 
   let timeoutIds = [];
 
@@ -182,7 +188,7 @@ function Rain({ RainProps, LightningProps }) {
     }
     return A;
   }
-  //Function to redraw the canvas
+  //Function to redraw the lightning
   function ReDraw() {
     if (Reset === true) {
       setReset(false);
@@ -197,7 +203,7 @@ function Rain({ RainProps, LightningProps }) {
     }
     DrawDroplets();
     return () => {
-      cancelAnimationFrame(id);
+      cancelAnimationFrame(animationFrameId.current);
     };
   }, [rainCtx]);
 

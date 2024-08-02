@@ -15,7 +15,7 @@ function Sand() {
   //Color state
   const [Color, setColor] = useState(190);
   //Pixel size
-  const Pix_size = 7;
+  const Pix_size = 9;
   //Update to prevent depth errors
 
   useEffect(() => {
@@ -127,18 +127,19 @@ function Sand() {
       for (let j = 0; j < Cols; j++) {
         let State = Grid[i][j]; //Gets the state of the current cell or previous generation
         if (State > 0) {
+          let FallVar = Math.random();
           let x = i * Pix_size;
           let y = j * Pix_size;
           ctx.fillStyle = ctx.fillStyle = `hsl(${Grid[i][j]}, 100%, 50%)`;
           ctx.fillRect(x, y, Pix_size, Pix_size);
-          let cellBellow = Grid[i][j + 1]; // renamed variable
+          let cellBellow = Grid[i][j + 1];
           let cellRight = i + 1 < Rows ? Grid[i + 1][j + 1] : 1;
           let cellLeft = i - 1 >= 0 ? Grid[i - 1][j + 1] : 1;
           if (cellBellow === 0) {
             Bellow(NextGrid, i, j, State);
-          } else if (cellRight === 0 && Math.random() < 0.5) {
+          } else if (cellRight === 0 && FallVar < 0.5) {
             BellowRight(NextGrid, i, j, State);
-          } else if (cellLeft === 0 && Math.random() < 0.5) {
+          } else if (cellLeft === 0 && FallVar > 0.5) {
             BellowLeft(NextGrid, i, j, State);
           } else {
             NextGrid[i][j] = State;
@@ -174,6 +175,7 @@ function Sand() {
       requestAnimationFrame(Draw);
     }
   }, [Grid]);
+
   return (
     <canvas
       ref={canvasRef}
