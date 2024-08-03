@@ -5,6 +5,13 @@ body {
   padding: 0;
   background-color: hsl(0, 0%, 0%);
 }
+
+:root {
+  --Backround-Black-1: hsl(180, 5%, 2.5%);
+  --Borders: hsl(180, 0%, 5%);
+  --Fill: hsl(180, 0%, 10%);
+}
+
 /*Settings button*/
 #Settings {
   position: absolute;
@@ -16,7 +23,7 @@ body {
 #Settings button {
   height: 6vh;
   width: 6vh;
-  background-color: hsl(180, 5%, 5%);
+  background-color: var(--Fill);
   color: rgb(255, 255, 255);
   border: none;
   font-size: 20px;
@@ -26,8 +33,8 @@ body {
   position: relative;
   width: 25vw;
   height: 99vh;
-  border: 5px solid hsl(180, 5%, 10%);
-  background-color: hsl(180, 5%, 1%);
+  border: 5px solid var(--Borders);
+  background-color: var(--Fill);
   left: 75vw; /*75*/
   animation: Slide 1s linear forwards;
 }
@@ -42,9 +49,11 @@ body {
 }
 
 .Buttons button {
-  border: 5px solid hsl(0, 5%, 25%);
+  padding: 20px;
+  color: rgb(139, 136, 136);
+  border: 5px solid var(--Borders);
   border-radius: 5%;
-  background-color: hsl(0, 5%, 10%);
+  background-color: var(--Fill);
 }
 
 .OptionsButtons {
@@ -57,7 +66,7 @@ body {
 .OptionsButtons button:hover {
   background-color: rgb(81, 197, 81);
   transform: scale(1.5);
-  box-shadow: 0px 0px 25px 10px rgba(212, 17, 17, 0.5);
+  box-shadow: 0px 0px 25px 10px rgba(56, 212, 17, 0.5);
 }
 
 .OptionsButtons button {
@@ -65,7 +74,7 @@ body {
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: hsl(100, 5%, 25%);
+  background-color: var(--Borders);
   transition: background-color 1s ease-in-out, transform 1s ease-in-out;
   border: 3px solid hsl(90, 100%, 50%);
 }

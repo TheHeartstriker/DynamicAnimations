@@ -51,15 +51,14 @@ function Interface() {
   const [RainIsON, setRainIsON] = useState(false);
   const [StarsIsON, setStarsIsON] = useState(false);
   const [ParticleIsON, setParticleIsON] = useState(false);
+  const [SandIsON, setSandIsON] = useState(false);
   //Activate animation/preset these are the first animation presets that are activated
   const [BoolStar, setBoolStar] = useState(false);
   const [BoolSand, setBoolSand] = useState(false);
   const [BoolRain, setBoolRain] = useState(false);
   const [BoolParticle, setBoolParticle] = useState(false);
   //Configuration presets
-  const [Config1Rain, setConfig1Rain] = useState(false);
   const [Config2Rain, setConfig2Rain] = useState(false);
-  const [Config1Star, setConfig1Star] = useState(false);
   const [Config2Star, setConfig2Star] = useState(false);
   const [Config2Particle, setConfig2Particle] = useState(false);
 
@@ -71,15 +70,10 @@ function Interface() {
     setRainIsON,
     setStarsIsON,
     setParticleIsON,
+    setSandIsON,
   ];
 
-  const Configsetarr = [
-    setConfig1Rain,
-    setConfig2Rain,
-    setConfig1Star,
-    setConfig2Star,
-    setConfig2Particle,
-  ];
+  const Configsetarr = [setConfig2Rain, setConfig2Star, setConfig2Particle];
 
   //Rain data for configurations
 
@@ -155,6 +149,10 @@ function Interface() {
     SunOn: true,
   };
 
+  const SandReset = {
+    Reset: false,
+  };
+
   //Function used to control button and cofig states
   function FirstTrue(Trueset, Falseset) {
     for (let i = 0; i < Falseset.length; i++) {
@@ -170,11 +168,13 @@ function Interface() {
   }
 
   //On click functions for the buttons
-  const Config1Check = () => {
-    FirstTrue([setConfig1Rain, setRainIsON], [...AniStates, ...Configsetarr]);
+
+  const ConfigSandReset = () => {
+    SandReset.Reset = true;
+    console.log(SandReset.Reset);
   };
 
-  const Config2Check = () => {
+  const Config2RainCheck = () => {
     FirstTrue([setConfig2Rain, setRainIsON], [...AniStates, ...Configsetarr]);
   };
 
@@ -200,7 +200,7 @@ function Interface() {
           <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
         )}
 
-        {BoolSand && <Sand />}
+        {BoolSand && <Sand SandProps={SandReset} />}
 
         {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
         {/* Configuration */}
@@ -239,7 +239,10 @@ function Interface() {
           </button>
           <button
             onClick={() =>
-              FirstTrue([setBoolSand], [...AniStates, ...Configsetarr])
+              FirstTrue(
+                [setBoolSand, setSandIsON],
+                [...AniStates, ...Configsetarr]
+              )
             }
           >
             Sand
@@ -257,23 +260,22 @@ function Interface() {
         </div>
         {RainIsON && (
           <div className="OptionsButtons">
-            <button onClick={Config2Check}>Vibro</button>
-            {/* <button onClick={Config2Check}>Sun</button> */}
-            <button>Test</button>
+            <button onClick={Config2RainCheck}>Vibro</button>
           </div>
         )}
         {StarsIsON && (
           <div className="OptionsButtons">
             <button onClick={Config2StarCheck}>Blue</button>
-            <button>Test</button>
-            <button>Test</button>
           </div>
         )}
         {ParticleIsON && (
           <div className="OptionsButtons">
             <button onClick={Config2ParticleCheck}>Sun</button>
-            <button>Test</button>
-            <button>Test</button>
+          </div>
+        )}
+        {setSandIsON && (
+          <div className="OptionsButtons">
+            <button onClick={ConfigSandReset}>Sand</button>
           </div>
         )}
       </div>

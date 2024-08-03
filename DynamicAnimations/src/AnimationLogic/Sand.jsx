@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 //Need to optimize code
 //Need to fix the color change
 //Orginize and understand the code aka comments
-function Sand() {
+function Sand({ SandProps }) {
+  let { Reset } = SandProps;
   //Grid generation
   const [Grid, setGrid] = useState([]);
   const [Rows, setRows] = useState(0);
@@ -164,17 +165,23 @@ function Sand() {
     NextGrid[i - 1][j + 1] = State;
   }
 
+  function resetSand() {
+    setOn(false); // Reset the On state
+    setMouseDown(false); // Reset the MouseDown state
+    setColor(190); // Reset the color to the initial value
+  }
   // Function to impose the grid
   useEffect(() => {
+    resetSand();
     Impose();
-  }, [ctx]);
+  }, [ctx, Reset]);
 
   useEffect(() => {
     if (On) {
       ChangeColor();
       requestAnimationFrame(Draw);
     }
-  }, [Grid]);
+  }, [Grid, Reset]);
 
   return (
     <canvas
