@@ -18,9 +18,9 @@ function Stars({ StarsProps }) {
         y: Math.floor(Math.random() * window.innerHeight),
       },
       size: {
-        s: Math.random() * 10,
+        s: Math.random() * 15,
       },
-      IncreaseTo: Math.random() * 10,
+      IncreaseTo: Math.random() * 15,
     }))
   );
 

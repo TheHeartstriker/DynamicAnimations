@@ -113,20 +113,19 @@ function Rain({ RainProps, LightningProps }) {
     setRainArray(newRainArray);
     animationFrameId.current = requestAnimationFrame(DrawDroplets);
   }
+  const [Ids, setIds] = useState([]);
 
-  let timeoutIds = [];
-
-  function Zeus(startX, startY, Thickness, Branches, Distance, Iterator) {
+  function Zeus(startX, startY, Thickness, Branches, Distance) {
     // Creates local references to the variables
     let Check = Roughness;
     let currentDistance = Distance;
     let currentThickness = Thickness;
-    let currentTime = Math.floor(Math.random() * Time) + 50;
+    let currentTime = Math.floor(Math.random() * Time) + 30;
     let accumulate = 0;
     let currentBranches = Branches;
     let Glow = 20;
 
-    for (let i = Iterator; i < Roughness; i++) {
+    for (let i = 0; i < Roughness; i++) {
       accumulate += currentTime / 2;
       let timeoutId = setTimeout(() => {
         //Drawing values
@@ -152,8 +151,7 @@ function Rain({ RainProps, LightningProps }) {
             startY,
             currentThickness,
             currentBranches,
-            currentDistance,
-            Iterator
+            currentDistance
           );
         }
         Glow - 0.5;
@@ -166,13 +164,18 @@ function Rain({ RainProps, LightningProps }) {
           ReDraw();
         }
       }, accumulate);
-      //Saves the id each iteration
-      timeoutIds.push(timeoutId);
+      setIds((prev) => [...prev, timeoutId]);
     }
   }
+
+  function clearAllTimeouts() {
+    Ids.forEach((id) => clearTimeout(id));
+    setIds([]);
+  }
+
   //Fucntion to draw the branches
-  function Branch(End1, End2, Thick, Branches, Distance, iteration) {
-    Zeus(End1, End2, Thick, Branches, Distance, iteration);
+  function Branch(End1, End2, Thick, Branches, Distance) {
+    Zeus(End1, End2, Thick, Branches, Distance);
   }
   //Controls the branching chance as the iteration increases
   function BranchChance(Check) {
@@ -196,7 +199,7 @@ function Rain({ RainProps, LightningProps }) {
       setReset(true);
     }
   }
-
+  //Draws the rain
   useEffect(() => {
     if (!rainCtx) {
       return;
@@ -212,24 +215,17 @@ function Rain({ RainProps, LightningProps }) {
     if (!lightningCtx) {
       return;
     }
-    setTimeout(() => {
-      if (test) {
-        test.style.animation = "Flash";
-        test.style.animationDuration = "1.5s";
-      }
-      //Calls lightning and the length time wise of the lightning
-      timeoutIds = [];
-      lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      Zeus(
-        Math.random() * window.innerWidth,
-        0,
-        Thickness,
-        Branches,
-        Distance,
-        0
-      );
-    }, 9000);
+
     test.style.animation = "none";
+    if (test) {
+      test.style.animation = "Flash";
+      test.style.animationDuration = "1.5s";
+    }
+    //Calls lightning and the length time wise of the lightning
+
+    lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    clearAllTimeouts();
+    Zeus(Math.random() * window.innerWidth, 0, Thickness, Branches, Distance);
   }, [lightningCtx, Reset]);
 
   return (

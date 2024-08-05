@@ -89,7 +89,7 @@ function Interface() {
     startY: 0,
     Distance: 75,
     Thickness: 3,
-    Time: 50,
+    Time: 200,
     Branches: 1,
     Iterator: 0,
     Roughness: 100,
@@ -132,12 +132,12 @@ function Interface() {
   const StarConfig1 = {
     Color: "red",
     Color2: "orange",
-    Glow: "yellow",
+    Glow: "red",
   };
 
   const StarConfig2 = {
     Color: "blue",
-    Color2: "white",
+    Color2: "cyan",
     Glow: "blue",
   };
 
@@ -273,9 +273,9 @@ function Interface() {
             <button onClick={Config2ParticleCheck}>Sun</button>
           </div>
         )}
-        {setSandIsON && (
+        {SandIsON && (
           <div className="OptionsButtons">
-            <button onClick={ConfigSandReset}>Sand</button>
+            <button onClick={ConfigSandReset}>Time-reset</button>
           </div>
         )}
       </div>
