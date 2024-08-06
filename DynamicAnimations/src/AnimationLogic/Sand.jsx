@@ -166,6 +166,7 @@ function Sand({ SandProps }) {
   }
 
   function resetSand() {
+    setGrid([]); // Reset the grid
     setOn(false); // Reset the On state
     setMouseDown(false); // Reset the MouseDown state
     setColor(190); // Reset the color to the initial value

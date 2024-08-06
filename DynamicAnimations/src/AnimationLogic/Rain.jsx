@@ -120,7 +120,7 @@ function Rain({ RainProps, LightningProps }) {
     let Check = Roughness;
     let currentDistance = Distance;
     let currentThickness = Thickness;
-    let currentTime = Math.floor(Math.random() * Time) + 30;
+    let currentTime = Math.floor(Math.random() * Time) + 50;
     let accumulate = 0;
     let currentBranches = Branches;
     let Glow = 20;
@@ -159,7 +159,7 @@ function Rain({ RainProps, LightningProps }) {
         currentDistance /= 1.1;
         currentTime *= 1.1;
 
-        if (i === 99) {
+        if (i === Roughness - 1) {
           console.log("Redraw");
           ReDraw();
         }
@@ -217,15 +217,22 @@ function Rain({ RainProps, LightningProps }) {
     }
 
     test.style.animation = "none";
+    void test.offsetHeight;
     if (test) {
       test.style.animation = "Flash";
-      test.style.animationDuration = "1.5s";
+      test.style.animationDuration = "1s";
     }
     //Calls lightning and the length time wise of the lightning
 
     lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     clearAllTimeouts();
-    Zeus(Math.random() * window.innerWidth, 0, Thickness, Branches, Distance);
+    Zeus(
+      100 + Math.random() * window.innerWidth - 200,
+      0,
+      Thickness,
+      Branches,
+      Distance
+    );
   }, [lightningCtx, Reset]);
 
   return (

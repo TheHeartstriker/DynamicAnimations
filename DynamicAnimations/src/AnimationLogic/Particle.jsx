@@ -148,7 +148,7 @@ function Particle({ ParticleProps }) {
   //Consider calling with delay
   function createParticles() {
     const newParticles = [];
-    for (let i = 0; i < 5000; i++) {
+    for (let i = 0; i < 4000; i++) {
       newParticles.push(new Particle());
     }
     setParticles(newParticles);
