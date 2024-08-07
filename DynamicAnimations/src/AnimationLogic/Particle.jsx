@@ -172,9 +172,13 @@ function Particle({ ParticleProps }) {
     if (SunOn) {
       SunArea();
     }
+    return () => {
+      setParticles([]);
+    };
   }, [ctx]);
 
   useEffect(() => {
+    setParticles([]);
     if (ctx) {
       createParticles();
       if (Test) {
