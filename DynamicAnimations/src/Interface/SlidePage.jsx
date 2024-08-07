@@ -165,6 +165,7 @@ function Interface() {
         Trueset[i](true);
       }
     }
+    console.log(BoolStar);
   }
 
   //On click functions for the buttons
@@ -187,6 +188,7 @@ function Interface() {
       [setConfig2Particle, setParticleIsON],
       [...AniStates, ...Configsetarr]
     );
+    console.log(BoolParticle);
   };
 
   //Html code

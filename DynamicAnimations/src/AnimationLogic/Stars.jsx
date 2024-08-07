@@ -6,6 +6,7 @@ function Stars({ StarsProps }) {
   let { Color, Color2, Glow } = StarsProps;
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
+  const animationFrameId = useRef(null);
   // Create an array of circles with data related to them
   const [circlearray, setCirclearray] = useState(
     new Array(20).fill().map(() => ({
@@ -52,6 +53,7 @@ function Stars({ StarsProps }) {
   // Function to draw a circle and related inputs
   function drawCircle(x, y, size) {
     if (!ctx) return;
+    console.log("drawCircle");
     var gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
     gradient.addColorStop(0, Color);
     gradient.addColorStop(1, Color2);
@@ -97,13 +99,17 @@ function Stars({ StarsProps }) {
     });
 
     setCirclearray(newCircleArray); // Update the state with the modified copy
-    requestAnimationFrame(update);
+    animationFrameId.current = requestAnimationFrame(update);
   }
 
   useEffect(() => {
     if (!ctx) return;
-    update();
-    console.log("update");
+    animationFrameId.current = requestAnimationFrame(update);
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
   }, [ctx]);
 
   return (

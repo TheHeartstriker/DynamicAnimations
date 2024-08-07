@@ -233,6 +233,9 @@ function Rain({ RainProps, LightningProps }) {
       Branches,
       Distance
     );
+    return () => {
+      clearAllTimeouts();
+    };
   }, [lightningCtx, Reset]);
 
   return (

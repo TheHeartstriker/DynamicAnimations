@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 function Particle({ ParticleProps }) {
   let { Fire, SunOn } = ParticleProps;
   const canvasRef = useRef(null);
+  const animationFrameId = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Particles array
   const [Particles, setParticles] = useState([]);
@@ -165,26 +166,24 @@ function Particle({ ParticleProps }) {
       Particles[i].completed();
       Particles[i].appear();
     }
-    requestAnimationFrame(draw);
+    animationFrameId.current = requestAnimationFrame(draw);
   }
 
   useEffect(() => {
     if (SunOn) {
       SunArea();
     }
-    return () => {
-      setParticles([]);
-    };
-  }, [ctx]);
-
-  useEffect(() => {
-    setParticles([]);
     if (ctx) {
       createParticles();
       if (Test) {
         draw();
       }
     }
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
   }, [ctx, Test]);
 
   return (
