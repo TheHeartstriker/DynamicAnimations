@@ -12,12 +12,18 @@ function Rain({ RainProps, LightningProps }) {
     Sat,
     Light,
   } = LightningProps;
-  // Create references to the canvases
+  // Create references to the canvases two are needed on differet layers
   const rainCanvasRef = useRef(null);
   const lightningCanvasRef = useRef(null);
   // Create states for the contexts
   const [rainCtx, setRainCtx] = useState(null);
   const [lightningCtx, setLightningCtx] = useState(null);
+  //Call a reset on lightning
+  const [Reset, setReset] = useState(false);
+  //Ids for the timeouts very important to clear them
+  const [Ids, setIds] = useState([]);
+  // Clean up once unmounted preventing memory leaks backround rendering
+  const animationFrameId = useRef(null);
   // The rain array
   const [rainArray, setRainArray] = useState(
     new Array(RainProps.DROPS).fill().map(() => ({
@@ -30,11 +36,7 @@ function Rain({ RainProps, LightningProps }) {
       height: RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1),
     }))
   );
-  //Call a reset on lightning
-  const [Reset, setReset] = useState(false);
-  // Create a reference to the animation frame for the rain
-  const animationFrameId = useRef(null);
-
+  //Creates a canvas
   useEffect(() => {
     // Creates references to current canvases
     const rainCanvas = rainCanvasRef.current;
@@ -77,20 +79,17 @@ function Rain({ RainProps, LightningProps }) {
       x1 + width,
       y1 + height
     );
-    if (!gradient) {
-      return;
-    }
+
     gradient.addColorStop(0, "black");
     gradient.addColorStop(1, "blue");
     rainCtx.beginPath();
     rainCtx.rect(x1, y1, width, height);
     rainCtx.lineWidth = RainProps.DROPWIDTH;
-    rainCtx.strokeStyle = "";
     rainCtx.fillStyle = gradient;
     rainCtx.fill();
     rainCtx.stroke();
   }
-
+  //Function to draw the rain
   function DrawDroplets() {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -113,8 +112,7 @@ function Rain({ RainProps, LightningProps }) {
     setRainArray(newRainArray);
     animationFrameId.current = requestAnimationFrame(DrawDroplets);
   }
-  const [Ids, setIds] = useState([]);
-
+  //Function that draws the lightning bolt
   function Zeus(startX, startY, Thickness, Branches, Distance) {
     // Creates local references to the variables
     let Check = Roughness;
@@ -123,7 +121,7 @@ function Rain({ RainProps, LightningProps }) {
     let currentTime = Math.floor(Math.random() * Time) + 50;
     let accumulate = 0;
     let currentBranches = Branches;
-    let Glow = 20;
+    let Glow = currentThickness * 3;
 
     for (let i = 0; i < Roughness; i++) {
       accumulate += currentTime / 2;
@@ -131,7 +129,7 @@ function Rain({ RainProps, LightningProps }) {
         //Drawing values
         lightningCtx.beginPath();
         lightningCtx.shadowBlur = Glow;
-        lightningCtx.shadowColor = "red";
+        lightningCtx.shadowColor = `hsl(${Hue}, ${Sat}%, ${Light}%)`;
         lightningCtx.strokeStyle = `hsl(${Hue}, ${Sat}%, ${Light}%)`;
         lightningCtx.lineWidth = currentThickness;
         //Drawing logic
@@ -154,16 +152,17 @@ function Rain({ RainProps, LightningProps }) {
             currentDistance
           );
         }
+        //Update values decreasing thickness and distance and increasing accumulation time
         Glow - 0.5;
         currentThickness /= 1.1;
         currentDistance /= 1.1;
         currentTime *= 1.1;
-
+        //Calls a redraw when the loop is finished
         if (i === Roughness - 1) {
-          console.log("Redraw");
           ReDraw();
         }
       }, accumulate);
+      //Pushes the timeout id to the array
       setIds((prev) => [...prev, timeoutId]);
     }
   }
@@ -178,13 +177,14 @@ function Rain({ RainProps, LightningProps }) {
     Zeus(End1, End2, Thick, Branches, Distance);
   }
   //Controls the branching chance as the iteration increases
+  //Imatatates naturaly occuring lightning logic
   function BranchChance(Check) {
     Check -= 1;
     if (Math.random() * Check < Chance) {
       return true;
     }
   }
-  //Function to convert a positive or negative value
+  //Function to convert a positive or negative value used to introduce randomness
   function PosNegConverter(A) {
     if (Math.random() < 0.5) {
       return A * -1;
@@ -205,34 +205,35 @@ function Rain({ RainProps, LightningProps }) {
       return;
     }
     DrawDroplets();
+    // Clean up
     return () => {
       cancelAnimationFrame(animationFrameId.current);
     };
   }, [rainCtx]);
 
-  let test = document.getElementById("lightningCanvas");
   useEffect(() => {
     if (!lightningCtx) {
       return;
     }
-
-    test.style.animation = "none";
-    void test.offsetHeight;
-    if (test) {
-      test.style.animation = "Flash";
-      test.style.animationDuration = "1s";
+    //Defines the flash part of the lightning
+    const Refrence = lightningCanvasRef.current;
+    Refrence.style.animation = "none";
+    void Refrence.offsetHeight;
+    if (Refrence) {
+      Refrence.style.animation = "Flash";
+      Refrence.style.animationDuration = "1s";
     }
-    //Calls lightning and the length time wise of the lightning
-
+    //Where the lightning is drawn
     lightningCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     clearAllTimeouts();
     Zeus(
-      100 + Math.random() * window.innerWidth - 200,
+      300 + Math.random() * (window.innerWidth - 600),
       0,
       Thickness,
       Branches,
       Distance
     );
+    // Clean up
     return () => {
       clearAllTimeouts();
     };

@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 
 function Stars({ StarsProps }) {
   let { Color, Color2, Glow } = StarsProps;
+  //Ctx and ref for the canvas
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
+  // Clean up once unmounted preventing memory leaks backround rendering errors
   const animationFrameId = useRef(null);
   // Create an array of circles with data related to them
   const [circlearray, setCirclearray] = useState(
@@ -24,7 +26,7 @@ function Stars({ StarsProps }) {
       IncreaseTo: Math.random() * 15,
     }))
   );
-
+  //Initailize the canvas
   useEffect(() => {
     // Creates a refrence to current canvas
     const canvas = canvasRef.current;
@@ -50,20 +52,21 @@ function Stars({ StarsProps }) {
       window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
+
   // Function to draw a circle and related inputs
   function drawCircle(x, y, size) {
     if (!ctx) return;
-    console.log("drawCircle");
+    //Colors
     var gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
     gradient.addColorStop(0, Color);
     gradient.addColorStop(1, Color2);
-
     ctx.fillStyle = gradient;
+    //Draw the circle
     ctx.beginPath();
-
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.stroke();
     ctx.fill();
+    //Glow
     ctx.shadowColor = Glow;
     ctx.shadowBlur = 20;
   }
