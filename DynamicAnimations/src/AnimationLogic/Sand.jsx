@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-//Need to optimize code
 //Need to fix the color change
-//Orginize and understand the code aka comments
 function Sand({ SandProps }) {
   let { Reset } = SandProps;
   //Grid generation
@@ -17,8 +15,9 @@ function Sand({ SandProps }) {
   const [Color, setColor] = useState(190);
   //Pixel size
   const Pix_size = 9;
-  //Update to prevent depth errors
-
+  //Mouse down event
+  const [MouseDown, setMouseDown] = useState(false);
+  //Initial setup
   useEffect(() => {
     // Creates a refrence to current canvas
     const canvas = canvasRef.current;
@@ -44,7 +43,7 @@ function Sand({ SandProps }) {
       window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
-
+  //Advance and change color back to the initial color if needed
   function ChangeColor() {
     let newColorH = Color + 0.5;
     if (newColorH > 260 || newColorH === 0) {
@@ -52,9 +51,7 @@ function Sand({ SandProps }) {
     }
     setColor(newColorH);
   }
-
-  //Mouse down event
-  const [MouseDown, setMouseDown] = useState(false);
+  //Event listeners for mouse down and up
   const handleMouseDown = () => {
     setOn(true);
     setMouseDown(true);
@@ -65,31 +62,34 @@ function Sand({ SandProps }) {
     setMouseDown(false);
     window.removeEventListener("mouseup", handleMouseUp);
   };
+
   //Tracks the mouse position converts it to grid position and sets the grid to 1
   function MouseTracker(event) {
     if (!ctx || MouseDown === false) {
       return;
     }
+    //Converts x and y to grid locations
     let x = Math.floor(event.clientX / Pix_size);
     let y = Math.floor(event.clientY / Pix_size);
+
     let AmountAround = 10;
     let Extent = Math.floor(AmountAround / 2);
-    let newGrid = [...Grid]; // create a copy of Grid
+    let newGrid = [...Grid];
     for (let i = -Extent; i <= Extent; i++) {
       for (let j = -Extent; j <= Extent; j++) {
         if (Math.random() < 0.5) {
           let X = x + i;
           let Y = y + j;
           if (X >= 0 && X < Rows && Y >= 0 && Y < Cols) {
-            newGrid[X][Y] = Color; // modify the copy, not the original state
+            newGrid[X][Y] = Color;
           }
         }
       }
     }
-    setGrid(newGrid); // update the state with the modified copy
+    setGrid(newGrid);
   }
 
-  // Function to create a 2D array and set all values to 0
+  // Creates a 2D array with values of 0
   function create2DArray(Rows, Cols) {
     let arr = new Array(Rows);
     for (let i = 0; i < arr.length; i++) {
@@ -103,16 +103,12 @@ function Sand({ SandProps }) {
 
   //Defines the number of rows and columns based on the window size
   function Impose() {
-    // Sets the number of rows and columns that are need based on res
     const rows = Math.floor(window.innerWidth / Pix_size);
     const cols = Math.floor(window.innerHeight / Pix_size);
-    // Sets
     setRows(rows);
     setCols(cols);
-
     // Creates the grid based on the number of rows and columns
     let initialGrid = create2DArray(rows, cols);
-
     setGrid(initialGrid);
   }
 
@@ -121,18 +117,23 @@ function Sand({ SandProps }) {
       return;
     }
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = "black";
-
-    let NextGrid = create2DArray(Rows, Cols); //Creates a empty grid
+    //Creates the next grid
+    let NextGrid = create2DArray(Rows, Cols);
+    //Instructions for the next grid
     for (let i = 0; i < Rows; i++) {
       for (let j = 0; j < Cols; j++) {
-        let State = Grid[i][j]; //Gets the state of the current cell or previous generation
+        //Previous grid gen state
+        let State = Grid[i][j];
+        //Instructions for the next grid
         if (State > 0) {
+          //Creates the slow or sticky falling look
           let FallVar = Math.random();
+
           let x = i * Pix_size;
           let y = j * Pix_size;
           ctx.fillStyle = ctx.fillStyle = `hsl(${Grid[i][j]}, 100%, 50%)`;
           ctx.fillRect(x, y, Pix_size, Pix_size);
+          //Fall logic
           let cellBellow = Grid[i][j + 1];
           let cellRight = i + 1 < Rows ? Grid[i + 1][j + 1] : 1;
           let cellLeft = i - 1 >= 0 ? Grid[i - 1][j + 1] : 1;
@@ -151,7 +152,7 @@ function Sand({ SandProps }) {
 
     setGrid(NextGrid);
   }
-
+  //Functions for the falling logic
   function Bellow(NextGrid, i, j, State) {
     NextGrid[i][j] = 0;
     NextGrid[i][j + 1] = State;
@@ -164,19 +165,19 @@ function Sand({ SandProps }) {
     NextGrid[i][j] = 0;
     NextGrid[i - 1][j + 1] = State;
   }
-
+  //Used to reset the sand
   function resetSand() {
-    setGrid([]); // Reset the grid
-    setOn(false); // Reset the On state
+    setGrid([]);
+    setOn(false);
     setMouseDown(false); // Reset the MouseDown state
     setColor(190); // Reset the color to the initial value
   }
-  // Function to impose the grid
+  // Function to impose the grid and reset the sand
   useEffect(() => {
     resetSand();
     Impose();
   }, [ctx, Reset]);
-
+  //Main loop
   useEffect(() => {
     if (On) {
       ChangeColor();
