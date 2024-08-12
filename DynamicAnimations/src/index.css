@@ -10,9 +10,10 @@ body {
   --Backround-Black-1: hsl(180, 5%, 2.5%);
   --Borders: hsl(180, 0%, 5%);
   --Fill: hsl(180, 0%, 10%);
+  --Words: hsl(0, 5%, 50%);
 }
 
-/*Settings button*/
+/*Settings button the button in the bottom left*/
 #Settings {
   position: absolute;
   display: flex;
@@ -28,7 +29,8 @@ body {
   border: none;
   font-size: 20px;
 }
-/*Settings panel*/
+
+/*Control pane*/
 .PageContainer {
   position: relative;
   width: 25vw;
@@ -38,24 +40,27 @@ body {
   left: 75vw; /*75*/
   animation: Slide 1s linear forwards;
 }
-
+/* Main buttons that allow an animation to be chosen */
 .Buttons {
   position: relative;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 5%;
+  margin: 10%;
 }
 
 .Buttons button {
+  width: 35%;
+  height: 10%;
   padding: 20px;
-  color: rgb(139, 136, 136);
+  color: var(--Words);
   border: 5px solid var(--Borders);
   border-radius: 5%;
   background-color: var(--Fill);
 }
 
+/* The configuration buttons that are spefic to each animation */
 .OptionsButtons {
   position: relative;
   display: flex;
@@ -70,12 +75,13 @@ body {
 }
 
 .OptionsButtons button {
+  color: var(--Words);
   width: 50px;
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
   background-color: var(--Borders);
-  transition: background-color 1s ease-in-out, transform 1s ease-in-out;
+  transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
   border: 3px solid hsl(90, 100%, 50%);
 }
 
