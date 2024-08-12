@@ -6,8 +6,11 @@ import Particle from "../AnimationLogic/Particle.jsx";
 
 function Interface() {
   const pageContainerRef = useRef(null);
-  const [Buttoncount, setButtoncount] = useState(0); //Helps switch between animation states aka left and right not a direct counter
+  //Used to see if a button is clicked
+  const [Buttoncount, setButtoncount] = useState(0);
+  //Timer used to make sure the slide is finished before it can trigger again
   const [Timer, setTimer] = useState(0);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prev) => prev + 1);
@@ -24,7 +27,7 @@ function Interface() {
       // Remove the animation
       pageContainerRef.current.style.animation = "none";
       // Force a reflow
-      pageContainerRef.current.offsetHeight; // reflow
+      pageContainerRef.current.offsetHeight;
       // Set animation
       pageContainerRef.current.style.setProperty("--start", "0%");
       pageContainerRef.current.style.setProperty("--end", "100%");
@@ -33,11 +36,11 @@ function Interface() {
       setTimer(0);
     }
     //Slide back aka right
-    if (pageContainerRef.current && Buttoncount === 1 && Timer > 1.5) {
+    if (pageContainerRef.current && Buttoncount === 1 && Timer > 1.2) {
       // Remove the animation
       pageContainerRef.current.style.animation = "none";
       // Force a reflow
-      pageContainerRef.current.offsetHeight; // reflow
+      pageContainerRef.current.offsetHeight;
       // Set animation
       pageContainerRef.current.style.setProperty("--start", "100%");
       pageContainerRef.current.style.setProperty("--end", "0%");
@@ -46,7 +49,7 @@ function Interface() {
       setTimer(0);
     }
   };
-
+  //Conditional rendering system
   //RainIsON is used to check if rain is on or off
   const [RainIsON, setRainIsON] = useState(false);
   const [StarsIsON, setStarsIsON] = useState(false);
@@ -61,7 +64,7 @@ function Interface() {
   const [Config2Rain, setConfig2Rain] = useState(false);
   const [Config2Star, setConfig2Star] = useState(false);
   const [Config2Particle, setConfig2Particle] = useState(false);
-
+  //Array of states to turn off and on
   const AniStates = [
     setBoolStar,
     setBoolSand,
@@ -72,11 +75,11 @@ function Interface() {
     setParticleIsON,
     setSandIsON,
   ];
-
+  //Array of configurations to turn off and on
   const Configsetarr = [setConfig2Rain, setConfig2Star, setConfig2Particle];
 
-  //Rain data for configurations
-
+  //Data to pass to the animations
+  //Base data for rain
   const Config1DataRain = {
     WIDTH: 2,
     HEIGHT: 40,
@@ -98,6 +101,7 @@ function Interface() {
     Sat: 100,
     Light: 50,
   };
+  //Configuration 2 data
   const Config2DataRain = {
     WIDTH: 3,
     HEIGHT: 30,
@@ -120,37 +124,42 @@ function Interface() {
     Sat: 100,
     Light: 50,
   };
+  //Applys the color of the flash to the background
+  useEffect(() => {
+    if (BoolRain) {
+      document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
+    } else if (Config2Rain) {
+      document.documentElement.style.setProperty("--HUE", Config2DataLight.Hue);
+    }
+  }, [BoolRain, Config2Rain]);
 
-  if (BoolRain) {
-    document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
-  }
-
-  if (Config2Rain) {
-    document.documentElement.style.setProperty("--HUE", Config2DataLight.Hue);
-  }
-
+  //Base star preset
   const StarConfig1 = {
     Color: "red",
     Color2: "orange",
     Glow: "red",
   };
-
+  //Configuration 2 star preset
   const StarConfig2 = {
     Color: "blue",
     Color2: "cyan",
     Glow: "blue",
   };
-
+  //Base particle preset
   const ParticleConfig1 = {
     Fire: true,
   };
-
+  //Configuration 2 particle preset
   const ParticleConfig2 = {
     SunOn: true,
   };
-
+  //Props for sand reset
   const SandReset = {
     Reset: false,
+  };
+  //Onclick function to reset the sand
+  const ConfigSandReset = () => {
+    SandReset.Reset = true;
   };
 
   //Function used to control button and cofig states
@@ -165,16 +174,9 @@ function Interface() {
         Trueset[i](true);
       }
     }
-    console.log(BoolStar);
   }
 
-  //On click functions for the buttons
-
-  const ConfigSandReset = () => {
-    SandReset.Reset = true;
-    console.log(SandReset.Reset);
-  };
-
+  //Onclick for when user wants to change the configuration of the animations
   const Config2RainCheck = () => {
     FirstTrue([setConfig2Rain, setRainIsON], [...AniStates, ...Configsetarr]);
   };
@@ -188,14 +190,13 @@ function Interface() {
       [setConfig2Particle, setParticleIsON],
       [...AniStates, ...Configsetarr]
     );
-    console.log(BoolParticle);
   };
 
   //Html code
   return (
     <>
-      {/* When true arguments */}
       <div>
+        {/* Base presets */}
         {BoolStar && <Stars StarsProps={StarConfig1} />}
 
         {BoolRain && (
@@ -205,7 +206,7 @@ function Interface() {
         {BoolSand && <Sand SandProps={SandReset} />}
 
         {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
-        {/* Configuration */}
+        {/* Configuration preset*/}
         {Config2Rain && (
           <Rain RainProps={Config2DataRain} LightningProps={Config2DataLight} />
         )}
@@ -214,10 +215,13 @@ function Interface() {
 
         {Config2Particle && <Particle ParticleProps={ParticleConfig2} />}
       </div>
+      {/* Controls the slide page */}
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
       </div>
+      {/* The sliding page located on the right of the screen */}
       <div className="PageContainer" ref={pageContainerRef}>
+        {/* Buttons located at the top portion of the screen contain orginal base presets */}
         <div className="Buttons">
           <button
             onClick={() =>
@@ -260,6 +264,7 @@ function Interface() {
             Particle
           </button>
         </div>
+        {/* Buttons located at the bottom portion of the screen contain the configuration presets */}
         {RainIsON && (
           <div className="OptionsButtons">
             <button onClick={Config2RainCheck}>Vibro</button>
