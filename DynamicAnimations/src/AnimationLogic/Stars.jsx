@@ -68,7 +68,7 @@ function Stars({ StarsProps }) {
     ctx.fill();
     //Glow
     ctx.shadowColor = Glow;
-    ctx.shadowBlur = 20;
+    ctx.shadowBlur = size * 5;
   }
   //Drawing function
   function update() {
