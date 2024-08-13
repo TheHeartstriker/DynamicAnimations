@@ -1,15 +1,20 @@
 import { useEffect, useState, useRef } from "react";
 
 function Particle({ ParticleProps }) {
+  //Desctructuring the ParticleProps object
   let { Fire, SunOn } = ParticleProps;
   const canvasRef = useRef(null);
+  // Used for clean up once unmounted
+  const animationFrameId = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Particles array
   const [Particles, setParticles] = useState([]);
-  //Sun points
+  //Sun points which hold valid points for the sun area
   const [Sun, setSun] = useState(false);
-  const [Test, setTest] = useState(false);
+  //Reset state to re-render the canvas
+  const [Reset, setReset] = useState(false);
 
+  //Inital canvas setup
   useEffect(() => {
     // Creates a refrence to current canvas
     const canvas = canvasRef.current;
@@ -36,13 +41,15 @@ function Particle({ ParticleProps }) {
     };
   }, []);
 
+  //Generates a random number between min and max with a bias towards the mean
+  //Basicall controlled ethropy to make a fire like look
   function generateBiasedRandom(min, max) {
     const mean = (max + min) / 2;
-    const standardDeviation = (max - min) / 6; // Assuming 99.7% values within [min, max]
+    const standardDeviation = (max - min) / 6;
     let rand;
     do {
       rand = generateGaussianRandom(mean, standardDeviation);
-    } while (rand < min || rand > max); // Ensure the value is within [min, max]
+    } while (rand < min || rand > max);
 
     return rand;
   }
@@ -53,17 +60,17 @@ function Particle({ ParticleProps }) {
     while (u === 0) u = Math.random();
     while (v === 0) v = Math.random();
     let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-    // Convert to the desired mean and standard deviation
+
     return num * standardDeviation + mean;
   }
-
+  //Sets the array of points for the sun area
   function SunArea() {
     if (ctx) return;
     const CenterX = window.innerWidth / 2;
     const CenterY = window.innerHeight / 2;
     const Radius = 250;
     const step = 1;
-    let newSun = []; // Temporary array to hold new sun points
+    let newSun = [];
     for (let x = CenterX - Radius; x <= CenterX + Radius; x += step) {
       for (let y = CenterY - Radius; y <= CenterY + Radius; y += step) {
         const distanceFromCenter = Math.sqrt(
@@ -74,17 +81,16 @@ function Particle({ ParticleProps }) {
         }
       }
     }
-    setSun(newSun); // Update the state with the new sun points
+    setSun(newSun);
   }
-
+  //Picks a random point from the sun area
   function SunPoint() {
     if (Sun && Sun.length > 0) {
       const Index = Math.floor(Math.random() * Sun.length);
       return Sun[Index];
     }
-    return null;
   }
-
+  //Picks x allocation based on the type of animation
   function LocationX() {
     if (Fire) {
       return generateBiasedRandom(0, window.innerWidth);
@@ -96,6 +102,7 @@ function Particle({ ParticleProps }) {
       }
     }
   }
+  //Picks y allocation based on the type of animation
   function LocationY() {
     if (Fire) {
       return window.innerHeight;
@@ -107,8 +114,6 @@ function Particle({ ParticleProps }) {
       }
     }
   }
-
-  //If slow make larger
 
   class Particle {
     constructor() {
@@ -144,17 +149,16 @@ function Particle({ ParticleProps }) {
       ctx.fill();
     }
   }
-
-  //Consider calling with delay
+  //Creates the array of particles
   function createParticles() {
     const newParticles = [];
-    for (let i = 0; i < 5000; i++) {
+    for (let i = 0; i < 4000; i++) {
       newParticles.push(new Particle());
     }
     setParticles(newParticles);
-    setTest(true);
+    setReset(true);
   }
-
+  //Draws the particles on the canvas
   function draw() {
     if (!ctx) return;
 
@@ -165,23 +169,24 @@ function Particle({ ParticleProps }) {
       Particles[i].completed();
       Particles[i].appear();
     }
-    requestAnimationFrame(draw);
+    animationFrameId.current = requestAnimationFrame(draw);
   }
 
   useEffect(() => {
     if (SunOn) {
       SunArea();
     }
-  }, [ctx]);
-
-  useEffect(() => {
     if (ctx) {
       createParticles();
-      if (Test) {
-        draw();
-      }
+      draw();
     }
-  }, [ctx, Test]);
+    //Clean up
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
+  }, [ctx, Reset]);
 
   return (
     <canvas

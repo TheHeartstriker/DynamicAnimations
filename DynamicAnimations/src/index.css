@@ -5,7 +5,15 @@ body {
   padding: 0;
   background-color: hsl(0, 0%, 0%);
 }
-/*Settings button*/
+
+:root {
+  --Backround-Black-1: hsl(180, 5%, 2.5%);
+  --Borders: hsl(180, 0%, 5%);
+  --Fill: hsl(180, 0%, 10%);
+  --Words: hsl(0, 5%, 50%);
+}
+
+/*Settings button the button in the bottom left*/
 #Settings {
   position: absolute;
   display: flex;
@@ -16,37 +24,43 @@ body {
 #Settings button {
   height: 6vh;
   width: 6vh;
-  background-color: hsl(180, 5%, 5%);
+  background-color: var(--Fill);
   color: rgb(255, 255, 255);
   border: none;
   font-size: 20px;
 }
-/*Settings panel*/
+
+/*Control pane*/
 .PageContainer {
   position: relative;
   width: 25vw;
   height: 99vh;
-  border: 5px solid hsl(180, 5%, 10%);
-  background-color: hsl(180, 5%, 1%);
+  border: 5px solid var(--Borders);
+  background-color: var(--Fill);
   left: 75vw; /*75*/
   animation: Slide 1s linear forwards;
 }
-
+/* Main buttons that allow an animation to be chosen */
 .Buttons {
   position: relative;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 5%;
+  margin: 10%;
 }
 
 .Buttons button {
-  border: 5px solid hsl(0, 5%, 25%);
+  width: 35%;
+  height: 10%;
+  padding: 20px;
+  color: var(--Words);
+  border: 5px solid var(--Borders);
   border-radius: 5%;
-  background-color: hsl(0, 5%, 10%);
+  background-color: var(--Fill);
 }
 
+/* The configuration buttons that are spefic to each animation */
 .OptionsButtons {
   position: relative;
   display: flex;
@@ -57,16 +71,17 @@ body {
 .OptionsButtons button:hover {
   background-color: rgb(81, 197, 81);
   transform: scale(1.5);
-  box-shadow: 0px 0px 25px 10px rgba(212, 17, 17, 0.5);
+  box-shadow: 0px 0px 25px 10px rgba(56, 212, 17, 0.5);
 }
 
 .OptionsButtons button {
+  color: var(--Words);
   width: 50px;
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  background-color: hsl(100, 5%, 25%);
-  transition: background-color 1s ease-in-out, transform 1s ease-in-out;
+  background-color: var(--Borders);
+  transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
   border: 3px solid hsl(90, 100%, 50%);
 }
 

@@ -1,3 +1,4 @@
+/* Changed in SlidePage acording to the lightning color/hue */
 :root {
   --HUE: 0;
 }
@@ -15,7 +16,7 @@
 #rainCanvas {
   background: rgb(0, 0, 0);
 }
-
+/* Lightning canvas that layers over the rains */
 #lightningCanvas {
   position: absolute;
   width: 100%;
@@ -23,27 +24,39 @@
   top: 0;
   left: 0;
 }
-
+/* The flash that appears in the backround */
 @keyframes Flash {
   0% {
-    background-color: hsla(var(--HUE), 50%, 25%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 30%, 0.5);
+  }
+  10% {
+    background-color: hsla(var(--HUE), 50%, 60%, 0.6);
   }
   20% {
-    background-color: hsla(var(--HUE), 50%, 25%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 45%, 0.5);
+  }
+  30% {
+    background-color: hsla(var(--HUE), 50%, 60%, 0.6);
   }
   40% {
-    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 45%, 0.5);
   }
   50% {
-    background-color: hsla(var(--HUE), 50%, 75%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 30%, 0.5);
+  }
+  60% {
+    background-color: hsla(var(--HUE), 50%, 60%, 0.6);
   }
   70% {
-    background-color: hsla(var(--HUE), 50%, 50%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 45%, 0.5);
+  }
+  80% {
+    background-color: hsla(var(--HUE), 50%, 30%, 0.5);
   }
   90% {
-    background-color: hsla(var(--HUE), 50%, 25%, 0.5);
+    background-color: hsla(var(--HUE), 50%, 60%, 0.6);
   }
   100% {
-    background-color: hsla(var(--HUE), 0%, 25%, 0);
+    background-color: hsla(var(--HUE), 50%, 30%, 0.5);
   }
 }
