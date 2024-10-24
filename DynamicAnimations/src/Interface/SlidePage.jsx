@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Route, Link, Routes } from "react-router-dom";
+import { Route, Link, Routes, useLocation } from "react-router-dom";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
@@ -95,14 +95,6 @@ function Interface() {
     Sat: 100,
     Light: 50,
   };
-  //Applys the color of the flash to the background
-  useEffect(() => {
-    if (BoolRain) {
-      document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
-    } else if (Config2Rain) {
-      document.documentElement.style.setProperty("--HUE", Config2DataLight.Hue);
-    }
-  }, [BoolRain, Config2Rain]);
 
   //Base star preset
   const StarConfig1 = {
@@ -119,10 +111,12 @@ function Interface() {
   //Base particle preset
   const ParticleConfig1 = {
     Fire: true,
+    SunOn: false,
   };
   //Configuration 2 particle preset
   const ParticleConfig2 = {
     SunOn: true,
+    Fire: false,
   };
   //Props for sand reset
   const SandReset = {
@@ -138,20 +132,37 @@ function Interface() {
   const [LightProp, setLightProp] = useState(Config1DataLight);
   const [ParticleProp, setParticleProp] = useState(ParticleConfig1);
   const [SandProp, setSandProp] = useState(SandReset);
+  const [renderKey, setRenderKey] = useState(0); // State variable to force re-render
 
-  //Html code
+  useEffect(() => {
+    setRenderKey((prev) => prev + 1);
+  }, [StarProp, RainProp, LightProp, ParticleProp, SandProp]);
+
+  let location = useLocation();
+
+  //Applys the color of the flash to the background
+  useEffect(() => {
+    console.log(ParticleProp);
+    if (location.pathname === "/rain") {
+    }
+  }, [location.pathname]);
+
+  // Html code
   return (
     <>
       <div>
         <Routes>
           <Route
             path="/stars"
-            element={<Stars StarsProps={StarProp} customProp="value" />}
+            element={
+              <Stars key={renderKey} StarsProps={StarProp} customProp="value" />
+            }
           />
           <Route
             path="/rain"
             element={
               <Rain
+                key={renderKey}
                 RainProps={RainProp}
                 LightningProps={LightProp}
                 customProp="value"
@@ -160,12 +171,18 @@ function Interface() {
           />
           <Route
             path="/sand"
-            element={<Sand SandProps={SandProp} customProp="value" />}
+            element={
+              <Sand key={renderKey} SandProps={SandProp} customProp="value" />
+            }
           />
           <Route
             path="/particle"
             element={
-              <Particle ParticleProps={ParticleProp} customProp="value" />
+              <Particle
+                key={renderKey}
+                ParticleProps={ParticleProp}
+                customProp="value"
+              />
             }
           />
         </Routes>
@@ -187,9 +204,36 @@ function Interface() {
             <button>Sand</button>
           </Link>
           <Link to="/particle">
-            <button>Particle</button>
+            <button onClick={() => setParticleProp(ParticleConfig1)}>
+              Particle
+            </button>
           </Link>
         </div>
+        {location.pathname === "/stars" && (
+          <div className="OptionsButtons">
+            <button onClick={() => setStarProp(StarConfig2)}></button>
+          </div>
+        )}
+        {location.pathname === "/rain" && (
+          <div className="OptionsButtons">
+            <button
+              onClick={() => {
+                setRainProp(Config2DataRain);
+                setLightProp(Config2DataLight);
+              }}
+            ></button>
+          </div>
+        )}
+        {location.pathname === "/sand" && (
+          <div className="OptionsButtons">
+            <button onClick={ConfigSandReset}>Reset</button>
+          </div>
+        )}
+        {location.pathname === "/particle" && (
+          <div className="OptionsButtons">
+            <button onClick={() => setParticleProp(ParticleConfig2)}></button>
+          </div>
+        )}
       </div>
     </>
   );
