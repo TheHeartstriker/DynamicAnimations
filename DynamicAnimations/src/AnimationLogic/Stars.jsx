@@ -24,6 +24,11 @@ function Stars({ StarsProps }) {
         s: Math.random() * 15,
       },
       IncreaseTo: Math.random() * 15,
+      MoveVal: Math.random() * 5,
+      velocity: {
+        x: 0,
+        y: 0,
+      },
     }))
   );
   //Initailize the canvas
@@ -70,6 +75,10 @@ function Stars({ StarsProps }) {
     ctx.shadowColor = Glow;
     ctx.shadowBlur = size * 5;
   }
+  const [Linear, setLinear] = useState(false);
+  const [Lerp, setLerp] = useState(true);
+  const [NonLinear, setNonLinear] = useState(false);
+  const Gravity = 0.05;
   //Drawing function
   function update() {
     if (!ctx) return;
@@ -89,21 +98,46 @@ function Stars({ StarsProps }) {
       if (Math.abs(circle.size.s - circle.IncreaseTo) < 1) {
         circle.IncreaseTo = Math.random() * 15;
       }
-      //Reset the target position if the circle is close enough to the target
-      if (distance < 1) {
-        circle.target.x = Math.floor(Math.random() * window.innerWidth);
-        circle.target.y = Math.floor(Math.random() * window.innerHeight);
+      // Call the Linear movement function which handles the movement of the circle if a linear type movement is selected
+      if (Linear || Lerp) LinearMovment(distance, dx, dy, circle);
+      if (NonLinear) {
+        // Apply gravity the passive downward force
+        circle.velocity.y += Gravity;
+        // Additional downward force based on the velocity
+        circle.current.y += circle.velocity.y;
+
+        // Handle ground collision
+        if (circle.current.y > window.innerHeight) {
+          circle.current.y = window.innerHeight;
+          circle.velocity.y = 0; // Reset velocity on collision
+        }
       }
-      // Move the circle towards the target position
-      let lerpFactor = 0.02;
-      circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
-      circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
       // Actuall creation of the circle
       drawCircle(circle.current.x, circle.current.y, circle.size.s);
     });
     // Set the new circle array
     setCirclearray(newCircleArray);
     animationFrameId.current = requestAnimationFrame(update);
+  }
+
+  function LinearMovment(distance, dx, dy, circle) {
+    //Reset the target position if the circle is close enough to the target
+    if (distance < circle.MoveVal) {
+      circle.target.x = Math.floor(Math.random() * window.innerWidth);
+      circle.target.y = Math.floor(Math.random() * window.innerHeight);
+    }
+    // Move the circle towards the target position
+    if (Linear) {
+      let directionX = dx / distance;
+      let directionY = dy / distance;
+      circle.current.x += directionX * circle.MoveVal;
+      circle.current.y += directionY * circle.MoveVal;
+    }
+    if (Lerp) {
+      let lerpFactor = 0.01;
+      circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
+      circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
+    }
   }
 
   useEffect(() => {
