@@ -5,11 +5,12 @@ import Interface from "./Interface/SlidePage.jsx";
 //Css
 import "./Canvas.css";
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div>
+    <BrowserRouter>
       <Interface />
-    </div>
+    </BrowserRouter>
   </React.StrictMode>
 );

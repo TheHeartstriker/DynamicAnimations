@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Route, Link, Routes, useLocation } from "react-router-dom";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
@@ -49,34 +50,6 @@ function Interface() {
       setTimer(0);
     }
   };
-  //Conditional rendering system
-  //RainIsON is used to check if rain is on or off
-  const [RainIsON, setRainIsON] = useState(false);
-  const [StarsIsON, setStarsIsON] = useState(false);
-  const [ParticleIsON, setParticleIsON] = useState(false);
-  const [SandIsON, setSandIsON] = useState(false);
-  //Activate animation/preset these are the first animation presets that are activated
-  const [BoolStar, setBoolStar] = useState(false);
-  const [BoolSand, setBoolSand] = useState(false);
-  const [BoolRain, setBoolRain] = useState(false);
-  const [BoolParticle, setBoolParticle] = useState(false);
-  //Configuration presets
-  const [Config2Rain, setConfig2Rain] = useState(false);
-  const [Config2Star, setConfig2Star] = useState(false);
-  const [Config2Particle, setConfig2Particle] = useState(false);
-  //Array of states to turn off and on
-  const AniStates = [
-    setBoolStar,
-    setBoolSand,
-    setBoolRain,
-    setBoolParticle,
-    setRainIsON,
-    setStarsIsON,
-    setParticleIsON,
-    setSandIsON,
-  ];
-  //Array of configurations to turn off and on
-  const Configsetarr = [setConfig2Rain, setConfig2Star, setConfig2Particle];
 
   //Data to pass to the animations
   //Base data for rain
@@ -122,14 +95,6 @@ function Interface() {
     Sat: 100,
     Light: 50,
   };
-  //Applys the color of the flash to the background
-  useEffect(() => {
-    if (BoolRain) {
-      document.documentElement.style.setProperty("--HUE", Config1DataLight.Hue);
-    } else if (Config2Rain) {
-      document.documentElement.style.setProperty("--HUE", Config2DataLight.Hue);
-    }
-  }, [BoolRain, Config2Rain]);
 
   //Base star preset
   const StarConfig1 = {
@@ -146,141 +111,122 @@ function Interface() {
   //Base particle preset
   const ParticleConfig1 = {
     Fire: true,
+    SunOn: false,
   };
   //Configuration 2 particle preset
   const ParticleConfig2 = {
     SunOn: true,
+    Fire: false,
   };
-  //Props for sand reset
-  const SandReset = {
-    Reset: false,
-  };
-  //Onclick function to reset the sand
-  const ConfigSandReset = () => {
-    SandReset.Reset = true;
-  };
-
-  //Function used to control button and cofig states
-  function FirstTrue(Trueset, Falseset) {
-    for (let i = 0; i < Falseset.length; i++) {
-      if (Falseset[i]) {
-        Falseset[i](false);
-      }
-    }
-    for (let i = 0; i < Trueset.length; i++) {
-      if (Trueset[i]) {
-        Trueset[i](true);
-      }
-    }
+  function ResetSand() {
+    setSandProp((prev) => prev + 1);
   }
 
-  //Onclick for when user wants to change the configuration of the animations
-  const Config2RainCheck = () => {
-    FirstTrue([setConfig2Rain, setRainIsON], [...AniStates, ...Configsetarr]);
-  };
+  const [StarProp, setStarProp] = useState(StarConfig1);
+  const [RainProp, setRainProp] = useState(Config1DataRain);
+  const [LightProp, setLightProp] = useState(Config1DataLight);
+  const [ParticleProp, setParticleProp] = useState(ParticleConfig1);
+  const [SandProp, setSandProp] = useState(0);
+  const [renderKey, setRenderKey] = useState(0); // State variable to force re-render
 
-  const Config2StarCheck = () => {
-    FirstTrue([setConfig2Star, setStarsIsON], [...AniStates, ...Configsetarr]);
-  };
+  useEffect(() => {
+    setRenderKey((prev) => prev + 1);
+  }, [StarProp, RainProp, LightProp, ParticleProp, SandProp]);
 
-  const Config2ParticleCheck = () => {
-    FirstTrue(
-      [setConfig2Particle, setParticleIsON],
-      [...AniStates, ...Configsetarr]
-    );
-  };
+  let location = useLocation();
 
-  //Html code
+  //Applys the color of the flash to the background
+  useEffect(() => {
+    if (location.pathname === "/rain") {
+      document.documentElement.style.setProperty("--HUE", LightProp.Hue);
+    }
+  }, [LightProp.Hue, location.pathname]);
+
+  // Html code
   return (
     <>
       <div>
-        {/* Base presets */}
-        {BoolStar && <Stars StarsProps={StarConfig1} />}
-
-        {BoolRain && (
-          <Rain RainProps={Config1DataRain} LightningProps={Config1DataLight} />
-        )}
-
-        {BoolSand && <Sand SandProps={SandReset} />}
-
-        {BoolParticle && <Particle ParticleProps={ParticleConfig1} />}
-        {/* Configuration preset*/}
-        {Config2Rain && (
-          <Rain RainProps={Config2DataRain} LightningProps={Config2DataLight} />
-        )}
-
-        {Config2Star && <Stars StarsProps={StarConfig2} />}
-
-        {Config2Particle && <Particle ParticleProps={ParticleConfig2} />}
+        <Routes>
+          <Route
+            path="/stars"
+            element={
+              <Stars key={renderKey} StarsProps={StarProp} customProp="value" />
+            }
+          />
+          <Route
+            path="/rain"
+            element={
+              <Rain
+                key={renderKey}
+                RainProps={RainProp}
+                LightningProps={LightProp}
+                customProp="value"
+              />
+            }
+          />
+          <Route
+            path="/sand"
+            element={
+              <Sand key={renderKey} SandProps={SandProp} customProp="value" />
+            }
+          />
+          <Route
+            path="/particle"
+            element={
+              <Particle
+                key={renderKey}
+                ParticleProps={ParticleProp}
+                customProp="value"
+              />
+            }
+          />
+        </Routes>
       </div>
-      {/* Controls the slide page */}
+      {/* Setting button in bottom left */}
       <div id="Settings">
         <button onClick={handleButtonClick}>+</button>
       </div>
-      {/* The sliding page located on the right of the screen */}
+      {/* Interface for the buttons */}
       <div className="PageContainer" ref={pageContainerRef}>
-        {/* Buttons located at the top portion of the screen contain orginal base presets */}
         <div className="Buttons">
-          <button
-            onClick={() =>
-              FirstTrue(
-                [setBoolStar, setStarsIsON],
-                [...AniStates, ...Configsetarr]
-              )
-            }
-          >
-            Stars
-          </button>
-          <button
-            onClick={() => {
-              FirstTrue(
-                [setBoolRain, setRainIsON],
-                [...AniStates, ...Configsetarr]
-              );
-            }}
-          >
-            Rain
-          </button>
-          <button
-            onClick={() =>
-              FirstTrue(
-                [setBoolSand, setSandIsON],
-                [...AniStates, ...Configsetarr]
-              )
-            }
-          >
-            Sand
-          </button>
-          <button
-            onClick={() =>
-              FirstTrue(
-                [setBoolParticle, setParticleIsON],
-                [...AniStates, ...Configsetarr]
-              )
-            }
-          >
-            Particle
-          </button>
+          <Link to="/stars">
+            <button>Stars</button>
+          </Link>
+          <Link to="/rain">
+            <button>Rain</button>
+          </Link>
+          <Link to="/sand">
+            <button>Sand</button>
+          </Link>
+          <Link to="/particle">
+            <button onClick={() => setParticleProp(ParticleConfig1)}>
+              Particle
+            </button>
+          </Link>
         </div>
-        {/* Buttons located at the bottom portion of the screen contain the configuration presets */}
-        {RainIsON && (
+        {location.pathname === "/stars" && (
           <div className="OptionsButtons">
-            <button onClick={Config2RainCheck}>Vibro</button>
+            <button onClick={() => setStarProp(StarConfig2)}></button>
           </div>
         )}
-        {StarsIsON && (
+        {location.pathname === "/rain" && (
           <div className="OptionsButtons">
-            <button onClick={Config2StarCheck}>Blue</button>
+            <button
+              onClick={() => {
+                setRainProp(Config2DataRain);
+                setLightProp(Config2DataLight);
+              }}
+            ></button>
           </div>
         )}
-        {ParticleIsON && (
+        {location.pathname === "/sand" && (
           <div className="OptionsButtons">
-            <button onClick={Config2ParticleCheck}>Sun</button>
+            <button onClick={() => ResetSand()}>Reset</button>
           </div>
         )}
-        {SandIsON && (
+        {location.pathname === "/particle" && (
           <div className="OptionsButtons">
-            <button onClick={ConfigSandReset}>Time-reset</button>
+            <button onClick={() => setParticleProp(ParticleConfig2)}></button>
           </div>
         )}
       </div>
