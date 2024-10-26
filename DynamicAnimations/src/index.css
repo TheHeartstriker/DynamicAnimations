@@ -51,8 +51,7 @@ body {
 }
 
 .Buttons button {
-  width: 35%;
-  height: 10%;
+  width: 100px;
   padding: 20px;
   color: var(--Words);
   border: 5px solid var(--Borders);

@@ -118,20 +118,15 @@ function Interface() {
     SunOn: true,
     Fire: false,
   };
-  //Props for sand reset
-  const SandReset = {
-    Reset: false,
-  };
-  //Onclick function to reset the sand
-  const ConfigSandReset = () => {
-    SandReset.Reset = true;
-  };
+  function ResetSand() {
+    setSandProp((prev) => prev + 1);
+  }
 
   const [StarProp, setStarProp] = useState(StarConfig1);
   const [RainProp, setRainProp] = useState(Config1DataRain);
   const [LightProp, setLightProp] = useState(Config1DataLight);
   const [ParticleProp, setParticleProp] = useState(ParticleConfig1);
-  const [SandProp, setSandProp] = useState(SandReset);
+  const [SandProp, setSandProp] = useState(0);
   const [renderKey, setRenderKey] = useState(0); // State variable to force re-render
 
   useEffect(() => {
@@ -142,10 +137,10 @@ function Interface() {
 
   //Applys the color of the flash to the background
   useEffect(() => {
-    console.log(ParticleProp);
     if (location.pathname === "/rain") {
+      document.documentElement.style.setProperty("--HUE", LightProp.Hue);
     }
-  }, [location.pathname]);
+  }, [LightProp.Hue, location.pathname]);
 
   // Html code
   return (
@@ -226,7 +221,7 @@ function Interface() {
         )}
         {location.pathname === "/sand" && (
           <div className="OptionsButtons">
-            <button onClick={ConfigSandReset}>Reset</button>
+            <button onClick={() => ResetSand()}>Reset</button>
           </div>
         )}
         {location.pathname === "/particle" && (
