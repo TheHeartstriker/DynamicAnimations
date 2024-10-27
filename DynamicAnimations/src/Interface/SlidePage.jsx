@@ -95,18 +95,39 @@ function Interface() {
     Sat: 100,
     Light: 50,
   };
-
+  const [Colors, setColors] = useState({
+    Color: "red",
+    Color2: "orange",
+    Glow: "red",
+  });
   //Base star preset
   const StarConfig1 = {
     Color: "red",
     Color2: "orange",
     Glow: "red",
+    Linear: true,
   };
   //Configuration 2 star preset
   const StarConfig2 = {
     Color: "blue",
     Color2: "cyan",
     Glow: "blue",
+    Linear: true,
+  };
+
+  const StarConfig3 = {
+    Color: "red",
+    Color2: "Orange",
+    Glow: "red",
+    Lerp: true,
+  };
+
+  const StarConfig4 = {
+    Color: "green",
+    Color2: "yellow",
+    Glow: "green",
+    Linear: true,
+    NonLinear: true,
   };
   //Base particle preset
   const ParticleConfig1 = {
@@ -206,7 +227,11 @@ function Interface() {
         </div>
         {location.pathname === "/stars" && (
           <div className="OptionsButtons">
-            <button onClick={() => setStarProp(StarConfig2)}></button>
+            <button onClick={() => setStarProp(StarConfig2)}>Blue</button>
+            <button onClick={() => setStarProp(StarConfig3)}>Lerp</button>
+            <button onClick={() => setStarProp(StarConfig4)}>
+              GoofyGravity
+            </button>
           </div>
         )}
         {location.pathname === "/rain" && (
