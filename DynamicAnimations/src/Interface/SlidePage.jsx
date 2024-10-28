@@ -139,15 +139,34 @@ function Interface() {
     SunOn: true,
     Fire: false,
   };
-  function ResetSand() {
-    setSandProp((prev) => prev + 1);
-  }
+  const [SandNum, setSandNum] = useState(0);
+
+  const SandConfig1 = {
+    StartHsl: 190,
+    EndHsl: 260,
+    Reset: SandNum,
+    Speed: 0.25,
+  };
+
+  const SandConfig2 = {
+    StartHsl: 0,
+    EndHsl: 60,
+    Reset: SandNum,
+    Speed: 0.25,
+  };
+
+  const SandConfig3 = {
+    StartHsl: 0,
+    EndHsl: 360,
+    Reset: SandNum,
+    Speed: 0.8,
+  };
 
   const [StarProp, setStarProp] = useState(StarConfig1);
   const [RainProp, setRainProp] = useState(Config1DataRain);
   const [LightProp, setLightProp] = useState(Config1DataLight);
   const [ParticleProp, setParticleProp] = useState(ParticleConfig1);
-  const [SandProp, setSandProp] = useState(0);
+  const [SandProp, setSandProp] = useState(SandConfig1);
   const [renderKey, setRenderKey] = useState(0); // State variable to force re-render
 
   useEffect(() => {
@@ -246,7 +265,9 @@ function Interface() {
         )}
         {location.pathname === "/sand" && (
           <div className="OptionsButtons">
-            <button onClick={() => ResetSand()}>Reset</button>
+            <button onClick={() => setSandProp(SandConfig1)}>Reset</button>
+            <button onClick={() => setSandProp(SandConfig2)}>Lava</button>
+            <button onClick={() => setSandProp(SandConfig3)}>Rainbow</button>
           </div>
         )}
         {location.pathname === "/particle" && (

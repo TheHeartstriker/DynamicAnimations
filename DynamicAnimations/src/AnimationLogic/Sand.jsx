@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 //Need to fix the color change
 function Sand({ SandProps }) {
-  let { Reset } = SandProps;
+  let { Reset, StartHsl, EndHsl, Speed } = SandProps;
   //Grid generation
   const [Grid, setGrid] = useState([]);
   const [Rows, setRows] = useState(0);
@@ -11,10 +11,10 @@ function Sand({ SandProps }) {
   const canvasRef = useRef(null);
   //On state which purpose is mainly to check if a pixel is on screen
   const [On, setOn] = useState(false);
-  //Color state
-  const [Color, setColor] = useState(190);
+  //Color state value expects to be a number in hsl
+  const [Color, setColor] = useState(0);
   //Pixel size
-  const Pix_size = 9;
+  const Pix_size = 10;
   //Mouse down event
   const [MouseDown, setMouseDown] = useState(false);
   //Initial setup
@@ -35,7 +35,8 @@ function Sand({ SandProps }) {
       canvas.height = window.innerHeight;
       // After resizing the canvas, we need to get the context again
       setCtx(canvas.getContext("2d"));
-      // Where the redrawing of the canvas happens
+      //Recalculates the rows and columns
+      Impose();
     };
     // Event listener where the resizeCanvas function is called
     window.addEventListener("resize", resizeCanvas);
@@ -45,9 +46,9 @@ function Sand({ SandProps }) {
   }, []);
   //Advance and change color back to the initial color if needed
   function ChangeColor() {
-    let newColorH = Color + 0.5;
-    if (newColorH > 260 || newColorH === 0) {
-      newColorH = 190;
+    let newColorH = Color + Speed;
+    if (newColorH > EndHsl || newColorH === 0) {
+      newColorH = StartHsl;
     }
     setColor(newColorH);
   }
@@ -81,7 +82,10 @@ function Sand({ SandProps }) {
           let X = x + i;
           let Y = y + j;
           if (X >= 0 && X < Rows && Y >= 0 && Y < Cols) {
-            newGrid[X][Y] = Color;
+            //Color check needed to check first frame
+            if (Color && Color >= StartHsl && Color <= EndHsl) {
+              newGrid[X][Y] = Color;
+            }
           }
         }
       }
@@ -103,6 +107,7 @@ function Sand({ SandProps }) {
 
   //Defines the number of rows and columns based on the window size
   function Impose() {
+    resetSand();
     const rows = Math.floor(window.innerWidth / Pix_size);
     const cols = Math.floor(window.innerHeight / Pix_size);
     setRows(rows);
@@ -174,7 +179,6 @@ function Sand({ SandProps }) {
   }
   // Function to impose the grid and reset the sand
   useEffect(() => {
-    resetSand();
     Impose();
   }, [ctx, Reset]);
   //Main loop
