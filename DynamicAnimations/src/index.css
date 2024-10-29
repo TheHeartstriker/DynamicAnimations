@@ -10,7 +10,10 @@ body {
   --Backround-Black-1: hsl(180, 5%, 2.5%);
   --Borders: hsl(180, 0%, 5%);
   --Fill: hsl(180, 0%, 10%);
-  --Words: hsl(0, 5%, 50%);
+  --Words: hsl(0, 5%, 75%);
+  --Btn-border: hsl(239, 80%, 50%);
+  --Grow-fill: hsl(202, 80%, 50%);
+  --Grow-fill2: hsla(202, 80%, 50%, 0.5);
 }
 
 /*Settings button the button in the bottom left*/
@@ -27,7 +30,7 @@ body {
   background-color: var(--Fill);
   color: rgb(255, 255, 255);
   border: none;
-  font-size: 20px;
+  font-size: 40px;
 }
 
 /*Control pane*/
@@ -68,20 +71,20 @@ body {
 }
 
 .OptionsButtons button:hover {
-  background-color: rgb(81, 197, 81);
+  background-color: var(--Grow-fill);
   transform: scale(1.5);
-  box-shadow: 0px 0px 25px 10px rgba(56, 212, 17, 0.5);
+  box-shadow: 0px 0px 25px 10px var(--Grow-fill2);
 }
 
 .OptionsButtons button {
   color: var(--Words);
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   cursor: pointer;
   background-color: var(--Borders);
   transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
-  border: 3px solid hsl(90, 100%, 50%);
+  border: 3px solid var(--Btn-border);
 }
 
 @keyframes Slide {

@@ -129,16 +129,20 @@ function Interface() {
     Linear: true,
     NonLinear: true,
   };
+  //State for the particle config presets need for this spefic animation
+  const [StartHslParticle, setStartHslParticle] = useState(160);
+  const [EndHslParticle, setEndHslParticle] = useState(260);
+  const [Fire, setFire] = useState(false);
+  const [Sun, setSun] = useState(false);
+
   //Base particle preset
-  const ParticleConfig1 = {
-    Fire: true,
-    SunOn: false,
+  const ParticleConfig = {
+    StartHsl: StartHslParticle,
+    EndHsl: EndHslParticle,
+    Fire: Fire,
+    SunOn: Sun,
   };
-  //Configuration 2 particle preset
-  const ParticleConfig2 = {
-    SunOn: true,
-    Fire: false,
-  };
+
   const [SandNum, setSandNum] = useState(0);
 
   const SandConfig1 = {
@@ -161,17 +165,17 @@ function Interface() {
     Reset: SandNum,
     Speed: 0.8,
   };
-
+  //State variables for the animation presets / props
   const [StarProp, setStarProp] = useState(StarConfig1);
   const [RainProp, setRainProp] = useState(Config1DataRain);
   const [LightProp, setLightProp] = useState(Config1DataLight);
-  const [ParticleProp, setParticleProp] = useState(ParticleConfig1);
+  const [ParticleProp, setParticleProp] = useState(ParticleConfig);
   const [SandProp, setSandProp] = useState(SandConfig1);
   const [renderKey, setRenderKey] = useState(0); // State variable to force re-render
 
   useEffect(() => {
     setRenderKey((prev) => prev + 1);
-  }, [StarProp, RainProp, LightProp, ParticleProp, SandProp]);
+  }, [StarProp, RainProp, LightProp, SandProp, ParticleProp]);
 
   let location = useLocation();
 
@@ -215,7 +219,7 @@ function Interface() {
             element={
               <Particle
                 key={renderKey}
-                ParticleProps={ParticleProp}
+                ParticleProps={ParticleConfig}
                 customProp="value"
               />
             }
@@ -233,13 +237,28 @@ function Interface() {
             <button>Stars</button>
           </Link>
           <Link to="/rain">
-            <button>Rain</button>
+            <button
+              onClick={() => {
+                setRainProp(Config1DataRain);
+                setLightProp(Config1DataLight);
+              }}
+            >
+              Rain
+            </button>
           </Link>
           <Link to="/sand">
             <button>Sand</button>
           </Link>
           <Link to="/particle">
-            <button onClick={() => setParticleProp(ParticleConfig1)}>
+            <button
+              onClick={() => {
+                setParticleProp(ParticleConfig);
+                setStartHslParticle(160);
+                setEndHslParticle(260);
+                setFire(true);
+                setSun(false);
+              }}
+            >
               Particle
             </button>
           </Link>
@@ -249,7 +268,7 @@ function Interface() {
             <button onClick={() => setStarProp(StarConfig2)}>Blue</button>
             <button onClick={() => setStarProp(StarConfig3)}>Lerp</button>
             <button onClick={() => setStarProp(StarConfig4)}>
-              GoofyGravity
+              Goofy Gravity
             </button>
           </div>
         )}
@@ -272,7 +291,24 @@ function Interface() {
         )}
         {location.pathname === "/particle" && (
           <div className="OptionsButtons">
-            <button onClick={() => setParticleProp(ParticleConfig2)}></button>
+            <button
+              onClick={() => {
+                setParticleProp(ParticleConfig);
+                setFire(false);
+                setSun(true);
+              }}
+            >
+              Point
+            </button>
+            <button
+              onClick={() => {
+                setParticleProp(ParticleConfig);
+                setStartHslParticle(0);
+                setEndHslParticle(60);
+              }}
+            >
+              Fire
+            </button>
           </div>
         )}
       </div>

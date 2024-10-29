@@ -29,7 +29,7 @@ function Rain({ RainProps, LightningProps }) {
     new Array(RainProps.DROPS).fill().map(() => ({
       Start: {
         x: Math.floor(Math.random() * window.innerWidth),
-        y: 0,
+        y: Math.floor(Math.random() * window.innerHeight),
       },
       speed: Math.random() * 5 + 5,
       width: RainProps.WIDTH,
