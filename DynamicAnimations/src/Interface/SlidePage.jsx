@@ -54,10 +54,9 @@ function Interface() {
   //Data to pass to the animations
   //Base data for rain
   const Config1DataRain = {
-    WIDTH: 2,
-    HEIGHT: 40,
+    HEIGHT: 50,
     SHEET: 3,
-    DROPWIDTH: 0.1,
+    DROPWIDTH: 2,
     DROPS: 100,
   };
   const Config1DataLight = {
@@ -75,10 +74,9 @@ function Interface() {
   };
   //Configuration 2 data
   const Config2DataRain = {
-    WIDTH: 3,
-    HEIGHT: 30,
+    HEIGHT: 50,
     SHEET: 4,
-    DROPWIDTH: 0.3,
+    DROPWIDTH: 2,
     DROPS: 300,
   };
 
@@ -94,6 +92,16 @@ function Interface() {
     Hue: 190,
     Sat: 100,
     Light: 50,
+  };
+
+  //Configuration 2 data
+  const Config3DataRain = {
+    HEIGHT: 50,
+    SHEET: 4,
+    DROPWIDTH: 2,
+    DROPS: 300,
+    Wind: true,
+    WindSpeed: 5,
   };
   const [Colors, setColors] = useState({
     Color: "red",
@@ -279,7 +287,17 @@ function Interface() {
                 setRainProp(Config2DataRain);
                 setLightProp(Config2DataLight);
               }}
-            ></button>
+            >
+              Vibro
+            </button>
+            <button
+              onClick={() => {
+                setRainProp(Config3DataRain);
+                setLightProp(Config1DataLight);
+              }}
+            >
+              Wind
+            </button>
           </div>
         )}
         {location.pathname === "/sand" && (

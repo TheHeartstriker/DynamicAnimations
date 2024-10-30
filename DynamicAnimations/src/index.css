@@ -37,7 +37,7 @@ body {
 .PageContainer {
   position: relative;
   width: 25vw;
-  height: 99vh;
+  height: calc(100vh - 10px);
   border: 5px solid var(--Borders);
   background-color: var(--Fill);
   left: 75vw; /*75*/
