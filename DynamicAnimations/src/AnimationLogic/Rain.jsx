@@ -24,17 +24,24 @@ function Rain({ RainProps, LightningProps }) {
   const [Ids, setIds] = useState([]);
   // Clean up once unmounted preventing memory leaks backround rendering
   const animationFrameId = useRef(null);
+  // Wind speed
+  const windSpeed = RainProps.WindSpeed || 0;
+  const wind = RainProps.Wind || false;
   // The rain array
   const [rainArray, setRainArray] = useState(
-    new Array(RainProps.DROPS).fill().map(() => ({
-      Start: {
-        x: Math.floor(Math.random() * window.innerWidth),
-        y: 0,
-      },
-      speed: Math.random() * 5 + 5,
-      width: RainProps.WIDTH,
-      height: RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1),
-    }))
+    new Array(RainProps.DROPS).fill().map(() => {
+      const startX = Math.floor(Math.random() * window.innerWidth);
+      const startY = Math.floor(Math.random() * window.innerHeight);
+      return {
+        Start: {
+          x: startX,
+          y: startY,
+        },
+        speed: Math.random() * 5 + 5,
+        x2: startX + windSpeed,
+        y2: startY + RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1),
+      };
+    })
   );
   //Creates a canvas
   useEffect(() => {
@@ -72,20 +79,16 @@ function Rain({ RainProps, LightningProps }) {
   }, []);
 
   // Drop constructor
-  function Droplet(x1, y1, width, height) {
-    let gradient = rainCtx.createLinearGradient(
-      x1,
-      y1,
-      x1 + width,
-      y1 + height
-    );
+  function Droplet(x1, y1, x2, y2) {
+    let gradient = rainCtx.createLinearGradient(x1, y1, x2, y2);
 
     gradient.addColorStop(0, "black");
     gradient.addColorStop(1, "blue");
     rainCtx.beginPath();
-    rainCtx.rect(x1, y1, width, height);
+    rainCtx.moveTo(x1, y1);
+    rainCtx.lineTo(x2, y2);
     rainCtx.lineWidth = RainProps.DROPWIDTH;
-    rainCtx.fillStyle = gradient;
+    rainCtx.strokeStyle = gradient;
     rainCtx.fill();
     rainCtx.stroke();
   }
@@ -98,12 +101,19 @@ function Rain({ RainProps, LightningProps }) {
 
     const newRainArray = rainArray.map((drop) => {
       drop.Start.y += drop.speed;
+      drop.y2 += drop.speed;
+      if (wind) {
+        drop.Start.x += 1.5;
+        drop.x2 += 1.5;
+      }
 
-      Droplet(drop.Start.x, drop.Start.y, drop.width, drop.height);
+      Droplet(drop.Start.x, drop.Start.y, drop.x2, drop.y2);
 
-      if (drop.Start.y > height) {
+      if (drop.y2 > height) {
         drop.Start.x = Math.floor(Math.random() * width);
         drop.Start.y = 0;
+        drop.x2 = drop.Start.x + windSpeed;
+        drop.y2 = RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1);
       }
 
       return drop;

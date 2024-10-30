@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 function Stars({ StarsProps }) {
-  let { Color, Color2, Glow } = StarsProps;
+  let { Color, Color2, Glow, Linear, Lerp, NonLinear } = StarsProps;
   //Ctx and ref for the canvas
   const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
@@ -24,11 +24,34 @@ function Stars({ StarsProps }) {
         s: Math.random() * 15,
       },
       IncreaseTo: Math.random() * 15,
+      MoveVal: Math.random() * 5,
+      velocity: {
+        x: 0,
+        y: 0,
+      },
     }))
   );
-  //Initailize the canvas
+  const [Mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [MouseDown, setMouseDown] = useState(false);
+
+  //Event listeners for mouse down and up
+  const handleMouseDown = () => {
+    setMouseDown(true);
+    window.addEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleMouseUp = () => {
+    setMouseDown(false);
+    window.removeEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleMouseMove = (event) => {
+    setMouse({ x: event.clientX, y: event.clientY });
+  };
+
+  // Initialize the canvas
   useEffect(() => {
-    // Creates a refrence to current canvas
+    // Creates a reference to current canvas
     const canvas = canvasRef.current;
     // Sets the default canvas size to the window size
     canvas.width = window.innerWidth;
@@ -52,7 +75,6 @@ function Stars({ StarsProps }) {
       window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
-
   // Function to draw a circle and related inputs
   function drawCircle(x, y, size) {
     if (!ctx) return;
@@ -70,11 +92,13 @@ function Stars({ StarsProps }) {
     ctx.shadowColor = Glow;
     ctx.shadowBlur = size * 5;
   }
+
+  const Gravity = 0.05;
   //Drawing function
   function update() {
     if (!ctx) return;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    const newCircleArray = circlearray.map((circle) => {
+    const newCircleArray = circlearray.map((circle, index) => {
       // Calculate the distance between the current and target position
       let dx = circle.target.x - circle.current.x;
       let dy = circle.target.y - circle.current.y;
@@ -89,21 +113,66 @@ function Stars({ StarsProps }) {
       if (Math.abs(circle.size.s - circle.IncreaseTo) < 1) {
         circle.IncreaseTo = Math.random() * 15;
       }
-      //Reset the target position if the circle is close enough to the target
-      if (distance < 1) {
-        circle.target.x = Math.floor(Math.random() * window.innerWidth);
-        circle.target.y = Math.floor(Math.random() * window.innerHeight);
+      // Call the Linear movement function which handles the movement of the circle if a linear type movement is selected
+      //Have this and gravity on aka non linear allows for a more natural movement
+      if (Linear || Lerp) LinearMovment(distance, dx, dy, circle);
+      if (NonLinear) {
+        // Apply gravity the passive downward force
+        circle.velocity.y += (Gravity * circle.size.s) / 2;
+        // Additional downward force based on the velocity
+        circle.current.y += circle.velocity.y;
+
+        // Handle ground collision
+        if (circle.current.y > window.innerHeight) {
+          circle.current.y = window.innerHeight;
+          circle.velocity.y = 0; // Reset velocity on collision
+        }
       }
-      // Move the circle towards the target position
-      let lerpFactor = 0.02;
-      circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
-      circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
+
+      // Check for collisions with other circles
+      for (let i = 0; i < circlearray.length; i++) {
+        if (i !== index) {
+          let otherCircle = circlearray[i];
+          let dx = otherCircle.current.x - circle.current.x;
+          let dy = otherCircle.current.y - circle.current.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          let combinedRadius = circle.size.s + otherCircle.size.s;
+
+          if (distance < combinedRadius) {
+            // Handle collision
+            // For simplicity, we'll just reset the velocities
+            circle.velocity.y = 0;
+            otherCircle.velocity.y = 0;
+          }
+        }
+      }
+
       // Actuall creation of the circle
       drawCircle(circle.current.x, circle.current.y, circle.size.s);
     });
     // Set the new circle array
     setCirclearray(newCircleArray);
     animationFrameId.current = requestAnimationFrame(update);
+  }
+
+  function LinearMovment(distance, dx, dy, circle) {
+    //Reset the target position if the circle is close enough to the target
+    if (distance < circle.MoveVal) {
+      circle.target.x = Math.floor(Math.random() * window.innerWidth);
+      circle.target.y = Math.floor(Math.random() * window.innerHeight);
+    }
+    // Move the circle towards the target position
+    if (Linear) {
+      let directionX = dx / distance;
+      let directionY = dy / distance;
+      circle.current.x += directionX * circle.MoveVal;
+      circle.current.y += directionY * circle.MoveVal;
+    }
+    if (Lerp) {
+      let lerpFactor = 0.01;
+      circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
+      circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
+    }
   }
 
   useEffect(() => {
@@ -123,6 +192,8 @@ function Stars({ StarsProps }) {
       id="myCanvas"
       width={window.innerWidth}
       height={window.innerHeight}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
     />
   );
 }

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 
 function Particle({ ParticleProps }) {
   //Desctructuring the ParticleProps object
-  let { Fire, SunOn } = ParticleProps;
+  let { Fire, SunOn, StartHsl, EndHsl } = ParticleProps;
   const canvasRef = useRef(null);
   // Used for clean up once unmounted
   const animationFrameId = useRef(null);
@@ -125,7 +125,7 @@ function Particle({ ParticleProps }) {
       this.vx = Math.random() * 8 - 4;
       this.vy = Math.random() * 8 - 4;
       this.alpha = 255;
-      this.hue = Math.random() * (260 - 190) + 190;
+      this.hue = Math.random() * (EndHsl - StartHsl) + StartHsl;
       this.saturation = 50;
       this.lightness = 50;
       this.Subtract = Math.random() * 5 + 1;
