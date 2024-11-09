@@ -127,22 +127,22 @@ function Stars({ StarsProps }) {
           circle.current.y = window.innerHeight;
           circle.velocity.y = 0; // Reset velocity on collision
         }
-      }
 
-      // Check for collisions with other circles
-      for (let i = 0; i < circlearray.length; i++) {
-        if (i !== index) {
-          let otherCircle = circlearray[i];
-          let dx = otherCircle.current.x - circle.current.x;
-          let dy = otherCircle.current.y - circle.current.y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
-          let combinedRadius = circle.size.s + otherCircle.size.s;
+        // Check for collisions with other circles
+        for (let i = 0; i < circlearray.length; i++) {
+          if (i !== index) {
+            let otherCircle = circlearray[i];
+            let dx = otherCircle.current.x - circle.current.x;
+            let dy = otherCircle.current.y - circle.current.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            let combinedRadius = circle.size.s + otherCircle.size.s;
 
-          if (distance < combinedRadius) {
-            // Handle collision
-            // For simplicity, we'll just reset the velocities
-            circle.velocity.y = 0;
-            otherCircle.velocity.y = 0;
+            if (distance < combinedRadius) {
+              // Handle collision
+              // For simplicity, we'll just reset the velocities
+              circle.velocity.y = 0;
+              otherCircle.velocity.y = 0;
+            }
           }
         }
       }
