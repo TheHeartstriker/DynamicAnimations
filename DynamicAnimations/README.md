@@ -33,4 +33,6 @@ its based on a simple current and target possition and a speed method for gettin
 by the browser so I will add more info when thats done
 
 Particles
-This is a played ground for particles
+This is a played ground for particles I made a fire animation that is inspired by well fire. And it just makes more particles closer to the center and less farther away using a gasean random.
+The next is a Point Bassically a circle at the center of the screen where particles can appear the goal was to make it look like a sun but the browser can only handle so many particles.
+But it still looks cool it fills an array with a amount of valid points in which we randomly pick one and the particle can appear there and the valid points is an array or circle in the center of the screen
