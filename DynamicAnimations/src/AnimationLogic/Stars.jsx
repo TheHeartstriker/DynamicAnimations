@@ -93,7 +93,7 @@ function Stars({ StarsProps }) {
     ctx.shadowBlur = size * 5;
   }
 
-  const Gravity = 0.05;
+  const Gravity = 9.8;
   //Drawing function
   function update() {
     if (!ctx) return;
@@ -118,9 +118,10 @@ function Stars({ StarsProps }) {
       if (Linear || Lerp) LinearMovment(distance, dx, dy, circle);
       if (NonLinear) {
         // Apply gravity the passive downward force
-        circle.velocity.y += (Gravity * circle.size.s) / 2;
+        circle.velocity.y += (Gravity * circle.size.s) / 60;
         // Additional downward force based on the velocity
-        circle.current.y += circle.velocity.y;
+        circle.current.y += circle.velocity.y / 60;
+        circle.current.x += circle.velocity.x / 60;
 
         // Handle ground collision
         if (circle.current.y > window.innerHeight) {
@@ -129,22 +130,7 @@ function Stars({ StarsProps }) {
         }
 
         // Check for collisions with other circles
-        for (let i = 0; i < circlearray.length; i++) {
-          if (i !== index) {
-            let otherCircle = circlearray[i];
-            let dx = otherCircle.current.x - circle.current.x;
-            let dy = otherCircle.current.y - circle.current.y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
-            let combinedRadius = circle.size.s + otherCircle.size.s;
-
-            if (distance < combinedRadius) {
-              // Handle collision
-              // For simplicity, we'll just reset the velocities
-              circle.velocity.y = 0;
-              otherCircle.velocity.y = 0;
-            }
-          }
-        }
+        CollisionDetection(index);
       }
 
       // Actuall creation of the circle
@@ -153,6 +139,29 @@ function Stars({ StarsProps }) {
     // Set the new circle array
     setCirclearray(newCircleArray);
     animationFrameId.current = requestAnimationFrame(update);
+  }
+
+  function CollisionDetection(Circle) {
+    const newCircleArray = [...circlearray];
+    for (let i = 0; i < newCircleArray.length; i++) {
+      if (i !== Circle) {
+        let dx = newCircleArray[i].current.x - newCircleArray[Circle].current.x;
+        let dy = newCircleArray[i].current.y - newCircleArray[Circle].current.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let combinedRadius =
+          newCircleArray[i].size.s + newCircleArray[Circle].size.s;
+        if (distance < combinedRadius) {
+          let overlap = 0.5 * (combinedRadius - distance);
+          // Displacement of current circle
+          newCircleArray[Circle].current.x -= overlap * (dx / distance);
+          newCircleArray[Circle].current.y -= overlap * (dy / distance);
+          // Displacement of connected circle
+          newCircleArray[i].current.x += overlap * (dx / distance);
+          newCircleArray[i].current.y += overlap * (dy / distance);
+        }
+      }
+    }
+    setCirclearray(newCircleArray);
   }
 
   function LinearMovment(distance, dx, dy, circle) {
