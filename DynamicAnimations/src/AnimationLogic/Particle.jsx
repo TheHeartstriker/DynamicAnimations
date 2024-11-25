@@ -141,11 +141,15 @@ function Particle({ ParticleProps }) {
       this.alpha -= this.Subtract;
     }
     appear() {
+      ctx.shadowBlur = 10; // Set the blur level for the shadow
+      ctx.shadowColor = `hsla(${this.hue}, ${this.saturation}%, ${
+        this.lightness
+      }%, ${this.alpha / 255})`;
       ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${
         this.lightness
       }%, ${this.alpha / 255})`;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+      ctx.arc(this.x, this.y, 10, 0, Math.PI * 2);
       ctx.fill();
     }
   }
