@@ -4,8 +4,8 @@ function Sand({ SandProps }) {
   let { Reset, StartHsl, EndHsl, Speed } = SandProps;
   //Grid generation
   const [Grid, setGrid] = useState([]);
-  const [Rows, setRows] = useState(0);
-  const [Cols, setCols] = useState(0);
+  const rowRef = useRef(0);
+  const colRef = useRef(0);
   //Boilerplate code for canvas
   const [ctx, setCtx] = useState(null);
   const canvasRef = useRef(null);
@@ -81,7 +81,7 @@ function Sand({ SandProps }) {
         if (Math.random() < 0.5) {
           let X = x + i;
           let Y = y + j;
-          if (X >= 0 && X < Rows && Y >= 0 && Y < Cols) {
+          if (X >= 0 && X < rowRef.current && Y >= 0 && Y < colRef.current) {
             //Color check needed to check first frame
             if (Color && Color >= StartHsl && Color <= EndHsl) {
               newGrid[X][Y] = Color;
@@ -110,23 +110,28 @@ function Sand({ SandProps }) {
     resetSand();
     const rows = Math.floor(window.innerWidth / Pix_size);
     const cols = Math.floor(window.innerHeight / Pix_size);
-    setRows(rows);
-    setCols(cols);
+    rowRef.current = rows;
+    colRef.current = cols;
     // Creates the grid based on the number of rows and columns
     let initialGrid = create2DArray(rows, cols);
     setGrid(initialGrid);
   }
 
   function Draw() {
-    if (!ctx || !Grid || Grid.length !== Rows || Grid[0].length !== Cols) {
+    if (
+      !ctx ||
+      !Grid ||
+      Grid.length !== rowRef.current ||
+      Grid[0].length !== colRef.current
+    ) {
       return;
     }
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     //Creates the next grid
-    let NextGrid = create2DArray(Rows, Cols);
+    let NextGrid = create2DArray(rowRef.current, colRef.current);
     //Instructions for the next grid
-    for (let i = 0; i < Rows; i++) {
-      for (let j = 0; j < Cols; j++) {
+    for (let i = 0; i < rowRef.current; i++) {
+      for (let j = 0; j < colRef.current; j++) {
         //Previous grid gen state
         let State = Grid[i][j];
         //Instructions for the next grid
@@ -140,7 +145,7 @@ function Sand({ SandProps }) {
           ctx.fillRect(x, y, Pix_size, Pix_size);
           //Fall logic
           let cellBellow = Grid[i][j + 1];
-          let cellRight = i + 1 < Rows ? Grid[i + 1][j + 1] : 1;
+          let cellRight = i + 1 < rowRef.current ? Grid[i + 1][j + 1] : 1;
           let cellLeft = i - 1 >= 0 ? Grid[i - 1][j + 1] : 1;
           if (cellBellow === 0) {
             Bellow(NextGrid, i, j, State);
@@ -161,21 +166,24 @@ function Sand({ SandProps }) {
   function Bellow(NextGrid, i, j, State) {
     NextGrid[i][j] = 0;
     NextGrid[i][j + 1] = State;
+    return NextGrid;
   }
   function BellowRight(NextGrid, i, j, State) {
     NextGrid[i][j] = 0;
     NextGrid[i + 1][j + 1] = State;
+    return NextGrid;
   }
   function BellowLeft(NextGrid, i, j, State) {
     NextGrid[i][j] = 0;
     NextGrid[i - 1][j + 1] = State;
+    return NextGrid;
   }
   //Used to reset the sand
   function resetSand() {
     setGrid([]);
     setOn(false);
-    setMouseDown(false); // Reset the MouseDown state
-    setColor(190); // Reset the color to the initial value
+    setMouseDown(false);
+    setColor(190);
   }
   // Function to impose the grid and reset the sand
   useEffect(() => {
