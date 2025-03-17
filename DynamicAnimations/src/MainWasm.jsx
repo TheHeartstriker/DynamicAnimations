@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import SDLModule from "./Wasm/sdl_app.mjs?init";
 
-//Calls the module and passes the canvas element
 const loadWasm = async (canvas) => {
   const wasm = await SDLModule({
     canvas,
@@ -13,7 +12,7 @@ const loadWasm = async (canvas) => {
   });
   return wasm;
 };
-function Ball() {
+function MainWasm() {
   const [wasm, setWasm] = useState(null);
   const canvasRef = useRef(null);
   const isLoaded = useRef(false);
@@ -24,14 +23,16 @@ function Ball() {
   });
   //load wasm module also loads main function
   useEffect(() => {
-    const fetchWasm = async () => {
-      if (canvasRef.current && !wasm && !isLoaded.current) {
-        const wasmModule = await loadWasm(canvasRef.current);
-        setWasm(wasmModule);
-        isLoaded.current = true;
-      }
-    };
-    fetchWasm();
+    if (canvasRef.current) {
+      const fetchWasm = async () => {
+        if (canvasRef.current && !wasm && !isLoaded.current) {
+          const wasmModule = await loadWasm(canvasRef.current);
+          setWasm(wasmModule);
+          isLoaded.current = true;
+        }
+      };
+      fetchWasm();
+    }
   }, [wasm]);
   //Window size event listener
   useEffect(() => {
@@ -45,8 +46,15 @@ function Ball() {
   }, []);
   //Set arguments for the wasm module
   useEffect(() => {
-    if (wasm) {
-      wasm._setArguments(window.innerHeight, window.innerWidth, AniType);
+    if (canvasRef.current) {
+      // Update the canvas size to match the window size
+      canvasRef.current.width = windowSize.width;
+      canvasRef.current.height = windowSize.height;
+
+      // Pass the updated size to the WASM module
+      if (wasm) {
+        wasm._setArguments(windowSize.height, windowSize.width, AniType);
+      }
     }
   }, [windowSize, wasm, AniType]);
 
@@ -63,4 +71,4 @@ function Ball() {
   );
 }
 
-export default Ball;
+export default MainWasm;

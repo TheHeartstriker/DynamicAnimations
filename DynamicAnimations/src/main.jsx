@@ -1,4 +1,5 @@
 import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 //Main Component/control interface
 import Interface from "./Interface/SlidePage.jsx";
@@ -9,10 +10,10 @@ import "./Main.css";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <StrictMode>
     <BrowserRouter>
       {/* <Interface /> */}
       <MainWasm />
     </BrowserRouter>
-  </React.StrictMode>
+  </StrictMode>
 );

@@ -4,12 +4,14 @@
 #include <cmath>
 #include <iostream>
 
+#include "Converge/ConvergeHeader.h"
+
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 
 int Winheight;
 int Winwidth;
-int TypeAni;
+int TypeAni = 1;
 
 void render();
 
@@ -32,11 +34,9 @@ void setArguments(int arg1, int arg2, int arg3) {
 void render() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
-  //   if (TypeAni == 1) {
-  //     MainConvergeCall(renderer);
-  //   } else {
-  //     MainSpacesCall(renderer);
-  //   }
+  if (TypeAni == 1) {
+    MainConvergeCall(renderer);
+  }
   SDL_RenderPresent(renderer);
 }
 

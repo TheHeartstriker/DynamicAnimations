@@ -2,7 +2,7 @@
 EMCC = emcc
 
 # Source files
-SRC = main.cpp 
+SRC = main.cpp Shapes/Shapes.cpp Converge/Converge.cpp
 
 # Output file
 OUT = sdl_app.mjs
