@@ -59,7 +59,7 @@ body {
   height: 10vw;
   padding: 20px;
   margin: 10px;
-  color: var(--Words);
+  color: white;
   border: 5px solid var(--Borders);
   border-radius: 15px;
 
