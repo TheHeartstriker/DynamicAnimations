@@ -242,7 +242,7 @@ function Interface() {
       <div className="PageContainer" ref={pageContainerRef}>
         <div className="Buttons">
           <Link to="/stars">
-            <button>Stars</button>
+            <button id="StarBtn">Stars</button>
           </Link>
           <Link to="/rain">
             <button
@@ -250,12 +250,13 @@ function Interface() {
                 setRainProp(Config1DataRain);
                 setLightProp(Config1DataLight);
               }}
+              id="RainBtn"
             >
               Rain
             </button>
           </Link>
           <Link to="/sand">
-            <button>Sand</button>
+            <button id="Sandbtn">Sand</button>
           </Link>
           <Link to="/particle">
             <button
@@ -266,6 +267,7 @@ function Interface() {
                 setFire(true);
                 setSun(false);
               }}
+              id="ParticleBtn"
             >
               Particle
             </button>
