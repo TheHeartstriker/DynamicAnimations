@@ -99,6 +99,14 @@ body {
   background-color: var(--Borders);
 }
 
+#ConvergeBtn {
+  background-image: url("./Images/Divide.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--Borders);
+}
+
 /* The configuration buttons that are spefic to each animation */
 .OptionsButtons {
   position: relative;

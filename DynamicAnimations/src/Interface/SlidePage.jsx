@@ -246,6 +246,9 @@ function Interface() {
           <Link to="/stars">
             <button id="StarBtn">Stars</button>
           </Link>
+          <Link to="/">
+            <button id="ConvergeBtn">Converge</button>
+          </Link>
           <Link to="/rain">
             <button
               onClick={() => {
