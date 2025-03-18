@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Route, Link, Routes, useLocation } from "react-router-dom";
+import MainWasm from "../MainWasm.jsx";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
@@ -179,7 +180,7 @@ function Interface() {
   const [LightProp, setLightProp] = useState(Config1DataLight);
   const [ParticleProp, setParticleProp] = useState(ParticleConfig);
   const [SandProp, setSandProp] = useState(SandConfig1);
-  const [renderKey, setRenderKey] = useState(0); // State variable to force re-render
+  const [renderKey, setRenderKey] = useState(0);
 
   useEffect(() => {
     setRenderKey((prev) => prev + 1);
@@ -232,6 +233,7 @@ function Interface() {
               />
             }
           />
+          <Route path="/" element={<MainWasm />} />
         </Routes>
       </div>
       {/* Setting button in bottom left */}

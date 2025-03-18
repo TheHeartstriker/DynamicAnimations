@@ -61,12 +61,6 @@ function MainWasm() {
   return (
     <div>
       <canvas ref={canvasRef} id="myCanvas"></canvas>
-      <button className="btn" onClick={() => setAniType(1)}>
-        Converge
-      </button>
-      <button className="btn" onClick={() => setAniType(2)}>
-        Orbit
-      </button>
     </div>
   );
 }
