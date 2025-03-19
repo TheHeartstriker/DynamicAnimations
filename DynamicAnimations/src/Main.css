@@ -50,16 +50,61 @@ body {
   justify-content: space-around;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 10%;
+  margin: 5%;
 }
 
 .Buttons button {
-  width: 100px;
+  position: relative;
+  width: 10vw;
+  height: 10vw;
   padding: 20px;
-  color: var(--Words);
+  margin: 10px;
+  color: white;
   border: 5px solid var(--Borders);
-  border-radius: 5%;
-  background-color: var(--Fill);
+  border-radius: 15px;
+
+  cursor: pointer;
+  z-index: 1;
+}
+
+#Sandbtn {
+  background-image: url("./Images/Sand.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--Borders);
+}
+
+#StarBtn {
+  background-image: url("./Images/Stars.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--Borders);
+}
+
+#ParticleBtn {
+  background-image: url("./Images/Particle.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--Borders);
+}
+
+#RainBtn {
+  background-image: url("./Images/Rain.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--Borders);
+}
+
+#ConvergeBtn {
+  background-image: url("./Images/Divide.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--Borders);
 }
 
 /* The configuration buttons that are spefic to each animation */

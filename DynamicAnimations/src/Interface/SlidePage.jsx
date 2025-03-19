@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Route, Link, Routes, useLocation } from "react-router-dom";
+import MainWasm from "../MainWasm.jsx";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
@@ -179,7 +180,7 @@ function Interface() {
   const [LightProp, setLightProp] = useState(Config1DataLight);
   const [ParticleProp, setParticleProp] = useState(ParticleConfig);
   const [SandProp, setSandProp] = useState(SandConfig1);
-  const [renderKey, setRenderKey] = useState(0); // State variable to force re-render
+  const [renderKey, setRenderKey] = useState(0);
 
   useEffect(() => {
     setRenderKey((prev) => prev + 1);
@@ -232,6 +233,7 @@ function Interface() {
               />
             }
           />
+          <Route path="/" element={<MainWasm />} />
         </Routes>
       </div>
       {/* Setting button in bottom left */}
@@ -242,7 +244,10 @@ function Interface() {
       <div className="PageContainer" ref={pageContainerRef}>
         <div className="Buttons">
           <Link to="/stars">
-            <button>Stars</button>
+            <button id="StarBtn">Stars</button>
+          </Link>
+          <Link to="/">
+            <button id="ConvergeBtn">Converge</button>
           </Link>
           <Link to="/rain">
             <button
@@ -250,12 +255,13 @@ function Interface() {
                 setRainProp(Config1DataRain);
                 setLightProp(Config1DataLight);
               }}
+              id="RainBtn"
             >
               Rain
             </button>
           </Link>
           <Link to="/sand">
-            <button>Sand</button>
+            <button id="Sandbtn">Sand</button>
           </Link>
           <Link to="/particle">
             <button
@@ -266,6 +272,7 @@ function Interface() {
                 setFire(true);
                 setSun(false);
               }}
+              id="ParticleBtn"
             >
               Particle
             </button>
