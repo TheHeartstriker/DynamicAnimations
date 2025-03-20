@@ -2,10 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-function Stars({ StarsProps }) {
+function Stars({ StarsProps, canvasRef }) {
   let { Color, Color2, Glow, Linear, Lerp, NonLinear } = StarsProps;
   //Ctx and ref for the canvas
-  const canvasRef = useRef(null);
   const [ctx, setCtx] = useState(null);
   // Clean up once unmounted preventing memory leaks backround rendering errors
   const animationFrameId = useRef(null);
@@ -198,7 +197,7 @@ function Stars({ StarsProps }) {
   return (
     <canvas
       ref={canvasRef}
-      id="myCanvas"
+      className="myCanvas"
       width={window.innerWidth}
       height={window.innerHeight}
       onMouseDown={handleMouseDown}

@@ -4,13 +4,21 @@
 }
 
 /*For animations that need only a single canvas*/
-#myCanvas {
+.myCanvas {
   position: absolute;
   background: rgb(0, 0, 0);
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+  transition: 1.5s ease-in-out height, 1.5s ease-in-out width;
+}
+
+.myCanvas.shrink {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 25px;
 }
 
 /*Canvas for rain animation*/
