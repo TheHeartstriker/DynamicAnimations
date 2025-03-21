@@ -3,7 +3,8 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background-color: hsl(0, 0%, 100%);
+  background-color: #121212;
+  font-family: "Protest Strike", sans-serif;
 }
 
 :root {
@@ -14,4 +15,87 @@ body {
   --Btn-border: hsl(239, 80%, 50%);
   --Grow-fill: hsl(202, 80%, 50%);
   --Grow-fill2: hsla(202, 80%, 50%, 0.5);
+}
+
+.HeaderContainer {
+  position: relative;
+  width: 100%;
+  height: 20vh;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.PlayContainer {
+  position: relative;
+  width: 11%;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #c0c0c0;
+  border-radius: 50px;
+  margin-right: 50px;
+}
+
+.PlayPause {
+  position: relative;
+  height: 80%;
+  width: 50%;
+  border-radius: 50px;
+  margin-left: 10px;
+  background-color: #121212;
+}
+
+.PlayIcon {
+  height: 100%;
+  width: 100%;
+  color: #0084ce;
+}
+
+.PlayText {
+  position: relative;
+  height: 85%;
+  width: 50%;
+  border-radius: 50px;
+  display: flex;
+  color: #0084ce;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.ButtonContainer {
+  position: absolute;
+  width: 25vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+}
+
+.Panel {
+  width: 65%;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.PanelItem {
+  text-align: center;
+  width: 50%;
+  height: 20%;
+  margin: 10px;
+}
+
+.PanelItem h1 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #0084ce;
 }

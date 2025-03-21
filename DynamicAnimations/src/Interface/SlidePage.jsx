@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Route, Link, Routes, useLocation } from "react-router-dom";
+import { PlayIcon } from "@heroicons/react/24/solid";
 import MainWasm from "../MainWasm.jsx";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
@@ -32,12 +33,36 @@ function Interface() {
     const newHeight = window.innerHeight * ShrinkFactor;
     //Styles
     //New size and centering
-    canvasRef.current.style.width = `${newWidth}px`;
-    canvasRef.current.style.height = `${newHeight}px`;
+    canvasRef.current.style.width = `50vw`;
+    canvasRef.current.style.height = `50vh`;
   }
 
   return (
     <div>
+      <div className="HeaderContainer">
+        <div className="PlayContainer">
+          <div className="PlayPause">
+            <PlayIcon className="PlayIcon" />
+          </div>
+          <div className="PlayText">Play</div>
+        </div>
+      </div>
+      <div className="ButtonContainer">
+        <div className="Panel">
+          <div className="PanelItem">
+            <h1>Star's</h1>
+          </div>
+          <div className="PanelItem">
+            <h1>Converge</h1>
+          </div>
+          <div className="PanelItem">
+            <h1>Sand</h1>
+          </div>
+          <div className="PanelItem">
+            <h1>Rain</h1>
+          </div>
+        </div>
+      </div>
       <Stars StarsProps={StarProps} canvasRef={canvasRef} />
     </div>
   );
