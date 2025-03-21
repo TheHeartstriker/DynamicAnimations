@@ -195,14 +195,16 @@ function Stars({ StarsProps, canvasRef }) {
   }, [ctx]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="myCanvas"
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="myCanvas"
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+      ></canvas>
+    </>
   );
 }
 

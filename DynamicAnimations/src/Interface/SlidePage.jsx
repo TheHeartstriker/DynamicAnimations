@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Route, Link, Routes, useLocation } from "react-router-dom";
-import { PlayIcon } from "@heroicons/react/24/solid";
+import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
 import MainWasm from "../MainWasm.jsx";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
@@ -9,6 +9,23 @@ import Particle from "../AnimationLogic/Particle.jsx";
 
 function Interface() {
   const canvasRef = useRef(null);
+  const [Play, setPlay] = useState(false);
+  const [Panel, setPanel] = useState({
+    PanelElement1: true,
+    PanelElement2: false,
+    PanelElement3: false,
+    PanelElement4: false,
+  });
+
+  function togglePanel(panelName) {
+    setPanel((prevState) => {
+      const newState = Object.keys(prevState).reduce((acc, key) => {
+        acc[key] = key === panelName;
+        return acc;
+      }, {});
+      return newState;
+    });
+  }
   const StarProps = {
     Color: "Blue",
     Color2: "Blue",
@@ -19,13 +36,17 @@ function Interface() {
   };
 
   useEffect(() => {
-    if (canvasRef.current) {
+    const canvas = canvasRef.current;
+    if (canvasRef.current && Play == false) {
       // Access the canvas element here
-      const canvas = canvasRef.current;
       canvas.classList.add("shrink");
       Shrink();
+    } else {
+      canvas.classList.remove("shrink");
+      canvas.style.width = `100%`;
+      canvas.style.height = `100%`;
     }
-  }, []);
+  }, [Play]);
 
   function Shrink() {
     const ShrinkFactor = 0.5;
@@ -40,25 +61,50 @@ function Interface() {
   return (
     <div>
       <div className="HeaderContainer">
-        <div className="PlayContainer">
-          <div className="PlayPause">
-            <PlayIcon className="PlayIcon" />
+        <div className="PlayContainer" onClick={() => setPlay(!Play)}>
+          <div className={`PlayPause ${Play ? "Active" : ""}`}>
+            <div className={`PlayIcon ${Play ? "Active" : ""}`}></div>
           </div>
-          <div className="PlayText">Play</div>
+          <div className={`PlayText ${Play ? "Active" : ""}`}>Play</div>
         </div>
       </div>
       <div className="ButtonContainer">
         <div className="Panel">
-          <div className="PanelItem">
+          {/* Panel 1 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement1")}
+          >
+            <div
+              className={`Highlight ${
+                Object.keys(Panel).findIndex((key) => Panel[key]) + 1
+                  ? `Active${
+                      Object.keys(Panel).findIndex((key) => Panel[key]) + 1
+                    }`
+                  : ""
+              }`}
+            ></div>
             <h1>Star's</h1>
           </div>
-          <div className="PanelItem">
+          {/* Panel 2 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement2")}
+          >
             <h1>Converge</h1>
           </div>
-          <div className="PanelItem">
+          {/* Panel 3 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement3")}
+          >
             <h1>Sand</h1>
           </div>
-          <div className="PanelItem">
+          {/* Panel 4 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement4")}
+          >
             <h1>Rain</h1>
           </div>
         </div>

@@ -18,7 +18,7 @@ body {
 }
 
 .HeaderContainer {
-  position: relative;
+  z-index: 500;
   width: 100%;
   height: 20vh;
   display: flex;
@@ -33,7 +33,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  z-index: 5;
   background-color: #c0c0c0;
   border-radius: 50px;
   margin-right: 50px;
@@ -46,12 +46,30 @@ body {
   border-radius: 50px;
   margin-left: 10px;
   background-color: #121212;
+  z-index: 2;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.PlayPause.Active {
+  transform: translateX(90%);
+}
+
+.PlayText.Active {
+  transform: translateX(-100%);
 }
 
 .PlayIcon {
   height: 100%;
   width: 100%;
   color: #0084ce;
+  background-image: url("https://img.icons8.com/ios-filled/50/0084ce/play--v1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.PlayIcon.Active {
+  background-image: url("https://img.icons8.com/ios-filled/50/0084ce/pause--v1.png");
 }
 
 .PlayText {
@@ -64,6 +82,8 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 2rem;
+  z-index: 1;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ButtonContainer {
@@ -88,14 +108,50 @@ body {
 }
 
 .PanelItem {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  width: 50%;
+  width: 60%;
   height: 20%;
   margin: 10px;
+  border-radius: 50px;
 }
 
 .PanelItem h1 {
   font-size: 2.3rem;
   font-weight: 800;
   color: #0084ce;
+}
+
+.Highlight {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  z-index: -1;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Make the highlight adjust based on the fit content of an element */
+
+.Highlight.Active1 {
+  background-color: #c0c0c0;
+  transform: translateY(0);
+}
+
+.Highlight.Active2 {
+  background-color: #c0c0c0;
+  transform: translateY(calc(100% + 20px));
+}
+
+.Highlight.Active3 {
+  background-color: #c0c0c0;
+  transform: translateY(calc(200% + 40px));
+}
+
+.Highlight.Active4 {
+  background-color: #c0c0c0;
+  transform: translateY(calc(300% + 60px));
 }
