@@ -9,6 +9,7 @@ import Particle from "../AnimationLogic/Particle.jsx";
 
 function Interface() {
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
   const [Play, setPlay] = useState(false);
   const [Panel, setPanel] = useState({
     PanelElement1: true,
@@ -36,26 +37,23 @@ function Interface() {
   };
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvasRef.current && Play == false) {
-      // Access the canvas element here
-      canvas.classList.add("shrink");
-      Shrink();
+    const canvasContainer = containerRef.current;
+    if (containerRef.current && Play == false) {
+      // Access the canvasContainer element here
+      canvasContainer.classList.add("grow");
+      Grow();
     } else {
-      canvas.classList.remove("shrink");
-      canvas.style.width = `100%`;
-      canvas.style.height = `100%`;
+      canvasContainer.classList.remove("grow");
+      canvasContainer.style.width = `50%`;
+      canvasContainer.style.height = `50%`;
     }
   }, [Play]);
 
-  function Shrink() {
-    const ShrinkFactor = 0.5;
-    const newWidth = window.innerWidth * ShrinkFactor;
-    const newHeight = window.innerHeight * ShrinkFactor;
+  function Grow() {
     //Styles
     //New size and centering
-    canvasRef.current.style.width = `50vw`;
-    canvasRef.current.style.height = `50vh`;
+    containerRef.current.style.width = `100%`;
+    containerRef.current.style.height = `100%`;
   }
 
   return (
@@ -109,7 +107,9 @@ function Interface() {
           </div>
         </div>
       </div>
-      <Stars StarsProps={StarProps} canvasRef={canvasRef} />
+      <div className="CanvasContainer" ref={containerRef}>
+        <Stars StarsProps={StarProps} canvasRef={canvasRef} stateProp={Play} />
+      </div>
     </div>
   );
 }

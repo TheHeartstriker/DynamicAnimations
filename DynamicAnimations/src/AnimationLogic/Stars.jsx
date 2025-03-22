@@ -2,8 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 
-function Stars({ StarsProps, canvasRef }) {
-  let { Color, Color2, Glow, Linear, Lerp, NonLinear } = StarsProps;
+function Stars({ StarsProps, canvasRef, stateProp }) {
+  // let { Color, Color2, Glow, Linear, Lerp, NonLinear } = StarsProps;
+  const AnimateControl = useRef({
+    Color: "Blue",
+    Color2: "Teal",
+    Glow: "Teal",
+    Linear: "True",
+    Lerp: "False",
+    NonLinear: "False",
+  });
   //Ctx and ref for the canvas
   const [ctx, setCtx] = useState(null);
   // Clean up once unmounted preventing memory leaks backround rendering errors
@@ -30,8 +38,6 @@ function Stars({ StarsProps, canvasRef }) {
       },
     }))
   );
-  const [Mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [MouseDown, setMouseDown] = useState(false);
 
   //Event listeners for mouse down and up
   const handleMouseDown = () => {
@@ -79,8 +85,8 @@ function Stars({ StarsProps, canvasRef }) {
     if (!ctx) return;
     //Colors
     var gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-    gradient.addColorStop(0, Color);
-    gradient.addColorStop(1, Color2);
+    gradient.addColorStop(0, AnimateControl.current.Color);
+    gradient.addColorStop(1, AnimateControl.current.Color2);
     ctx.fillStyle = gradient;
     //Draw the circle
     ctx.beginPath();
@@ -88,7 +94,7 @@ function Stars({ StarsProps, canvasRef }) {
     ctx.stroke();
     ctx.fill();
     //Glow
-    ctx.shadowColor = Glow;
+    ctx.shadowColor = AnimateControl.current.Glow;
     ctx.shadowBlur = size * 5;
   }
 
@@ -114,8 +120,9 @@ function Stars({ StarsProps, canvasRef }) {
       }
       // Call the Linear movement function which handles the movement of the circle if a linear type movement is selected
       //Have this and gravity on aka non linear allows for a more natural movement
-      if (Linear || Lerp) LinearMovment(distance, dx, dy, circle);
-      if (NonLinear) {
+      if (AnimateControl.current.Linear || AnimateControl.current.Lerp)
+        LinearMovment(distance, dx, dy, circle);
+      if (AnimateControl.current.NonLinear) {
         // Apply gravity the passive downward force
         circle.velocity.y += (Gravity * circle.size.s) / 60;
         // Additional downward force based on the velocity
@@ -170,17 +177,26 @@ function Stars({ StarsProps, canvasRef }) {
       circle.target.y = Math.floor(Math.random() * window.innerHeight);
     }
     // Move the circle towards the target position
-    if (Linear) {
+    if (AnimateControl.current.Linear) {
       let directionX = dx / distance;
       let directionY = dy / distance;
       circle.current.x += directionX * circle.MoveVal;
       circle.current.y += directionY * circle.MoveVal;
     }
-    if (Lerp) {
+    if (AnimateControl.current.Lerp) {
       let lerpFactor = 0.01;
       circle.current.x += (circle.target.x - circle.current.x) * lerpFactor;
       circle.current.y += (circle.target.y - circle.current.y) * lerpFactor;
     }
+  }
+
+  function AniChangeClick(color, color2, glow, linear, lerp, nonLinear) {
+    AnimateControl.current.Color = color;
+    AnimateControl.current.Color2 = color2;
+    AnimateControl.current.Glow = glow;
+    AnimateControl.current.Linear = linear;
+    AnimateControl.current.Lerp = lerp;
+    AnimateControl.current.NonLinear = nonLinear;
   }
 
   useEffect(() => {
@@ -204,6 +220,31 @@ function Stars({ StarsProps, canvasRef }) {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
       ></canvas>
+      <div className="canvasBtnContainer">
+        <div
+          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          onClick={() =>
+            AniChangeClick("Red", "Orange", "Orange", "True", "False", "False")
+          }
+        >
+          Lerp
+        </div>
+        <div
+          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          onClick={() =>
+            AniChangeClick(
+              "Green",
+              "Yellow",
+              "lightgreen",
+              "False",
+              "False",
+              "True"
+            )
+          }
+        >
+          Goofy Gravity
+        </div>
+      </div>
     </>
   );
 }
