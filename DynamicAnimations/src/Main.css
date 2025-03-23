@@ -3,7 +3,7 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background-color: #121212;
+  background-color: #080808;
   font-family: "Protest Strike", sans-serif;
 }
 
@@ -53,7 +53,7 @@ body {
 
 .PlayPause.Active {
   transform: translateX(90%);
-  background-color: #121212;
+  background-color: #080808;
 }
 
 .PlayText.Active {
@@ -156,4 +156,9 @@ body {
 .Highlight.Active4 {
   background-color: #c0c0c0;
   transform: translateY(calc(300% + 60px));
+}
+
+.Highlight.Active5 {
+  background-color: #c0c0c0;
+  transform: translateY(calc(400% + 80px));
 }

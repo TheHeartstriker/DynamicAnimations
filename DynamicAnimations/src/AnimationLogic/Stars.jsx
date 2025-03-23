@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-function Stars({ StarsProps, canvasRef, stateProp }) {
+function Stars({ canvasRef, stateProp }) {
   // let { Color, Color2, Glow, Linear, Lerp, NonLinear } = StarsProps;
   const AnimateControl = useRef({
     Color: "Blue",
@@ -16,6 +16,8 @@ function Stars({ StarsProps, canvasRef, stateProp }) {
   const [ctx, setCtx] = useState(null);
   // Clean up once unmounted preventing memory leaks backround rendering errors
   const animationFrameId = useRef(null);
+  const [Mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [MouseDown, setMouseDown] = useState(false);
   // Create an array of circles with data related to them
   const [circlearray, setCirclearray] = useState(
     new Array(20).fill().map(() => ({

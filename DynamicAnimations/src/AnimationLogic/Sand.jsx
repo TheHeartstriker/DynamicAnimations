@@ -1,14 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 //Need to fix the color change
-function Sand({ SandProps }) {
-  let { Reset, StartHsl, EndHsl, Speed } = SandProps;
+function Sand({ canvasRef, stateProp }) {
+  const AnimateControl = useRef({
+    Reset: false,
+    StartHsl: 155,
+    EndHsl: 260,
+    Speed: 1,
+  });
+
   //Grid generation
   const [Grid, setGrid] = useState([]);
   const rowRef = useRef(0);
   const colRef = useRef(0);
+  const AniId = useRef(null);
   //Boilerplate code for canvas
   const [ctx, setCtx] = useState(null);
-  const canvasRef = useRef(null);
   //On state which purpose is mainly to check if a pixel is on screen
   const [On, setOn] = useState(false);
   //Color state value expects to be a number in hsl
@@ -46,9 +52,9 @@ function Sand({ SandProps }) {
   }, []);
   //Advance and change color back to the initial color if needed
   function ChangeColor() {
-    let newColorH = Color + Speed;
-    if (newColorH > EndHsl || newColorH === 0) {
-      newColorH = StartHsl;
+    let newColorH = Color + AnimateControl.current.Speed;
+    if (newColorH > AnimateControl.current.EndHsl || newColorH === 0) {
+      newColorH = AnimateControl.current.StartHsl;
     }
     setColor(newColorH);
   }
@@ -83,7 +89,11 @@ function Sand({ SandProps }) {
           let Y = y + j;
           if (X >= 0 && X < rowRef.current && Y >= 0 && Y < colRef.current) {
             //Color check needed to check first frame
-            if (Color && Color >= StartHsl && Color <= EndHsl) {
+            if (
+              Color &&
+              Color >= AnimateControl.current.StartHsl &&
+              Color <= AnimateControl.current.EndHsl
+            ) {
               newGrid[X][Y] = Color;
             }
           }
@@ -185,27 +195,62 @@ function Sand({ SandProps }) {
     setMouseDown(false);
     setColor(190);
   }
+
+  function AniChangeClick(Reset, StartHsl, EndHsl, Speed) {
+    if (Reset === true) {
+      Impose();
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+    AnimateControl.current.StartHsl = StartHsl;
+    AnimateControl.current.EndHsl = EndHsl;
+    AnimateControl.current.Speed = Speed;
+  }
   // Function to impose the grid and reset the sand
   useEffect(() => {
     Impose();
-  }, [ctx, Reset]);
+  }, [ctx, AnimateControl.current.Reset]);
   //Main loop
   useEffect(() => {
     if (On) {
       ChangeColor();
-      requestAnimationFrame(Draw);
+      AniId.current = requestAnimationFrame(Draw);
     }
-  }, [Grid, Reset]);
+    return () => {
+      cancelAnimationFrame(AniId.current);
+    };
+  }, [Grid, AnimateControl.current.Reset]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      id="myCanvas"
-      width={window.innerWidth}
-      height={window.innerHeight}
-      onMouseDown={handleMouseDown}
-      onMouseMove={MouseTracker}
-    ></canvas>
+    <>
+      <canvas
+        ref={canvasRef}
+        className="myCanvas"
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onMouseDown={handleMouseDown}
+        onMouseMove={MouseTracker}
+      ></canvas>
+      <div className="canvasBtnContainer">
+        <div
+          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => AniChangeClick(false, 1, 60, 0.5)}
+        >
+          Lava
+        </div>
+        <div
+          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => AniChangeClick(false, 90, 280, 0.8)}
+        >
+          Space juice
+        </div>
+        <div
+          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => AniChangeClick(true, 155, 260, 1)}
+        >
+          Reset
+        </div>
+      </div>
+    </>
   );
 }
 

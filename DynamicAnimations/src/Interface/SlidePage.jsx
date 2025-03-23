@@ -16,6 +16,7 @@ function Interface() {
     PanelElement2: false,
     PanelElement3: false,
     PanelElement4: false,
+    PanelElement5: false,
   });
 
   function togglePanel(panelName) {
@@ -105,10 +106,25 @@ function Interface() {
           >
             <h1>Rain</h1>
           </div>
+          {/* Panel 5 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement5")}
+          >
+            <h1>Particle</h1>
+          </div>
         </div>
       </div>
       <div className="CanvasContainer" ref={containerRef}>
-        <Stars StarsProps={StarProps} canvasRef={canvasRef} stateProp={Play} />
+        {Panel.PanelElement1 && (
+          <Stars canvasRef={canvasRef} stateProp={Play} />
+        )}
+        {Panel.PanelElement2 && <MainWasm />}
+        {Panel.PanelElement3 && <Sand canvasRef={canvasRef} stateProp={Play} />}
+        {Panel.PanelElement4 && <Rain canvasRef={canvasRef} stateProp={Play} />}
+        {Panel.PanelElement5 && (
+          <Particle canvasRef={canvasRef} stateProp={Play} />
+        )}
       </div>
     </div>
   );
