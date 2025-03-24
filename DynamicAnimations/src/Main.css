@@ -3,18 +3,19 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background-color: #080808;
-  font-family: "Protest Strike", sans-serif;
+  background-color: var(--Background);
+  font-family: "Protest Revolution", sans-serif;
 }
 
 :root {
-  --Backround-Black-1: hsl(180, 5%, 2.5%);
-  --Borders: hsl(180, 0%, 5%);
-  --Fill: hsl(180, 0%, 10%);
-  --Words: hsl(0, 5%, 75%);
-  --Btn-border: hsl(239, 80%, 50%);
-  --Grow-fill: hsl(202, 80%, 50%);
-  --Grow-fill2: hsla(202, 80%, 50%, 0.5);
+  /* Maroon */
+  --Background: #3d0000;
+  /* Blood red */
+  --BloodRed: #8b0000;
+  --Crimson: #dc143c;
+  --Purple: #4b0082;
+  --NeonPurple: #8000ff;
+  --Amber: #ff8c00;
 }
 
 .HeaderContainer {
@@ -22,19 +23,50 @@ body {
   width: 100%;
   height: 20vh;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  pad: 0 2rem;
+}
+
+.SacrificeContainer {
+  position: relative;
+  width: 25vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 8%;
+}
+
+.EyeContainer {
+  position: relative;
+  width: 25vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .PlayContainer {
   position: relative;
-  width: 11%;
+  width: 25vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 8%;
+}
+
+.PlayElementContainer {
+  position: relative;
+  width: 40%;
   height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 5;
-  background-color: #c0c0c0;
+  background-color: var(--BloodRed);
   border-radius: 50px;
   margin-right: 50px;
 }
@@ -53,7 +85,7 @@ body {
 
 .PlayPause.Active {
   transform: translateX(90%);
-  background-color: #080808;
+  background-color: var(--Background);
 }
 
 .PlayText.Active {
@@ -63,15 +95,14 @@ body {
 .PlayIcon {
   height: 100%;
   width: 100%;
-  color: #0084ce;
-  background-image: url("https://img.icons8.com/ios-filled/50/0084ce/pause--v1.png");
+  background-image: url("https://img.icons8.com/ios-filled/50/dc143c/pause--v1.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .PlayIcon.Active {
-  background-image: url("https://img.icons8.com/ios-filled/50/0084ce/play--v1.png");
+  background-image: url("https://img.icons8.com/ios-filled/50/dc143c/play--v1.png");
 }
 
 .PlayText {
@@ -80,7 +111,7 @@ body {
   width: 50%;
   border-radius: 50px;
   display: flex;
-  color: #0084ce;
+  color: var(--Crimson);
   justify-content: center;
   align-items: center;
   font-size: 2rem;
@@ -112,7 +143,7 @@ body {
 
 .Links a {
   text-decoration: none;
-  color: #0084ce;
+  color: var(--Crimson);
   margin: 20px;
 }
 
@@ -152,13 +183,14 @@ body {
 .PanelItem h1 {
   font-size: 2rem;
   font-weight: 800;
-  color: #0084ce;
+  color: var(--Crimson);
 }
 
 .Highlight {
   position: absolute;
   width: 100%;
   height: 100%;
+  background-color: var(--BloodRed);
   border-radius: 50px;
   z-index: -1;
   transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
@@ -167,26 +199,21 @@ body {
 /* Make the highlight adjust based on the fit content of an element */
 
 .Highlight.Active1 {
-  background-color: #c0c0c0;
   transform: translateY(0);
 }
 
 .Highlight.Active2 {
-  background-color: #c0c0c0;
   transform: translateY(calc(100% + 20px));
 }
 
 .Highlight.Active3 {
-  background-color: #c0c0c0;
   transform: translateY(calc(200% + 40px));
 }
 
 .Highlight.Active4 {
-  background-color: #c0c0c0;
   transform: translateY(calc(300% + 60px));
 }
 
 .Highlight.Active5 {
-  background-color: #c0c0c0;
   transform: translateY(calc(400% + 80px));
 }

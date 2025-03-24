@@ -1,15 +1,15 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Route, Link, Routes, useLocation } from "react-router-dom";
-import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
 import MainWasm from "../MainWasm.jsx";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
 import Sand from "../AnimationLogic/Sand.jsx";
 import Particle from "../AnimationLogic/Particle.jsx";
-
+import DragonEye from "../Images/DragonEye.jsx";
 function Interface() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
+  const DragonEyeRef = useRef(null);
+  const [Mouse, setMouse] = useState({ x: 0, y: 0 });
   const [Play, setPlay] = useState(true);
   const [Panel, setPanel] = useState({
     PanelElement1: true,
@@ -28,14 +28,41 @@ function Interface() {
       return newState;
     });
   }
-  const StarProps = {
-    Color: "Blue",
-    Color2: "Blue",
-    Glow: "True",
-    Linear: "True",
-    Lerp: "False",
-    NonLinear: "False",
-  };
+  function Grow() {
+    //Styles
+    //New size and centering
+    containerRef.current.style.width = `100%`;
+    containerRef.current.style.height = `100%`;
+  }
+
+  function FollowCursor() {
+    if (DragonEyeRef.current) {
+      const InnerEye = DragonEyeRef.current.querySelector("#InnerEye");
+      const rect = DragonEyeRef.current.getBoundingClientRect();
+
+      const mouseX = Mouse.x - rect.left;
+      const mouseY = Mouse.y - rect.top;
+
+      const movementX = (mouseX - rect.width / 2) * 0.02;
+      const movementY = (mouseY - rect.height / 2) * 0.02;
+
+      InnerEye.style.transform = `translate(${movementX}px, ${movementY}px)`;
+    }
+  }
+
+  useEffect(() => {
+    FollowCursor();
+  }, [Mouse]);
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setMouse({ x: event.clientX, y: event.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   useEffect(() => {
     const canvasContainer = containerRef.current;
@@ -50,21 +77,20 @@ function Interface() {
     }
   }, [Play]);
 
-  function Grow() {
-    //Styles
-    //New size and centering
-    containerRef.current.style.width = `100%`;
-    containerRef.current.style.height = `100%`;
-  }
-
   return (
     <div>
       <div className="HeaderContainer">
-        <div className="PlayContainer" onClick={() => setPlay(!Play)}>
-          <div className={`PlayPause ${Play ? "Active" : ""}`}>
-            <div className={`PlayIcon ${Play ? "Active" : ""}`}></div>
+        <div className="SacrificeContainer"></div>
+        <div className="EyeContainer">
+          <DragonEye ref={DragonEyeRef} />
+        </div>
+        <div className="PlayContainer">
+          <div className="PlayElementContainer" onClick={() => setPlay(!Play)}>
+            <div className={`PlayPause ${Play ? "Active" : ""}`}>
+              <div className={`PlayIcon ${Play ? "Active" : ""}`}></div>
+            </div>
+            <div className={`PlayText ${Play ? "Active" : ""}`}>Play</div>
           </div>
-          <div className={`PlayText ${Play ? "Active" : ""}`}>Play</div>
         </div>
       </div>
       <div className="ButtonContainer">
