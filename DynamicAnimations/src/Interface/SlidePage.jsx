@@ -10,7 +10,7 @@ import Particle from "../AnimationLogic/Particle.jsx";
 function Interface() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
-  const [Play, setPlay] = useState(false);
+  const [Play, setPlay] = useState(true);
   const [Panel, setPanel] = useState({
     PanelElement1: true,
     PanelElement2: false,
@@ -125,6 +125,26 @@ function Interface() {
         {Panel.PanelElement5 && (
           <Particle canvasRef={canvasRef} stateProp={Play} />
         )}
+      </div>
+      <div className="LinkContainer">
+        <div className="Links">
+          <a
+            href="https://github.com/TheHeartstriker/DynamicAnimations"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="Link"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.kadenwildauer.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="Link"
+          >
+            Portfolio
+          </a>
+        </div>
       </div>
     </div>
   );

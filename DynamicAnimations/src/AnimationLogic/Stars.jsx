@@ -8,9 +8,9 @@ function Stars({ canvasRef, stateProp }) {
     Color: "Blue",
     Color2: "Teal",
     Glow: "Teal",
-    Linear: "True",
-    Lerp: "False",
-    NonLinear: "False",
+    Linear: true,
+    Lerp: false,
+    NonLinear: false,
   });
   //Ctx and ref for the canvas
   const [ctx, setCtx] = useState(null);
@@ -226,7 +226,7 @@ function Stars({ canvasRef, stateProp }) {
         <div
           className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
           onClick={() =>
-            AniChangeClick("Red", "Orange", "Orange", "True", "False", "False")
+            AniChangeClick("Red", "Orange", "Orange", false, true, false)
           }
         >
           Lerp
@@ -234,14 +234,7 @@ function Stars({ canvasRef, stateProp }) {
         <div
           className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
           onClick={() =>
-            AniChangeClick(
-              "Green",
-              "Yellow",
-              "lightgreen",
-              "False",
-              "False",
-              "True"
-            )
+            AniChangeClick("Green", "Yellow", "lightgreen", true, false, true)
           }
         >
           Goofy Gravity
