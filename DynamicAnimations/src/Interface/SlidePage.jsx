@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Route, Link, Routes, useLocation } from "react-router-dom";
+import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
 import MainWasm from "../MainWasm.jsx";
 import Stars from "../AnimationLogic/Stars.jsx";
 import Rain from "../AnimationLogic/Rain.jsx";
@@ -7,337 +8,145 @@ import Sand from "../AnimationLogic/Sand.jsx";
 import Particle from "../AnimationLogic/Particle.jsx";
 
 function Interface() {
-  const pageContainerRef = useRef(null);
-  //Used to see if a button is clicked
-  const [Buttoncount, setButtoncount] = useState(0);
-  //Timer used to make sure the slide is finished before it can trigger again
-  const [Timer, setTimer] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer((prev) => prev + 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  const handleButtonClick = () => {
-    //Slide left
-    if (pageContainerRef.current && Buttoncount === 0 && Timer > 1.2) {
-      // Remove the animation
-      pageContainerRef.current.style.animation = "none";
-      // Force a reflow
-      pageContainerRef.current.offsetHeight;
-      // Set animation
-      pageContainerRef.current.style.setProperty("--start", "0%");
-      pageContainerRef.current.style.setProperty("--end", "100%");
-      pageContainerRef.current.style.animation = "Slide 1s linear forwards";
-      setButtoncount(1);
-      setTimer(0);
-    }
-    //Slide back aka right
-    if (pageContainerRef.current && Buttoncount === 1 && Timer > 1.2) {
-      // Remove the animation
-      pageContainerRef.current.style.animation = "none";
-      // Force a reflow
-      pageContainerRef.current.offsetHeight;
-      // Set animation
-      pageContainerRef.current.style.setProperty("--start", "100%");
-      pageContainerRef.current.style.setProperty("--end", "0%");
-      pageContainerRef.current.style.animation = "Slide 1s linear forwards";
-      setButtoncount(0);
-      setTimer(0);
-    }
-  };
-
-  //Data to pass to the animations
-  //Base data for rain
-  const Config1DataRain = {
-    HEIGHT: 50,
-    SHEET: 3,
-    DROPWIDTH: 2,
-    DROPS: 100,
-  };
-  const Config1DataLight = {
-    startX: window.innerWidth / 2,
-    startY: 0,
-    Distance: 100,
-    Thickness: 3,
-    Time: 180,
-    Branches: 1,
-    Roughness: 100,
-    Chance: 5,
-    Hue: 300,
-    Sat: 100,
-    Light: 50,
-  };
-  //Configuration 2 data
-  const Config2DataRain = {
-    HEIGHT: 50,
-    SHEET: 4,
-    DROPWIDTH: 2,
-    DROPS: 300,
-  };
-
-  const Config2DataLight = {
-    startX: window.innerWidth / 2,
-    startY: 0,
-    Distance: 100,
-    Thickness: 3,
-    Time: 180,
-    Branches: 1,
-    Roughness: 100,
-    Chance: 5,
-    Hue: 190,
-    Sat: 100,
-    Light: 50,
-  };
-
-  //Configuration 2 data
-  const Config3DataRain = {
-    HEIGHT: 50,
-    SHEET: 4,
-    DROPWIDTH: 2,
-    DROPS: 300,
-    Wind: true,
-    WindSpeed: 5,
-  };
-  const [Colors, setColors] = useState({
-    Color: "red",
-    Color2: "orange",
-    Glow: "red",
+  const canvasRef = useRef(null);
+  const containerRef = useRef(null);
+  const [Play, setPlay] = useState(true);
+  const [Panel, setPanel] = useState({
+    PanelElement1: true,
+    PanelElement2: false,
+    PanelElement3: false,
+    PanelElement4: false,
+    PanelElement5: false,
   });
-  //Base star preset
-  const StarConfig1 = {
-    Color: "red",
-    Color2: "orange",
-    Glow: "red",
-    Linear: true,
-  };
-  //Configuration 2 star preset
-  const StarConfig2 = {
-    Color: "blue",
-    Color2: "cyan",
-    Glow: "blue",
-    Linear: true,
-  };
 
-  const StarConfig3 = {
-    Color: "red",
-    Color2: "Orange",
-    Glow: "red",
-    Lerp: true,
+  function togglePanel(panelName) {
+    setPanel((prevState) => {
+      const newState = Object.keys(prevState).reduce((acc, key) => {
+        acc[key] = key === panelName;
+        return acc;
+      }, {});
+      return newState;
+    });
+  }
+  const StarProps = {
+    Color: "Blue",
+    Color2: "Blue",
+    Glow: "True",
+    Linear: "True",
+    Lerp: "False",
+    NonLinear: "False",
   };
-
-  const StarConfig4 = {
-    Color: "green",
-    Color2: "yellow",
-    Glow: "green",
-    Linear: true,
-    NonLinear: true,
-  };
-  //State for the particle config presets need for this spefic animation
-  const [StartHslParticle, setStartHslParticle] = useState(160);
-  const [EndHslParticle, setEndHslParticle] = useState(260);
-  const [Fire, setFire] = useState(false);
-  const [Sun, setSun] = useState(false);
-
-  //Base particle preset
-  const ParticleConfig = {
-    StartHsl: StartHslParticle,
-    EndHsl: EndHslParticle,
-    Fire: Fire,
-    SunOn: Sun,
-  };
-
-  const [SandNum, setSandNum] = useState(0);
-
-  const SandConfig1 = {
-    StartHsl: 190,
-    EndHsl: 260,
-    Reset: SandNum,
-    Speed: 0.25,
-  };
-
-  const SandConfig2 = {
-    StartHsl: 0,
-    EndHsl: 60,
-    Reset: SandNum,
-    Speed: 0.25,
-  };
-
-  const SandConfig3 = {
-    StartHsl: 0,
-    EndHsl: 360,
-    Reset: SandNum,
-    Speed: 0.8,
-  };
-  //State variables for the animation presets / props
-  const [StarProp, setStarProp] = useState(StarConfig1);
-  const [RainProp, setRainProp] = useState(Config1DataRain);
-  const [LightProp, setLightProp] = useState(Config1DataLight);
-  const [ParticleProp, setParticleProp] = useState(ParticleConfig);
-  const [SandProp, setSandProp] = useState(SandConfig1);
-  const [renderKey, setRenderKey] = useState(0);
 
   useEffect(() => {
-    setRenderKey((prev) => prev + 1);
-  }, [StarProp, RainProp, LightProp, SandProp, ParticleProp]);
-
-  let location = useLocation();
-
-  //Applys the color of the flash to the background
-  useEffect(() => {
-    if (location.pathname === "/rain") {
-      document.documentElement.style.setProperty("--HUE", LightProp.Hue);
+    const canvasContainer = containerRef.current;
+    if (containerRef.current && Play == false) {
+      // Access the canvasContainer element here
+      canvasContainer.classList.add("grow");
+      Grow();
+    } else {
+      canvasContainer.classList.remove("grow");
+      canvasContainer.style.width = `50%`;
+      canvasContainer.style.height = `50%`;
     }
-  }, [LightProp.Hue, location.pathname]);
+  }, [Play]);
 
-  // Html code
+  function Grow() {
+    //Styles
+    //New size and centering
+    containerRef.current.style.width = `100%`;
+    containerRef.current.style.height = `100%`;
+  }
+
   return (
-    <>
-      <div>
-        <Routes>
-          <Route
-            path="/stars"
-            element={
-              <Stars key={renderKey} StarsProps={StarProp} customProp="value" />
-            }
-          />
-          <Route
-            path="/rain"
-            element={
-              <Rain
-                key={renderKey}
-                RainProps={RainProp}
-                LightningProps={LightProp}
-                customProp="value"
-              />
-            }
-          />
-          <Route
-            path="/sand"
-            element={
-              <Sand key={renderKey} SandProps={SandProp} customProp="value" />
-            }
-          />
-          <Route
-            path="/particle"
-            element={
-              <Particle
-                key={renderKey}
-                ParticleProps={ParticleConfig}
-                customProp="value"
-              />
-            }
-          />
-          <Route path="/" element={<MainWasm />} />
-        </Routes>
-      </div>
-      {/* Setting button in bottom left */}
-      <div id="Settings">
-        <button onClick={handleButtonClick}>+</button>
-      </div>
-      {/* Interface for the buttons */}
-      <div className="PageContainer" ref={pageContainerRef}>
-        <div className="Buttons">
-          <Link to="/stars">
-            <button id="StarBtn">Stars</button>
-          </Link>
-          <Link to="/">
-            <button id="ConvergeBtn">Converge</button>
-          </Link>
-          <Link to="/rain">
-            <button
-              onClick={() => {
-                setRainProp(Config1DataRain);
-                setLightProp(Config1DataLight);
-              }}
-              id="RainBtn"
-            >
-              Rain
-            </button>
-          </Link>
-          <Link to="/sand">
-            <button id="Sandbtn">Sand</button>
-          </Link>
-          <Link to="/particle">
-            <button
-              onClick={() => {
-                setParticleProp(ParticleConfig);
-                setStartHslParticle(160);
-                setEndHslParticle(260);
-                setFire(true);
-                setSun(false);
-              }}
-              id="ParticleBtn"
-            >
-              Particle
-            </button>
-          </Link>
+    <div>
+      <div className="HeaderContainer">
+        <div className="PlayContainer" onClick={() => setPlay(!Play)}>
+          <div className={`PlayPause ${Play ? "Active" : ""}`}>
+            <div className={`PlayIcon ${Play ? "Active" : ""}`}></div>
+          </div>
+          <div className={`PlayText ${Play ? "Active" : ""}`}>Play</div>
         </div>
-        {location.pathname === "/stars" && (
-          <div className="OptionsButtons">
-            <button onClick={() => setStarProp(StarConfig2)}>Blue</button>
-            <button onClick={() => setStarProp(StarConfig3)}>Lerp</button>
-            <button onClick={() => setStarProp(StarConfig4)}>
-              Goofy Gravity
-            </button>
+      </div>
+      <div className="ButtonContainer">
+        <div className="Panel">
+          {/* Panel 1 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement1")}
+          >
+            <div
+              className={`Highlight ${
+                Object.keys(Panel).findIndex((key) => Panel[key]) + 1
+                  ? `Active${
+                      Object.keys(Panel).findIndex((key) => Panel[key]) + 1
+                    }`
+                  : ""
+              }`}
+            ></div>
+            <h1>Star's</h1>
           </div>
+          {/* Panel 2 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement2")}
+          >
+            <h1>Converge</h1>
+          </div>
+          {/* Panel 3 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement3")}
+          >
+            <h1>Sand</h1>
+          </div>
+          {/* Panel 4 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement4")}
+          >
+            <h1>Rain</h1>
+          </div>
+          {/* Panel 5 */}
+          <div
+            className="PanelItem"
+            onClick={() => togglePanel("PanelElement5")}
+          >
+            <h1>Particle</h1>
+          </div>
+        </div>
+      </div>
+      <div className="CanvasContainer" ref={containerRef}>
+        {Panel.PanelElement1 && (
+          <Stars canvasRef={canvasRef} stateProp={Play} />
         )}
-        {location.pathname === "/rain" && (
-          <div className="OptionsButtons">
-            <button
-              onClick={() => {
-                setRainProp(Config2DataRain);
-                setLightProp(Config2DataLight);
-              }}
-            >
-              Vibro
-            </button>
-            <button
-              onClick={() => {
-                setRainProp(Config3DataRain);
-                setLightProp(Config1DataLight);
-              }}
-            >
-              Wind
-            </button>
-          </div>
-        )}
-        {location.pathname === "/sand" && (
-          <div className="OptionsButtons">
-            <button onClick={() => setSandProp(SandConfig1)}>Reset</button>
-            <button onClick={() => setSandProp(SandConfig2)}>Lava</button>
-            <button onClick={() => setSandProp(SandConfig3)}>Rainbow</button>
-          </div>
-        )}
-        {location.pathname === "/particle" && (
-          <div className="OptionsButtons">
-            <button
-              onClick={() => {
-                setParticleProp(ParticleConfig);
-                setFire(false);
-                setSun(true);
-              }}
-            >
-              Point
-            </button>
-            <button
-              onClick={() => {
-                setParticleProp(ParticleConfig);
-                setStartHslParticle(0);
-                setEndHslParticle(60);
-              }}
-            >
-              Fire
-            </button>
-          </div>
+        {Panel.PanelElement2 && <MainWasm />}
+        {Panel.PanelElement3 && <Sand canvasRef={canvasRef} stateProp={Play} />}
+        {Panel.PanelElement4 && <Rain canvasRef={canvasRef} stateProp={Play} />}
+        {Panel.PanelElement5 && (
+          <Particle canvasRef={canvasRef} stateProp={Play} />
         )}
       </div>
-    </>
+      <div className="LinkContainer">
+        <div className="Links">
+          <a
+            href="https://github.com/TheHeartstriker/DynamicAnimations"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="Link"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.kadenwildauer.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="Link"
+          >
+            Portfolio
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -1,17 +1,28 @@
 import { useState, useEffect, useRef } from "react";
 
-function Rain({ RainProps, LightningProps }) {
-  let {
-    Distance,
-    Thickness,
-    Time,
-    Branches,
-    Roughness,
-    Chance,
-    Hue,
-    Sat,
-    Light,
-  } = LightningProps;
+function Rain({ canvasRef, stateProp }) {
+  //
+  // Warning this is my first react code and I refuse to change it much so enjoy the mess!
+  //
+  const RainData = useRef({
+    HEIGHT: 50,
+    SHEET: 3,
+    DROPWIDTH: 2,
+    DROPS: 100,
+    Wind: false,
+    WindSpeed: 0,
+  });
+  const LightningData = useRef({
+    Distance: 100,
+    Thickness: 3,
+    Time: 180,
+    Branches: 1,
+    Roughness: 100,
+    Chance: 5,
+    Hue: 300,
+    Sat: 100,
+    Light: 50,
+  });
   // Create references to the canvases two are needed on differet layers
   const rainCanvasRef = useRef(null);
   const lightningCanvasRef = useRef(null);
@@ -25,11 +36,11 @@ function Rain({ RainProps, LightningProps }) {
   // Clean up once unmounted preventing memory leaks backround rendering
   const animationFrameId = useRef(null);
   // Wind speed
-  const windSpeed = RainProps.WindSpeed || 0;
-  const wind = RainProps.Wind || false;
+  const windSpeed = RainData.current.WindSpeed || 0;
+  const wind = RainData.current.WindSpeed || false;
   // The rain array
   const [rainArray, setRainArray] = useState(
-    new Array(RainProps.DROPS).fill().map(() => {
+    new Array(RainData.current.DROPS).fill().map(() => {
       const startX = Math.floor(Math.random() * window.innerWidth);
       const startY = Math.floor(Math.random() * window.innerHeight);
       return {
@@ -39,7 +50,9 @@ function Rain({ RainProps, LightningProps }) {
         },
         speed: Math.random() * 5 + 5,
         x2: startX + windSpeed,
-        y2: startY + RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1),
+        y2:
+          startY +
+          RainData.current.HEIGHT / (Math.floor(Math.random() * 3) + 1),
       };
     })
   );
@@ -87,7 +100,7 @@ function Rain({ RainProps, LightningProps }) {
     rainCtx.beginPath();
     rainCtx.moveTo(x1, y1);
     rainCtx.lineTo(x2, y2);
-    rainCtx.lineWidth = RainProps.DROPWIDTH;
+    rainCtx.lineWidth = RainData.current.DROPWIDTH;
     rainCtx.strokeStyle = gradient;
     rainCtx.fill();
     rainCtx.stroke();
@@ -113,7 +126,7 @@ function Rain({ RainProps, LightningProps }) {
         drop.Start.x = Math.floor(Math.random() * width);
         drop.Start.y = 0;
         drop.x2 = drop.Start.x + windSpeed;
-        drop.y2 = RainProps.HEIGHT / (Math.floor(Math.random() * 3) + 1);
+        drop.y2 = RainData.current.HEIGHT / (Math.floor(Math.random() * 3) + 1);
       }
 
       return drop;
@@ -125,22 +138,23 @@ function Rain({ RainProps, LightningProps }) {
   //Function that draws the lightning bolt
   function Zeus(startX, startY, Thickness, Branches, Distance) {
     // Creates local references to the variables
-    let Check = Roughness;
+    let Check = LightningData.current.Roughness;
     let currentDistance = Distance;
     let currentThickness = Thickness;
-    let currentTime = Math.floor(Math.random() * Time) + 50;
+    let currentTime =
+      Math.floor(Math.random() * LightningData.current.Time) + 50;
     let accumulate = 0;
     let currentBranches = Branches;
     let Glow = currentThickness * 3;
 
-    for (let i = 0; i < Roughness; i++) {
+    for (let i = 0; i < LightningData.current.Roughness; i++) {
       accumulate += currentTime / 2;
       let timeoutId = setTimeout(() => {
         //Drawing values
         lightningCtx.beginPath();
         lightningCtx.shadowBlur = Glow;
-        lightningCtx.shadowColor = `hsl(${Hue}, ${Sat}%, ${Light}%)`;
-        lightningCtx.strokeStyle = `hsl(${Hue}, ${Sat}%, ${Light}%)`;
+        lightningCtx.shadowColor = `hsl(${LightningData.current.Hue}, ${LightningData.current.Sat}%, ${LightningData.current.Light}%)`;
+        lightningCtx.strokeStyle = `hsl(${LightningData.current.Hue}, ${LightningData.current.Sat}%, ${LightningData.current.Light}%)`;
         lightningCtx.lineWidth = currentThickness;
         //Drawing logic
         lightningCtx.moveTo(startX, startY);
@@ -168,7 +182,7 @@ function Rain({ RainProps, LightningProps }) {
         currentDistance /= 1.1;
         currentTime *= 1.1;
         //Calls a redraw when the loop is finished
-        if (i === Roughness - 1) {
+        if (i === LightningData.current.Roughness - 1) {
           ReDraw();
         }
       }, accumulate);
@@ -190,7 +204,7 @@ function Rain({ RainProps, LightningProps }) {
   //Imatatates naturaly occuring lightning logic
   function BranchChance(Check) {
     Check -= 1;
-    if (Math.random() * Check < Chance) {
+    if (Math.random() * Check < LightningData.current.Chance) {
       return true;
     }
   }
@@ -239,9 +253,9 @@ function Rain({ RainProps, LightningProps }) {
     Zeus(
       300 + Math.random() * (window.innerWidth - 600),
       0,
-      Thickness,
-      Branches,
-      Distance
+      LightningData.current.Thickness,
+      LightningData.current.Branches,
+      LightningData.current.Distance
     );
     // Clean up
     return () => {
@@ -250,22 +264,24 @@ function Rain({ RainProps, LightningProps }) {
   }, [lightningCtx, Reset]);
 
   return (
-    <div>
-      <canvas
-        ref={rainCanvasRef}
-        style={{ position: "absolute" }}
-        id="rainCanvas"
-        width={window.innerWidth}
-        height={window.innerHeight}
-      />
-      <canvas
-        ref={lightningCanvasRef}
-        style={{ position: "absolute" }}
-        id="lightningCanvas"
-        width={window.innerWidth}
-        height={window.innerHeight}
-      />
-    </div>
+    <>
+      <div>
+        <canvas
+          ref={rainCanvasRef}
+          style={{ position: "absolute" }}
+          id="rainCanvas"
+          width={window.innerWidth}
+          height={window.innerHeight}
+        />
+        <canvas
+          ref={lightningCanvasRef}
+          style={{ position: "absolute" }}
+          id="lightningCanvas"
+          width={window.innerWidth}
+          height={window.innerHeight}
+        />
+      </div>
+    </>
   );
 }
 

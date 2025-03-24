@@ -1,9 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 
-function Particle({ ParticleProps }) {
+function Particle({ canvasRef, stateProp }) {
   //Desctructuring the ParticleProps object
-  let { Fire, SunOn, StartHsl, EndHsl } = ParticleProps;
-  const canvasRef = useRef(null);
+  const AniState = useRef({
+    Fire: true,
+    SunOn: false,
+    StartHsl: 0,
+    EndHsl: 360,
+  });
   // Used for clean up once unmounted
   const animationFrameId = useRef(null);
   const [ctx, setCtx] = useState(null);
@@ -65,7 +69,6 @@ function Particle({ ParticleProps }) {
   }
   //Sets the array of points for the sun area
   function SunArea() {
-    if (ctx) return;
     const CenterX = window.innerWidth / 2;
     const CenterY = window.innerHeight / 2;
     const Radius = 250;
@@ -92,10 +95,10 @@ function Particle({ ParticleProps }) {
   }
   //Picks x allocation based on the type of animation
   function LocationX() {
-    if (Fire) {
+    if (AniState.current.Fire) {
       return generateBiasedRandom(0, window.innerWidth);
     }
-    if (SunOn) {
+    if (AniState.current.SunOn) {
       const point = SunPoint();
       if (Sun) {
         return point ? point.x : null;
@@ -104,10 +107,10 @@ function Particle({ ParticleProps }) {
   }
   //Picks y allocation based on the type of animation
   function LocationY() {
-    if (Fire) {
+    if (AniState.current.Fire) {
       return window.innerHeight;
     }
-    if (SunOn) {
+    if (AniState.current.SunOn) {
       const point = SunPoint();
       if (Sun) {
         return point ? point.y : null;
@@ -125,7 +128,9 @@ function Particle({ ParticleProps }) {
       this.vx = Math.random() * 8 - 4;
       this.vy = Math.random() * 8 - 4;
       this.alpha = 255;
-      this.hue = Math.random() * (EndHsl - StartHsl) + StartHsl;
+      this.hue =
+        Math.random() * (AniState.current.EndHsl - AniState.current.StartHsl) +
+        AniState.current.StartHsl;
       this.saturation = 50;
       this.lightness = 50;
       this.Subtract = Math.random() * 5 + 1;
@@ -156,7 +161,7 @@ function Particle({ ParticleProps }) {
   //Creates the array of particles
   function createParticles() {
     const newParticles = [];
-    for (let i = 0; i < 4000; i++) {
+    for (let i = 0; i < 3200; i++) {
       newParticles.push(new Particle());
     }
     setParticles(newParticles);
@@ -177,7 +182,8 @@ function Particle({ ParticleProps }) {
   }
 
   useEffect(() => {
-    if (SunOn) {
+    if (AniState.current.SunOn) {
+      console.log("sun on");
       SunArea();
     }
     if (ctx) {
@@ -192,13 +198,47 @@ function Particle({ ParticleProps }) {
     };
   }, [ctx, Reset]);
 
+  function OnClickHandle(startC, endC, fire, sun) {
+    if (startC !== undefined) AniState.current.StartHsl = startC;
+    if (endC !== undefined) AniState.current.EndHsl = endC;
+    if (fire !== undefined) {
+      AniState.current.Fire = fire;
+      setForceUpdate((prev) => !prev);
+    }
+    if (sun !== undefined) {
+      AniState.current.SunOn = sun;
+      setForceUpdate((prev) => !prev);
+    }
+  }
   return (
-    <canvas
-      ref={canvasRef}
-      id="myCanvas"
-      width={window.innerWidth}
-      height={window.innerHeight}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="myCanvas"
+        width={window.innerWidth}
+        height={window.innerHeight}
+      />
+      <div className="canvasBtnContainer">
+        <div
+          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => OnClickHandle(140, 260, undefined, undefined)}
+        >
+          Bluish
+        </div>
+        <div
+          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => OnClickHandle(70, 140, undefined, undefined)}
+        >
+          Green
+        </div>
+        <div
+          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => OnClickHandle(0, 60, undefined, undefined)}
+        >
+          Red
+        </div>
+      </div>
+    </>
   );
 }
 
