@@ -3,12 +3,12 @@ import React, { forwardRef } from "react";
 const DragonEye = forwardRef((props, ref) => {
   return (
     <svg
-      ref={ref}
       width="188"
       height="188"
       viewBox="0 0 188 188"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      ref={ref}
       {...props}
     >
       <g id="EyeBall" filter="url(#filter0_d_5_35)">
@@ -20,17 +20,6 @@ const DragonEye = forwardRef((props, ref) => {
           rx="74"
           fill="url(#paint0_radial_5_35)"
         />
-        <radialGradient
-          id="paint0_radial_5_35"
-          cx="0"
-          cy="0"
-          r="1"
-          gradientUnits="userSpaceOnUse"
-          gradientTransform="translate(94 94) rotate(90) scale(74)"
-        >
-          <stop stopColor="#FFBABA" />
-          <stop offset="1" stopColor="#4B0082" />
-        </radialGradient>
         <g id="InnerEye">
           <path
             id="Polygon 1"
@@ -45,23 +34,23 @@ const DragonEye = forwardRef((props, ref) => {
           <g id="Frame 8" clipPath="url(#clip0_5_35)">
             <path
               id="Polygon 4"
-              d="M92.5 132L78.2106 91.5H106.789L92.5 132Z"
+              d="M92.5 132L78.2106 90.75H106.789L92.5 132Z"
               fill="url(#paint1_linear_5_35)"
             />
             <path
               id="Polygon 5"
-              d="M92.5 51L106.789 91.5H78.2106L92.5 51Z"
+              d="M92.5 50L106.789 91.25H78.2106L92.5 50Z"
               fill="url(#paint2_linear_5_35)"
             />
             <path
               id="Polygon 6"
-              d="M92.5 64L98.9952 91.75H86.0048L92.5 64Z"
-              fill="black"
+              d="M92.5 63L98.9952 91.5H86.0048L92.5 63Z"
+              fill="#FF0000"
             />
             <path
               id="Polygon 7"
-              d="M92.5 119L86.0048 91.25H98.9952L92.5 119Z"
-              fill="black"
+              d="M92.5 120L86.0048 91.5H98.9952L92.5 120Z"
+              fill="#FF0000"
             />
           </g>
         </g>
@@ -102,12 +91,23 @@ const DragonEye = forwardRef((props, ref) => {
             result="shape"
           />
         </filter>
+        <radialGradient
+          id="paint0_radial_5_35"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(94 94) rotate(90) scale(74)"
+        >
+          <stop stopColor="#FFBABA" />
+          <stop offset="1" stopColor="#4B0082" />
+        </radialGradient>
         <linearGradient
           id="paint1_linear_5_35"
           x1="92.5"
-          y1="112.5"
+          y1="112.139"
           x2="92.5"
-          y2="78"
+          y2="77"
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#FF8C00" />
@@ -115,7 +115,7 @@ const DragonEye = forwardRef((props, ref) => {
         <linearGradient
           id="paint2_linear_5_35"
           x1="92.5"
-          y1="70.5"
+          y1="69.8611"
           x2="92.5"
           y2="105"
           gradientUnits="userSpaceOnUse"
