@@ -1,6 +1,14 @@
 /* Changed in SlidePage acording to the lightning color/hue */
 :root {
   --HUE: 0;
+  /* Maroon */
+  --Background: #3d0000;
+  /* Blood red */
+  --BloodRed: #8b0000;
+  --Crimson: #dc143c;
+  --Purple: #4b0082;
+  --NeonPurple: #8000ff;
+  --Amber: #ff8c00;
 }
 
 .CanvasContainer {
@@ -15,6 +23,7 @@
   z-index: 1;
   transition: 1.5s ease-in-out height, 1.5s ease-in-out width,
     1.5s ease-in-out border, 2s ease-in-out border-radius;
+  border: 3px solid var(--Crimson);
 }
 
 .CanvasContainer.grow {
