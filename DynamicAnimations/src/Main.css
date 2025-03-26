@@ -61,23 +61,26 @@ body {
 
 .PlayElementContainer {
   position: relative;
-  width: 50%;
-  height: 4rem;
+  width: 40%;
+  height: 35%;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 5;
-  background-color: var(--BloodRed);
+  background-color: var(--Purple);
   border-radius: 50px;
   margin-right: 50px;
 }
 
 .PlayPause {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 80%;
   width: 40%;
+  left: 5%;
   border-radius: 50px;
-  margin-left: 10px;
   z-index: 2;
   background-color: black;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -85,7 +88,7 @@ body {
 }
 
 .PlayPause.Active {
-  transform: translateX(110%);
+  transform: translateX(100%);
   background-color: var(--Background);
 }
 
@@ -94,25 +97,26 @@ body {
 }
 
 .PlayIcon {
-  height: 100%;
-  width: 100%;
-  background-image: url("https://img.icons8.com/ios-filled/50/dc143c/pause--v1.png");
+  height: 75%;
+  width: 75%;
+  background-image: url("https://img.icons8.com/ios-filled/50/8000ff/pause--v1.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .PlayIcon.Active {
-  background-image: url("https://img.icons8.com/ios-filled/50/dc143c/play--v1.png");
+  background-image: url("https://img.icons8.com/ios-filled/50/8000ff/play--v1.png");
 }
 
 .PlayText {
   position: relative;
   height: 85%;
   width: 50%;
+  left: 5%;
   border-radius: 50px;
   display: flex;
-  color: var(--Crimson);
+  color: var(--NeonPurple);
   justify-content: center;
   align-items: center;
   font-size: 2rem;
