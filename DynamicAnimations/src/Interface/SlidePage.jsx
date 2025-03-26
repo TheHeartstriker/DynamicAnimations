@@ -125,6 +125,7 @@ function Interface() {
 
   return (
     <div>
+      <div className="Background"></div>
       <div className="HeaderContainer">
         <div className="SacrificeContainer"></div>
         <div className="EyeContainer">

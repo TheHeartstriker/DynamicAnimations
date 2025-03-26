@@ -18,6 +18,15 @@ body {
   --Amber: #ff8c00;
 }
 
+.Background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("./Images/Background.svg");
+
+  z-index: -1;
+}
+
 .HeaderContainer {
   z-index: 500;
   width: 100%;
@@ -188,8 +197,16 @@ body {
 
 .PanelItem h1 {
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--Crimson);
+}
+
+#PanelElementId4 h1 {
+  color: black;
+}
+
+#PanelElementId5 h1 {
+  color: black;
 }
 
 .Highlight {
@@ -200,7 +217,7 @@ body {
   border-radius: 50px;
   z-index: -1;
   transition: transform 0.5s cubic-bezier(0, 0.85, 0.82, 0.99),
-    width 0.8s ease-in-out;
+    width 0.8s ease-in-out, background-color 0.8s ease-in-out;
 }
 
 /* Make the highlight adjust based on the fit content of an element */
@@ -218,9 +235,11 @@ body {
 }
 
 .Highlight.Active4 {
+  background-color: var(--Purple);
   transform: translateY(calc(300% + 60px));
 }
 
 .Highlight.Active5 {
+  background-color: var(--Purple);
   transform: translateY(calc(400% + 80px));
 }
