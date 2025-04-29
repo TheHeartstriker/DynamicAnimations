@@ -1,17 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import SDLModule from "./Wasm/sdl_app.mjs?init";
-
-const loadWasm = async (canvas) => {
-  const wasm = await SDLModule({
-    canvas,
-    wasi_snapshot_preview1: {
-      proc_exit: (code) => {
-        console.log(`WASM exited with code ${code}`);
-      },
-    },
-  });
-  return wasm;
-};
+//
+// Put a gun to my head and still would't be able to tell you why 50+ error when wasm loads
+// It happen only here! My other tests never did this!
+//
 function MainWasm() {
   const [wasm, setWasm] = useState(null);
   const canvasRef = useRef(null);
@@ -21,37 +12,41 @@ function MainWasm() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-  //load wasm module also loads main function
-  useEffect(() => {
-    if (canvasRef.current) {
-      const fetchWasm = async () => {
-        if (canvasRef.current && !wasm && !isLoaded.current) {
-          const wasmModule = await loadWasm(canvasRef.current);
-          setWasm(wasmModule);
-          isLoaded.current = true;
-        }
-      };
-      fetchWasm();
-    }
-  }, [wasm]);
-  //Window size event listener
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    });
 
-    return () => {
-      window.removeEventListener("resize", () => {});
+  // Load WASM module
+  useEffect(() => {
+    const loadWasm = async () => {
+      if (canvasRef.current && !wasm && !isLoaded.current) {
+        try {
+          console.log("Attempting to load WASM module...");
+          const module = await import(
+            "./wasm/build/DynamicAnimations.mjs?init"
+          );
+          const wasmInstance = await module.default({
+            canvas: canvasRef.current,
+            locateFile: (path, prefix) => {
+              console.log(`Locating file: ${path}`);
+              return `${prefix}${path}`;
+            },
+            print: (msg) => console.log(msg),
+            printErr: (msg) => console.error(msg),
+          });
+          setWasm(wasmInstance);
+          isLoaded.current = true;
+          console.log("WASM module loaded successfully");
+        } catch (error) {
+          console.error("Failed to load WASM module:", error);
+        }
+      }
     };
+    loadWasm();
   }, []);
-  //Set arguments for the wasm module
+  //Send width and height to wasm when needed
   useEffect(() => {
     if (canvasRef.current) {
-      // Update the canvas size to match the window size
       canvasRef.current.width = windowSize.width;
       canvasRef.current.height = windowSize.height;
 
-      // Pass the updated size to the WASM module
       if (wasm) {
         wasm._setArguments(windowSize.height, windowSize.width, AniType);
       }
@@ -60,7 +55,7 @@ function MainWasm() {
 
   return (
     <div>
-      <canvas ref={canvasRef} id="myCanvas"></canvas>
+      <canvas ref={canvasRef} id="wasmCanvas"></canvas>
     </div>
   );
 }

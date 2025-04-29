@@ -1,0 +1,4 @@
+C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/build/CMakeFiles/DynamicAnimations.dir
+C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/build/CMakeFiles/custom_clean.dir
+C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/build/CMakeFiles/edit_cache.dir
+C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/build/CMakeFiles/rebuild_cache.dir
