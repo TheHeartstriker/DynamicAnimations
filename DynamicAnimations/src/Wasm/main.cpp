@@ -9,8 +9,8 @@
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 
-int Winheight;
-int Winwidth;
+int Winheight = 600;
+int Winwidth = 800;
 int TypeAni = 1;
 
 void render();
@@ -44,8 +44,9 @@ int main() {
   // Intialize SDL
   SDL_Init(SDL_INIT_VIDEO);
   // Create a window and renderer
-  window = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                            Winheight, Winwidth, SDL_WINDOW_SHOWN);
+  window = SDL_CreateWindow("Dynamic Animations", SDL_WINDOWPOS_CENTERED,
+                            SDL_WINDOWPOS_CENTERED, Winwidth, Winheight,
+                            SDL_WINDOW_SHOWN);
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
   // Main loop
   emscripten_set_main_loop(render, 0, 1);
