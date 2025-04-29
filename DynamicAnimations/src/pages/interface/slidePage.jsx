@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
-import MainWasm from "../MainWasm.jsx";
-import Stars from "../AnimationLogic/Stars.jsx";
-import Rain from "../AnimationLogic/Rain.jsx";
-import Sand from "../AnimationLogic/Sand.jsx";
-import Particle from "../AnimationLogic/Particle.jsx";
-import DragonEye from "../Images/DragonEye.jsx";
+import MainWasm from "../../mainWasm.jsx";
+import Stars from "../animationLogic/stars.jsx";
+import Rain from "../animationLogic/rain.jsx";
+import Sand from "../animationLogic/sand.jsx";
+import Particle from "../animationLogic/particle.jsx";
+import DragonEye from "../../images/DragonEye.jsx";
 function Interface() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
@@ -83,9 +83,9 @@ function Interface() {
         const El = document.getElementById(`PanelElementId${index + 1}`);
         if (Highlight && El) {
           const computedStyle = window.getComputedStyle(El);
-          const width = parseFloat(computedStyle.width); // Convert width to a number
-          Highlight.style.width = `${width + 25}px`; // Add 100 and set the width
-          Highlight.style.height = computedStyle.height; // Match the height
+          const width = parseFloat(computedStyle.width);
+          Highlight.style.width = `${width + 25}px`;
+          Highlight.style.height = computedStyle.height;
         }
       }
     });
