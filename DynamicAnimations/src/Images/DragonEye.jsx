@@ -21,38 +21,19 @@ const DragonEye = forwardRef((props, ref) => {
           fill="url(#paint0_radial_5_35)"
         />
         <g id="InnerEye">
-          <path
-            id="Polygon 1"
-            d="M93 34L112.919 91H73.0814L93 34Z"
-            fill="#8000FF"
-          />
-          <path
-            id="Polygon 2"
-            d="M93 148L73.0814 91H112.919L93 148Z"
-            fill="#8000FF"
-          />
-          <g id="Frame 8" clipPath="url(#clip0_5_35)">
+          <g id="PurpleTri">
             <path
-              id="Polygon 4"
-              d="M92.5 132L78.2106 90.75H106.789L92.5 132Z"
-              fill="url(#paint1_linear_5_35)"
-            />
-            <path
-              id="Polygon 5"
-              d="M92.5 50L106.789 91.25H78.2106L92.5 50Z"
-              fill="url(#paint2_linear_5_35)"
-            />
-            <path
-              id="Polygon 6"
-              d="M92.5 63L98.9952 91.5H86.0048L92.5 63Z"
-              fill="#FF0000"
-            />
-            <path
-              id="Polygon 7"
-              d="M92.5 120L86.0048 91.5H98.9952L92.5 120Z"
-              fill="#FF0000"
+              d="M93.9189 151L74 94L93.9189 37L113.838 94L93.9189 151Z"
+              fill="#8000FF"
+              fillOpacity="0.5"
+              style={{ mixBlendMode: "multiply" }}
             />
           </g>
+          <path
+            id="BlackTri"
+            d="M101.897 93.9443H102L101.948 94.1279L102 94.3115H101.897L93.5 124.256L85.1025 94.3115H85L85.0508 94.1279L85 93.9443H85.1025L93.5 64L101.897 93.9443Z"
+            fill="black"
+          />
         </g>
       </g>
       <defs>
@@ -102,34 +83,6 @@ const DragonEye = forwardRef((props, ref) => {
           <stop stopColor="#FFBABA" />
           <stop offset="1" stopColor="#4B0082" />
         </radialGradient>
-        <linearGradient
-          id="paint1_linear_5_35"
-          x1="92.5"
-          y1="112.139"
-          x2="92.5"
-          y2="77"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#FF8C00" />
-        </linearGradient>
-        <linearGradient
-          id="paint2_linear_5_35"
-          x1="92.5"
-          y1="69.8611"
-          x2="92.5"
-          y2="105"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#FF8C00" />
-        </linearGradient>
-        <clipPath id="clip0_5_35">
-          <rect
-            width="33"
-            height="105"
-            fill="white"
-            transform="translate(76 39)"
-          />
-        </clipPath>
       </defs>
     </svg>
   );
