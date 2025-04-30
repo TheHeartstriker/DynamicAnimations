@@ -5,7 +5,6 @@ import { animate, createAnimatable } from "animejs";
 function Eye() {
   const DragonEyeRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
-  const preMouseRef = useRef({ x: 0, y: 0 });
   const animationIdRef = useRef(null);
 
   function anitAnimate() {
@@ -61,9 +60,7 @@ function Eye() {
       animatable[index].y(targetY);
     });
   }
-  //
-  // Make the prev mouse check
-  //
+
   useEffect(() => {
     const { animatable, items } = anitAnimate();
     function onMouseMove(event) {
@@ -83,12 +80,6 @@ function Eye() {
       }
     };
   }, []);
-
-  // useEffect(() => {
-  //   if (DragonEyeRef.current) {
-  //     FollowCursor();
-  //   }
-  // }, [Mouse]);
 
   return (
     <div className="EyeContainer">

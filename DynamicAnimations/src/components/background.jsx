@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { animate, utils, stagger } from "animejs";
-import BackGround from "../../images/backgroundSvg";
+import BackGround from "../images/backgroundSvg";
+import "../styles/background.css"; // Ensure you have the correct path to your CSS file
 
 function Background() {
   const backgroundRef = useRef(null);
@@ -10,7 +11,7 @@ function Background() {
       easing: "easeInOutSine",
       scale: [1, 1.1, 1],
       duration: 6500,
-      delay: stagger(300, { start: 800, from: "center" }),
+      delay: stagger(300, { start: 0, from: "center" }),
       loop: true,
       alternate: true,
     });
