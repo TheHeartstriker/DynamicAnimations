@@ -1,4 +1,4 @@
-import DragonEye from "../../images/DragonEye.jsx";
+import DragonEye from "../images/DragonEye.jsx";
 import { useState, useRef, useEffect } from "react";
 import { animate, createAnimatable } from "animejs";
 
@@ -28,8 +28,8 @@ function Eye() {
     const radial = DragonEyeRef.current.querySelector("#paint0_radial_5_35");
     if (!radial) return;
 
-    const targetX = 94 + relX * 0.3;
-    const targetY = 94 + relY * 0.3;
+    const targetX = 94 + relX * 1.1;
+    const targetY = 94 + relY * 1.1;
 
     radial.setAttribute(
       "gradientTransform",
@@ -41,7 +41,6 @@ function Eye() {
     if (!animatable || !items) {
       return;
     }
-    const radial = DragonEyeRef.current.querySelector("#paint0_radial_5_35");
     items.forEach((item, index) => {
       //Bounding
       const boundingRect = item.getBoundingClientRect();
@@ -50,7 +49,6 @@ function Eye() {
       const relativeX = mouseRef.current.x - left;
       const relativeY = mouseRef.current.y - top;
       let targetX, targetY;
-
       if (item.id === "InnerEye") {
         targetX = (relativeX - width / 2) * 0.03;
         targetY = (relativeY - height / 2) * 0.015;

@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
+import Background from "../../components/background.jsx";
 import MainWasm from "../../mainWasm.jsx";
 import Stars from "../animationLogic/stars.jsx";
 import Rain from "../animationLogic/rain.jsx";
 import Sand from "../animationLogic/sand.jsx";
 import Particle from "../animationLogic/particle.jsx";
-import Eye from "./eye.jsx";
+import Eye from "../../components/eye.jsx";
 function Interface() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
@@ -68,7 +69,7 @@ function Interface() {
 
   return (
     <div>
-      <div className="Background"></div>
+      <Background />
       <div className="HeaderContainer">
         <div className="SacrificeContainer"></div>
         <Eye />
