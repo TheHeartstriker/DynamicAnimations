@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { animate, utils, stagger } from "animejs";
-import BackGround from "../images/Background";
-import { use } from "react";
+import BackGround from "../../images/backgroundSvg";
 
 function Background() {
   const backgroundRef = useRef(null);
@@ -10,8 +9,8 @@ function Background() {
     animate(".wave", {
       easing: "easeInOutSine",
       scale: [1, 1.1, 1],
-      duration: 3000,
-      delay: stagger(200, { start: 500, from: "center" }),
+      duration: 6500,
+      delay: stagger(300, { start: 800, from: "center" }),
       loop: true,
       alternate: true,
     });

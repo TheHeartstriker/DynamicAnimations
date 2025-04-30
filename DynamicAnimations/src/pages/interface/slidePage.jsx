@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import Background from "../../components/background.jsx";
+import Background from "../../components/background/background.jsx";
 import MainWasm from "../../mainWasm.jsx";
 import Stars from "../animationLogic/stars.jsx";
 import Rain from "../animationLogic/rain.jsx";

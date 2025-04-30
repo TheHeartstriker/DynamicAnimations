@@ -10,6 +10,8 @@ body {
 :root {
   /* Maroon */
   --Background: #3d0000;
+  --Background2: #0a0a0a;
+
   /* Blood red */
   --BloodRed: #8b0000;
   --Crimson: #dc143c;

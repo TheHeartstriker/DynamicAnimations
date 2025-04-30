@@ -13,8 +13,8 @@ const BackGround = forwardRef((props, ref) => {
       ref={ref}
       {...props}
     >
-      <g clip-path="url(#clip0_259_2)" filter="url(#filter0_f_259_2)">
-        <path d="M1980 0H0V1080H1980V0Z" fill="#3D0000" />
+      <g clipPath="url(#clip0_259_2)" filter="url(#filter0_f_259_2)">
+        <path d="M1980 0H0V1080H1980V0Z" fill="#3d0000" />
         <path
           className="wave"
           d="M0 727.2L36.74 709.56C73.26 691.74 146.74 656.46 220 653.76C293.26 651.06 366.74 680.94 440 706.14C513.26 731.34 586.74 751.86 660 757.26C733.26 762.66 806.74 752.94 880 732.06C953.26 711 1026.74 678.6 1100 667.26C1173.26 655.74 1246.74 665.46 1320 657.36C1393.26 649.26 1466.74 623.34 1540 619.2C1613.26 615.06 1686.74 632.34 1760 622.8C1833.26 613.26 1906.74 576.54 1943.26 558.36L1980 540V1081.8H1943.26C1906.74 1081.8 1833.26 1081.8 1760 1081.8C1686.74 1081.8 1613.26 1081.8 1540 1081.8C1466.74 1081.8 1393.26 1081.8 1320 1081.8C1246.74 1081.8 1173.26 1081.8 1100 1081.8C1026.74 1081.8 953.26 1081.8 880 1081.8C806.74 1081.8 733.26 1081.8 660 1081.8C586.74 1081.8 513.26 1081.8 440 1081.8C366.74 1081.8 293.26 1081.8 220 1081.8C146.74 1081.8 73.26 1081.8 36.74 1081.8H0V727.2Z"
@@ -59,9 +59,9 @@ const BackGround = forwardRef((props, ref) => {
           width="2000"
           height="1100"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
