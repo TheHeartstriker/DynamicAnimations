@@ -1,4 +1,4 @@
-import DragonEye from "../images/DragonEye.jsx";
+import DragonEye from "../images/dragonEye.jsx";
 import { useState, useRef, useEffect } from "react";
 import { animate, createAnimatable } from "animejs";
 
