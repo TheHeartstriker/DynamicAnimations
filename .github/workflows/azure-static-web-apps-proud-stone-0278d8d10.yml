@@ -20,18 +20,14 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: Clear Cache
-        run: |
-          rm -rf node_modules
-          rm -rf .vite
-          npm install
-
       - name: List Files
         run: |
+          cd ./DynamicAnimations 
           ls -R
 
       - name: Clean Build Directory
         run: |
+          cd ./DynamicAnimations 
           rm -rf dist
 
       - name: Build And Deploy
