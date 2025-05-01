@@ -19,6 +19,21 @@ jobs:
         with:
           submodules: true
           lfs: false
+
+      - name: Clear Cache
+        run: |
+          rm -rf node_modules
+          rm -rf .vite
+          npm install
+
+      - name: List Files
+        run: |
+          ls -R
+
+      - name: Clean Build Directory
+        run: |
+          rm -rf dist
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
