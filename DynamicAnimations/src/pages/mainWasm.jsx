@@ -20,7 +20,7 @@ function MainWasm() {
         try {
           console.log("Attempting to load WASM module...");
           const module = await import(
-            "./wasm/build/DynamicAnimations.mjs?init"
+            "../wasm/build/DynamicAnimations.mjs?init"
           );
           const wasmInstance = await module.default({
             canvas: canvasRef.current,
