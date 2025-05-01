@@ -20,16 +20,6 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: List Files
-        run: |
-          cd ./DynamicAnimations 
-          ls -R
-
-      - name: Clean Build Directory
-        run: |
-          cd ./DynamicAnimations 
-          rm -rf dist
-
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
