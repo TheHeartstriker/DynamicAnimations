@@ -6,7 +6,7 @@ import Interface from "./pages/interface/slidePage.jsx";
 //Css
 import "./styles/canvas.css";
 import "./styles/main.css";
-import "./site.css";
+import "./styles/site.css";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
