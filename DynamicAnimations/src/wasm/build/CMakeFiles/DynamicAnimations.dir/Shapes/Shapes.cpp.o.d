@@ -260,4 +260,5 @@ CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_timer.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_version.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_locale.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_misc.h
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_misc.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cmath

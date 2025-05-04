@@ -5,12 +5,13 @@
 #include <iostream>
 
 #include "Converge/ConvergeHeader.h"
+#include "particle/particleHeader.h"
 
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
 
-int Winheight = 600;
-int Winwidth = 800;
+int Winheight;
+int Winwidth;
 int TypeAni = 1;
 
 void render();
@@ -36,6 +37,8 @@ void render() {
   SDL_RenderClear(renderer);
   if (TypeAni == 1) {
     MainConvergeCall(renderer);
+  } else if (TypeAni == 2) {
+    mainCall(renderer);
   }
   SDL_RenderPresent(renderer);
 }
