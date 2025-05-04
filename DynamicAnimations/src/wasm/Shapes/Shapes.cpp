@@ -40,42 +40,40 @@ void ChoasOrbWithGlow(SDL_Renderer* renderer, int radius, int cx, int cy,
   // Store the current blend mode
   SDL_BlendMode originalBlendMode;
   SDL_GetRenderDrawBlendMode(renderer, &originalBlendMode);
-
-  // Enable alpha blending
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
   // Total radius including glow
   int totalRadius = radius + glowRadius;
 
-  // Iterate over a bounding box around the circle
-  for (int y = cy - totalRadius; y <= cy + totalRadius; y++) {
-    for (int x = cx - totalRadius; x <= cx + totalRadius; x++) {
-      // Calculate distance from the center
-      float dx = static_cast<float>(x - cx);
-      float dy = static_cast<float>(y - cy);
-      float distance = std::sqrt(dx * dx + dy * dy);
+  // Step size for radial gradient (adjust for quality vs. performance)
+  const int radialStep = 2;  // Draw a filled circle every 2 pixels
 
-      // Skip pixels outside the total radius
-      if (distance > totalRadius) continue;
+  // Iterate radially from the center to the glow edge
+  for (int r = 0; r <= totalRadius; r += radialStep) {
+    // Calculate normalized distance (0 at center, 1 at glow edge)
+    float t = static_cast<float>(r) / totalRadius;
 
-      // Calculate normalized distance (0 at center, 1 at glow edge)
-      float t = distance / totalRadius;
+    // Quadratic falloff for smooth gradient
+    float alphaFactor = 1.0f - t * t;  // Quadratic falloff
+    Uint8 currentAlpha = static_cast<Uint8>(color.a * alphaFactor * 0.2f);
 
-      // Quadratic falloff for smooth gradient (fades to 0 at the edge)
-      float alphaFactor =
-          1.0f -
-          t * t;  // Adjust for desired falloff (e.g., 1.0f - t for linear)
-      Uint8 currentAlpha =
-          static_cast<Uint8>(color.a * alphaFactor * 0.2f);  // Scale intensity
+    // If within the solid circle radius, use full opacity
+    if (r <= radius) {
+      currentAlpha = color.a;  // Solid circle
+    }
 
-      // Draw pixel with gradient color
-      SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, currentAlpha);
-      SDL_RenderDrawPoint(renderer, x, y);
+    // Skip if alpha is negligible
+    if (currentAlpha == 0) continue;
+
+    // Set color for this radial step
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, currentAlpha);
+
+    // Draw a filled circle for this radius
+    for (int y = cy - r; y <= cy + r; y++) {
+      int dx = static_cast<int>(std::sqrt(r * r - (y - cy) * (y - cy)));
+      SDL_RenderDrawLine(renderer, cx - dx, y, cx + dx, y);
     }
   }
-
-  // Draw the solid circle on top
-  ChoasOrb(renderer, radius, cx, cy, color);
 
   // Restore the original blend mode
   SDL_SetRenderDrawBlendMode(renderer, originalBlendMode);

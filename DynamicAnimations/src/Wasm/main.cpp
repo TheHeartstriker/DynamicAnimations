@@ -38,7 +38,7 @@ void render() {
   if (TypeAni == 1) {
     MainConvergeCall(renderer);
   } else if (TypeAni == 2) {
-    mainCall(renderer);
+    mainParticle(renderer);
   }
   SDL_RenderPresent(renderer);
 }

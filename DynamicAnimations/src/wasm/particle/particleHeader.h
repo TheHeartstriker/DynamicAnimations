@@ -3,6 +3,6 @@
 
 #include <SDL2/SDL.h>
 
-void mainCall(SDL_Renderer* renderer);
+void mainParticle(SDL_Renderer* renderer);
 
 #endif

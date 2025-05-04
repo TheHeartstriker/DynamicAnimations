@@ -8,8 +8,8 @@
 extern int Winwidth;
 extern int Winheight;
 
-int intialWinwidth = Winwidth;
-int intialWinheight = Winheight;
+static int intialWinwidth = Winwidth;
+static int intialWinheight = Winheight;
 
 static std::random_device rd;
 static std::mt19937 gen(rd());
