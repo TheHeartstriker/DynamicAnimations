@@ -5,11 +5,18 @@ attribute vec2 a_texCoord;
 varying vec2 v_texCoord;
 
 uniform vec2 u_resolution;
+uniform vec2 u_translation; // New uniform for moving the circle
 
 void main() {
-  // Convert position to clip space, accounting for aspect ratio
-  vec2 scaledPosition = a_position * vec2(u_resolution.y / u_resolution.x, 1.0);
-  gl_Position = vec4(scaledPosition, 0.0, 1.0);
+  // Convert position from pixel coordinates to normalized device coordinates
+  vec2 normalizedPosition = a_position + u_translation; // Apply translation
+  normalizedPosition = normalizedPosition / u_resolution; // Scale to [0, 1]
+  normalizedPosition = normalizedPosition * 2.0 - 1.0; // Map to [-1, 1]
+
+  // Flip y-axis if needed (WebGL has y=1 at the top)
+  normalizedPosition.y = -normalizedPosition.y;
+
+  gl_Position = vec4(normalizedPosition, 0.0, 1.0);
   v_texCoord = a_texCoord;
 }
 `;

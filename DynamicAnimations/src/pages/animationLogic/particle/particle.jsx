@@ -16,7 +16,7 @@ function Particle({ canvasRef, stateProp }) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       // After resizing the canvas, we need to get the context again
-      setCtx(canvas.getContext("2d"));
+      setCtx(canvas.getContext("webgl2"));
       // Where the redrawing of the canvas happens
     };
     // Event listener where the resizeCanvas function is called
@@ -26,7 +26,13 @@ function Particle({ canvasRef, stateProp }) {
     };
   }, []);
 
-  function toClipSpace(x, y) {}
+  function toClipSpace(xPx, yPx) {
+    let width = canvasRef.current.width;
+    let height = canvasRef.current.height;
+    let xClip = (xPx / width) * 2 - 1;
+    let yClip = 1 - (yPx / height) * 2;
+    return [xClip, yClip];
+  }
 
   function drawParticles() {
     const gl = ctx;
@@ -34,20 +40,20 @@ function Particle({ canvasRef, stateProp }) {
 
     // Quad vertex data: [x, y, u, v]
     const vertices = new Float32Array([
-      -0.1,
-      -0.1,
+      -50.0,
+      -50.0,
       0.0,
       0.0, // Bottom-left
-      0.1,
-      -0.1,
+      50.0,
+      -50.0,
       1.0,
       0.0, // Bottom-right
-      -0.1,
-      0.1,
+      -50.0,
+      50.0,
       0.0,
       1.0, // Top-left
-      0.1,
-      0.1,
+      50.0,
+      50.0,
       1.0,
       1.0, // Top-right
     ]);
@@ -67,6 +73,10 @@ function Particle({ canvasRef, stateProp }) {
     // Locate and enable position attribute
     const positionLoc = gl.getAttribLocation(program, "a_position");
     const texCoordLoc = gl.getAttribLocation(program, "a_texCoord");
+    const translationLocation = gl.getUniformLocation(
+      programRef.current,
+      "u_translation"
+    );
 
     // Enable attributes: each vertex has 4 floats (x, y, u, v)
     gl.enableVertexAttribArray(positionLoc);
@@ -88,6 +98,8 @@ function Particle({ canvasRef, stateProp }) {
       gl.canvas.height
     );
 
+    gl.uniform2f(translationLocation, 0.0, 0.0); // No translation
+
     // Enable alpha blending
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -95,6 +107,7 @@ function Particle({ canvasRef, stateProp }) {
     // Clear canvas
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
     // Draw triangles
     gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
