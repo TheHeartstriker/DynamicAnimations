@@ -5,7 +5,7 @@ attribute vec2 a_texCoord;
 varying vec2 v_texCoord;
 
 uniform vec2 u_resolution;
-uniform vec2 u_translation; // New uniform for moving the circle
+uniform vec2 u_translation; 
 
 void main() {
   // Convert position from pixel coordinates to normalized device coordinates
@@ -92,4 +92,43 @@ export function initWebGL(canvasRef, programRef) {
   }
   programRef.current = program;
   gl.useProgram(program);
+}
+
+export function defineBuffer(gl) {
+  //
+  // Defines view box and stucture of what we rendering
+  //
+
+  const vertices = new Float32Array([
+    -50.0,
+    -50.0,
+    0.0,
+    0.0, // Bottom-left
+    50.0,
+    -50.0,
+    1.0,
+    0.0, // Bottom-right
+    -50.0,
+    50.0,
+    0.0,
+    1.0, // Top-left
+    50.0,
+    50.0,
+    1.0,
+    1.0, // Top-right
+  ]);
+
+  const indices = new Uint16Array([0, 1, 2, 2, 1, 3]);
+
+  // Create and bind vertex buffer
+  const vertexBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+  // Create and bind index buffer
+  const indexBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+
+  return { vertexBuffer, indexBuffer, indices };
 }

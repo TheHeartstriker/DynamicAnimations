@@ -1,8 +1,14 @@
 import { useEffect, useState, useRef } from "react";
-import { vertexShader, fragmentShader, initWebGL } from "./FragVec";
+import {
+  vertexShader,
+  fragmentShader,
+  initWebGL,
+  defineBuffer,
+} from "./FragVec";
 function Particle({ canvasRef, stateProp }) {
   const [ctx, setCtx] = useState(null);
   const programRef = useRef(null);
+  const [particles, setParticles] = useState([]);
 
   //Inital canvas setup
   useEffect(() => {
@@ -26,59 +32,36 @@ function Particle({ canvasRef, stateProp }) {
     };
   }, []);
 
-  function toClipSpace(xPx, yPx) {
-    let width = canvasRef.current.width;
-    let height = canvasRef.current.height;
-    let xClip = (xPx / width) * 2 - 1;
-    let yClip = 1 - (yPx / height) * 2;
-    return [xClip, yClip];
+  function createParticleArray() {
+    for (let i = 0; i < 100; i++) {
+      let particle = {
+        position: [
+          Math.random() * window.innerWidth,
+          Math.random() * window.innerHeight,
+        ],
+        color: [Math.random(), Math.random(), Math.random()],
+        size: Math.random() * 5 + 1, // Random size between 1 and 6
+      };
+    }
   }
 
   function drawParticles() {
     const gl = ctx;
     const program = programRef.current;
+    let indices = defineBuffer(gl).indices;
 
-    // Quad vertex data: [x, y, u, v]
-    const vertices = new Float32Array([
-      -50.0,
-      -50.0,
-      0.0,
-      0.0, // Bottom-left
-      50.0,
-      -50.0,
-      1.0,
-      0.0, // Bottom-right
-      -50.0,
-      50.0,
-      0.0,
-      1.0, // Top-left
-      50.0,
-      50.0,
-      1.0,
-      1.0, // Top-right
-    ]);
-
-    const indices = new Uint16Array([0, 1, 2, 2, 1, 3]);
-
-    // Create and bind vertex buffer
-    const vertexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-
-    // Create and bind index buffer
-    const indexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
-
-    // Locate and enable position attribute
+    //
+    // Individual particle rendering
+    //
+    //set res
+    gl.uniform2f(
+      gl.getUniformLocation(program, "u_resolution"),
+      gl.canvas.width,
+      gl.canvas.height
+    );
+    // Positioning
     const positionLoc = gl.getAttribLocation(program, "a_position");
     const texCoordLoc = gl.getAttribLocation(program, "a_texCoord");
-    const translationLocation = gl.getUniformLocation(
-      programRef.current,
-      "u_translation"
-    );
-
-    // Enable attributes: each vertex has 4 floats (x, y, u, v)
     gl.enableVertexAttribArray(positionLoc);
     gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 4 * 4, 0);
 
@@ -87,19 +70,14 @@ function Particle({ canvasRef, stateProp }) {
 
     // Set uniforms
     gl.useProgram(program);
-    gl.uniform3f(gl.getUniformLocation(program, "u_color"), 1.0, 0.5, 0.2);
     gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.1);
     gl.uniform1f(gl.getUniformLocation(program, "u_outerRadius"), 0.5);
     gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.5);
 
-    gl.uniform2f(
-      gl.getUniformLocation(program, "u_resolution"),
-      gl.canvas.width,
-      gl.canvas.height
+    const translationLocation = gl.getUniformLocation(
+      programRef.current,
+      "u_translation"
     );
-
-    gl.uniform2f(translationLocation, 0.0, 0.0); // No translation
-
     // Enable alpha blending
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -108,8 +86,14 @@ function Particle({ canvasRef, stateProp }) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+    // Draw first particle
+    gl.uniform3f(gl.getUniformLocation(program, "u_color"), 1.0, 0.5, 0.5); // Color for the first particle
+    gl.uniform2f(translationLocation, 150, 150); // Position of the first particle
+    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 
-    // Draw triangles
+    // Draw second particle
+    gl.uniform3f(gl.getUniformLocation(program, "u_color"), 0.2, 0.8, 1.0); // Color for the second particle
+    gl.uniform2f(translationLocation, 300, 300); // Position of the second particle
     gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
   }
 
