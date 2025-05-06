@@ -33,16 +33,62 @@ function Particle({ canvasRef, stateProp }) {
   }, []);
 
   function createParticleArray() {
-    for (let i = 0; i < 100; i++) {
+    let particlesArray = [];
+    for (let i = 0; i < 1000; i++) {
       let particle = {
         position: [
           Math.random() * window.innerWidth,
           Math.random() * window.innerHeight,
         ],
-        color: [Math.random(), Math.random(), Math.random()],
-        size: Math.random() * 5 + 1, // Random size between 1 and 6
+        color: [Math.random(), Math.random(), Math.random(), 1.0],
+        size: Math.random() * 5 + 1,
+        velX: Math.random() * 2 - 1,
+        velY: Math.random() * 2 - 1,
+        sub: Math.random() * 0.01, // Speed of fading
       };
+      particlesArray.push(particle);
     }
+    setParticles(particlesArray);
+  }
+
+  function drawScene(gl, program, indices, translationLocation) {
+    // Clear canvas
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
+    particles.forEach((particle) => {
+      // Set the particle color
+      gl.uniform4f(
+        gl.getUniformLocation(program, "u_color"),
+        particle.color[0], // Red
+        particle.color[1], // Green
+        particle.color[2], // Blue
+        particle.color[3] // Alpha
+      );
+      // Set the particle position
+      gl.uniform2f(
+        translationLocation,
+        particle.position[0], // X position
+        particle.position[1] // Y position
+      );
+      // Draw the particle
+      gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+
+      particle.position[0] += particle.velX; // Update X position
+      particle.position[1] += particle.velY; // Update Y position
+      particle.color[3] = Math.max(0, particle.color[3] - particle.sub); // Fade out alpha
+      if (particle.color[3] <= 0) {
+        particle.color[3] = 1.0; // Reset alpha if it fades out
+        particle.position[0] = Math.random() * window.innerWidth; // Reset X position
+        particle.position[1] = Math.random() * window.innerHeight; // Reset Y position
+      }
+    });
+
+    // Request the next frame
+    requestAnimationFrame(() =>
+      drawScene(gl, program, indices, translationLocation)
+    );
   }
 
   function drawParticles() {
@@ -81,20 +127,9 @@ function Particle({ canvasRef, stateProp }) {
     // Enable alpha blending
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-    // Clear canvas
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-    // Draw first particle
-    gl.uniform3f(gl.getUniformLocation(program, "u_color"), 1.0, 0.5, 0.5); // Color for the first particle
-    gl.uniform2f(translationLocation, 150, 150); // Position of the first particle
-    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-
-    // Draw second particle
-    gl.uniform3f(gl.getUniformLocation(program, "u_color"), 0.2, 0.8, 1.0); // Color for the second particle
-    gl.uniform2f(translationLocation, 300, 300); // Position of the second particle
-    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
+    createParticleArray();
+    if (particles.length === 0) return;
+    drawScene(gl, program, indices, translationLocation);
   }
 
   useEffect(() => {

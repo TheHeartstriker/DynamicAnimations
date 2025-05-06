@@ -25,7 +25,7 @@ void main() {
 export const fragmentShader = `precision mediump float;
 varying vec2 v_texCoord;
 
-uniform vec3 u_color;
+uniform vec4 u_color; // Ensure this is a vec4
 uniform float u_innerRadius;
 uniform float u_outerRadius;
 uniform float u_intensity;
@@ -35,18 +35,18 @@ void main() {
   float dist = length(coord);
 
   if (dist <= u_innerRadius) {
-    gl_FragColor = vec4(u_color, 1.0);
+    gl_FragColor = u_color; // Use u_color directly
     return;
   }
 
   float glow = smoothstep(u_outerRadius, u_innerRadius, dist);
   glow = pow(glow, 2.0) * u_intensity;
 
-  float alpha = glow;
-  vec3 color = u_color * glow;
+  float alpha = glow * u_color.a; // Use the alpha from u_color
+  vec3 color = u_color.rgb * glow; // Use the RGB components of u_color
 
   if (alpha < 0.01) discard;
-  gl_FragColor = vec4(color, alpha);
+  gl_FragColor = vec4(color, alpha); // Combine color and alpha
 }`;
 
 export function initWebGL(canvasRef, programRef) {
