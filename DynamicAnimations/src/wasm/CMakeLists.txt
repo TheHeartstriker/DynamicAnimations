@@ -21,6 +21,7 @@ set(SOURCES
     main.cpp
     Shapes/Shapes.cpp
     Converge/Converge.cpp
+    particle/particle.cpp
 )
 
 # Add executable

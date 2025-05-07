@@ -213,6 +213,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+particle/particle.o: particle/particle.cpp.o
+.PHONY : particle/particle.o
+
+# target to build an object file
+particle/particle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o
+.PHONY : particle/particle.cpp.o
+
+particle/particle.i: particle/particle.cpp.i
+.PHONY : particle/particle.i
+
+# target to preprocess a source file
+particle/particle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.i
+.PHONY : particle/particle.cpp.i
+
+particle/particle.s: particle/particle.cpp.s
+.PHONY : particle/particle.s
+
+# target to generate assembly for a file
+particle/particle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.s
+.PHONY : particle/particle.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -232,6 +256,9 @@ help:
 	@echo ... main.o
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... particle/particle.o
+	@echo ... particle/particle.i
+	@echo ... particle/particle.s
 .PHONY : help
 
 

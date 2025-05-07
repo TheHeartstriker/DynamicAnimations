@@ -62,6 +62,49 @@
   z-index: 10;
 }
 
+.canvasBtnContainer1 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 35vh;
+  height: 35vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex-direction: row;
+  z-index: 10;
+}
+
+/* Ensure the button starts invisible without triggering FadeOut */
+.CircleButton1 {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: var(--Crimson);
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background-color: var(--Amber);
+  margin: 10px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.CircleButton1.Animate {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.CircleButton1:not(.Animate) {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Ensure the button starts invisible without triggering FadeOut */
 .CircleButton {
   position: relative;
@@ -70,7 +113,7 @@
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  color: black;
+  color: var(--Amber);
   width: 30%;
   height: 30%;
   border-radius: 50%;

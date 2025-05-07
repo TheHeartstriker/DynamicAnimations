@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o.d"
   "CMakeFiles/DynamicAnimations.dir/main.cpp.o"
   "CMakeFiles/DynamicAnimations.dir/main.cpp.o.d"
+  "CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o"
+  "CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o.d"
   "DynamicAnimations.mjs"
   "DynamicAnimations.mjs.manifest"
   "DynamicAnimations.pdb"
