@@ -1,11 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { vertexShader, fragmentShader, initWebGL, defineBuffer } from "./Webgl";
 import { getCenteredRandom, getRandomCirclePoint } from "./xyFunctions";
+import { hslToRgb } from "./healper";
 function Particle({ canvasRef, stateProp }) {
+  //State and refs
   const [ctx, setCtx] = useState(null);
   const programRef = useRef(null);
   const [particles, setParticles] = useState([]);
-  const [colorArr, setColorArr] = useState([]);
+  const colorArrRef = useRef([]);
   const colorArray = 100;
   const colorRef = useRef({
     hueMin: 0,
@@ -23,49 +25,27 @@ function Particle({ canvasRef, stateProp }) {
     const context = canvas.getContext("webgl2");
     setCtx(context);
     const resizeCanvas = () => {
-      // The resize
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // After resizing the canvas, we need to get the context again
       setCtx(canvas.getContext("webgl2"));
-      // Where the redrawing of the canvas happens
     };
-    // Event listener where the resizeCanvas function is called
     window.addEventListener("resize", resizeCanvas);
     return () => {
       window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 
-  function hslToRgb(h, s, l) {
-    h = h % 360;
-    h /= 360;
-
-    let r, g, b;
-
-    if (s === 0) {
-      r = g = b = l;
+  //Controls setting of the particles aka x and y positioning
+  function xandY() {
+    if (aniTypeRef.current.fire) {
+      return getCenteredRandom();
     } else {
-      const hue2rgb = (p, q, t) => {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1 / 6) return p + (q - p) * 6 * t;
-        if (t < 1 / 2) return q;
-        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-        return p;
-      };
-
-      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-      const p = 2 * l - q;
-
-      r = hue2rgb(p, q, h + 1 / 3);
-      g = hue2rgb(p, q, h);
-      b = hue2rgb(p, q, h - 1 / 3);
+      return getRandomCirclePoint(window.innerWidth, window.innerHeight, 200);
     }
-
-    return [r, g, b]; // all values are in [0, 1]
   }
-
+  //Creates a color array to optimze the color picking process
+  //Every particle has a index that is used to pick a color from the color array
+  //instead of generating a color when the color changes
   function createColorArray() {
     let colors = [];
     for (let i = 0; i < colorArray; i++) {
@@ -77,20 +57,11 @@ function Particle({ canvasRef, stateProp }) {
       );
       colors.push([hslToRgbValue[0], hslToRgbValue[1], hslToRgbValue[2]]);
     }
-    setColorArr(colors);
+    colorArrRef.current = colors;
   }
-
-  function xandY() {
-    if (aniTypeRef.current.fire) {
-      return getCenteredRandom();
-    } else {
-      return getRandomCirclePoint(window.innerWidth, window.innerHeight, 200);
-    }
-  }
-
   function createParticleArray() {
     let particlesArray = [];
-    for (let i = 0; i < 2000; i++) {
+    for (let i = 0; i < 3000; i++) {
       let { x, y } = xandY();
       let particle = {
         position: [x, y],
@@ -105,6 +76,13 @@ function Particle({ canvasRef, stateProp }) {
     }
     setParticles(particlesArray);
   }
+  //handler for color change
+  function colorChange(minrange, maxrange) {
+    colorRef.current.hueMin = minrange;
+    colorRef.current.hueMax = maxrange;
+    colorArrRef.current = [];
+    createColorArray();
+  }
 
   function drawScene(gl, program, indices, translationLocation) {
     // Clear canvas
@@ -114,7 +92,7 @@ function Particle({ canvasRef, stateProp }) {
 
     particles.forEach((particle) => {
       // Set the particle color
-      const colorVal = colorArr[particle.index];
+      const colorVal = colorArrRef.current[particle.index];
       gl.uniform4f(
         gl.getUniformLocation(program, "u_color"),
         colorVal[0], // Red
@@ -141,11 +119,6 @@ function Particle({ canvasRef, stateProp }) {
         particle.position[1] = y; // Reset Y position
       }
     });
-
-    // Request the next frame
-    requestAnimationFrame(() =>
-      drawScene(gl, program, indices, translationLocation)
-    );
   }
 
   function initProgramVars() {
@@ -173,9 +146,9 @@ function Particle({ canvasRef, stateProp }) {
 
     // Set uniforms
     gl.useProgram(program);
-    gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.1);
+    gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.15);
     gl.uniform1f(gl.getUniformLocation(program, "u_outerRadius"), 0.5);
-    gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.2);
+    gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.3);
 
     const translationLocation = gl.getUniformLocation(
       programRef.current,
@@ -187,6 +160,8 @@ function Particle({ canvasRef, stateProp }) {
     return { gl, program, indices, translationLocation };
   }
 
+  const anId = useRef(null);
+
   useEffect(() => {
     initWebGL(canvasRef, programRef);
     if (ctx && programRef.current) {
@@ -195,9 +170,17 @@ function Particle({ canvasRef, stateProp }) {
         createParticleArray();
         createColorArray();
       }
-      drawScene(gl, program, indices, translationLocation);
+      // Animation loop
+      function animate() {
+        anId.current = requestAnimationFrame(animate);
+        drawScene(gl, program, indices, translationLocation);
+      }
+      animate();
+      return () => {
+        cancelAnimationFrame(anId.current);
+      };
     }
-  }, [ctx]);
+  }, [ctx, programRef.current]);
 
   return (
     <>
@@ -211,23 +194,44 @@ function Particle({ canvasRef, stateProp }) {
         <div
           className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
-            aniTypeRef.current.fire = true;
-            aniTypeRef.current.circle = false;
+            colorChange(0, 50);
           }}
         >
-          Bluish
+          Red
         </div>
         <div
           className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
-          onClick={() => OnClickHandle(70, 140, undefined, undefined)}
+          onClick={() => {
+            colorChange(80, 130);
+          }}
         >
           Green
         </div>
         <div
           className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
-          onClick={() => OnClickHandle(0, 60, undefined, undefined)}
+          onClick={() => colorChange(170, 260)}
         >
-          Red
+          Blue
+        </div>
+      </div>
+      <div className="canvasBtnContainer1">
+        <div
+          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => {
+            aniTypeRef.current.fire = true;
+            aniTypeRef.current.circle = false;
+          }}
+        >
+          Fire
+        </div>
+        <div
+          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => {
+            aniTypeRef.current.fire = false;
+            aniTypeRef.current.circle = true;
+          }}
+        >
+          Sun
         </div>
       </div>
     </>
