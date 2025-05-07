@@ -48,7 +48,9 @@ void main() {
   if (alpha < 0.01) discard;
   gl_FragColor = vec4(color, alpha); // Combine color and alpha
 }`;
-
+//
+//Creates the program that links the vertex and fragment shaders
+//
 export function initWebGL(canvasRef, programRef) {
   const canvas = canvasRef.current;
   const gl =
@@ -93,7 +95,9 @@ export function initWebGL(canvasRef, programRef) {
   programRef.current = program;
   gl.useProgram(program);
 }
-
+//
+// Defines the reused buffer for rendering
+//
 export function defineBuffer(gl) {
   //
   // Defines view box and stucture of what we rendering

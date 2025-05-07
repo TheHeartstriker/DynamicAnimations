@@ -1,14 +1,19 @@
 import { useEffect, useState, useRef } from "react";
-import {
-  vertexShader,
-  fragmentShader,
-  initWebGL,
-  defineBuffer,
-} from "./FragVec";
+import { vertexShader, fragmentShader, initWebGL, defineBuffer } from "./Webgl";
+import { getCenteredRandom, getRandomCirclePoint } from "./xyFunctions";
 function Particle({ canvasRef, stateProp }) {
   const [ctx, setCtx] = useState(null);
   const programRef = useRef(null);
   const [particles, setParticles] = useState([]);
+  const [colorArr, setColorArr] = useState([]);
+  const colorArray = 100;
+  const colorRef = useRef({
+    hueMin: 0,
+    hueMax: 50,
+    saturation: 1,
+    lightness: 0.5,
+  });
+  const aniTypeRef = useRef({ fire: false, circle: true });
 
   //Inital canvas setup
   useEffect(() => {
@@ -32,16 +37,69 @@ function Particle({ canvasRef, stateProp }) {
     };
   }, []);
 
+  function hslToRgb(h, s, l) {
+    h = h % 360;
+    h /= 360;
+
+    let r, g, b;
+
+    if (s === 0) {
+      r = g = b = l;
+    } else {
+      const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + (q - p) * 6 * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        return p;
+      };
+
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+
+    return [r, g, b]; // all values are in [0, 1]
+  }
+
+  function createColorArray() {
+    let colors = [];
+    for (let i = 0; i < colorArray; i++) {
+      let hslToRgbValue = hslToRgb(
+        Math.random() * (colorRef.current.hueMax - colorRef.current.hueMin) +
+          colorRef.current.hueMin,
+        colorRef.current.saturation,
+        colorRef.current.lightness
+      );
+      colors.push([hslToRgbValue[0], hslToRgbValue[1], hslToRgbValue[2]]);
+    }
+    setColorArr(colors);
+  }
+
+  function xandY() {
+    if (aniTypeRef.current.fire) {
+      return getCenteredRandom();
+    } else {
+      return getRandomCirclePoint(window.innerWidth, window.innerHeight, 200);
+    }
+  }
+
   function createParticleArray() {
     let particlesArray = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 2000; i++) {
+      let { x, y } = xandY();
       let particle = {
-        position: [Math.random() * window.innerWidth, window.innerHeight],
-        color: [Math.random() * 0.5 + 0.5, Math.random() * 0.5, 0, 1.0],
+        position: [x, y],
+        alpha: 1.0,
+        index: Math.floor(Math.random() * colorArray),
         size: Math.random() * 5 + 1,
         velX: Math.random() * 8 - 4,
         velY: Math.random() * 8 - 4,
-        sub: Math.random() * 0.01, // Speed of fading
+        sub: Math.random() * 0.01,
       };
       particlesArray.push(particle);
     }
@@ -56,12 +114,13 @@ function Particle({ canvasRef, stateProp }) {
 
     particles.forEach((particle) => {
       // Set the particle color
+      const colorVal = colorArr[particle.index];
       gl.uniform4f(
         gl.getUniformLocation(program, "u_color"),
-        particle.color[0], // Red
-        particle.color[1], // Green
-        particle.color[2], // Blue
-        particle.color[3] // Alpha
+        colorVal[0], // Red
+        colorVal[1], // Green
+        colorVal[2], // Blue
+        particle.alpha // Alpha
       );
       // Set the particle position
       gl.uniform2f(
@@ -74,11 +133,12 @@ function Particle({ canvasRef, stateProp }) {
 
       particle.position[0] += particle.velX; // Update X position
       particle.position[1] += particle.velY; // Update Y position
-      particle.color[3] = Math.max(0, particle.color[3] - particle.sub); // Fade out alpha
-      if (particle.color[3] <= 0) {
-        particle.color[3] = 1.0; // Reset alpha if it fades out
-        particle.position[0] = Math.random() * window.innerWidth; // Reset X position
-        particle.position[1] = window.innerHeight; // Reset Y position
+      particle.alpha = Math.max(0, particle.alpha - particle.sub); // Fade out alpha
+      if (particle.alpha <= 0) {
+        particle.alpha = 1;
+        let { x, y } = xandY();
+        particle.position[0] = x; // Reset X position
+        particle.position[1] = y; // Reset Y position
       }
     });
 
@@ -115,7 +175,7 @@ function Particle({ canvasRef, stateProp }) {
     gl.useProgram(program);
     gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.1);
     gl.uniform1f(gl.getUniformLocation(program, "u_outerRadius"), 0.5);
-    gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.5);
+    gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.2);
 
     const translationLocation = gl.getUniformLocation(
       programRef.current,
@@ -133,6 +193,7 @@ function Particle({ canvasRef, stateProp }) {
       let { gl, program, indices, translationLocation } = initProgramVars();
       if (particles.length === 0) {
         createParticleArray();
+        createColorArray();
       }
       drawScene(gl, program, indices, translationLocation);
     }
@@ -149,7 +210,10 @@ function Particle({ canvasRef, stateProp }) {
       <div className="canvasBtnContainer">
         <div
           className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
-          onClick={() => OnClickHandle(140, 260, undefined, undefined)}
+          onClick={() => {
+            aniTypeRef.current.fire = true;
+            aniTypeRef.current.circle = false;
+          }}
         >
           Bluish
         </div>
