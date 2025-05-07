@@ -886,5 +886,4 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__format\formatter_tuple.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\print \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\unistd.h \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Converge\ConvergeHeader.h \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\particle\particleHeader.h
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Converge\ConvergeHeader.h

@@ -36,14 +36,11 @@ function Particle({ canvasRef, stateProp }) {
     let particlesArray = [];
     for (let i = 0; i < 1000; i++) {
       let particle = {
-        position: [
-          Math.random() * window.innerWidth,
-          Math.random() * window.innerHeight,
-        ],
-        color: [Math.random(), Math.random(), Math.random(), 1.0],
+        position: [Math.random() * window.innerWidth, window.innerHeight],
+        color: [Math.random() * 0.5 + 0.5, Math.random() * 0.5, 0, 1.0],
         size: Math.random() * 5 + 1,
-        velX: Math.random() * 2 - 1,
-        velY: Math.random() * 2 - 1,
+        velX: Math.random() * 8 - 4,
+        velY: Math.random() * 8 - 4,
         sub: Math.random() * 0.01, // Speed of fading
       };
       particlesArray.push(particle);
@@ -81,7 +78,7 @@ function Particle({ canvasRef, stateProp }) {
       if (particle.color[3] <= 0) {
         particle.color[3] = 1.0; // Reset alpha if it fades out
         particle.position[0] = Math.random() * window.innerWidth; // Reset X position
-        particle.position[1] = Math.random() * window.innerHeight; // Reset Y position
+        particle.position[1] = window.innerHeight; // Reset Y position
       }
     });
 
@@ -91,7 +88,7 @@ function Particle({ canvasRef, stateProp }) {
     );
   }
 
-  function drawParticles() {
+  function initProgramVars() {
     const gl = ctx;
     const program = programRef.current;
     let indices = defineBuffer(gl).indices;
@@ -127,15 +124,17 @@ function Particle({ canvasRef, stateProp }) {
     // Enable alpha blending
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    createParticleArray();
-    if (particles.length === 0) return;
-    drawScene(gl, program, indices, translationLocation);
+    return { gl, program, indices, translationLocation };
   }
 
   useEffect(() => {
     initWebGL(canvasRef, programRef);
     if (ctx && programRef.current) {
-      drawParticles();
+      let { gl, program, indices, translationLocation } = initProgramVars();
+      if (particles.length === 0) {
+        createParticleArray();
+      }
+      drawScene(gl, program, indices, translationLocation);
     }
   }, [ctx]);
 

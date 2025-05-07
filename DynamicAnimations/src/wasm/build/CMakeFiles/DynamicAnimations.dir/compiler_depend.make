@@ -1165,7 +1165,6 @@ CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o: C:/Users/Kaden/OneDrive/De
 
 CMakeFiles/DynamicAnimations.dir/main.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/main.cpp \
   C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/Converge/ConvergeHeader.h \
-  C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/particle/particleHeader.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_assert.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_atomic.h \
@@ -4794,10 +4793,6 @@ C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/stdint.h:
 
 C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/Shapes/Shapes.cpp:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/deque:
-
-C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/particle/particleHeader.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/chars_format.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/to_chars_floating_point.h:
@@ -4815,6 +4810,10 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/r
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/range_formatter.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/ref_view.h:
+
+C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/particle/particleHeader.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/deque:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/istream:
 
