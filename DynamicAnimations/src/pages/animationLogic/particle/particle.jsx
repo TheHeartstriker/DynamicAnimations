@@ -1,7 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import { vertexShader, fragmentShader, initWebGL, defineBuffer } from "./Webgl";
-import { getCenteredRandom, getRandomCirclePoint } from "./xyFunctions";
+import {
+  getCenteredRandom,
+  getRandomCirclePoint,
+  collision,
+} from "./xyFunctions";
 import { hslToRgb } from "./healper";
+import { use } from "react";
 function Particle({ canvasRef, stateProp }) {
   //State and refs
   const [ctx, setCtx] = useState(null);
@@ -9,6 +14,7 @@ function Particle({ canvasRef, stateProp }) {
   const [particles, setParticles] = useState([]);
   const colorArrRef = useRef([]);
   const colorArray = 100;
+  const mousePosRef = useRef({ x: 0, y: 0 });
   const colorRef = useRef({
     hueMin: 0,
     hueMax: 50,
@@ -61,7 +67,7 @@ function Particle({ canvasRef, stateProp }) {
   }
   function createParticleArray() {
     let particlesArray = [];
-    for (let i = 0; i < 3000; i++) {
+    for (let i = 0; i < 100; i++) {
       let { x, y } = xandY();
       let particle = {
         position: [x, y],
@@ -82,6 +88,23 @@ function Particle({ canvasRef, stateProp }) {
     colorRef.current.hueMax = maxrange;
     colorArrRef.current = [];
     createColorArray();
+  }
+
+  function mouseAura(particle) {
+    const dx = mousePosRef.current.x - particle.position[0];
+    const dy = mousePosRef.current.y - particle.position[1];
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance <= 200 && distance > 1) {
+      // The closer the particle, the stronger the force
+      const strength = (1 - distance / 200) * 3; // 0.5 is a tunable factor
+      // Normalize direction
+      const nx = dx / distance;
+      const ny = dy / distance;
+      // Apply force toward mouse
+      particle.velX += nx * strength;
+      particle.velY += ny * strength;
+    }
   }
 
   function drawScene(gl, program, indices, translationLocation) {
@@ -109,9 +132,12 @@ function Particle({ canvasRef, stateProp }) {
       // Draw the particle
       gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 
-      particle.position[0] += particle.velX; // Update X position
-      particle.position[1] += particle.velY; // Update Y position
-      particle.alpha = Math.max(0, particle.alpha - particle.sub); // Fade out alpha
+      particle.position[0] += particle.velX;
+      particle.position[1] += particle.velY;
+      particle.alpha = Math.max(0, particle.alpha - particle.sub);
+      collision(particle, particles, 20);
+      mouseAura(particle);
+
       if (particle.alpha <= 0) {
         particle.alpha = 1;
         let { x, y } = xandY();
@@ -146,7 +172,7 @@ function Particle({ canvasRef, stateProp }) {
 
     // Set uniforms
     gl.useProgram(program);
-    gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.15);
+    gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.2);
     gl.uniform1f(gl.getUniformLocation(program, "u_outerRadius"), 0.5);
     gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.3);
 
@@ -181,6 +207,17 @@ function Particle({ canvasRef, stateProp }) {
       };
     }
   }, [ctx, programRef.current]);
+
+  useEffect(() => {
+    function handleMouseMove(e) {
+      mousePosRef.current.x = e.clientX;
+      mousePosRef.current.y = e.clientY;
+    }
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   return (
     <>
