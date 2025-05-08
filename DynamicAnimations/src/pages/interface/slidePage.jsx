@@ -56,12 +56,15 @@ function Interface() {
 
   useEffect(() => {
     const canvasContainer = containerRef.current;
+    const eyeContainer = document.querySelector(".EyeContainer");
     if (containerRef.current && Play == false) {
       // Access the canvasContainer element here
       canvasContainer.classList.add("grow");
+      eyeContainer.classList.add("grow");
       Grow();
     } else {
       canvasContainer.classList.remove("grow");
+      eyeContainer.classList.remove("grow");
       canvasContainer.style.width = `50%`;
       canvasContainer.style.height = `50%`;
     }

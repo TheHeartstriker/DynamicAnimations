@@ -56,6 +56,11 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 999;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.EyeContainer.grow {
+  opacity: 0;
 }
 
 .PlayContainer {
