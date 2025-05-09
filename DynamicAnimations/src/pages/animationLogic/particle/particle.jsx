@@ -71,7 +71,7 @@ function Particle({ canvasRef, stateProp }) {
   }
   function createParticleArray() {
     let particlesArray = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 2000; i++) {
       let { x, y } = xandY();
       let particle = {
         position: [x, y],
@@ -182,7 +182,7 @@ function Particle({ canvasRef, stateProp }) {
     gl.useProgram(program);
     gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.2);
     gl.uniform1f(gl.getUniformLocation(program, "u_outerRadius"), 0.5);
-    gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.3);
+    gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.5);
 
     const translationLocation = gl.getUniformLocation(
       programRef.current,
