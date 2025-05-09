@@ -6,7 +6,6 @@ import {
   collision,
 } from "./xyFunctions";
 import { hslToRgb } from "./healper";
-import { use } from "react";
 function Particle({ canvasRef, stateProp }) {
   //State and refs
   const [ctx, setCtx] = useState(null);
@@ -21,7 +20,7 @@ function Particle({ canvasRef, stateProp }) {
     saturation: 1,
     lightness: 0.5,
   });
-  const aniTypeRef = useRef({ fire: false, circle: true });
+  const aniTypeRef = useRef({ fire: true, circle: false, colide: false });
 
   //Inital canvas setup
   useEffect(() => {
@@ -45,8 +44,13 @@ function Particle({ canvasRef, stateProp }) {
   function xandY() {
     if (aniTypeRef.current.fire) {
       return getCenteredRandom();
-    } else {
+    } else if (aniTypeRef.current.circle) {
       return getRandomCirclePoint(window.innerWidth, window.innerHeight, 200);
+    } else {
+      return {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+      };
     }
   }
   //Creates a color array to optimze the color picking process
@@ -67,7 +71,7 @@ function Particle({ canvasRef, stateProp }) {
   }
   function createParticleArray() {
     let particlesArray = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 200; i++) {
       let { x, y } = xandY();
       let particle = {
         position: [x, y],
@@ -134,11 +138,15 @@ function Particle({ canvasRef, stateProp }) {
 
       particle.position[0] += particle.velX;
       particle.position[1] += particle.velY;
-      particle.alpha = Math.max(0, particle.alpha - particle.sub);
-      collision(particle, particles, 20);
-      mouseAura(particle);
+      if (aniTypeRef.current.colide) {
+        collision(particle, particles, 20);
+        mouseAura(particle);
+      }
+      if (aniTypeRef.current.colide !== true) {
+        particle.alpha = Math.max(0, particle.alpha - particle.sub);
+      }
 
-      if (particle.alpha <= 0) {
+      if (particle.alpha <= 0 && aniTypeRef.current.colide !== true) {
         particle.alpha = 1;
         let { x, y } = xandY();
         particle.position[0] = x; // Reset X position
@@ -184,6 +192,12 @@ function Particle({ canvasRef, stateProp }) {
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     return { gl, program, indices, translationLocation };
+  }
+
+  function setOnlyKeyTrue(key) {
+    Object.keys(aniTypeRef.current).forEach((k) => {
+      aniTypeRef.current[k] = k === key;
+    });
   }
 
   const anId = useRef(null);
@@ -239,7 +253,7 @@ function Particle({ canvasRef, stateProp }) {
         <div
           className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
-            colorChange(80, 130);
+            colorChange(75, 140);
           }}
         >
           Green
@@ -255,8 +269,7 @@ function Particle({ canvasRef, stateProp }) {
         <div
           className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
-            aniTypeRef.current.fire = true;
-            aniTypeRef.current.circle = false;
+            setOnlyKeyTrue("fire");
           }}
         >
           Fire
@@ -264,11 +277,18 @@ function Particle({ canvasRef, stateProp }) {
         <div
           className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
-            aniTypeRef.current.fire = false;
-            aniTypeRef.current.circle = true;
+            setOnlyKeyTrue("circle");
           }}
         >
           Sun
+        </div>
+        <div
+          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => {
+            setOnlyKeyTrue("colide");
+          }}
+        >
+          Colide
         </div>
       </div>
     </>
