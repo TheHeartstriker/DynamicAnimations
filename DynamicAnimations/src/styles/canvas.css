@@ -22,7 +22,8 @@
   overflow: hidden;
   z-index: 1;
   transition: 1.5s ease-in-out height, 1.5s ease-in-out width,
-    1.5s ease-in-out border, 2s ease-in-out border-radius;
+    1.5s ease-in-out border, 2s ease-in-out border-radius,
+    1.5s ease-in-out box-shadow;
   border: 2px solid var(--Crimson);
   box-shadow: 0 0 30px 4px rgba(220, 20, 60, 0.3);
 }
@@ -32,6 +33,7 @@
   height: 100%;
   border-radius: 0;
   border: none;
+  box-shadow: none;
 }
 
 /*For animations that need only a single canvas*/

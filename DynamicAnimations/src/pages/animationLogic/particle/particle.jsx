@@ -4,13 +4,20 @@ import {
   getCenteredRandom,
   getRandomCirclePoint,
   collision,
+  mouseAura,
 } from "./xyFunctions";
 import { hslToRgb } from "./healper";
+
+const particleCount = 2000;
+const colideCount = 100;
+const bunchCount = 400;
+
 function Particle({ canvasRef, stateProp }) {
   //State and refs
   const [ctx, setCtx] = useState(null);
-  const programRef = useRef(null);
   const [particles, setParticles] = useState([]);
+  const programRef = useRef(null);
+  const anId = useRef(null);
   const colorArrRef = useRef([]);
   const colorArray = 100;
   const mousePosRef = useRef({ x: 0, y: 0 });
@@ -20,7 +27,13 @@ function Particle({ canvasRef, stateProp }) {
     saturation: 1,
     lightness: 0.5,
   });
-  const aniTypeRef = useRef({ fire: true, circle: false, colide: false });
+  const radiusRef = useRef({ drawnRadius: 0.2, detectedRadius: 20 });
+  const aniTypeRef = useRef({
+    fire: true,
+    circle: false,
+    colide: false,
+    bunch: false,
+  });
 
   //Inital canvas setup
   useEffect(() => {
@@ -69,9 +82,9 @@ function Particle({ canvasRef, stateProp }) {
     }
     colorArrRef.current = colors;
   }
-  function createParticleArray() {
+  function createParticleArray(amount) {
     let particlesArray = [];
-    for (let i = 0; i < 2000; i++) {
+    for (let i = 0; i < amount; i++) {
       let { x, y } = xandY();
       let particle = {
         position: [x, y],
@@ -86,6 +99,7 @@ function Particle({ canvasRef, stateProp }) {
     }
     setParticles(particlesArray);
   }
+
   //handler for color change
   function colorChange(minrange, maxrange) {
     colorRef.current.hueMin = minrange;
@@ -94,21 +108,17 @@ function Particle({ canvasRef, stateProp }) {
     createColorArray();
   }
 
-  function mouseAura(particle) {
-    const dx = mousePosRef.current.x - particle.position[0];
-    const dy = mousePosRef.current.y - particle.position[1];
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    if (distance <= 200 && distance > 1) {
-      // The closer the particle, the stronger the force
-      const strength = (1 - distance / 200) * 3; // 0.5 is a tunable factor
-      // Normalize direction
-      const nx = dx / distance;
-      const ny = dy / distance;
-      // Apply force toward mouse
-      particle.velX += nx * strength;
-      particle.velY += ny * strength;
-    }
+  function radiusChange(radius, detectedRadius, gl, program) {
+    // Detected radius
+    let detectedRadiusSet = detectedRadius;
+    radiusRef.current.detectedRadius = detectedRadiusSet;
+    //Actual draw radius
+    let drawnRadiusSet = radius / 100;
+    radiusRef.current.drawnRadius = drawnRadiusSet;
+    gl.uniform1f(
+      gl.getUniformLocation(program, "u_innerRadius"),
+      radiusRef.current.drawnRadius
+    );
   }
 
   function drawScene(gl, program, indices, translationLocation) {
@@ -138,11 +148,14 @@ function Particle({ canvasRef, stateProp }) {
 
       particle.position[0] += particle.velX;
       particle.position[1] += particle.velY;
-      if (aniTypeRef.current.colide) {
-        collision(particle, particles, 20);
-        mouseAura(particle);
+      if (aniTypeRef.current.colide || aniTypeRef.current.bunch) {
+        collision(particle, particles, radiusRef.current.detectedRadius);
+        mouseAura(particle, mousePosRef);
       }
-      if (aniTypeRef.current.colide !== true) {
+      if (
+        aniTypeRef.current.colide !== true &&
+        aniTypeRef.current.bunch !== true
+      ) {
         particle.alpha = Math.max(0, particle.alpha - particle.sub);
       }
 
@@ -180,7 +193,10 @@ function Particle({ canvasRef, stateProp }) {
 
     // Set uniforms
     gl.useProgram(program);
-    gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.2);
+    gl.uniform1f(
+      gl.getUniformLocation(program, "u_innerRadius"),
+      radiusRef.current.drawnRadius
+    );
     gl.uniform1f(gl.getUniformLocation(program, "u_outerRadius"), 0.5);
     gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.5);
 
@@ -198,16 +214,27 @@ function Particle({ canvasRef, stateProp }) {
     Object.keys(aniTypeRef.current).forEach((k) => {
       aniTypeRef.current[k] = k === key;
     });
+
+    if (key === "colide") {
+      if (particles.length !== colideCount) {
+        createParticleArray(colideCount);
+      }
+    } else if (key === "bunch") {
+      if (particles.length !== bunchCount) {
+        createParticleArray(bunchCount);
+      }
+    } else {
+      if (particles.length !== particleCount) {
+        createParticleArray(particleCount);
+      }
+    }
   }
-
-  const anId = useRef(null);
-
   useEffect(() => {
     initWebGL(canvasRef, programRef);
     if (ctx && programRef.current) {
       let { gl, program, indices, translationLocation } = initProgramVars();
       if (particles.length === 0) {
-        createParticleArray();
+        createParticleArray(particleCount);
         createColorArray();
       }
       // Animation loop
@@ -289,6 +316,15 @@ function Particle({ canvasRef, stateProp }) {
           }}
         >
           Colide
+        </div>
+        <div
+          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          onClick={() => {
+            setOnlyKeyTrue("bunch");
+            radiusChange(15, 10, ctx, programRef.current);
+          }}
+        >
+          Bunch
         </div>
       </div>
     </>

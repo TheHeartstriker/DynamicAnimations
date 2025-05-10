@@ -116,3 +116,20 @@ export function collision(data, ObjectData, Radius) {
     }
   }
 }
+
+export function mouseAura(particle, mousePosRef) {
+  const dx = mousePosRef.current.x - particle.position[0];
+  const dy = mousePosRef.current.y - particle.position[1];
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  if (distance <= 200 && distance > 1) {
+    // The closer the particle, the stronger the force
+    const strength = (1 - distance / 200) * 3; // 0.5 is a tunable factor
+    // Normalize direction
+    const nx = dx / distance;
+    const ny = dy / distance;
+    // Apply force toward mouse
+    particle.velX += nx * strength;
+    particle.velY += ny * strength;
+  }
+}
