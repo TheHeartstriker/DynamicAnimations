@@ -8,9 +8,10 @@ import {
 } from "./xyFunctions";
 import { hslToRgb } from "./healper";
 
-const particleCount = 2000;
+const particleCount = 4000;
 const colideCount = 100;
-const bunchCount = 400;
+const atomCount = 400;
+const baseAmount = 20;
 
 function Particle({ canvasRef, stateProp }) {
   //State and refs
@@ -27,12 +28,15 @@ function Particle({ canvasRef, stateProp }) {
     saturation: 1,
     lightness: 0.5,
   });
-  const radiusRef = useRef({ drawnRadius: 0.2, detectedRadius: 20 });
+  const radiusRef = useRef({
+    drawnRadius: baseAmount / 100,
+    detectedRadius: baseAmount,
+  });
   const aniTypeRef = useRef({
-    fire: true,
-    circle: false,
+    fire: false,
+    circle: true,
     colide: false,
-    bunch: false,
+    atom: false,
   });
 
   //Inital canvas setup
@@ -148,13 +152,13 @@ function Particle({ canvasRef, stateProp }) {
 
       particle.position[0] += particle.velX;
       particle.position[1] += particle.velY;
-      if (aniTypeRef.current.colide || aniTypeRef.current.bunch) {
+      if (aniTypeRef.current.colide || aniTypeRef.current.atom) {
         collision(particle, particles, radiusRef.current.detectedRadius);
         mouseAura(particle, mousePosRef);
       }
       if (
         aniTypeRef.current.colide !== true &&
-        aniTypeRef.current.bunch !== true
+        aniTypeRef.current.atom !== true
       ) {
         particle.alpha = Math.max(0, particle.alpha - particle.sub);
       }
@@ -215,13 +219,17 @@ function Particle({ canvasRef, stateProp }) {
       aniTypeRef.current[k] = k === key;
     });
 
+    if (key !== "atom") {
+      radiusChange(baseAmount, baseAmount, ctx, programRef.current);
+    }
+
     if (key === "colide") {
       if (particles.length !== colideCount) {
         createParticleArray(colideCount);
       }
-    } else if (key === "bunch") {
-      if (particles.length !== bunchCount) {
-        createParticleArray(bunchCount);
+    } else if (key === "atom") {
+      if (particles.length !== atomCount) {
+        createParticleArray(atomCount);
       }
     } else {
       if (particles.length !== particleCount) {
@@ -320,11 +328,11 @@ function Particle({ canvasRef, stateProp }) {
         <div
           className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
-            setOnlyKeyTrue("bunch");
+            setOnlyKeyTrue("atom");
             radiusChange(15, 10, ctx, programRef.current);
           }}
         >
-          Bunch
+          Atom
         </div>
       </div>
     </>
