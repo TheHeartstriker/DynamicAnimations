@@ -8,9 +8,9 @@ import {
 } from "./xyFunctions";
 import { hslToRgb } from "./healper";
 
-const particleCount = 4000;
+const particleCount = 3000;
 const colideCount = 100;
-const atomCount = 400;
+const atomCount = 350;
 const baseAmount = 20;
 
 function Particle({ canvasRef, stateProp }) {
@@ -276,9 +276,9 @@ function Particle({ canvasRef, stateProp }) {
         width={window.innerWidth}
         height={window.innerHeight}
       />
-      <div className="canvasBtnContainer">
+      <div className="canvasBtnContainer right">
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
             colorChange(0, 50);
           }}
@@ -286,7 +286,7 @@ function Particle({ canvasRef, stateProp }) {
           Red
         </div>
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
             colorChange(75, 140);
           }}
@@ -294,15 +294,17 @@ function Particle({ canvasRef, stateProp }) {
           Green
         </div>
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => colorChange(170, 260)}
         >
           Blue
         </div>
       </div>
-      <div className="canvasBtnContainer1">
+      <div className="canvasBtnContainer left">
         <div
-          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
           onClick={() => {
             setOnlyKeyTrue("fire");
           }}
@@ -310,7 +312,9 @@ function Particle({ canvasRef, stateProp }) {
           Fire
         </div>
         <div
-          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
           onClick={() => {
             setOnlyKeyTrue("circle");
           }}
@@ -318,7 +322,9 @@ function Particle({ canvasRef, stateProp }) {
           Sun
         </div>
         <div
-          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
           onClick={() => {
             setOnlyKeyTrue("colide");
           }}
@@ -326,7 +332,9 @@ function Particle({ canvasRef, stateProp }) {
           Colide
         </div>
         <div
-          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
           onClick={() => {
             setOnlyKeyTrue("atom");
             radiusChange(15, 10, ctx, programRef.current);

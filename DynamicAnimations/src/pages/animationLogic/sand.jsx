@@ -230,21 +230,21 @@ function Sand({ canvasRef, stateProp }) {
         onMouseDown={handleMouseDown}
         onMouseMove={MouseTracker}
       ></canvas>
-      <div className="canvasBtnContainer">
+      <div className="canvasBtnContainer right">
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => AniChangeClick(false, 1, 60, 0.5)}
         >
           Lava
         </div>
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => AniChangeClick(false, 90, 280, 0.8)}
         >
           Space juice
         </div>
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => AniChangeClick(true, 155, 260, 1)}
         >
           Reset
