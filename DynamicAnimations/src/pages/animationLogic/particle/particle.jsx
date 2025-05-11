@@ -1,21 +1,43 @@
 import { useEffect, useState, useRef } from "react";
 import { vertexShader, fragmentShader, initWebGL, defineBuffer } from "./Webgl";
-import { getCenteredRandom, getRandomCirclePoint } from "./xyFunctions";
+import {
+  getCenteredRandom,
+  getRandomCirclePoint,
+  collision,
+  mouseAura,
+} from "./xyFunctions";
 import { hslToRgb } from "./healper";
+
+const particleCount = 3000;
+const colideCount = 100;
+const atomCount = 400;
+const baseAmount = 20;
+
 function Particle({ canvasRef, stateProp }) {
   //State and refs
   const [ctx, setCtx] = useState(null);
-  const programRef = useRef(null);
   const [particles, setParticles] = useState([]);
+  const programRef = useRef(null);
+  const anId = useRef(null);
   const colorArrRef = useRef([]);
   const colorArray = 100;
+  const mousePosRef = useRef({ x: 0, y: 0 });
   const colorRef = useRef({
     hueMin: 0,
     hueMax: 50,
     saturation: 1,
     lightness: 0.5,
   });
-  const aniTypeRef = useRef({ fire: false, circle: true });
+  const radiusRef = useRef({
+    drawnRadius: baseAmount / 100,
+    detectedRadius: baseAmount,
+  });
+  const aniTypeRef = useRef({
+    fire: false,
+    circle: true,
+    colide: false,
+    atom: false,
+  });
 
   //Inital canvas setup
   useEffect(() => {
@@ -39,8 +61,13 @@ function Particle({ canvasRef, stateProp }) {
   function xandY() {
     if (aniTypeRef.current.fire) {
       return getCenteredRandom();
-    } else {
+    } else if (aniTypeRef.current.circle) {
       return getRandomCirclePoint(window.innerWidth, window.innerHeight, 200);
+    } else {
+      return {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+      };
     }
   }
   //Creates a color array to optimze the color picking process
@@ -59,9 +86,9 @@ function Particle({ canvasRef, stateProp }) {
     }
     colorArrRef.current = colors;
   }
-  function createParticleArray() {
+  function createParticleArray(amount) {
     let particlesArray = [];
-    for (let i = 0; i < 3000; i++) {
+    for (let i = 0; i < amount; i++) {
       let { x, y } = xandY();
       let particle = {
         position: [x, y],
@@ -76,12 +103,26 @@ function Particle({ canvasRef, stateProp }) {
     }
     setParticles(particlesArray);
   }
+
   //handler for color change
   function colorChange(minrange, maxrange) {
     colorRef.current.hueMin = minrange;
     colorRef.current.hueMax = maxrange;
     colorArrRef.current = [];
     createColorArray();
+  }
+
+  function radiusChange(radius, detectedRadius, gl, program) {
+    // Detected radius
+    let detectedRadiusSet = detectedRadius;
+    radiusRef.current.detectedRadius = detectedRadiusSet;
+    //Actual draw radius
+    let drawnRadiusSet = radius / 100;
+    radiusRef.current.drawnRadius = drawnRadiusSet;
+    gl.uniform1f(
+      gl.getUniformLocation(program, "u_innerRadius"),
+      radiusRef.current.drawnRadius
+    );
   }
 
   function drawScene(gl, program, indices, translationLocation) {
@@ -109,10 +150,20 @@ function Particle({ canvasRef, stateProp }) {
       // Draw the particle
       gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 
-      particle.position[0] += particle.velX; // Update X position
-      particle.position[1] += particle.velY; // Update Y position
-      particle.alpha = Math.max(0, particle.alpha - particle.sub); // Fade out alpha
-      if (particle.alpha <= 0) {
+      particle.position[0] += particle.velX;
+      particle.position[1] += particle.velY;
+      if (aniTypeRef.current.colide || aniTypeRef.current.atom) {
+        collision(particle, particles, radiusRef.current.detectedRadius);
+        mouseAura(particle, mousePosRef);
+      }
+      if (
+        aniTypeRef.current.colide !== true &&
+        aniTypeRef.current.atom !== true
+      ) {
+        particle.alpha = Math.max(0, particle.alpha - particle.sub);
+      }
+
+      if (particle.alpha <= 0 && aniTypeRef.current.colide !== true) {
         particle.alpha = 1;
         let { x, y } = xandY();
         particle.position[0] = x; // Reset X position
@@ -146,9 +197,12 @@ function Particle({ canvasRef, stateProp }) {
 
     // Set uniforms
     gl.useProgram(program);
-    gl.uniform1f(gl.getUniformLocation(program, "u_innerRadius"), 0.15);
+    gl.uniform1f(
+      gl.getUniformLocation(program, "u_innerRadius"),
+      radiusRef.current.drawnRadius
+    );
     gl.uniform1f(gl.getUniformLocation(program, "u_outerRadius"), 0.5);
-    gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.3);
+    gl.uniform1f(gl.getUniformLocation(program, "u_intensity"), 0.5);
 
     const translationLocation = gl.getUniformLocation(
       programRef.current,
@@ -160,14 +214,35 @@ function Particle({ canvasRef, stateProp }) {
     return { gl, program, indices, translationLocation };
   }
 
-  const anId = useRef(null);
+  function setOnlyKeyTrue(key) {
+    Object.keys(aniTypeRef.current).forEach((k) => {
+      aniTypeRef.current[k] = k === key;
+    });
 
+    if (key !== "atom") {
+      radiusChange(baseAmount, baseAmount, ctx, programRef.current);
+    }
+
+    if (key === "colide") {
+      if (particles.length !== colideCount) {
+        createParticleArray(colideCount);
+      }
+    } else if (key === "atom") {
+      if (particles.length !== atomCount) {
+        createParticleArray(atomCount);
+      }
+    } else {
+      if (particles.length !== particleCount) {
+        createParticleArray(particleCount);
+      }
+    }
+  }
   useEffect(() => {
     initWebGL(canvasRef, programRef);
     if (ctx && programRef.current) {
       let { gl, program, indices, translationLocation } = initProgramVars();
       if (particles.length === 0) {
-        createParticleArray();
+        createParticleArray(particleCount);
         createColorArray();
       }
       // Animation loop
@@ -182,6 +257,17 @@ function Particle({ canvasRef, stateProp }) {
     }
   }, [ctx, programRef.current]);
 
+  useEffect(() => {
+    function handleMouseMove(e) {
+      mousePosRef.current.x = e.clientX;
+      mousePosRef.current.y = e.clientY;
+    }
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
   return (
     <>
       <canvas
@@ -190,9 +276,9 @@ function Particle({ canvasRef, stateProp }) {
         width={window.innerWidth}
         height={window.innerHeight}
       />
-      <div className="canvasBtnContainer">
+      <div className="canvasBtnContainer right">
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
             colorChange(0, 50);
           }}
@@ -200,38 +286,61 @@ function Particle({ canvasRef, stateProp }) {
           Red
         </div>
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => {
-            colorChange(80, 130);
+            colorChange(75, 140);
           }}
         >
           Green
         </div>
         <div
-          className={`CircleButton ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton red ${stateProp === false ? "Animate" : ""}`}
           onClick={() => colorChange(170, 260)}
         >
           Blue
         </div>
       </div>
-      <div className="canvasBtnContainer1">
+      <div className="canvasBtnContainer left">
         <div
-          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
           onClick={() => {
-            aniTypeRef.current.fire = true;
-            aniTypeRef.current.circle = false;
+            setOnlyKeyTrue("fire");
           }}
         >
           Fire
         </div>
         <div
-          className={`CircleButton1 ${stateProp === false ? "Animate" : ""}`}
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
           onClick={() => {
-            aniTypeRef.current.fire = false;
-            aniTypeRef.current.circle = true;
+            setOnlyKeyTrue("circle");
           }}
         >
           Sun
+        </div>
+        <div
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
+          onClick={() => {
+            setOnlyKeyTrue("colide");
+          }}
+        >
+          Colide
+        </div>
+        <div
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
+          onClick={() => {
+            setOnlyKeyTrue("atom");
+            radiusChange(15, 10, ctx, programRef.current);
+          }}
+        >
+          Atom
         </div>
       </div>
     </>

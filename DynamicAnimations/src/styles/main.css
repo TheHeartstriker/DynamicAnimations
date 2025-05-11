@@ -56,6 +56,11 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 999;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.EyeContainer.grow {
+  opacity: 0;
 }
 
 .PlayContainer {
@@ -198,12 +203,12 @@ body {
   color: var(--Crimson);
 }
 
-#PanelElementId4 h1 {
-  color: black;
+#PanelElementId3 h1 {
+  color: var(--NeonPurple);
 }
 
-#PanelElementId5 h1 {
-  color: black;
+#PanelElementId4 h1 {
+  color: var(--NeonPurple);
 }
 
 .Highlight {
@@ -228,17 +233,13 @@ body {
 }
 
 .Highlight.Active3 {
+  background-color: var(--Purple);
   transform: translateY(calc(200% + 40px));
 }
 
 .Highlight.Active4 {
   background-color: var(--Purple);
   transform: translateY(calc(300% + 60px));
-}
-
-.Highlight.Active5 {
-  background-color: var(--Purple);
-  transform: translateY(calc(400% + 80px));
 }
 
 @media (max-width: 1000px) {

@@ -1,0 +1,3 @@
+- Healper.js is just as it says helper functions that have nothing todo with glsl
+- Webgl.js Has most of the unchanging webgl code the shaders, and frag linking and init the program and buffers.
+- xyFunctions.js is x, y manipulation functions. So collision logic etc.

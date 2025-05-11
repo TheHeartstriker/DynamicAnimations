@@ -22,7 +22,8 @@
   overflow: hidden;
   z-index: 1;
   transition: 1.5s ease-in-out height, 1.5s ease-in-out width,
-    1.5s ease-in-out border, 2s ease-in-out border-radius;
+    1.5s ease-in-out border, 2s ease-in-out border-radius,
+    1.5s ease-in-out box-shadow;
   border: 2px solid var(--Crimson);
   box-shadow: 0 0 30px 4px rgba(220, 20, 60, 0.3);
 }
@@ -32,6 +33,7 @@
   height: 100%;
   border-radius: 0;
   border: none;
+  box-shadow: none;
 }
 
 /*For animations that need only a single canvas*/
@@ -49,46 +51,48 @@
   height: 100%;
 }
 
-.canvasBtnContainer {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 35vh;
-  height: 35vh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  flex-direction: row;
-  z-index: 10;
-}
-
 .canvasBtnContainer1 {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  width: 35vh;
-  height: 35vh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  flex-direction: row;
+  bottom: 0px;
+  left: 0px;
+  width: 20vh;
+  height: 20vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-rows: repeat(2, 1fr); /* 2 rows */
   z-index: 10;
 }
+.CircleButton1:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
 
-/* Ensure the button starts invisible without triggering FadeOut */
+.CircleButton1:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.CircleButton1:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.CircleButton1:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
 .CircleButton1 {
   position: relative;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   font-size: 1.5rem;
   color: var(--Crimson);
-  width: 30%;
-  height: 30%;
-  border-radius: 50%;
-  background-color: var(--Amber);
-  margin: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: #0a0a0a;
+  margin: auto;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
@@ -105,26 +109,58 @@
   pointer-events: none;
 }
 
-/* Ensure the button starts invisible without triggering FadeOut */
+/* Base styles for the button container */
+.canvasBtnContainer {
+  position: absolute;
+  bottom: 0;
+  right: var(--btn-container-right, 0); /* Default to 0 */
+  left: var(--btn-container-left, auto); /* Default to auto */
+  width: 25vh;
+  height: 25vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  direction: rtl; /* Reverse horizontal flow */
+  transform: rotate(180deg); /* Flip the grid visually */
+  z-index: 10;
+}
+
+/* Base styles for the buttons */
 .CircleButton {
-  position: relative;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  transform: rotate(180deg); /* Un-flip button content */
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--btn-bg-color, #0a0a0a); /* Default background color */
+  color: var(--btn-color, var(--Amber)); /* Default text color */
   font-size: 1.5rem;
-  color: var(--Amber);
-  width: 30%;
-  height: 30%;
-  border-radius: 50%;
-  background-color: var(--Crimson);
-  margin: 10px;
-  cursor: pointer;
   opacity: 0;
   pointer-events: none;
+  cursor: pointer;
   transition: opacity 1.5s ease-in-out;
 }
 
+/* Modifier class for left-aligned container */
+.canvasBtnContainer.left {
+  right: auto;
+  left: 0;
+}
+
+/* Modifier class for right-aligned container */
+.canvasBtnContainer.right {
+  right: 0;
+  left: auto;
+}
+
+/* Modifier class for custom button colors */
+.CircleButton.red {
+  color: var(--Crimson);
+}
+
+.CircleButton.purple {
+  color: var(--NeonPurple);
+}
 .CircleButton.Animate {
   opacity: 1;
   pointer-events: auto;

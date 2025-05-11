@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Background from "../../components/background.jsx";
 import MainWasm from "../../mainWasm.jsx";
-import Stars from "../animationLogic/stars.jsx";
 import Rain from "../animationLogic/rain.jsx";
 import Sand from "../animationLogic/sand.jsx";
 import Particle from "../animationLogic/particle/particle.jsx";
@@ -16,7 +15,6 @@ function Interface() {
     PanelElement2: false,
     PanelElement3: false,
     PanelElement4: false,
-    PanelElement5: false,
   });
 
   function togglePanel(panelName) {
@@ -56,12 +54,15 @@ function Interface() {
 
   useEffect(() => {
     const canvasContainer = containerRef.current;
+    const eyeContainer = document.querySelector(".EyeContainer");
     if (containerRef.current && Play == false) {
       // Access the canvasContainer element here
       canvasContainer.classList.add("grow");
+      eyeContainer.classList.add("grow");
       Grow();
     } else {
       canvasContainer.classList.remove("grow");
+      eyeContainer.classList.remove("grow");
       canvasContainer.style.width = `50%`;
       canvasContainer.style.height = `50%`;
     }
@@ -102,9 +103,10 @@ function Interface() {
                   : ""
               }`}
             ></div>
-            <h1>Star's</h1>
+            <h1>Particle</h1>
           </div>
           {/* Panel 2 */}
+
           <div
             id="PanelElementId2"
             className="PanelItem"
@@ -128,26 +130,15 @@ function Interface() {
           >
             <h1>Rain</h1>
           </div>
-          {/* Panel 5 */}
-          <div
-            id="PanelElementId5"
-            className="PanelItem"
-            onClick={() => togglePanel("PanelElement5")}
-          >
-            <h1>Particle</h1>
-          </div>
         </div>
       </div>
       <div className="CanvasContainer" ref={containerRef}>
         {Panel.PanelElement1 && (
-          <Stars canvasRef={canvasRef} stateProp={Play} />
+          <Particle canvasRef={canvasRef} stateProp={Play} />
         )}
         {Panel.PanelElement2 && <MainWasm />}
         {Panel.PanelElement3 && <Sand canvasRef={canvasRef} stateProp={Play} />}
         {Panel.PanelElement4 && <Rain canvasRef={canvasRef} stateProp={Play} />}
-        {Panel.PanelElement5 && (
-          <Particle canvasRef={canvasRef} stateProp={Play} />
-        )}
       </div>
       <div className="LinkContainer">
         <div className="Links">
