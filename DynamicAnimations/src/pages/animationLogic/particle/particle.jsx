@@ -10,7 +10,7 @@ import { hslToRgb } from "./healper";
 
 const particleCount = 3000;
 const colideCount = 100;
-const atomCount = 350;
+const atomCount = 400;
 const baseAmount = 20;
 
 function Particle({ canvasRef, stateProp }) {
