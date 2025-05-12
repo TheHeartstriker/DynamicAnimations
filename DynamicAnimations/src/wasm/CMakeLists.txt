@@ -19,9 +19,8 @@ endif()
 # Source files
 set(SOURCES
     main.cpp
-    Shapes/Shapes.cpp
-    Converge/Converge.cpp
-    particle/particle.cpp
+    helper/shapes.cpp
+    converge/converge.cpp
 )
 
 # Add executable

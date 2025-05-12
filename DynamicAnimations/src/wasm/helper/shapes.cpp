@@ -1,8 +1,8 @@
-#include "Shapes.h"
-
 #include <SDL2/SDL.h>
 
 #include <cmath>
+
+#include "helper.h"
 
 void DrawPixel(SDL_Renderer* renderer, int x, int y, Uint8 r, Uint8 g, Uint8 b,
                Uint8 a, int size) {

@@ -4,8 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "Converge/ConvergeHeader.h"
-// #include "particle/particleHeader.h" Particle glow effect is slow for wasm
+#include "converge/convergeHeader.h"
 
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;

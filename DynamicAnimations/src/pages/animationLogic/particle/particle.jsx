@@ -6,7 +6,7 @@ import {
   collision,
   mouseAura,
 } from "./xyFunctions";
-import { hslToRgb } from "./healper";
+import { hslToRgb } from "./helper";
 
 const particleCount = 3000;
 const colideCount = 100;

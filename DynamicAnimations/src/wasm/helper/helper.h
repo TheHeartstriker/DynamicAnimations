@@ -1,5 +1,5 @@
-#ifndef SHAPES_H
-#define SHAPES_H
+#ifndef HELPER_H
+#define HELPER_H
 
 #include <SDL2/SDL.h>
 

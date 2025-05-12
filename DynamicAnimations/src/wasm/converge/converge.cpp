@@ -2,8 +2,8 @@
 #include <string>
 #include <vector>
 
-#include "../Shapes/Shapes.h"
-#include "ConvergeHeader.h"
+#include "../helper/helper.h"
+#include "convergeHeader.h"
 
 extern int Winwidth;
 extern int Winheight;

@@ -141,53 +141,53 @@ custom_clean/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\custom_clean.dir\build.make CMakeFiles/custom_clean.dir/build
 .PHONY : custom_clean/fast
 
-Converge/Converge.o: Converge/Converge.cpp.o
-.PHONY : Converge/Converge.o
+converge/converge.o: converge/converge.cpp.o
+.PHONY : converge/converge.o
 
 # target to build an object file
-Converge/Converge.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o
-.PHONY : Converge/Converge.cpp.o
+converge/converge.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.o
+.PHONY : converge/converge.cpp.o
 
-Converge/Converge.i: Converge/Converge.cpp.i
-.PHONY : Converge/Converge.i
+converge/converge.i: converge/converge.cpp.i
+.PHONY : converge/converge.i
 
 # target to preprocess a source file
-Converge/Converge.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.i
-.PHONY : Converge/Converge.cpp.i
+converge/converge.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.i
+.PHONY : converge/converge.cpp.i
 
-Converge/Converge.s: Converge/Converge.cpp.s
-.PHONY : Converge/Converge.s
+converge/converge.s: converge/converge.cpp.s
+.PHONY : converge/converge.s
 
 # target to generate assembly for a file
-Converge/Converge.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.s
-.PHONY : Converge/Converge.cpp.s
+converge/converge.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.s
+.PHONY : converge/converge.cpp.s
 
-Shapes/Shapes.o: Shapes/Shapes.cpp.o
-.PHONY : Shapes/Shapes.o
+helper/shapes.o: helper/shapes.cpp.o
+.PHONY : helper/shapes.o
 
 # target to build an object file
-Shapes/Shapes.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o
-.PHONY : Shapes/Shapes.cpp.o
+helper/shapes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o
+.PHONY : helper/shapes.cpp.o
 
-Shapes/Shapes.i: Shapes/Shapes.cpp.i
-.PHONY : Shapes/Shapes.i
+helper/shapes.i: helper/shapes.cpp.i
+.PHONY : helper/shapes.i
 
 # target to preprocess a source file
-Shapes/Shapes.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.i
-.PHONY : Shapes/Shapes.cpp.i
+helper/shapes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.i
+.PHONY : helper/shapes.cpp.i
 
-Shapes/Shapes.s: Shapes/Shapes.cpp.s
-.PHONY : Shapes/Shapes.s
+helper/shapes.s: helper/shapes.cpp.s
+.PHONY : helper/shapes.s
 
 # target to generate assembly for a file
-Shapes/Shapes.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.s
-.PHONY : Shapes/Shapes.cpp.s
+helper/shapes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.s
+.PHONY : helper/shapes.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -213,30 +213,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-particle/particle.o: particle/particle.cpp.o
-.PHONY : particle/particle.o
-
-# target to build an object file
-particle/particle.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o
-.PHONY : particle/particle.cpp.o
-
-particle/particle.i: particle/particle.cpp.i
-.PHONY : particle/particle.i
-
-# target to preprocess a source file
-particle/particle.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.i
-.PHONY : particle/particle.cpp.i
-
-particle/particle.s: particle/particle.cpp.s
-.PHONY : particle/particle.s
-
-# target to generate assembly for a file
-particle/particle.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.s
-.PHONY : particle/particle.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -247,18 +223,15 @@ help:
 	@echo ... rebuild_cache
 	@echo ... custom_clean
 	@echo ... DynamicAnimations
-	@echo ... Converge/Converge.o
-	@echo ... Converge/Converge.i
-	@echo ... Converge/Converge.s
-	@echo ... Shapes/Shapes.o
-	@echo ... Shapes/Shapes.i
-	@echo ... Shapes/Shapes.s
+	@echo ... converge/converge.o
+	@echo ... converge/converge.i
+	@echo ... converge/converge.s
+	@echo ... helper/shapes.o
+	@echo ... helper/shapes.i
+	@echo ... helper/shapes.s
 	@echo ... main.o
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... particle/particle.o
-	@echo ... particle/particle.i
-	@echo ... particle/particle.s
 .PHONY : help
 
 
