@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.o.d"
   "CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o"
   "CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o.d"
+  "CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o"
+  "CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o.d"
   "CMakeFiles/DynamicAnimations.dir/main.cpp.o"
   "CMakeFiles/DynamicAnimations.dir/main.cpp.o.d"
   "DynamicAnimations.mjs"

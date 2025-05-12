@@ -189,6 +189,30 @@ helper/shapes.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.s
 .PHONY : helper/shapes.cpp.s
 
+helper/vector.o: helper/vector.cpp.o
+.PHONY : helper/vector.o
+
+# target to build an object file
+helper/vector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o
+.PHONY : helper/vector.cpp.o
+
+helper/vector.i: helper/vector.cpp.i
+.PHONY : helper/vector.i
+
+# target to preprocess a source file
+helper/vector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.i
+.PHONY : helper/vector.cpp.i
+
+helper/vector.s: helper/vector.cpp.s
+.PHONY : helper/vector.s
+
+# target to generate assembly for a file
+helper/vector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.s
+.PHONY : helper/vector.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -229,6 +253,9 @@ help:
 	@echo ... helper/shapes.o
 	@echo ... helper/shapes.i
 	@echo ... helper/shapes.s
+	@echo ... helper/vector.o
+	@echo ... helper/vector.i
+	@echo ... helper/vector.s
 	@echo ... main.o
 	@echo ... main.i
 	@echo ... main.s

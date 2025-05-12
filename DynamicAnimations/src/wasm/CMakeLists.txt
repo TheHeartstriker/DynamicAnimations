@@ -20,6 +20,7 @@ endif()
 set(SOURCES
     main.cpp
     helper/shapes.cpp
+    helper/vector.cpp
     converge/converge.cpp
 )
 

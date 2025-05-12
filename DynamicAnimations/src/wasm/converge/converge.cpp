@@ -1,3 +1,7 @@
+#include <SDL2/SDL.h>
+
+#include <array>
+#include <cstdint>
 #include <random>
 #include <string>
 #include <vector>
@@ -21,30 +25,58 @@ static std::uniform_int_distribution<Uint8> dis_Color(0, 255);
 namespace {
 // False means go down, true means go up
 struct Pixel {
-  int x;
-  float y;
-  Uint8 r;
-  Uint8 g;
-  Uint8 b;
-  float speed;
-  bool Direction = true;
+  uint8_t mass;                  // Mass of the pixel
+  Vector position;               // Position of the pixel
+  Vector velocity;               // Velocity of the pixel
+  Vector acceleration;           // Acceleration of the pixel
+  std::array<uint8_t, 3> color;  // RGB color of the pixel
+  bool Direction;                // Direction of the pixel (for linear motion)
+
+  Pixel(uint8_t mass = 1, Vector position = Vector(0, 0),
+        Vector velocity = Vector(0, 0), Vector acceleration = Vector(0, 0),
+        std::array<uint8_t, 3> color = {0, 0, 0}, bool Direction = false)
+      : mass(mass),
+        position(position),
+        velocity(velocity),
+        acceleration(acceleration),
+        color(color) {}
+
+  // Apply a force to the pixel
+  void applyForce(const Vector& force) {
+    Vector forceCopy = force;
+    forceCopy.divide(this->mass);       // F = ma -> a = F / m
+    this->acceleration.add(forceCopy);  // Add the resulting acceleration
+  }
+
+  void updatePosition() {
+    // Update the position based on velocity
+    this->velocity.add(this->acceleration);
+    this->position.add(this->velocity);
+    this->acceleration.multiply(0);
+  }
+
+  void drawData(SDL_Renderer* renderer) {
+    // Draw the pixel using the helper function
+    DrawPixel(renderer, position.x, position.y, color[0], color[1], color[2], 0,
+              2);
+  }
 };
 }  // namespace
-// Stores pixels data
 static std::vector<Pixel> pixels;
-// Creates a hundred instances of the Pixel struct
-static void initPixels(std::vector<Pixel>& pixels) {
-  if (Winheight) {
-    for (int i = 0; i < 75000; i++) {
-      if (i % 2 == 0) {
-        pixels.push_back({dis(gen), 2.0f, dis_Color(gen), dis_Color(gen),
-                          dis_Color(gen), dis_Num(gen), false});
-      } else {
-        pixels.push_back({dis(gen), static_cast<float>(Winheight - 2),
-                          dis_Color(gen), dis_Color(gen), dis_Color(gen),
-                          dis_Num(gen), true});
-      }
-    }
+// Function to initialize the pixels
+void initPixels(std::vector<Pixel>& pixels) {
+  static const int numPixels = 100;  // Number of pixels to create
+  for (int i = 0; i < numPixels; ++i) {
+    // Randomize properties
+    Vector position(dis(gen), dis(gen));
+    Vector velocity(0, 0);
+    Vector acceleration(0, 0);
+    std::array<uint8_t, 3> color = {dis_Color(gen), dis_Color(gen),
+                                    dis_Color(gen)};
+    uint8_t mass = static_cast<uint8_t>(dis_Color(gen) % 10 + 1);
+
+    // Create a Pixel and add it to the vector
+    pixels.emplace_back(mass, position, velocity, acceleration, color);
   }
 }
 // Instructions for window size change
@@ -57,23 +89,6 @@ static void WindowSizeChange() {
     initPixels(pixels);
   }
 }
-// Out of bounds? General reset
-static void ResetPixel(Pixel& Pix) {
-  Pix.x = dis(gen);
-  Pix.speed = dis_Num(gen);
-  Uint8 newR = dis_Color(gen);
-  Uint8 newG = dis_Color(gen);
-  Uint8 newB = dis_Color(gen);
-  if (Pix.Direction) {
-    Pix.y = static_cast<float>(Winheight);
-  } else {
-    Pix.y = 0.0f;
-  }
-
-  Pix.r = newR;
-  Pix.g = newG;
-  Pix.b = newB;
-}
 
 void MainConvergeCall(SDL_Renderer* renderer) {
   static const float Decay = 3.0f;
@@ -83,33 +98,16 @@ void MainConvergeCall(SDL_Renderer* renderer) {
   }
   // If window size changes
   WindowSizeChange();
-  // Draw the pixels
+
   for (auto& pixel : pixels) {
-    float distanceFromCenter = std::abs(pixel.y - Winheight / 2);
-    float slowFactor = std::exp(-distanceFromCenter / (Winheight / 2) * Decay);
-    // Chance to disappear if close to center
-    if (pixel.y > Winheight / 2 - 65 && pixel.y < Winheight / 2 + 65 &&
-        dis_Color(gen) < 10) {
-      ResetPixel(pixel);
-      continue;
-    }
-    // If at center
-    if (pixel.y > Winheight / 2 - 12 && pixel.y < Winheight / 2 + 12) {
-      ResetPixel(pixel);
-      continue;
-    }
-    // Color change
-    pixel.r =
-        static_cast<Uint8>(std::min(255.0f, pixel.r + 0.05f / slowFactor));
-    pixel.g = static_cast<Uint8>(std::max(0.0f, pixel.g - 0.03f / slowFactor));
-    pixel.b = static_cast<Uint8>(std::max(0.0f, pixel.b - 0.03f / slowFactor));
-    // Up vs down fall logic
-    if (pixel.Direction) {
-      pixel.y -= pixel.speed / slowFactor;
-      DrawPixel(renderer, pixel.x, pixel.y, pixel.r, pixel.g, pixel.b, 0, 2);
-    } else {
-      pixel.y += pixel.speed / slowFactor;
-      DrawPixel(renderer, pixel.x, pixel.y, pixel.r, pixel.g, pixel.b, 0, 2);
-    }
+    // Apply gravity
+    Vector gravity(0, 0.1f * pixel.mass);
+    pixel.applyForce(gravity);
+    pixel.updatePosition();
+    // Draw the pixel
+    pixel.drawData(renderer);
+
+    // Reset acceleration for the next frame
+    pixel.acceleration = Vector(0, 0);
   }
 }
