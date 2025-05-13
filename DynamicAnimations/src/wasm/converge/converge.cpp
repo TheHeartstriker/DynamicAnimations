@@ -15,24 +15,26 @@ extern int Winheight;
 
 static int intialWinwidth = Winwidth;
 static int intialWinheight = Winheight;
+static int midPoint = Winheight / 2;
 
 static std::random_device rd;
 static std::mt19937 gen(rd());
 static std::uniform_int_distribution<int> dis(0, Winwidth);
+static std::uniform_real_distribution<float> dis_mass(1.0f, 3.0f);
 static std::uniform_int_distribution<uint8_t> dis_Color(0, 255);
 
 // Name space to free up global space
 namespace {
 // False means go down, true means go up
 struct Pixel {
-  uint8_t mass;                  // Mass of the pixel
+  float mass;                    // Mass of the pixel
   Vector position;               // Position of the pixel
   Vector velocity;               // Velocity of the pixel
   Vector acceleration;           // Acceleration of the pixel
   std::array<uint8_t, 3> color;  // RGB color of the pixel
   bool Direction;                // Direction of the pixel (for linear motion)
 
-  Pixel(uint8_t mass = 1, Vector position = Vector(0, 0),
+  Pixel(float mass = 1, Vector position = Vector(0, 0),
         Vector velocity = Vector(0, 0), Vector acceleration = Vector(0, 0),
         std::array<uint8_t, 3> color = {0, 0, 0}, bool Direction = false)
       : mass(mass),
@@ -66,24 +68,25 @@ struct Pixel {
 static std::vector<Pixel> pixels;
 // Function to initialize the pixels
 void initPixels(std::vector<Pixel>& pixels) {
-  static const int numPixels = 100;  // Number of pixels to create
+  static const int numPixels = 50000;
   for (int i = 0; i < numPixels; ++i) {
     Vector position;
     bool direction;
 
     if (i % 2 == 0) {
-      position = Vector(dis(gen), Winheight - 15);
+      position = Vector(dis(gen),
+                        Winheight);  // Bottom of the screen
       direction = false;
     } else {
-      position = Vector(dis(gen), 15);  // Top of the screen
-      direction = true;                 // Move downward
+      position = Vector(dis(gen), 0);  // Top of the screen
+      direction = true;                // Move downward
     }
 
     Vector velocity(0, 0);
     Vector acceleration(0, 0);
     std::array<uint8_t, 3> color = {dis_Color(gen), dis_Color(gen),
                                     dis_Color(gen)};
-    uint8_t mass = static_cast<uint8_t>(dis_Color(gen) % 10 + 1);
+    float mass = dis_mass(gen);
 
     pixels.emplace_back(mass, position, velocity, acceleration, color,
                         direction);
@@ -95,9 +98,54 @@ static void WindowSizeChange() {
     pixels.clear();
     intialWinwidth = Winwidth;
     intialWinheight = Winheight;
+    midPoint = Winheight / 2;
     dis = std::uniform_int_distribution<int>(0, Winwidth);
     initPixels(pixels);
   }
+}
+
+static void resetPixel(Pixel& pixel) {
+  pixel.position.x = dis(gen);      // Randomize x position
+  pixel.color[0] = dis_Color(gen);  // Randomize color
+  pixel.color[1] = dis_Color(gen);
+  pixel.color[2] = dis_Color(gen);
+  pixel.velocity = Vector(0, 0);      // Reset velocity
+  pixel.acceleration = Vector(0, 0);  // Reset acceleration
+
+  if (pixel.Direction == true) {
+    pixel.position.y = 1;  // Reset to top
+  } else {
+    pixel.position.y = Winheight - 1;  // Reset to bottom
+  }
+}
+
+static void centerDetection(Pixel& pixel) {
+  // Chance to disappear if close to center
+  if (pixel.position.y > Winheight / 2 - 85 &&
+      pixel.position.y < Winheight / 2 + 85 && dis_Color(gen) < 15) {
+    resetPixel(pixel);
+  }
+  // If at center
+  if (pixel.position.y > Winheight / 2 - 18 &&
+      pixel.position.y < Winheight / 2 + 18) {
+    resetPixel(pixel);
+  }
+}
+
+static void pixelColorDegradation(Pixel& pixel, float slowFactor) {
+  const float adjustmentFactor =
+      1.5f;  // Adjust this value to control the speed of color change
+
+  // Decrease the color values over time
+  pixel.color[0] = static_cast<uint8_t>(std::min(
+      255.0f,
+      pixel.color[0] + 0.005f / (slowFactor * adjustmentFactor)));  // Red
+  pixel.color[1] = static_cast<uint8_t>(std::max(
+      0.0f,
+      pixel.color[1] - 0.003f / (slowFactor * adjustmentFactor)));  // Green
+  pixel.color[2] = static_cast<uint8_t>(std::max(
+      0.0f,
+      pixel.color[2] - 0.003f / (slowFactor * adjustmentFactor)));  // Blue
 }
 
 void MainConvergeCall(SDL_Renderer* renderer) {
@@ -108,13 +156,24 @@ void MainConvergeCall(SDL_Renderer* renderer) {
   // If window size changes
   WindowSizeChange();
 
+  const double Decay = 0.8;
+
   for (auto& pixel : pixels) {
-    // Apply gravity
+    float distanceFromCenter = std::abs(pixel.position.y - Winheight / 2);
+    float slowFactor = (1.0f + distanceFromCenter * Decay);
+
     if (pixel.Direction == true) {
-      pixel.applyForce(Vector(0, 1));  // Downward force for pixels at the top
+      Vector force(0,
+                   1.0f / slowFactor);  // Apply smaller force as it gets closer
+      pixel.applyForce(force);          // Downward force for pixels at the top
     } else if (pixel.Direction == false) {
-      pixel.applyForce(Vector(0, -1));  // Upward force for pixels at the bottom
+      Vector force(
+          0, -1.0f / slowFactor);  // Apply smaller force as it gets closer
+      pixel.applyForce(force);     // Upward force for pixels at the bottom
     }
+    centerDetection(pixel);
+    pixelColorDegradation(pixel, slowFactor);
+    // Update the pixel's position
     pixel.updatePosition();
     // Draw the pixel
     pixel.drawData(renderer);
