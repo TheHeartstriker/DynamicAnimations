@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <iostream>
 #include <random>
 #include <string>
 #include <vector>
@@ -18,8 +19,7 @@ static int intialWinheight = Winheight;
 static std::random_device rd;
 static std::mt19937 gen(rd());
 static std::uniform_int_distribution<int> dis(0, Winwidth);
-static std::uniform_real_distribution<float> dis_Num(0.3, 0.9);
-static std::uniform_int_distribution<Uint8> dis_Color(0, 255);
+static std::uniform_int_distribution<uint8_t> dis_Color(0, 255);
 
 // Name space to free up global space
 namespace {
@@ -39,7 +39,8 @@ struct Pixel {
         position(position),
         velocity(velocity),
         acceleration(acceleration),
-        color(color) {}
+        color(color),
+        Direction(Direction) {}
 
   // Apply a force to the pixel
   void applyForce(const Vector& force) {
@@ -67,16 +68,25 @@ static std::vector<Pixel> pixels;
 void initPixels(std::vector<Pixel>& pixels) {
   static const int numPixels = 100;  // Number of pixels to create
   for (int i = 0; i < numPixels; ++i) {
-    // Randomize properties
-    Vector position(dis(gen), dis(gen));
+    Vector position;
+    bool direction;
+
+    if (i % 2 == 0) {
+      position = Vector(dis(gen), Winheight - 15);
+      direction = false;
+    } else {
+      position = Vector(dis(gen), 15);  // Top of the screen
+      direction = true;                 // Move downward
+    }
+
     Vector velocity(0, 0);
     Vector acceleration(0, 0);
     std::array<uint8_t, 3> color = {dis_Color(gen), dis_Color(gen),
                                     dis_Color(gen)};
     uint8_t mass = static_cast<uint8_t>(dis_Color(gen) % 10 + 1);
 
-    // Create a Pixel and add it to the vector
-    pixels.emplace_back(mass, position, velocity, acceleration, color);
+    pixels.emplace_back(mass, position, velocity, acceleration, color,
+                        direction);
   }
 }
 // Instructions for window size change
@@ -91,7 +101,6 @@ static void WindowSizeChange() {
 }
 
 void MainConvergeCall(SDL_Renderer* renderer) {
-  static const float Decay = 3.0f;
   // Initialize the pixels
   if (pixels.empty()) {
     initPixels(pixels);
@@ -101,8 +110,11 @@ void MainConvergeCall(SDL_Renderer* renderer) {
 
   for (auto& pixel : pixels) {
     // Apply gravity
-    Vector gravity(0, 0.1f * pixel.mass);
-    pixel.applyForce(gravity);
+    if (pixel.Direction == true) {
+      pixel.applyForce(Vector(0, 1));  // Downward force for pixels at the top
+    } else if (pixel.Direction == false) {
+      pixel.applyForce(Vector(0, -1));  // Upward force for pixels at the bottom
+    }
     pixel.updatePosition();
     // Draw the pixel
     pixel.drawData(renderer);

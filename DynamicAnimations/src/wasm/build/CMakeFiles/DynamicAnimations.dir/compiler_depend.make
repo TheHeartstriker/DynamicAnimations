@@ -320,14 +320,17 @@ CMakeFiles/DynamicAnimations.dir/Converge/converge.cpp.o: C:/Users/Kaden/OneDriv
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__bit/popcount.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__bit/rotate.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__bit_reference \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/chars_format.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/tables.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/to_chars_base_10.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/to_chars_floating_point.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/to_chars_integral.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/to_chars_result.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/traits.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/convert_to_timespec.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/duration.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/high_resolution_clock.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/statically_widen.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/steady_clock.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/system_clock.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/time_point.h \
@@ -378,21 +381,36 @@ CMakeFiles/DynamicAnimations.dir/Converge/converge.cpp.o: C:/Users/Kaden/OneDriv
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__exception/terminate.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/buffer.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/concepts.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/container_adaptor.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/enable_insertable.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/escaped_output_table.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/extended_grapheme_cluster_table.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_arg.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_arg_store.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_args.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_context.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_error.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_functions.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_fwd.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_parse_context.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_string.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_to_n_result.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_bool.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_char.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_floating_point.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_integer.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_integral.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_output.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_pointer.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_string.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_tuple.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/parser_std_format_spec.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/range_default_formatter.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/range_formatter.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/unicode.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/width_estimation_table.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/write_escaped.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/binary_function.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/binary_negate.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/bind.h \
@@ -601,6 +619,7 @@ CMakeFiles/DynamicAnimations.dir/Converge/converge.cpp.o: C:/Users/Kaden/OneDriv
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/enable_view.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/from_range.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/movable_box.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/ref_view.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/size.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/subrange.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/view_interface.h \
@@ -794,6 +813,7 @@ CMakeFiles/DynamicAnimations.dir/Converge/converge.cpp.o: C:/Users/Kaden/OneDriv
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/array \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/atomic \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/bit \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/bitset \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/cctype \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/cerrno \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/climits \
@@ -811,14 +831,18 @@ CMakeFiles/DynamicAnimations.dir/Converge/converge.cpp.o: C:/Users/Kaden/OneDriv
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/ctype.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/cwchar \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/cwctype \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/deque \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/errno.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/exception \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/execution \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/format \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/functional \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/initializer_list \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/inttypes.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/ios \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iosfwd \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iostream \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/istream \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iterator \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/limits \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/locale \
@@ -829,8 +853,12 @@ CMakeFiles/DynamicAnimations.dir/Converge/converge.cpp.o: C:/Users/Kaden/OneDriv
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/new \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/numeric \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/optional \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/ostream \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/print \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/queue \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/random \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/ratio \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stack \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stddef.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stdexcept \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stdint.h \
@@ -876,6 +904,7 @@ CMakeFiles/DynamicAnimations.dir/Converge/converge.cpp.o: C:/Users/Kaden/OneDriv
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/sys/select.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/sys/types.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/time.h \
+  C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/unistd.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/wasi/api.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/wchar.h \
   C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/wctype.h \
@@ -3028,13 +3057,11 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_endian.h
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_find.h:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/allocator.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_events.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_for_each.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/allocator.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/addressof.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_filesystem.h:
 
@@ -3049,8 +3076,6 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_keycode.
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/uses_allocator_construction.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_gamecontroller.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/allocator_traits.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_gesture.h:
 
@@ -3099,8 +3124,6 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorith
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__numeric/transform_exclusive_scan.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_keyboard.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/auto_ptr.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__random/cauchy_distribution.h:
 
@@ -3296,9 +3319,9 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorith
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/find.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_char.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/find_end.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_char.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/find_first_of.h:
 
@@ -3334,9 +3357,9 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__debug_ut
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_stable_partition.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__atomic/atomic_flag.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/remainder.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__atomic/atomic_flag.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/in_found_result.h:
 
@@ -3360,9 +3383,9 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorith
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/in_out_out_result.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/in_out_result.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/traits.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/in_out_result.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__utility/no_destroy.h:
 
@@ -3568,15 +3591,15 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_tra
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_backends/cpu_backends/backend.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_minmax_element.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/builtin_new_allocator.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/add_cv.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_backends/cpu_backends/fill.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__concepts/semiregular.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/builtin_new_allocator.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_minmax_element.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_backends/cpu_backends/for_each.h:
 
@@ -3584,23 +3607,23 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorith
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_backends/cpu_backends/serial.h:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_min.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_integer.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__utility/integer_sequence.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_backends/cpu_backends/stable_sort.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_partition_copy.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_integer.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_min.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_backends/cpu_backends/transform.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/trigonometric_functions.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stdio.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_pop_heap.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/trigonometric_functions.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_backends/cpu_backends/transform.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_backends/cpu_backends/transform_reduce.h:
 
@@ -3626,9 +3649,9 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_tra
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_move.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_rotate_copy.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/align.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_rotate_copy.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/pstl_stable_sort.h:
 
@@ -3650,13 +3673,13 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorith
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_copy.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_copy_backward.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__compare/ordering.h:
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_fill.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_floating_point.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_fill.h:
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/ranges_copy_backward.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__compare/ordering.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__algorithm/reverse.h:
 
@@ -3958,9 +3981,9 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__bit/bit_
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__iterator/unreachable_sentinel.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/statically_widen.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__bit/bit_log2.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__chrono/statically_widen.h:
 
 C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/__stddef_nullptr_t.h:
 
@@ -3986,7 +4009,13 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__function
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__bit_reference:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/unary_function.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/chars_format.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/tables.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/to_chars_floating_point.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/to_chars_integral.h:
 
@@ -4082,6 +4111,8 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/log
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__concepts/predicate.h:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_arg_store.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__concepts/regular.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__concepts/same_as.h:
@@ -4094,9 +4125,9 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__concepts
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__condition_variable/condition_variable.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__config:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/roots.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__config:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/function.h:
 
@@ -4120,13 +4151,29 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/b
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/invoke.h:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/variant:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/container_adaptor.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/access.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/enable_insertable.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/fma.h:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/escaped_output_table.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/extended_grapheme_cluster_table.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__system_error/errc.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_args.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_context.h:
+
+C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/__stdarg_va_arg.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_functions.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_fwd.h:
 
@@ -4138,13 +4185,33 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/f
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_integral.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/modulo.h:
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_pointer.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__threading_support:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_string.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/aligned_union.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__mbstate_t.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_tuple.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/fdim.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/parser_std_format_spec.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/width_estimation_table.h:
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/range_default_formatter.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/range_formatter.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/allocator_destructor.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/width_estimation_table.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/apply_cv.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/write_escaped.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__thread/id.h:
 
@@ -4169,8 +4236,6 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__utility/
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/mem_fn.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/operations.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/unary_function.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/is_same.h:
 
@@ -4256,21 +4321,17 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/err
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/exponential_functions.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_tuple.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/aligned_union.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/fdim.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__mbstate_t.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/gamma.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/inverse_hyperbolic_functions.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/min_max.h:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/modulo.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__math/rounding_functions.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/addressof.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/maybe_const.h:
 
@@ -4282,11 +4343,15 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/compat/math.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/allocator_arg_t.h:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/allocator_traits.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/time.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__string/extern_template_lists.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/assume_aligned.h:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/auto_ptr.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__memory/compressed_pair.h:
 
@@ -4432,6 +4497,8 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/d
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/from_range.h:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/ref_view.h:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__utility/is_pointer_in_range.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__split_buffer:
@@ -4446,19 +4513,11 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__string/c
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__support/musl/xlocale.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_args.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__system_error/errc.h:
-
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/is_assignable.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__system_error/error_code.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__thread/poll_with_backoff.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_string.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__threading_support:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__tuple/sfinae_helpers.h:
 
@@ -4485,10 +4544,6 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_tra
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/is_trivially_move_constructible.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/alignment_of.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/write_escaped.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__type_traits/apply_cv.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/unistd.h:
 
@@ -4694,11 +4749,15 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/cstddef:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/cwctype:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/deque:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/exception:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/functional:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/ios:
+
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/istream:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iterator:
 
@@ -4712,15 +4771,13 @@ C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/memory:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/new:
 
+C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stack:
+
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/string.h:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/unordered_map:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/utility:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/container_adaptor.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/variant:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/wchar.h:
 
@@ -4758,10 +4815,6 @@ C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/__stdarg___gnuc_va_list.h:
 
 C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/__stdarg_header_macro.h:
 
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_functions.h:
-
-C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/__stdarg_va_arg.h:
-
 C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/__stddef_header_macro.h:
 
 C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/__stddef_ptrdiff_t.h:
@@ -4771,30 +4824,6 @@ C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/stdarg.h:
 C:/Users/Kaden/emsdk/upstream/lib/clang/20/include/stdint.h:
 
 C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/helper/shapes.cpp:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/chars_format.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__charconv/to_chars_floating_point.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/escaped_output_table.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_arg_store.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/format_context.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/formatter_pointer.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/range_default_formatter.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__format/range_formatter.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__ranges/ref_view.h:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/deque:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/istream:
-
-C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stack:
 
 C:/Users/Kaden/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/stdbool.h:
 
