@@ -108,7 +108,7 @@ export function collision(data, ObjectData, Radius) {
       data.velY = v2n * ny + v1t * nx;
       ObjectData[i].velX = v1n * nx - v2t * ny;
       ObjectData[i].velY = v1n * ny + v2t * nx;
-      // Optional damping (similar to wall collisions)
+      // Damping effect to reduce speed after collision
       data.velX *= 0.7;
       data.velY *= 0.7;
       ObjectData[i].velX *= 0.7;

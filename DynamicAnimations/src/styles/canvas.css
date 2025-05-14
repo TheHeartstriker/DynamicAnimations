@@ -123,6 +123,7 @@
   direction: rtl; /* Reverse horizontal flow */
   transform: rotate(180deg); /* Flip the grid visually */
   z-index: 10;
+  gap: 0px;
 }
 
 /* Base styles for the buttons */
@@ -139,6 +140,9 @@
   pointer-events: none;
   cursor: pointer;
   transition: opacity 1.5s ease-in-out;
+  user-select: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Modifier class for left-aligned container */

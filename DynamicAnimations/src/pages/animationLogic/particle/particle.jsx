@@ -10,7 +10,7 @@ import { hslToRgb } from "./helper";
 
 const particleCount = 3000;
 const colideCount = 100;
-const atomCount = 400;
+const atomCount = 450;
 const baseAmount = 20;
 
 function Particle({ canvasRef, stateProp }) {

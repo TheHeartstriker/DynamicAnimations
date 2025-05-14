@@ -16,6 +16,7 @@ extern int Winheight;
 static int intialWinwidth = Winwidth;
 static int intialWinheight = Winheight;
 static int midPoint = Winheight / 2;
+static std::string name = "Converge";
 
 static std::random_device rd;
 static std::mt19937 gen(rd());
@@ -23,8 +24,6 @@ static std::uniform_int_distribution<int> dis(0, Winwidth);
 static std::uniform_real_distribution<float> dis_mass(1.0f, 3.0f);
 static std::uniform_int_distribution<uint8_t> dis_Color(0, 255);
 
-// Name space to free up global space
-namespace {
 // False means go down, true means go up
 struct Pixel {
   float mass;                    // Mass of the pixel
@@ -64,8 +63,18 @@ struct Pixel {
               2);
   }
 };
-}  // namespace
 static std::vector<Pixel> pixels;
+static void convergeCreation(Vector& position, bool& direction, int i) {
+  if (i % 2 == 0) {
+    position = Vector(dis(gen),
+                      Winheight);  // Bottom of the screen
+    direction = false;
+  } else {
+    position = Vector(dis(gen), 0);  // Top of the screen
+    direction = true;                // Move downward
+  }
+}
+
 // Function to initialize the pixels
 void initPixels(std::vector<Pixel>& pixels) {
   static const int numPixels = 50000;
@@ -73,14 +82,7 @@ void initPixels(std::vector<Pixel>& pixels) {
     Vector position;
     bool direction;
 
-    if (i % 2 == 0) {
-      position = Vector(dis(gen),
-                        Winheight);  // Bottom of the screen
-      direction = false;
-    } else {
-      position = Vector(dis(gen), 0);  // Top of the screen
-      direction = true;                // Move downward
-    }
+    convergeCreation(position, direction, i);
 
     Vector velocity(0, 0);
     Vector acceleration(0, 0);
@@ -132,6 +134,22 @@ static void centerDetection(Pixel& pixel) {
   }
 }
 
+static float convergeForce(Pixel& pixel, float Decay) {
+  float distanceFromCenter = std::abs(pixel.position.y - Winheight / 2);
+  float slowFactor = (1.0f + distanceFromCenter * Decay);
+
+  if (pixel.Direction == true) {
+    Vector force(0,
+                 1.0f / slowFactor);  // Apply smaller force as it gets closer
+    pixel.applyForce(force);          // Downward force for pixels at the top
+  } else if (pixel.Direction == false) {
+    Vector force(0,
+                 -1.0f / slowFactor);  // Apply smaller force as it gets closer
+    pixel.applyForce(force);           // Upward force for pixels at the bottom
+  }
+  return slowFactor;
+}
+
 static void pixelColorDegradation(Pixel& pixel, float slowFactor) {
   const float adjustmentFactor =
       1.5f;  // Adjust this value to control the speed of color change
@@ -159,20 +177,11 @@ void MainConvergeCall(SDL_Renderer* renderer) {
   const double Decay = 0.8;
 
   for (auto& pixel : pixels) {
-    float distanceFromCenter = std::abs(pixel.position.y - Winheight / 2);
-    float slowFactor = (1.0f + distanceFromCenter * Decay);
-
-    if (pixel.Direction == true) {
-      Vector force(0,
-                   1.0f / slowFactor);  // Apply smaller force as it gets closer
-      pixel.applyForce(force);          // Downward force for pixels at the top
-    } else if (pixel.Direction == false) {
-      Vector force(
-          0, -1.0f / slowFactor);  // Apply smaller force as it gets closer
-      pixel.applyForce(force);     // Upward force for pixels at the bottom
+    if (name == "Converge") {
+      float slowFactor = convergeForce(pixel, Decay);
+      centerDetection(pixel);
+      pixelColorDegradation(pixel, slowFactor);
     }
-    centerDetection(pixel);
-    pixelColorDegradation(pixel, slowFactor);
     // Update the pixel's position
     pixel.updatePosition();
     // Draw the pixel
