@@ -20,7 +20,9 @@ static std::string name = "Converge";
 
 static std::random_device rd;
 static std::mt19937 gen(rd());
-static std::uniform_int_distribution<int> dis(0, Winwidth);
+static std::uniform_int_distribution<int> disW(0, Winwidth);
+static std::uniform_int_distribution<int> disH(0, Winheight);
+
 static std::uniform_real_distribution<float> dis_mass(1.0f, 3.0f);
 static std::uniform_int_distribution<uint8_t> dis_Color(0, 255);
 
@@ -66,13 +68,18 @@ struct Pixel {
 static std::vector<Pixel> pixels;
 static void convergeCreation(Vector& position, bool& direction, int i) {
   if (i % 2 == 0) {
-    position = Vector(dis(gen),
+    position = Vector(disW(gen),
                       Winheight);  // Bottom of the screen
     direction = false;
   } else {
-    position = Vector(dis(gen), 0);  // Top of the screen
-    direction = true;                // Move downward
+    position = Vector(disW(gen), 0);  // Top of the screen
+    direction = true;                 // Move downward
   }
+}
+
+static void blackHoleCreation(Vector& position, bool& direction) {
+  // Create a black hole at the center of the screen
+  position = Vector(disW(gen), disH(gen));
 }
 
 // Function to initialize the pixels
@@ -101,13 +108,16 @@ static void WindowSizeChange() {
     intialWinwidth = Winwidth;
     intialWinheight = Winheight;
     midPoint = Winheight / 2;
-    dis = std::uniform_int_distribution<int>(0, Winwidth);
+    disW = std::uniform_int_distribution<int>(0, Winwidth);
     initPixels(pixels);
   }
 }
 
-static void resetPixel(Pixel& pixel) {
-  pixel.position.x = dis(gen);      // Randomize x position
+static void resetPixel(Pixel& pixel, std::string name) {
+  pixel.position.x = disW(gen);  // Randomize x position
+  if (name == "BlackHole") {
+    pixel.position.y = disH(gen);  // Randomize y position
+  }
   pixel.color[0] = dis_Color(gen);  // Randomize color
   pixel.color[1] = dis_Color(gen);
   pixel.color[2] = dis_Color(gen);
@@ -125,12 +135,12 @@ static void centerDetection(Pixel& pixel) {
   // Chance to disappear if close to center
   if (pixel.position.y > Winheight / 2 - 85 &&
       pixel.position.y < Winheight / 2 + 85 && dis_Color(gen) < 15) {
-    resetPixel(pixel);
+    resetPixel(pixel, "Converge");
   }
   // If at center
   if (pixel.position.y > Winheight / 2 - 18 &&
       pixel.position.y < Winheight / 2 + 18) {
-    resetPixel(pixel);
+    resetPixel(pixel, "Converge");
   }
 }
 
