@@ -16,13 +16,14 @@ extern int Winheight;
 static int intialWinwidth = Winwidth;
 static int intialWinheight = Winheight;
 static int midPoint = Winheight / 2;
-static std::string name = "Converge";
+static std::string name = "BlackHole";
 
 static std::random_device rd;
 static std::mt19937 gen(rd());
 static std::uniform_int_distribution<int> disW(0, Winwidth);
 static std::uniform_int_distribution<int> disH(0, Winheight);
 
+static std::uniform_real_distribution<float> dis_vel(-2.0f, 2.0f);
 static std::uniform_real_distribution<float> dis_mass(1.0f, 3.0f);
 static std::uniform_int_distribution<uint8_t> dis_Color(0, 255);
 
@@ -62,10 +63,61 @@ struct Pixel {
   void drawData(SDL_Renderer* renderer) {
     // Draw the pixel using the helper function
     DrawPixel(renderer, position.x, position.y, color[0], color[1], color[2], 0,
-              2);
+              4);
   }
 };
 static std::vector<Pixel> pixels;
+
+static void resetPixel(Pixel& pixel, std::string name) {
+  pixel.color[0] = dis_Color(gen);  // Randomize color
+  pixel.color[1] = dis_Color(gen);
+  pixel.color[2] = dis_Color(gen);
+  pixel.velocity = Vector(0, 0);      // Reset velocity
+  pixel.acceleration = Vector(0, 0);  // Reset acceleration
+  if (name == "BlackHole") {
+    pixel.position.y = disH(gen);
+    pixel.position.x = disW(gen);
+    pixel.velocity = Vector(dis_vel(gen), dis_vel(gen));
+  } else {
+    pixel.position.x = disW(gen);  // Randomize x position
+    if (pixel.Direction == true) {
+      pixel.position.y = 1;  // Reset to top
+    } else {
+      pixel.position.y = Winheight - 1;  // Reset to bottom
+    }
+  }
+}
+// Think about attracting as if the black hole is spinning
+struct Attractor {
+  Vector position;  // Position of the attractor
+  int Radius;       // Size of the attractor
+  float mass;       // Mass of the attractor
+
+  Attractor(Vector position, float mass, int Radius)
+      : position(position), mass(mass), Radius(Radius) {}
+
+  // Apply a force to the pixel
+  Vector attract(Pixel& pixel) {
+    Vector force = position;
+    force.subtract(pixel.position);
+    float distance = force.magnitude();
+    float strength = (1 * mass * pixel.mass) / (distance * distance);
+    force.normalize();
+    force.multiply(strength);
+    return force;
+  }
+
+  void consume(Pixel& pixel) {
+    // Consume the pixel
+    float dx = position.x - pixel.position.x;
+    float dy = position.y - pixel.position.y;
+    float distance = std::sqrt(dx * dx + dy * dy);
+    if (distance < Radius) {
+      resetPixel(pixel, "BlackHole");
+    }
+  }
+};
+
 static void convergeCreation(Vector& position, bool& direction, int i) {
   if (i % 2 == 0) {
     position = Vector(disW(gen),
@@ -84,14 +136,19 @@ static void blackHoleCreation(Vector& position, bool& direction) {
 
 // Function to initialize the pixels
 void initPixels(std::vector<Pixel>& pixels) {
-  static const int numPixels = 50000;
+  static const int numPixels = 10000;
   for (int i = 0; i < numPixels; ++i) {
     Vector position;
     bool direction;
+    Vector velocity;
 
-    convergeCreation(position, direction, i);
-
-    Vector velocity(0, 0);
+    if (name == "BlackHole") {
+      blackHoleCreation(position, direction);
+      velocity = Vector(dis_vel(gen), dis_vel(gen));
+    } else {
+      convergeCreation(position, direction, i);
+      velocity = Vector(0, 0);
+    }
     Vector acceleration(0, 0);
     std::array<uint8_t, 3> color = {dis_Color(gen), dis_Color(gen),
                                     dis_Color(gen)};
@@ -109,25 +166,8 @@ static void WindowSizeChange() {
     intialWinheight = Winheight;
     midPoint = Winheight / 2;
     disW = std::uniform_int_distribution<int>(0, Winwidth);
+    disH = std::uniform_int_distribution<int>(0, Winheight);
     initPixels(pixels);
-  }
-}
-
-static void resetPixel(Pixel& pixel, std::string name) {
-  pixel.position.x = disW(gen);  // Randomize x position
-  if (name == "BlackHole") {
-    pixel.position.y = disH(gen);  // Randomize y position
-  }
-  pixel.color[0] = dis_Color(gen);  // Randomize color
-  pixel.color[1] = dis_Color(gen);
-  pixel.color[2] = dis_Color(gen);
-  pixel.velocity = Vector(0, 0);      // Reset velocity
-  pixel.acceleration = Vector(0, 0);  // Reset acceleration
-
-  if (pixel.Direction == true) {
-    pixel.position.y = 1;  // Reset to top
-  } else {
-    pixel.position.y = Winheight - 1;  // Reset to bottom
   }
 }
 
@@ -160,6 +200,8 @@ static float convergeForce(Pixel& pixel, float Decay) {
   return slowFactor;
 }
 
+// Function to
+
 static void pixelColorDegradation(Pixel& pixel, float slowFactor) {
   const float adjustmentFactor =
       1.5f;  // Adjust this value to control the speed of color change
@@ -191,6 +233,13 @@ void MainConvergeCall(SDL_Renderer* renderer) {
       float slowFactor = convergeForce(pixel, Decay);
       centerDetection(pixel);
       pixelColorDegradation(pixel, slowFactor);
+    } else if (name == "BlackHole") {
+      // Create a black hole at the center of the screen
+      Attractor blackHole(Vector(Winwidth / 2, Winheight / 2), 1000, 100);
+      // Attract the pixel towards the black hole
+      Vector force = blackHole.attract(pixel);
+      pixel.applyForce(force);
+      blackHole.consume(pixel);
     }
     // Update the pixel's position
     pixel.updatePosition();
