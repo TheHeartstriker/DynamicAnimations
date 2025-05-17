@@ -1,5 +1,6 @@
-CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o: \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Converge\Converge.cpp \
+CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o: \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\pixelUtil.cpp \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\pixelUtil.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\random \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__assert \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__assertion_handler \
@@ -837,7 +838,7 @@ CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\seed_seq.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\student_t_distribution.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\weibull_distribution.h \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Converge\..\Shapes\Shapes.h \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\..\helper\helper.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_main.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_stdinc.h \
@@ -894,5 +895,4 @@ CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_timer.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_version.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_locale.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_misc.h \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Converge\ConvergeHeader.h
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_misc.h

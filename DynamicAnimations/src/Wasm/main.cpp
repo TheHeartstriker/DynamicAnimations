@@ -4,8 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "Converge/ConvergeHeader.h"
-// #include "particle/particleHeader.h" Particle glow effect is slow for wasm
+#include "pixelAni/pixel.h"
 
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;
@@ -35,9 +34,7 @@ void setArguments(int arg1, int arg2, int arg3) {
 void render() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
-  if (TypeAni == 1) {
-    MainConvergeCall(renderer);
-  }
+  MainConvergeCall(renderer);
   SDL_RenderPresent(renderer);
 }
 

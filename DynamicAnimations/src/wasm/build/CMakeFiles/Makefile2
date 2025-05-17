@@ -85,12 +85,12 @@ clean: CMakeFiles/custom_clean.dir/clean
 CMakeFiles/DynamicAnimations.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=1,2,3,4,5 "Built target DynamicAnimations"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target DynamicAnimations"
 .PHONY : CMakeFiles/DynamicAnimations.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/DynamicAnimations.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/DynamicAnimations.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles 0
 .PHONY : CMakeFiles/DynamicAnimations.dir/rule
@@ -102,7 +102,7 @@ DynamicAnimations: CMakeFiles/DynamicAnimations.dir/rule
 # codegen rule for target.
 CMakeFiles/DynamicAnimations.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=1,2,3,4,5 "Finished codegen for target DynamicAnimations"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Finished codegen for target DynamicAnimations"
 .PHONY : CMakeFiles/DynamicAnimations.dir/codegen
 
 # clean rule for target.
@@ -117,7 +117,7 @@ CMakeFiles/DynamicAnimations.dir/clean:
 CMakeFiles/custom_clean.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\custom_clean.dir\build.make CMakeFiles/custom_clean.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\custom_clean.dir\build.make CMakeFiles/custom_clean.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=6 "Built target custom_clean"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=8 "Built target custom_clean"
 .PHONY : CMakeFiles/custom_clean.dir/all
 
 # Build rule for subdir invocation for target.
@@ -134,7 +134,7 @@ custom_clean: CMakeFiles/custom_clean.dir/rule
 # codegen rule for target.
 CMakeFiles/custom_clean.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\custom_clean.dir\build.make CMakeFiles/custom_clean.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=6 "Finished codegen for target custom_clean"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=8 "Finished codegen for target custom_clean"
 .PHONY : CMakeFiles/custom_clean.dir/codegen
 
 # clean rule for target.

@@ -83,7 +83,8 @@
     "xmemory": "cpp",
     "xstring": "cpp",
     "xtr1common": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "xhash": "cpp"
   },
   "cmake.sourceDirectory": "C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm"
 }

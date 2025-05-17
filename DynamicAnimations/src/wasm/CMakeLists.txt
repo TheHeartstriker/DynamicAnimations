@@ -19,9 +19,11 @@ endif()
 # Source files
 set(SOURCES
     main.cpp
-    Shapes/Shapes.cpp
-    Converge/Converge.cpp
-    particle/particle.cpp
+    helper/shapes.cpp
+    helper/vector.cpp
+    pixelAni/pixel.cpp
+    pixelAni/pixelUtil.cpp
+    pixelAni/classes.cpp
 )
 
 # Add executable

@@ -86,69 +86,103 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/main.cpp.s"
 	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\main.cpp -o CMakeFiles\DynamicAnimations.dir\main.cpp.s
 
-CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
-CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
-CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/Shapes/Shapes.cpp
-CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o -MF CMakeFiles\DynamicAnimations.dir\Shapes\Shapes.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\Shapes\Shapes.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Shapes\Shapes.cpp
+CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
+CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
+CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/helper/shapes.cpp
+CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o -MF CMakeFiles\DynamicAnimations.dir\helper\shapes.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\helper\shapes.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\helper\shapes.cpp
 
-CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.i"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Shapes\Shapes.cpp > CMakeFiles\DynamicAnimations.dir\Shapes\Shapes.cpp.i
+CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.i"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\helper\shapes.cpp > CMakeFiles\DynamicAnimations.dir\helper\shapes.cpp.i
 
-CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.s"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Shapes\Shapes.cpp -o CMakeFiles\DynamicAnimations.dir\Shapes\Shapes.cpp.s
+CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.s"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\helper\shapes.cpp -o CMakeFiles\DynamicAnimations.dir\helper\shapes.cpp.s
 
-CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
-CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
-CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/Converge/Converge.cpp
-CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o -MF CMakeFiles\DynamicAnimations.dir\Converge\Converge.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\Converge\Converge.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Converge\Converge.cpp
+CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
+CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
+CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/helper/vector.cpp
+CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o -MF CMakeFiles\DynamicAnimations.dir\helper\vector.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\helper\vector.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\helper\vector.cpp
 
-CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.i"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Converge\Converge.cpp > CMakeFiles\DynamicAnimations.dir\Converge\Converge.cpp.i
+CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.i"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\helper\vector.cpp > CMakeFiles\DynamicAnimations.dir\helper\vector.cpp.i
 
-CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.s"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\Converge\Converge.cpp -o CMakeFiles\DynamicAnimations.dir\Converge\Converge.cpp.s
+CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.s"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\helper\vector.cpp -o CMakeFiles\DynamicAnimations.dir\helper\vector.cpp.s
 
-CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
-CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
-CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/particle/particle.cpp
-CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o -MF CMakeFiles\DynamicAnimations.dir\particle\particle.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\particle\particle.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\particle\particle.cpp
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/pixelAni/pixel.cpp
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o -MF CMakeFiles\DynamicAnimations.dir\pixelAni\pixel.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\pixelAni\pixel.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixel.cpp
 
-CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.i"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\particle\particle.cpp > CMakeFiles\DynamicAnimations.dir\particle\particle.cpp.i
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.i"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixel.cpp > CMakeFiles\DynamicAnimations.dir\pixelAni\pixel.cpp.i
 
-CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.s"
-	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\particle\particle.cpp -o CMakeFiles\DynamicAnimations.dir\particle\particle.cpp.s
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.s"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixel.cpp -o CMakeFiles\DynamicAnimations.dir\pixelAni\pixel.cpp.s
+
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/pixelAni/pixelUtil.cpp
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o -MF CMakeFiles\DynamicAnimations.dir\pixelAni\pixelUtil.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\pixelAni\pixelUtil.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixelUtil.cpp
+
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.i"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixelUtil.cpp > CMakeFiles\DynamicAnimations.dir\pixelAni\pixelUtil.cpp.i
+
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.s"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixelUtil.cpp -o CMakeFiles\DynamicAnimations.dir\pixelAni\pixelUtil.cpp.s
+
+CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
+CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
+CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/pixelAni/classes.cpp
+CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o -MF CMakeFiles\DynamicAnimations.dir\pixelAni\classes.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\pixelAni\classes.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\classes.cpp
+
+CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.i"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\classes.cpp > CMakeFiles\DynamicAnimations.dir\pixelAni\classes.cpp.i
+
+CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.s"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\classes.cpp -o CMakeFiles\DynamicAnimations.dir\pixelAni\classes.cpp.s
 
 # Object files for target DynamicAnimations
 DynamicAnimations_OBJECTS = \
 "CMakeFiles/DynamicAnimations.dir/main.cpp.o" \
-"CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o" \
-"CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o" \
-"CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o"
+"CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o" \
+"CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o" \
+"CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o" \
+"CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o" \
+"CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o"
 
 # External object files for target DynamicAnimations
 DynamicAnimations_EXTERNAL_OBJECTS =
 
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/main.cpp.o
-DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/Shapes/Shapes.cpp.o
-DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/Converge/Converge.cpp.o
-DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/particle/particle.cpp.o
+DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o
+DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o
+DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o
+DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o
+DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/build.make
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/objects1.rsp
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable DynamicAnimations.mjs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable DynamicAnimations.mjs"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DynamicAnimations.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

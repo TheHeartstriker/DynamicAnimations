@@ -1,5 +1,5 @@
-#ifndef CONVERGEHEADER_H
-#define CONVERGEHEADER_H
+#ifndef PIXEL_H
+#define PIXEL_H
 
 #include <SDL2/SDL.h>
 

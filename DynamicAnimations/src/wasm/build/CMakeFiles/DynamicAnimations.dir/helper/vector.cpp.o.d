@@ -1,83 +1,25 @@
-CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\main.cpp \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_main.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_stdinc.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_config.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_platform.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\begin_code.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\close_code.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_config_emscripten.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\sys\types.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\features.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\bits\alltypes.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\endian.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\sys\select.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdio.h \
+CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o: \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\helper\vector.cpp \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cmath \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__assert \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__assertion_handler \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__config \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__config_site \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdio.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\wasi\api.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stddef.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\stddef.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stddef.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_header_macro.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_ptrdiff_t.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_size_t.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_wchar_t.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_null.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_nullptr_t.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_max_align_t.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_offsetof.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdint.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\stdint.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdint.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\bits\stdint.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\compat\stdlib.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdlib.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdlib.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\alloca.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\compat\stdarg.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\stdarg.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdarg.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg_header_macro.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg___gnuc_va_list.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg_va_list.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg_va_arg.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg___va_copy.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg_va_copy.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\compat\string.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\string.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\string.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\strings.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\wchar.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\wchar.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\inttypes.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\inttypes.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\inttypes.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\ctype.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\ctype.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\compat\math.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\math.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\math.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\abs.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__verbose_abort \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__availability \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\enable_if.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_integral.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_arithmetic.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\integral_constant.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_floating_point.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\remove_cv.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\remove_const.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\remove_volatile.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\copysign.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_arithmetic.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_floating_point.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\promote.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_integral.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_constant_evaluated.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_same.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\promote.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\declval.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\limits \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__assert \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__assertion_handler \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__verbose_abort \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__availability \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_signed.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__undef_macros \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\version \
@@ -91,6 +33,17 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_void.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\remove_reference.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstddef \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stddef.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\stddef.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stddef.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_header_macro.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_ptrdiff_t.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_size_t.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_wchar_t.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_null.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_nullptr_t.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_max_align_t.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stddef_offsetof.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\add_rvalue_reference.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\add_volatile.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\aligned_storage.h \
@@ -143,7 +96,6 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_compound.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_fundamental.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_null_pointer.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_constant_evaluated.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_constructible.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_copy_assignable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_copy_constructible.h \
@@ -183,6 +135,11 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_trivially_copy_constructible.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_trivially_copyable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstdint \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdint.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\stdint.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdint.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\bits\alltypes.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\bits\stdint.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_trivially_default_constructible.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_trivially_destructible.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_trivially_move_assignable.h \
@@ -200,6 +157,12 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\invoke.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\type_identity.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\unwrap_ref.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\compat\math.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\math.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\math.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\features.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\abs.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\copysign.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\error_functions.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\exponential_functions.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\fdim.h \
@@ -217,62 +180,10 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\rounding_functions.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\traits.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__math\trigonometric_functions.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_assert.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_atomic.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_audio.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_error.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_endian.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_mutex.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_thread.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_rwops.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_clipboard.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_cpuinfo.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_events.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_video.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_pixels.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_rect.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_surface.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_blendmode.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_keyboard.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_keycode.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_scancode.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_mouse.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_joystick.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_guid.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_gamecontroller.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_sensor.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_quit.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_gesture.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_touch.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_filesystem.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_haptic.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_hidapi.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_hints.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_loadso.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_log.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_messagebox.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_metal.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_power.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_render.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_shape.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_system.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_timer.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_version.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_locale.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_misc.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\emscripten.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\em_asm.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\em_macros.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\em_types.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdbool.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\stdbool.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdbool.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\em_js.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\promise.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\wget.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\version.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cmath \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\compat\stdlib.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdlib.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdlib.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\alloca.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\iostream \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\ios \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\ios.h \
@@ -405,6 +316,10 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\unique_ptr.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\hash.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstring \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\compat\string.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\string.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\string.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\strings.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\typeinfo \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\memory_order.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__mutex\once_flag.h \
@@ -443,6 +358,8 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\to_underlying.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\no_destroy.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cctype \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\ctype.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\ctype.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\clocale \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\locale.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\locale.h \
@@ -460,6 +377,8 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cwctype \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\wctype.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\wctype.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\wchar.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\wchar.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_if.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\remove_if.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__format\enable_insertable.h \
@@ -476,6 +395,9 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\search.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_first_of.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstdio \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdio.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdio.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\wasi\api.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__string\extern_template_lists.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_allocator.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\noexcept_move_assign_container.h \
@@ -825,6 +747,15 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\streambuf \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__locale_dir\locale_base_api\bsd_locale_fallbacks.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__locale_dir\locale_base_api\locale_guard.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\compat\stdarg.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\stdarg.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdarg.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg_header_macro.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg___gnuc_va_list.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg_va_list.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg_va_arg.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg___va_copy.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\__stdarg_va_copy.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstdarg \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__format\formatter_output.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__format\parser_std_format_spec.h \
@@ -886,4 +817,61 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__format\formatter_tuple.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\print \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\unistd.h \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixel.h
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\helper\helper.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_main.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_stdinc.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_config.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_platform.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\begin_code.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\close_code.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_config_emscripten.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\sys\types.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\endian.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\sys\select.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\inttypes.h \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\inttypes.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\inttypes.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_assert.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_atomic.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_audio.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_error.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_endian.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_mutex.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_thread.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_rwops.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_clipboard.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_cpuinfo.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_events.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_video.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_pixels.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_rect.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_surface.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_blendmode.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_keyboard.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_keycode.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_scancode.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_mouse.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_joystick.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_guid.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_gamecontroller.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_sensor.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_quit.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_gesture.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_touch.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_filesystem.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_haptic.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_hidapi.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_hints.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_loadso.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_log.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_messagebox.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_metal.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_power.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_render.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_shape.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_system.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_timer.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_version.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_locale.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_misc.h
