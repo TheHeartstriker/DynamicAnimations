@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "converge/convergeHeader.h"
+#include "pixelAni/pixel.h"
 
 SDL_Window* window = nullptr;
 SDL_Renderer* renderer = nullptr;

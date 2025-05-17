@@ -141,78 +141,6 @@ custom_clean/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\custom_clean.dir\build.make CMakeFiles/custom_clean.dir/build
 .PHONY : custom_clean/fast
 
-converge/classes.o: converge/classes.cpp.o
-.PHONY : converge/classes.o
-
-# target to build an object file
-converge/classes.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o
-.PHONY : converge/classes.cpp.o
-
-converge/classes.i: converge/classes.cpp.i
-.PHONY : converge/classes.i
-
-# target to preprocess a source file
-converge/classes.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.i
-.PHONY : converge/classes.cpp.i
-
-converge/classes.s: converge/classes.cpp.s
-.PHONY : converge/classes.s
-
-# target to generate assembly for a file
-converge/classes.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.s
-.PHONY : converge/classes.cpp.s
-
-converge/converge.o: converge/converge.cpp.o
-.PHONY : converge/converge.o
-
-# target to build an object file
-converge/converge.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.o
-.PHONY : converge/converge.cpp.o
-
-converge/converge.i: converge/converge.cpp.i
-.PHONY : converge/converge.i
-
-# target to preprocess a source file
-converge/converge.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.i
-.PHONY : converge/converge.cpp.i
-
-converge/converge.s: converge/converge.cpp.s
-.PHONY : converge/converge.s
-
-# target to generate assembly for a file
-converge/converge.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.s
-.PHONY : converge/converge.cpp.s
-
-converge/pixelUtil.o: converge/pixelUtil.cpp.o
-.PHONY : converge/pixelUtil.o
-
-# target to build an object file
-converge/pixelUtil.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o
-.PHONY : converge/pixelUtil.cpp.o
-
-converge/pixelUtil.i: converge/pixelUtil.cpp.i
-.PHONY : converge/pixelUtil.i
-
-# target to preprocess a source file
-converge/pixelUtil.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.i
-.PHONY : converge/pixelUtil.cpp.i
-
-converge/pixelUtil.s: converge/pixelUtil.cpp.s
-.PHONY : converge/pixelUtil.s
-
-# target to generate assembly for a file
-converge/pixelUtil.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.s
-.PHONY : converge/pixelUtil.cpp.s
-
 helper/shapes.o: helper/shapes.cpp.o
 .PHONY : helper/shapes.o
 
@@ -285,6 +213,78 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+pixelAni/classes.o: pixelAni/classes.cpp.o
+.PHONY : pixelAni/classes.o
+
+# target to build an object file
+pixelAni/classes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.o
+.PHONY : pixelAni/classes.cpp.o
+
+pixelAni/classes.i: pixelAni/classes.cpp.i
+.PHONY : pixelAni/classes.i
+
+# target to preprocess a source file
+pixelAni/classes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.i
+.PHONY : pixelAni/classes.cpp.i
+
+pixelAni/classes.s: pixelAni/classes.cpp.s
+.PHONY : pixelAni/classes.s
+
+# target to generate assembly for a file
+pixelAni/classes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/classes.cpp.s
+.PHONY : pixelAni/classes.cpp.s
+
+pixelAni/pixel.o: pixelAni/pixel.cpp.o
+.PHONY : pixelAni/pixel.o
+
+# target to build an object file
+pixelAni/pixel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o
+.PHONY : pixelAni/pixel.cpp.o
+
+pixelAni/pixel.i: pixelAni/pixel.cpp.i
+.PHONY : pixelAni/pixel.i
+
+# target to preprocess a source file
+pixelAni/pixel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.i
+.PHONY : pixelAni/pixel.cpp.i
+
+pixelAni/pixel.s: pixelAni/pixel.cpp.s
+.PHONY : pixelAni/pixel.s
+
+# target to generate assembly for a file
+pixelAni/pixel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.s
+.PHONY : pixelAni/pixel.cpp.s
+
+pixelAni/pixelUtil.o: pixelAni/pixelUtil.cpp.o
+.PHONY : pixelAni/pixelUtil.o
+
+# target to build an object file
+pixelAni/pixelUtil.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.o
+.PHONY : pixelAni/pixelUtil.cpp.o
+
+pixelAni/pixelUtil.i: pixelAni/pixelUtil.cpp.i
+.PHONY : pixelAni/pixelUtil.i
+
+# target to preprocess a source file
+pixelAni/pixelUtil.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.i
+.PHONY : pixelAni/pixelUtil.cpp.i
+
+pixelAni/pixelUtil.s: pixelAni/pixelUtil.cpp.s
+.PHONY : pixelAni/pixelUtil.s
+
+# target to generate assembly for a file
+pixelAni/pixelUtil.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/pixelAni/pixelUtil.cpp.s
+.PHONY : pixelAni/pixelUtil.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -295,15 +295,6 @@ help:
 	@echo ... rebuild_cache
 	@echo ... custom_clean
 	@echo ... DynamicAnimations
-	@echo ... converge/classes.o
-	@echo ... converge/classes.i
-	@echo ... converge/classes.s
-	@echo ... converge/converge.o
-	@echo ... converge/converge.i
-	@echo ... converge/converge.s
-	@echo ... converge/pixelUtil.o
-	@echo ... converge/pixelUtil.i
-	@echo ... converge/pixelUtil.s
 	@echo ... helper/shapes.o
 	@echo ... helper/shapes.i
 	@echo ... helper/shapes.s
@@ -313,6 +304,15 @@ help:
 	@echo ... main.o
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... pixelAni/classes.o
+	@echo ... pixelAni/classes.i
+	@echo ... pixelAni/classes.s
+	@echo ... pixelAni/pixel.o
+	@echo ... pixelAni/pixel.i
+	@echo ... pixelAni/pixel.s
+	@echo ... pixelAni/pixelUtil.o
+	@echo ... pixelAni/pixelUtil.i
+	@echo ... pixelAni/pixelUtil.s
 .PHONY : help
 
 

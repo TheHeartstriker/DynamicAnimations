@@ -1,5 +1,6 @@
-CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\main.cpp \
+CMakeFiles/DynamicAnimations.dir/pixelAni/pixel.cpp.o: \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixel.cpp \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixel.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_main.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_stdinc.h \
@@ -260,104 +261,51 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_version.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_locale.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\SDL2\SDL_misc.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\emscripten.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\em_asm.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\em_macros.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\em_types.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdbool.h \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\stdbool.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\stdbool.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\em_js.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\promise.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\wget.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\emscripten\version.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cmath \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\iostream \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\ios \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\ios.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\string.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\memory_resource.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ios\fpos.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__locale \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\shared_ptr.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\compare_three_way.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\three_way_comparable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\common_comparison_category.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\ordering.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\common_reference_with.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\convertible_to.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\same_as.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\equality_comparable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\boolean_testable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\totally_ordered.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\exception.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\binary_function.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\operations.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\unary_function.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\array \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\equal.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\comp.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\operation_traits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\reference_wrapper.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\weak_result_type.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\addressof.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\ostream.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\access.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocation_guard.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocator_traits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\construct_at.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\voidify.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\move.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\new \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstdlib \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\pointer_traits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocator.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocate_at_least.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocator_destructor.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\auto_ptr.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\compressed_pair.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\get.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\unwrap_iter.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\iterator_traits.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\arithmetic.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_signed_integer.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_unsigned_integer.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\constructible.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\convertible_to.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\destructible.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\copyable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\assignable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\constructible.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\destructible.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\common_reference_with.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\same_as.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\movable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\swappable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\class_or_enum.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\exchange.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\move.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\swap.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\array.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\subrange.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\tuple.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_element.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_indices.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\integer_sequence.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_types.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\piecewise_construct.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\uninitialized_algorithms.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\copy.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\copy_move_common.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\iterator_operations.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\iter_swap.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\ranges_iterator_concept.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\equality_comparable.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\boolean_testable.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\totally_ordered.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\incrementable_traits.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_primary_template.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_valid_expansion.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\readable_traits.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\pointer_traits.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\addressof.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\identity.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\reference_wrapper.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\weak_result_type.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\binary_function.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\unary_function.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\distance.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\concepts.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\arithmetic.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_signed_integer.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_unsigned_integer.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\derived_from.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\invocable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\predicate.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\regular.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\semiregular.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\relation.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\incrementable_traits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_primary_template.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_valid_expansion.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\iter_move.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\iterator_traits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\readable_traits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\advance.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\convert_to_integral.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\unreachable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\distance.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\access.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\enable_borrowed_range.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\auto_cast.h \
@@ -366,51 +314,88 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\enable_view.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\size.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\initializer_list \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__string\constexpr_c_functions.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\construct_at.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\access.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\voidify.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\new \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\exception.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstdlib \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\datasizeof.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_always_bitcastable.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_equality_comparable.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_trivially_lexicographically_comparable.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\is_pointer_in_range.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\fill_n.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\convert_to_integral.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\lexicographical_compare.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\comp_ref_type.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\lexicographical_compare_three_way.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\min.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\min_element.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\three_way_comp_ref_type.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\ordering.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\compare_three_way.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\three_way_comparable.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\common_comparison_category.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\swap_ranges.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\iterator_operations.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\iter_swap.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\ranges_iterator_concept.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\advance.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\unreachable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\iter_swap.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\next.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\prev.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\unwrap_iter.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\unwrap_range.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\pair.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\synth_three_way.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\different_from.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\array.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\get.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\subrange.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\tuple.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_element.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_indices.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\integer_sequence.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_types.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\pair_like.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_like.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_size.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\sfinae_helpers.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\make_tuple_types.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__tuple\tuple_like_ext.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__string\constexpr_c_functions.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\datasizeof.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_always_bitcastable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_equality_comparable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_trivially_lexicographically_comparable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\is_pointer_in_range.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\comp.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\for_each_segment.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\segmented_iterator.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\min.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\comp_ref_type.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\min_element.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\identity.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\move.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\piecewise_construct.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\reverse_iterator.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\compare_three_way_result.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\iterator.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\segmented_iterator.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\subrange.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\dangling.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\view_interface.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\empty.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\exception_guard.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\unique_ptr.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\hash.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstring \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\empty.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdexcept \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\string.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\memory_resource.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\exception \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\exception_ptr.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\operations.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\typeinfo \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\memory_order.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__mutex\once_flag.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\tuple \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocator_arg_t.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\uses_allocator.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\nested_exception.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\terminate.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\iosfwd \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\fstream.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\ios.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\istream.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\ostream.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\sstream.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\streambuf.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__std_mbstate_t.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__mbstate_t.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\data.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\empty.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\reverse_access.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\size.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\compare \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\compare_partial_order_fallback.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\partial_order.h \
@@ -418,79 +403,10 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\strong_order.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\bit_cast.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\priority_tag.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cmath \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\compare_strong_order_fallback.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\compare_weak_order_fallback.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__compare\is_eq.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\exception \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\exception_ptr.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\operations.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\nested_exception.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__exception\terminate.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\iosfwd \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\fstream.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\istream.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\sstream.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\streambuf.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__std_mbstate_t.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__mbstate_t.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\utility \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\as_const.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\as_lvalue.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\cmp.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\forward_like.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\in_place.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\rel_ops.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\to_underlying.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\no_destroy.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cctype \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\clocale \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\locale.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\locale.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\string \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\max.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\max_element.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\remove.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_segment_if.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\countr.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\rotate.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\invert_if.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\bit_reference.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cwchar \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cwctype \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\wctype.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\wctype.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_if.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\remove_if.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__format\enable_insertable.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\wrap_iter.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\swap_allocator.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory_resource\polymorphic_allocator.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory_resource\memory_resource.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\container_compatible_range.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\from_range.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__string\char_traits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\copy_n.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\fill_n.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_end.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\search.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_first_of.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstdio \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__string\extern_template_lists.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_allocator.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\noexcept_move_assign_container.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\climits \
-  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\limits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\limits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\bits\limits.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\stdexcept \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\string_view \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\string_view.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\bounded_iter.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\data.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\empty.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\reverse_access.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\size.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\algorithm \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\adjacent_find.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\all_of.h \
@@ -499,20 +415,42 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\lower_bound.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\half_positive.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\clamp.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\copy.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\copy_move_common.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\unwrap_range.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\for_each_segment.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\copy_backward.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\copy_if.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\copy_n.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\count.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\invert_if.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\popcount.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\rotate.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\bit_reference.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\count_if.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\equal.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\equal_range.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\upper_bound.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\fill.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_segment_if.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\countr.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cwchar \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cwctype \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cctype \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\wctype.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\wctype.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_end.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\search.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_first_of.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_if.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\find_if_not.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\fold.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\for_each.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\movable_box.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\optional \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\hash.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstring \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\in_place.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\atomic \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\aliases.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\atomic.h \
@@ -521,8 +459,13 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\contention_t.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\cxx_atomic_impl.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\is_always_lock_free.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\memory_order.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__chrono\duration.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\ratio \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\climits \
+  C:\Users\Kaden\emsdk\upstream\lib\clang\20\include\limits.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\limits.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\bits\limits.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__thread\poll_with_backoff.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__chrono\high_resolution_clock.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__chrono\steady_clock.h \
@@ -539,6 +482,7 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\pthread.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\sched.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\check_memory_order.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\operations.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\atomic_lock_free.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\atomic_flag.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__atomic\atomic_init.h \
@@ -548,9 +492,21 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__concepts\common_with.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\iterator \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\back_insert_iterator.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\bounded_iter.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\common_iterator.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\variant \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\forward_like.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__variant\monostate.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\tuple \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocator_arg_t.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\uses_allocator.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\utility \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\as_const.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\as_lvalue.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\cmp.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\exception_guard.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\rel_ops.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\to_underlying.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\counted_iterator.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\default_sentinel.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\erase_if_container.h \
@@ -569,14 +525,26 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\permutable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\sortable.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\unreachable_sentinel.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__iterator\wrap_iter.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\memory \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\align.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocate_at_least.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocator_traits.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocation_guard.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocator.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\assume_aligned.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\auto_ptr.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\compressed_pair.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\concepts.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\ranges_construct_at.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\ranges_uninitialized_algorithms.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\in_out_result.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\uninitialized_algorithms.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\move.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\raw_storage_iterator.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\shared_ptr.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\allocator_destructor.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\unique_ptr.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\temporary_buffer.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\uses_allocator_construction.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\for_each_n.h \
@@ -591,7 +559,6 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\inplace_merge.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\rotate.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\move_backward.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\swap_ranges.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\destruct_n.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\is_heap.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\is_heap_until.h \
@@ -599,11 +566,10 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\is_permutation.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\is_sorted.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\is_sorted_until.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\lexicographical_compare.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\lexicographical_compare_three_way.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\three_way_comp_ref_type.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\make_heap.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\sift_down.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\max.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\max_element.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\merge.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\min_max_result.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\minmax.h \
@@ -635,7 +601,6 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\pstl_backends\cpu_backends\any_of.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\pstl_backends\cpu_backends\backend.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\pstl_backends\cpu_backends\serial.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\empty.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_execution_policy.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\pstl_backends\cpu_backends\fill.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\pstl_backends\cpu_backends\find_if.h \
@@ -769,7 +734,9 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\ranges_unique_copy.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\unique_copy.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\ranges_upper_bound.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\remove.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\remove_copy.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\remove_if.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\replace.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\replace_copy.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__algorithm\replace_copy_if.h \
@@ -786,6 +753,29 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\byteswap.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\endian.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__bit\has_single_bit.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\iostream \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\ios \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ios\fpos.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__locale \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__mutex\once_flag.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__utility\no_destroy.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\clocale \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\locale.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\locale.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\string \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__format\enable_insertable.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory\swap_allocator.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory_resource\polymorphic_allocator.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__memory_resource\memory_resource.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\container_compatible_range.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__ranges\from_range.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__string\char_traits.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\cstdio \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__string\extern_template_lists.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\is_allocator.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__type_traits\noexcept_move_assign_container.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\string_view \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__fwd\string_view.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__support\musl\xlocale.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__system_error\error_category.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__system_error\error_code.h \
@@ -846,7 +836,6 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\binder1st.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\binder2nd.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\boyer_moore_searcher.h \
-  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\array \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\unordered_map \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__functional\is_transparent.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__hash_table \
@@ -886,4 +875,55 @@ CMakeFiles/DynamicAnimations.dir/main.cpp.o: \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__format\formatter_tuple.h \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\print \
   C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\unistd.h \
-  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixel.h
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\random \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\bernoulli_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\uniform_real_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\generate_canonical.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\binomial_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\cauchy_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\chi_squared_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\gamma_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\exponential_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\clamp_to_integral.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\default_random_engine.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\linear_congruential_engine.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\is_seed_sequence.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\discard_block_engine.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\discrete_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\numeric \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\accumulate.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\adjacent_difference.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\exclusive_scan.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\gcd_lcm.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\inclusive_scan.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\inner_product.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\iota.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\midpoint.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\partial_sum.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\pstl_reduce.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\reduce.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\saturation_arithmetic.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\transform_exclusive_scan.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__numeric\transform_inclusive_scan.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\extreme_value_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\fisher_f_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\geometric_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\negative_binomial_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\poisson_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\normal_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\independent_bits_engine.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\knuth_b.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\shuffle_order_engine.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\lognormal_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\mersenne_twister_engine.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\piecewise_constant_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\piecewise_linear_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\random_device.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\ranlux.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\subtract_with_carry_engine.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\seed_seq.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\student_t_distribution.h \
+  C:\Users\Kaden\emsdk\upstream\emscripten\cache\sysroot\include\c++\v1\__random\weibull_distribution.h \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\..\helper\helper.h \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\classes.h \
+  C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\pixelAni\pixelUtil.h

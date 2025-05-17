@@ -21,9 +21,9 @@ set(SOURCES
     main.cpp
     helper/shapes.cpp
     helper/vector.cpp
-    converge/converge.cpp
-    converge/pixelUtil.cpp
-    converge/classes.cpp
+    pixelAni/pixel.cpp
+    pixelAni/pixelUtil.cpp
+    pixelAni/classes.cpp
 )
 
 # Add executable

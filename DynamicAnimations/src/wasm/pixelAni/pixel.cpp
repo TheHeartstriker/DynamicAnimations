@@ -1,3 +1,5 @@
+#include "pixel.h"
+
 #include <SDL2/SDL.h>
 
 #include <array>
@@ -9,7 +11,6 @@
 
 #include "../helper/helper.h"
 #include "classes.h"
-#include "convergeHeader.h"
 #include "pixelUtil.h"
 
 extern int Winwidth;
@@ -25,51 +26,10 @@ static std::mt19937 gen(rd());
 static std::uniform_int_distribution<int> disW(0, Winwidth);
 static std::uniform_int_distribution<int> disH(0, Winheight);
 
-static std::uniform_real_distribution<float> dis_vel(-2.0f, 2.0f);
+static std::uniform_real_distribution<float> dis_vel(-1.0f, 1.0f);
 static std::uniform_real_distribution<float> dis_mass(1.0f, 3.0f);
 static std::uniform_int_distribution<uint8_t> dis_Color(0, 255);
 
-// // False means go down, true means go up
-// struct Pixel {
-//   float mass;                    // Mass of the pixel
-//   Vector position;               // Position of the pixel
-//   Vector velocity;               // Velocity of the pixel
-//   Vector acceleration;           // Acceleration of the pixel
-//   std::array<uint8_t, 3> color;  // RGB color of the pixel
-//   bool Direction;                // Direction of the pixel (for linear
-//   motion)
-
-//   Pixel(float mass = 1, Vector position = Vector(0, 0),
-//         Vector velocity = Vector(0, 0), Vector acceleration = Vector(0, 0),
-//         std::array<uint8_t, 3> color = {0, 0, 0}, bool Direction = false)
-//       : mass(mass),
-//         position(position),
-//         velocity(velocity),
-//         acceleration(acceleration),
-//         color(color),
-//         Direction(Direction) {}
-
-//   // Apply a force to the pixel
-//   void applyForce(const Vector& force) {
-//     Vector forceCopy = force;
-//     forceCopy.divide(this->mass);       // F = ma -> a = F / m
-//     this->acceleration.add(forceCopy);  // Add the resulting acceleration
-//   }
-
-//   void updatePosition() {
-//     // Update the position based on velocity
-//     this->velocity.add(this->acceleration);
-//     this->position.add(this->velocity);
-//     this->acceleration.multiply(0);
-//   }
-
-//   void drawData(SDL_Renderer* renderer) {
-//     // Draw the pixel using the helper function
-//     DrawPixel(renderer, position.x, position.y, color[0], color[1], color[2],
-//     0,
-//               4);
-//   }
-// };
 static std::vector<Pixel> pixels;
 
 static void resetPixel(Pixel& pixel, std::string name) {
@@ -107,8 +67,22 @@ struct Attractor {
     force.subtract(pixel.position);
     float distance = force.magnitude();
     float strength = (1 * mass * pixel.mass) / (distance * distance);
+
+    // --- Radial force (towards center) ---
     force.normalize();
     force.multiply(strength);
+
+    // --- Tangential "spin" force ---
+    // Create a perpendicular vector (2D cross product)
+    Vector tangent(-force.y, force.x);  // 90-degree rotation
+    tangent.normalize();
+    float spinStrength =
+        0.03f * strength;  // Adjust this value for more/less spin
+    tangent.multiply(spinStrength);
+
+    // Combine radial and tangential forces
+    force.add(tangent);
+
     return force;
   }
 
@@ -125,7 +99,7 @@ struct Attractor {
 
 // Function to initialize the pixels
 void initPixels(std::vector<Pixel>& pixels) {
-  static const int numPixels = 10000;
+  static const int numPixels = 1000;
   for (int i = 0; i < numPixels; ++i) {
     Vector position;
     bool direction;
@@ -224,7 +198,7 @@ void MainConvergeCall(SDL_Renderer* renderer) {
       pixelColorDegradation(pixel, slowFactor);
     } else if (name == "BlackHole") {
       // Create a black hole at the center of the screen
-      Attractor blackHole(Vector(Winwidth / 2, Winheight / 2), 1000, 100);
+      Attractor blackHole(Vector(Winwidth / 2, Winheight / 2), 750, 100);
       // Attract the pixel towards the black hole
       Vector force = blackHole.attract(pixel);
       pixel.applyForce(force);
