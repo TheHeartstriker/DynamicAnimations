@@ -141,6 +141,30 @@ custom_clean/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\custom_clean.dir\build.make CMakeFiles/custom_clean.dir/build
 .PHONY : custom_clean/fast
 
+converge/classes.o: converge/classes.cpp.o
+.PHONY : converge/classes.o
+
+# target to build an object file
+converge/classes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o
+.PHONY : converge/classes.cpp.o
+
+converge/classes.i: converge/classes.cpp.i
+.PHONY : converge/classes.i
+
+# target to preprocess a source file
+converge/classes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.i
+.PHONY : converge/classes.cpp.i
+
+converge/classes.s: converge/classes.cpp.s
+.PHONY : converge/classes.s
+
+# target to generate assembly for a file
+converge/classes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.s
+.PHONY : converge/classes.cpp.s
+
 converge/converge.o: converge/converge.cpp.o
 .PHONY : converge/converge.o
 
@@ -164,6 +188,30 @@ converge/converge.s: converge/converge.cpp.s
 converge/converge.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.s
 .PHONY : converge/converge.cpp.s
+
+converge/pixelUtil.o: converge/pixelUtil.cpp.o
+.PHONY : converge/pixelUtil.o
+
+# target to build an object file
+converge/pixelUtil.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o
+.PHONY : converge/pixelUtil.cpp.o
+
+converge/pixelUtil.i: converge/pixelUtil.cpp.i
+.PHONY : converge/pixelUtil.i
+
+# target to preprocess a source file
+converge/pixelUtil.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.i
+.PHONY : converge/pixelUtil.cpp.i
+
+converge/pixelUtil.s: converge/pixelUtil.cpp.s
+.PHONY : converge/pixelUtil.s
+
+# target to generate assembly for a file
+converge/pixelUtil.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DynamicAnimations.dir\build.make CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.s
+.PHONY : converge/pixelUtil.cpp.s
 
 helper/shapes.o: helper/shapes.cpp.o
 .PHONY : helper/shapes.o
@@ -247,9 +295,15 @@ help:
 	@echo ... rebuild_cache
 	@echo ... custom_clean
 	@echo ... DynamicAnimations
+	@echo ... converge/classes.o
+	@echo ... converge/classes.i
+	@echo ... converge/classes.s
 	@echo ... converge/converge.o
 	@echo ... converge/converge.i
 	@echo ... converge/converge.s
+	@echo ... converge/pixelUtil.o
+	@echo ... converge/pixelUtil.i
+	@echo ... converge/pixelUtil.s
 	@echo ... helper/shapes.o
 	@echo ... helper/shapes.i
 	@echo ... helper/shapes.s

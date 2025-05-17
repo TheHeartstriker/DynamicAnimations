@@ -8,7 +8,9 @@
 #include <vector>
 
 #include "../helper/helper.h"
+#include "classes.h"
 #include "convergeHeader.h"
+#include "pixelUtil.h"
 
 extern int Winwidth;
 extern int Winheight;
@@ -27,45 +29,47 @@ static std::uniform_real_distribution<float> dis_vel(-2.0f, 2.0f);
 static std::uniform_real_distribution<float> dis_mass(1.0f, 3.0f);
 static std::uniform_int_distribution<uint8_t> dis_Color(0, 255);
 
-// False means go down, true means go up
-struct Pixel {
-  float mass;                    // Mass of the pixel
-  Vector position;               // Position of the pixel
-  Vector velocity;               // Velocity of the pixel
-  Vector acceleration;           // Acceleration of the pixel
-  std::array<uint8_t, 3> color;  // RGB color of the pixel
-  bool Direction;                // Direction of the pixel (for linear motion)
+// // False means go down, true means go up
+// struct Pixel {
+//   float mass;                    // Mass of the pixel
+//   Vector position;               // Position of the pixel
+//   Vector velocity;               // Velocity of the pixel
+//   Vector acceleration;           // Acceleration of the pixel
+//   std::array<uint8_t, 3> color;  // RGB color of the pixel
+//   bool Direction;                // Direction of the pixel (for linear
+//   motion)
 
-  Pixel(float mass = 1, Vector position = Vector(0, 0),
-        Vector velocity = Vector(0, 0), Vector acceleration = Vector(0, 0),
-        std::array<uint8_t, 3> color = {0, 0, 0}, bool Direction = false)
-      : mass(mass),
-        position(position),
-        velocity(velocity),
-        acceleration(acceleration),
-        color(color),
-        Direction(Direction) {}
+//   Pixel(float mass = 1, Vector position = Vector(0, 0),
+//         Vector velocity = Vector(0, 0), Vector acceleration = Vector(0, 0),
+//         std::array<uint8_t, 3> color = {0, 0, 0}, bool Direction = false)
+//       : mass(mass),
+//         position(position),
+//         velocity(velocity),
+//         acceleration(acceleration),
+//         color(color),
+//         Direction(Direction) {}
 
-  // Apply a force to the pixel
-  void applyForce(const Vector& force) {
-    Vector forceCopy = force;
-    forceCopy.divide(this->mass);       // F = ma -> a = F / m
-    this->acceleration.add(forceCopy);  // Add the resulting acceleration
-  }
+//   // Apply a force to the pixel
+//   void applyForce(const Vector& force) {
+//     Vector forceCopy = force;
+//     forceCopy.divide(this->mass);       // F = ma -> a = F / m
+//     this->acceleration.add(forceCopy);  // Add the resulting acceleration
+//   }
 
-  void updatePosition() {
-    // Update the position based on velocity
-    this->velocity.add(this->acceleration);
-    this->position.add(this->velocity);
-    this->acceleration.multiply(0);
-  }
+//   void updatePosition() {
+//     // Update the position based on velocity
+//     this->velocity.add(this->acceleration);
+//     this->position.add(this->velocity);
+//     this->acceleration.multiply(0);
+//   }
 
-  void drawData(SDL_Renderer* renderer) {
-    // Draw the pixel using the helper function
-    DrawPixel(renderer, position.x, position.y, color[0], color[1], color[2], 0,
-              4);
-  }
-};
+//   void drawData(SDL_Renderer* renderer) {
+//     // Draw the pixel using the helper function
+//     DrawPixel(renderer, position.x, position.y, color[0], color[1], color[2],
+//     0,
+//               4);
+//   }
+// };
 static std::vector<Pixel> pixels;
 
 static void resetPixel(Pixel& pixel, std::string name) {
@@ -78,7 +82,8 @@ static void resetPixel(Pixel& pixel, std::string name) {
     pixel.position.y = disH(gen);
     pixel.position.x = disW(gen);
     pixel.velocity = Vector(dis_vel(gen), dis_vel(gen));
-  } else {
+  }
+  if (name == "Converge") {
     pixel.position.x = disW(gen);  // Randomize x position
     if (pixel.Direction == true) {
       pixel.position.y = 1;  // Reset to top
@@ -118,22 +123,6 @@ struct Attractor {
   }
 };
 
-static void convergeCreation(Vector& position, bool& direction, int i) {
-  if (i % 2 == 0) {
-    position = Vector(disW(gen),
-                      Winheight);  // Bottom of the screen
-    direction = false;
-  } else {
-    position = Vector(disW(gen), 0);  // Top of the screen
-    direction = true;                 // Move downward
-  }
-}
-
-static void blackHoleCreation(Vector& position, bool& direction) {
-  // Create a black hole at the center of the screen
-  position = Vector(disW(gen), disH(gen));
-}
-
 // Function to initialize the pixels
 void initPixels(std::vector<Pixel>& pixels) {
   static const int numPixels = 10000;
@@ -143,10 +132,10 @@ void initPixels(std::vector<Pixel>& pixels) {
     Vector velocity;
 
     if (name == "BlackHole") {
-      blackHoleCreation(position, direction);
+      blackHoleCreation(position, direction, disW, gen, disH);
       velocity = Vector(dis_vel(gen), dis_vel(gen));
     } else {
-      convergeCreation(position, direction, i);
+      convergeCreation(position, direction, i, disW, gen, Winheight);
       velocity = Vector(0, 0);
     }
     Vector acceleration(0, 0);

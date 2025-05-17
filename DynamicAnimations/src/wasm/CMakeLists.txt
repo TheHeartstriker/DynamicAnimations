@@ -22,6 +22,8 @@ set(SOURCES
     helper/shapes.cpp
     helper/vector.cpp
     converge/converge.cpp
+    converge/pixelUtil.cpp
+    converge/classes.cpp
 )
 
 # Add executable

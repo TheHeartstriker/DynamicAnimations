@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o"
+  "CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o.d"
   "CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.o"
   "CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.o.d"
+  "CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o"
+  "CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o.d"
   "CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o"
   "CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o.d"
   "CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o"

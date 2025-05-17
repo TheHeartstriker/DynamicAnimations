@@ -131,12 +131,44 @@ CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.s"
 	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\converge.cpp -o CMakeFiles\DynamicAnimations.dir\converge\converge.cpp.s
 
+CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
+CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
+CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/converge/pixelUtil.cpp
+CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o -MF CMakeFiles\DynamicAnimations.dir\converge\pixelUtil.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\converge\pixelUtil.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\pixelUtil.cpp
+
+CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.i"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\pixelUtil.cpp > CMakeFiles\DynamicAnimations.dir\converge\pixelUtil.cpp.i
+
+CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.s"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\pixelUtil.cpp -o CMakeFiles\DynamicAnimations.dir\converge\pixelUtil.cpp.s
+
+CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o: CMakeFiles/DynamicAnimations.dir/flags.make
+CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o: CMakeFiles/DynamicAnimations.dir/includes_CXX.rsp
+CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o: C:/Users/Kaden/OneDrive/Desktop/Code.hehe/DynamicAnimations/DynamicAnimations/src/wasm/converge/classes.cpp
+CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o: CMakeFiles/DynamicAnimations.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o -MF CMakeFiles\DynamicAnimations.dir\converge\classes.cpp.o.d -o CMakeFiles\DynamicAnimations.dir\converge\classes.cpp.o -c C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\classes.cpp
+
+CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.i"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\classes.cpp > CMakeFiles\DynamicAnimations.dir\converge\classes.cpp.i
+
+CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.s"
+	C:\Users\Kaden\emsdk\upstream\emscripten\em++.bat $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\converge\classes.cpp -o CMakeFiles\DynamicAnimations.dir\converge\classes.cpp.s
+
 # Object files for target DynamicAnimations
 DynamicAnimations_OBJECTS = \
 "CMakeFiles/DynamicAnimations.dir/main.cpp.o" \
 "CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o" \
 "CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o" \
-"CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.o"
+"CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.o" \
+"CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o" \
+"CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o"
 
 # External object files for target DynamicAnimations
 DynamicAnimations_EXTERNAL_OBJECTS =
@@ -145,10 +177,12 @@ DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/main.cpp.o
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/helper/shapes.cpp.o
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/helper/vector.cpp.o
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/converge/converge.cpp.o
+DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/converge/pixelUtil.cpp.o
+DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/converge/classes.cpp.o
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/build.make
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/objects1.rsp
 DynamicAnimations.mjs: CMakeFiles/DynamicAnimations.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable DynamicAnimations.mjs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Kaden\OneDrive\Desktop\Code.hehe\DynamicAnimations\DynamicAnimations\src\wasm\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable DynamicAnimations.mjs"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DynamicAnimations.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
