@@ -112,7 +112,7 @@ function Interface() {
             className="PanelItem"
             onClick={() => togglePanel("PanelElement2")}
           >
-            <h1>Converge</h1>
+            <h1>Pixel</h1>
           </div>
           {/* Panel 3 */}
           <div
@@ -136,7 +136,9 @@ function Interface() {
         {Panel.PanelElement1 && (
           <Particle canvasRef={canvasRef} stateProp={Play} />
         )}
-        {Panel.PanelElement2 && <MainWasm />}
+        {Panel.PanelElement2 && (
+          <MainWasm canvasRef={canvasRef} stateProp={Play} />
+        )}
         {Panel.PanelElement3 && <Sand canvasRef={canvasRef} stateProp={Play} />}
         {Panel.PanelElement4 && <Rain canvasRef={canvasRef} stateProp={Play} />}
       </div>

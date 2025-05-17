@@ -13,11 +13,10 @@ const loadWasm = async (canvas) => {
   return wasm;
 };
 
-function MainWasm() {
+function MainWasm({ canvasRef, stateProp }) {
   const [wasm, setWasm] = useState(null);
-  const canvasRef = useRef(null);
   const isLoaded = useRef(false);
-  const [AniType, setAniType] = useState(1);
+  const [AniType, setAniType] = useState(0);
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -66,9 +65,37 @@ function MainWasm() {
   }, [windowSize, wasm, AniType]);
 
   return (
-    <div>
+    <>
       <canvas ref={canvasRef} id="wasmCanvas"></canvas>
-    </div>
+      <div className="canvasBtnContainer left">
+        <div
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
+          onClick={() => {
+            setAniType(0);
+            if (wasm) {
+              wasm._setArguments(windowSize.height, windowSize.width, 0);
+            }
+          }}
+        >
+          Converge
+        </div>
+        <div
+          className={`CircleButton purple ${
+            stateProp === false ? "Animate" : ""
+          }`}
+          onClick={() => {
+            setAniType(1);
+            if (wasm) {
+              wasm._setArguments(windowSize.height, windowSize.width, 1);
+            }
+          }}
+        >
+          BlackHole
+        </div>
+      </div>
+    </>
   );
 }
 

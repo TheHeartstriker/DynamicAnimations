@@ -28,7 +28,7 @@ void Pixel::updatePosition() {
   this->acceleration.multiply(0);
 }
 
-void Pixel::drawData(SDL_Renderer* renderer) {
+void Pixel::drawData(SDL_Renderer* renderer, int size) {
   DrawPixel(renderer, position.x, position.y, color[0], color[1], color[2], 0,
-            4);
+            size);
 }

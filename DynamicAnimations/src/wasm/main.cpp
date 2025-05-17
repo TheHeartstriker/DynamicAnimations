@@ -34,9 +34,7 @@ void setArguments(int arg1, int arg2, int arg3) {
 void render() {
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
-  if (TypeAni == 1) {
-    MainConvergeCall(renderer);
-  }
+  MainConvergeCall(renderer);
   SDL_RenderPresent(renderer);
 }
 

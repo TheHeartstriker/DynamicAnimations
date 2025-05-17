@@ -12,14 +12,20 @@
 #include "../helper/helper.h"
 #include "classes.h"
 #include "pixelUtil.h"
-
+//
+// Warning typeAni 0 is for Converge
+// Warning typeAni 1 is for BlackHole
+//
 extern int Winwidth;
 extern int Winheight;
+extern int TypeAni;
 
 static int intialWinwidth = Winwidth;
 static int intialWinheight = Winheight;
+static int initialAniType = TypeAni;
 static int midPoint = Winheight / 2;
-static std::string name = "BlackHole";
+static const int blackHoleParams = 750;
+static const int convergeParams = 40000;
 
 static std::random_device rd;
 static std::mt19937 gen(rd());
@@ -32,18 +38,18 @@ static std::uniform_int_distribution<uint8_t> dis_Color(0, 255);
 
 static std::vector<Pixel> pixels;
 
-static void resetPixel(Pixel& pixel, std::string name) {
+static void resetPixel(Pixel& pixel, int AniType) {
   pixel.color[0] = dis_Color(gen);  // Randomize color
   pixel.color[1] = dis_Color(gen);
   pixel.color[2] = dis_Color(gen);
   pixel.velocity = Vector(0, 0);      // Reset velocity
   pixel.acceleration = Vector(0, 0);  // Reset acceleration
-  if (name == "BlackHole") {
+  if (AniType == 1) {
     pixel.position.y = disH(gen);
     pixel.position.x = disW(gen);
     pixel.velocity = Vector(dis_vel(gen), dis_vel(gen));
   }
-  if (name == "Converge") {
+  if (AniType == 0) {
     pixel.position.x = disW(gen);  // Randomize x position
     if (pixel.Direction == true) {
       pixel.position.y = 1;  // Reset to top
@@ -92,20 +98,19 @@ struct Attractor {
     float dy = position.y - pixel.position.y;
     float distance = std::sqrt(dx * dx + dy * dy);
     if (distance < Radius) {
-      resetPixel(pixel, "BlackHole");
+      resetPixel(pixel, 1);
     }
   }
 };
 
 // Function to initialize the pixels
-void initPixels(std::vector<Pixel>& pixels) {
-  static const int numPixels = 1000;
-  for (int i = 0; i < numPixels; ++i) {
+void initPixels(std::vector<Pixel>& pixels, int amount) {
+  for (int i = 0; i < amount; ++i) {
     Vector position;
     bool direction;
     Vector velocity;
 
-    if (name == "BlackHole") {
+    if (TypeAni == 1) {
       blackHoleCreation(position, direction, disW, gen, disH);
       velocity = Vector(dis_vel(gen), dis_vel(gen));
     } else {
@@ -121,6 +126,23 @@ void initPixels(std::vector<Pixel>& pixels) {
                         direction);
   }
 }
+static int aniValue() {
+  if (TypeAni == 0) {
+    return convergeParams;
+  } else if (TypeAni == 1) {
+    return blackHoleParams;
+  }
+  return -1;  // Invalid type
+}
+
+static int getSize() {
+  if (TypeAni == 0) {
+    return 2;
+  } else if (TypeAni == 1) {
+    return 4;
+  }
+  return -1;  // Invalid type
+}
 // Instructions for window size change
 static void WindowSizeChange() {
   if (Winwidth != intialWinwidth || Winheight != intialWinheight) {
@@ -130,7 +152,15 @@ static void WindowSizeChange() {
     midPoint = Winheight / 2;
     disW = std::uniform_int_distribution<int>(0, Winwidth);
     disH = std::uniform_int_distribution<int>(0, Winheight);
-    initPixels(pixels);
+    initPixels(pixels, aniValue());
+  }
+}
+
+static void aniReset() {
+  if (TypeAni != initialAniType) {
+    pixels.clear();
+    initialAniType = TypeAni;
+    initPixels(pixels, aniValue());
   }
 }
 
@@ -138,12 +168,12 @@ static void centerDetection(Pixel& pixel) {
   // Chance to disappear if close to center
   if (pixel.position.y > Winheight / 2 - 85 &&
       pixel.position.y < Winheight / 2 + 85 && dis_Color(gen) < 15) {
-    resetPixel(pixel, "Converge");
+    resetPixel(pixel, 0);
   }
   // If at center
   if (pixel.position.y > Winheight / 2 - 18 &&
       pixel.position.y < Winheight / 2 + 18) {
-    resetPixel(pixel, "Converge");
+    resetPixel(pixel, 0);
   }
 }
 
@@ -184,7 +214,7 @@ static void pixelColorDegradation(Pixel& pixel, float slowFactor) {
 void MainConvergeCall(SDL_Renderer* renderer) {
   // Initialize the pixels
   if (pixels.empty()) {
-    initPixels(pixels);
+    initPixels(pixels, aniValue());
   }
   // If window size changes
   WindowSizeChange();
@@ -192,11 +222,12 @@ void MainConvergeCall(SDL_Renderer* renderer) {
   const double Decay = 0.8;
 
   for (auto& pixel : pixels) {
-    if (name == "Converge") {
+    aniReset();
+    if (TypeAni == 0) {
       float slowFactor = convergeForce(pixel, Decay);
       centerDetection(pixel);
       pixelColorDegradation(pixel, slowFactor);
-    } else if (name == "BlackHole") {
+    } else if (TypeAni == 1) {
       // Create a black hole at the center of the screen
       Attractor blackHole(Vector(Winwidth / 2, Winheight / 2), 750, 100);
       // Attract the pixel towards the black hole
@@ -207,7 +238,7 @@ void MainConvergeCall(SDL_Renderer* renderer) {
     // Update the pixel's position
     pixel.updatePosition();
     // Draw the pixel
-    pixel.drawData(renderer);
+    pixel.drawData(renderer, getSize());
 
     // Reset acceleration for the next frame
     pixel.acceleration = Vector(0, 0);

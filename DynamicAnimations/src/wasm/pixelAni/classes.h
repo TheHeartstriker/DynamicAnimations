@@ -20,7 +20,7 @@ struct Pixel {
 
   void applyForce(const Vector& force);
   void updatePosition();
-  void drawData(SDL_Renderer* renderer);
+  void drawData(SDL_Renderer* renderer, int size);
 };
 
 #endif
