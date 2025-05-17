@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import SDLModule from "./wasm/build/dynamicAnimations?init";
+import SDLModule from "./wasm/build/DynamicAnimations?init";
 
 const loadWasm = async (canvas) => {
   const wasm = await SDLModule({
