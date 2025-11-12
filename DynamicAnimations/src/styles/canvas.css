@@ -24,8 +24,8 @@
   transition: 1.5s ease-in-out height, 1.5s ease-in-out width,
     1.5s ease-in-out border, 2s ease-in-out border-radius,
     1.5s ease-in-out box-shadow;
-  border: 2px solid var(--Crimson);
-  box-shadow: 0 0 30px 4px rgba(220, 20, 60, 0.3);
+  border: 2px solid var(--color-4);
+  box-shadow: 0 0 30px 4px var(--opacity-color-4);
 }
 
 .CanvasContainer.grow {
