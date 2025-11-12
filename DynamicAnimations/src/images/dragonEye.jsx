@@ -24,8 +24,8 @@ const DragonEye = forwardRef((props, ref) => {
           <g id="PurpleTri">
             <path
               d="M93.9189 151L74 94L93.9189 37L113.838 94L93.9189 151Z"
-              fill="#8000FF"
-              fillOpacity="0.5"
+              fill="#6bd425"
+              fillOpacity="1"
               style={{ mixBlendMode: "multiply" }}
             />
           </g>
@@ -58,7 +58,7 @@ const DragonEye = forwardRef((props, ref) => {
           <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
-            values="0 0 0 0 0.294118 0 0 0 0 0 0 0 0 0 0.509804 0 0 0 1 0"
+            values="0 0 0 0 0.4196 0 0 0 0 0.8314 0 0 0 0 0.1451 0 0 0 0.5 0"
           />
           <feBlend
             mode="normal"
@@ -80,8 +80,8 @@ const DragonEye = forwardRef((props, ref) => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(94 94) rotate(90) scale(74)"
         >
-          <stop stopColor="#FFBABA" />
-          <stop offset="1" stopColor="#4B0082" />
+          <stop stopColor="#ffffffff" />
+          <stop offset="1" stopColor="#6bd425" />
         </radialGradient>
       </defs>
     </svg>

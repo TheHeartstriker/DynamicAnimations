@@ -1,6 +1,6 @@
 import DragonEye from "../images/dragonEye.jsx";
-import { useState, useRef, useEffect } from "react";
-import { animate, createAnimatable } from "animejs";
+import { useRef, useEffect } from "react";
+import { createAnimatable } from "animejs";
 
 function Eye() {
   const DragonEyeRef = useRef(null);

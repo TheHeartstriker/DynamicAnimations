@@ -1,5 +1,21 @@
 body {
   font-size: 16px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-1);
+  font-family: "Protest Revolution", sans-serif;
+}
+
+:root {
+  --color-1: #0d0e20;
+  --color-2: #161836;
+  --color-3: #1e2048;
+  --color-4: #471ca8;
+  --color-5: #6bd425;
+
+  --opacity-color-4: rgba(71, 28, 168, 0.5);
+  --opacity-color-5: rgba(107, 212, 37, 0.5);
 }
 
 @media (min-width: 2000px) {

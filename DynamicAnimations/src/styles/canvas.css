@@ -1,17 +1,6 @@
 /* Changed in SlidePage acording to the lightning color/hue */
-:root {
-  --HUE: 0;
-  /* Maroon */
-  --Background: #3d0000;
-  /* Blood red */
-  --BloodRed: #8b0000;
-  --Crimson: #dc143c;
-  --Purple: #4b0082;
-  --NeonPurple: #8000ff;
-  --Amber: #ff8c00;
-}
 
-.CanvasContainer {
+.canvas-container {
   position: absolute;
   width: 50%;
   height: 50%;
@@ -24,11 +13,11 @@
   transition: 1.5s ease-in-out height, 1.5s ease-in-out width,
     1.5s ease-in-out border, 2s ease-in-out border-radius,
     1.5s ease-in-out box-shadow;
-  border: 2px solid var(--Crimson);
-  box-shadow: 0 0 30px 4px rgba(220, 20, 60, 0.3);
+  border: 2px solid var(--color-4);
+  box-shadow: 0 0 30px 4px var(--opacity-color-4);
 }
 
-.CanvasContainer.grow {
+.canvas-container.grow {
   width: 100%;
   height: 100%;
   border-radius: 0;
@@ -111,10 +100,10 @@
 
 /* Modifier class for custom button colors */
 .CircleButton.red {
-  color: var(--Crimson);
+  color: var(--color-5);
 }
 .CircleButton.purple {
-  color: var(--NeonPurple);
+  color: var(--color-4);
 }
 
 .CircleButton.Animate {
