@@ -15,6 +15,7 @@ body {
   --color-5: #6bd425;
 
   --opacity-color-4: rgba(71, 28, 168, 0.5);
+  --opacity-color-5: rgba(107, 212, 37, 0.5);
 }
 
 @media (min-width: 2000px) {

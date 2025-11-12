@@ -5,8 +5,8 @@
 
   z-index: -1;
 }
-
-.HeaderContainer {
+/* Top container */
+.header-container {
   z-index: 500;
   width: 100%;
   height: 20vh;
@@ -14,10 +14,9 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  pad: 0 2rem;
 }
 
-.SacrificeContainer {
+.sacrifice-container {
   position: relative;
   width: 25vw;
   height: 100%;
@@ -27,7 +26,7 @@
   right: 8%;
 }
 
-.EyeContainer {
+.eye-container {
   position: relative;
   width: 25vw;
   height: 100%;
@@ -38,11 +37,11 @@
   transition: opacity 0.8s ease-in-out;
 }
 
-.EyeContainer.grow {
+.eye-container.grow {
   opacity: 0;
 }
 
-.PlayContainer {
+.play-container {
   position: relative;
   width: 25vw;
   height: 100%;
@@ -52,57 +51,47 @@
   left: 8%;
 }
 
-.PlayElementContainer {
+.play-element-container {
   position: relative;
-  width: 45%;
+  width: 20rem;
   height: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   z-index: 5;
   background-color: var(--color-2);
   border-radius: 50px;
 }
 
-.PlayPause {
+.play-pause {
+  box-sizing: border-box;
+  margin: 0 7.5px;
+
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 85%;
-  width: 48%;
+  width: 50%;
   border-radius: 50px;
   z-index: 2;
+
   background-color: var(--color-1);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     background-color 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.PlayPause.Active {
-  transform: translateX(100%);
+.play-pause svg {
+  width: 100%;
+  height: 100%;
+  color: var(--color-4);
 }
-
-.PlayText.Active {
-  transform: translateX(-100%);
-}
-
-.PlayIcon {
-  height: 75%;
-  width: 75%;
-  background-image: url("https://img.icons8.com/ios-filled/50/8000ff/pause--v1.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.PlayIcon.Active {
-  background-image: url("https://img.icons8.com/ios-filled/50/8000ff/play--v1.png");
-}
-
-.PlayText {
+.play-text {
+  box-sizing: border-box;
+  margin: 0 7.5px;
   position: relative;
   height: 85%;
-  width: 48%;
+  width: 50%;
   border-radius: 50px;
   display: flex;
   color: var(--color-4);
@@ -110,10 +99,19 @@
   align-items: center;
   font-size: 2rem;
   z-index: 1;
+
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.LinkContainer {
+.play-pause.Active {
+  transform: translateX(10rem);
+}
+
+.play-text.Active {
+  transform: translateX(-10rem);
+}
+
+.link-container {
   position: absolute;
   width: 25vw;
   height: 100%;
@@ -124,7 +122,7 @@
   right: 0;
 }
 
-.Links {
+.links {
   position: relative;
   width: 60%;
   height: 35%;
@@ -135,13 +133,13 @@
   font-size: 2rem;
 }
 
-.Links a {
+.links a {
   text-decoration: none;
   color: var(--color-4);
   margin: 20px;
 }
 
-.ButtonContainer {
+.button-container {
   position: absolute;
   width: 25vw;
   height: 100%;
@@ -153,7 +151,7 @@
   left: 0;
 }
 
-.Panel {
+.panel {
   width: 65%;
   height: 45%;
   display: flex;
@@ -162,7 +160,7 @@
   flex-direction: column;
 }
 
-.PanelItem {
+.panel-item {
   position: relative;
   display: flex;
   justify-content: center;
@@ -175,7 +173,7 @@
   cursor: pointer;
 }
 
-.PanelItem h1 {
+.panel-item h1 {
   font-size: 2rem;
   font-weight: 600;
   color: var(--color-4);
@@ -192,7 +190,7 @@
     width 0.8s ease-in-out, background-color 0.8s ease-in-out;
 }
 
-/* Make the highlight adjust based on the fit content of an element */
+/* Make the Highlight adjust based on the fit content of an element */
 
 .Highlight.Active1 {
   transform: translateY(0);
@@ -208,18 +206,4 @@
 
 .Highlight.Active4 {
   transform: translateY(calc(300% + 60px));
-}
-
-@media (max-width: 1000px) {
-  .PlayElementContainer {
-    width: 65%;
-    height: 50%;
-  }
-}
-
-@media (max-width: 775px) {
-  .PlayElementContainer {
-    width: 75%;
-    height: 60%;
-  }
 }
